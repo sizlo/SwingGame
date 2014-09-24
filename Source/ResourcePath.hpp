@@ -38,6 +38,17 @@
 /// with the main bundle or an empty string is there is no bundle.
 ///
 ////////////////////////////////////////////////////////////
+#if defined(_WIN64) // Temporary solution
+#include <windows.h>
+std::string resourcePath(void)
+{ 
+	char buffer[MAX_PATH];
+    GetModuleFileName( NULL, buffer, MAX_PATH );
+    std::string::size_type pos = std::string( buffer ).find_last_of( "\\/" );
+    return std::string( buffer ).substr( 0, pos+1);
+}
+#else
 std::string resourcePath(void);
+#endif
 
 #endif
