@@ -17,7 +17,7 @@ Follow development progress at http://timbrier.com/blogs/swinggame/
 2. Unpack SFML anywhere you like
 3. Open the visual studio solution
 4. Update the following properties for your location of SFML
-	In the project's properties, add:
-	The path to the SFML headers (<sfml-install-path>/include) to C/C++ » General » Additional Include Directories
-	The path to the SFML libraries (<sfml-install-path>/lib) to Linker » General » Additional Library Directories
+	- In the project's properties, add:
+	- The path to the SFML headers (<sfml-install-path>/include) to C/C++ » General » Additional Include Directories
+	- The path to the SFML libraries (<sfml-install-path>/lib) to Linker » General » Additional Library Directories
 5. Hit build
