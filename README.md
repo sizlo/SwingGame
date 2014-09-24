@@ -19,4 +19,5 @@ Follow development progress at http://timbrier.com/blogs/swinggame/
 4. Update the following properties for your location of SFML
 	- The path to the SFML headers (<sfml-install-path>/include) in C/C++ » General » Additional Include Directories
 	- The path to the SFML libraries (<sfml-install-path>/lib) in Linker » General » Additional Library Directories
-5. Hit build
+5. Make sure the platform configuration is set to x64
+6. Hit build
