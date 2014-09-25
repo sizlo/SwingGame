@@ -17,11 +17,35 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "SFMLIntegration.hpp"
+#include "CTextUtilties.hpp"
+
 // Here is a small helper for you ! Have a look.
 #include "ResourcePath.hpp"
 
 int main(int, char const**)
 {
+#if 1
+#if !SG_DEBUG // Don't output SFML errors in release
+    sf::err().rdbuf(NULL);
+#endif
+    
+    CWindow theWindow(800, 600, "Test window");
+    while (theWindow.isOpen())
+    {
+        CEvent theEvent;
+        while (theWindow.pollEvent(theEvent))
+        {
+            if (theEvent.type == sf::Event::Closed)
+                theWindow.close();
+        }
+        theWindow.clear();
+        theWindow.DrawTextAt("Hello world", 50, 50, CColour::White);
+        theWindow.display();
+    }
+    
+    CTextUtilities::DeleteFonts();
+#else
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 
@@ -88,4 +112,5 @@ int main(int, char const**)
     }
 
     return EXIT_SUCCESS;
+#endif
 }
