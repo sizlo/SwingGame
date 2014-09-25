@@ -13,6 +13,8 @@
 		2218B60119D31462002A2EB7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2218B5FD19D31462002A2EB7 /* icon.png */; };
 		2218B60219D31462002A2EB7 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 2218B5FE19D31462002A2EB7 /* nice_music.ogg */; };
 		2218B60319D31462002A2EB7 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2218B5FF19D31462002A2EB7 /* sansation.ttf */; };
+		2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2250710E19D4745B00F1179D /* CTextUtilties.cpp */; };
+		22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +26,14 @@
 		2218B5FD19D31462002A2EB7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Data/icon.png; sourceTree = SOURCE_ROOT; };
 		2218B5FE19D31462002A2EB7 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; name = nice_music.ogg; path = Data/nice_music.ogg; sourceTree = SOURCE_ROOT; };
 		2218B5FF19D31462002A2EB7 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sansation.ttf; path = Data/sansation.ttf; sourceTree = SOURCE_ROOT; };
+		2250710E19D4745B00F1179D /* CTextUtilties.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextUtilties.cpp; sourceTree = "<group>"; };
+		2250710F19D4745B00F1179D /* CTextUtilties.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTextUtilties.hpp; sourceTree = "<group>"; };
+		2250711119D4C58D00F1179D /* FontEnums.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FontEnums.hpp; sourceTree = "<group>"; };
+		2250711219D4C88C00F1179D /* SwingGame_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwingGame_Prefix.pch; sourceTree = "<group>"; };
+		2250711319D4CA3F00F1179D /* Macros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
 		22C3F3EE19D313880043264D /* SwingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SFMLIntegration.cpp; sourceTree = "<group>"; };
+		22C8293D19D4690800B5C77A /* SFMLIntegration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SFMLIntegration.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +53,13 @@
 				2218B5F719D3143E002A2EB7 /* main.cpp */,
 				2218B5F819D3143E002A2EB7 /* ResourcePath.hpp */,
 				2218B5F919D3143E002A2EB7 /* ResourcePath.mm */,
+				22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */,
+				22C8293D19D4690800B5C77A /* SFMLIntegration.hpp */,
+				2250710E19D4745B00F1179D /* CTextUtilties.cpp */,
+				2250710F19D4745B00F1179D /* CTextUtilties.hpp */,
+				2250711119D4C58D00F1179D /* FontEnums.hpp */,
+				2250711219D4C88C00F1179D /* SwingGame_Prefix.pch */,
+				2250711319D4CA3F00F1179D /* Macros.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -175,6 +191,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */,
+				2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* ResourcePath.mm in Sources */,
 				2218B5FA19D3143E002A2EB7 /* main.cpp in Sources */,
 			);
@@ -290,6 +308,7 @@
 		22C3F40419D313880043264D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = Source/SwingGame_Prefix.pch;
 				INFOPLIST_FILE = "MacResources/SwingGame-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -298,6 +317,7 @@
 		22C3F40519D313880043264D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = Source/SwingGame_Prefix.pch;
 				INFOPLIST_FILE = "MacResources/SwingGame-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
