@@ -1,0 +1,28 @@
+//
+//  SwingGame.pch
+//  SwingGame
+//
+//  Created by Tim Brier on 25/09/2014.
+//  Copyright (c) 2014 tbrier. All rights reserved.
+//
+
+#ifndef SwingGame_SwingGame_pch
+#define SwingGame_SwingGame_pch
+
+
+// =============================================================================
+// Configuration
+// Must be before includes so Debug config is sorted
+// -----------------------------------------------------------------------------
+#if defined(DEBUG)
+#define SG_DEBUG 1
+#else
+#define SG_DEBUG 0
+#endif
+
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "Macros.hpp"
+
+#endif
