@@ -20,6 +20,14 @@
 #define SG_DEBUG 0
 #endif
 
+#if defined(_WIN64)
+#define SG_WINDOWS  1
+#elif defined(__APPLE__) && defined(__MACH__)
+#define SG_MAC      1
+#else
+#error Unsupported platform
+#endif
+
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
