@@ -23,8 +23,10 @@
 // Logging
 // -----------------------------------------------------------------------------
 #if SG_DEBUG
-#define DEBUG_LOG(fmt, ...)         \
-    printf("%s:%d " fmt, __FILE__, __LINE__, __VA_ARGS__);
+#define DEBUG_LOG(...)                      \
+    printf("%s:%d ", __FILE__, __LINE__);   \
+    printf(__VA_ARGS__);                    \
+    printf("\n");
 #else
 #define DEBUG_LOG(fmt, ...)
 #endif
