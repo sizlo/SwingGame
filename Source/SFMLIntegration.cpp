@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration.hpp"
 #include "CTextUtilties.hpp"
-#include "ResourcePath.hpp"
+#include "CSystemUtilities.hpp"
 
 // =============================================================================
 // CColour constructors/destructors
@@ -40,7 +40,7 @@ CColour::~CColour()
 // CWindow constructor/destructor
 // -----------------------------------------------------------------------------
 CWindow::CWindow(unsigned int width, unsigned int height, std::string title)
-: sf::RenderWindow(sf::VideoMode(width, height), title)
+: sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Close)
 {
     
 }
@@ -75,10 +75,13 @@ void CWindow::DrawTextAt(std::string theString,
 // CFont constructor/destructor
 // -----------------------------------------------------------------------------
 // Loads the font from the given filename
-CFont::CFont(std::string filename)
+CFont::CFont(std::string filename) : sf::Font()
 {
-    if (!loadFromFile(resourcePath() + filename))
+    bool result = loadFromFile(CSystemUtilities::GetResourcePath() + filename);
+    if (!result)
+    {
         DEBUG_LOG("Error loading font file: %s", filename.c_str());
+    }
 }
 
 CFont::~CFont()
@@ -98,6 +101,40 @@ CText::CText(std::string theString, CFont &theFont, unsigned int theFontSize /* 
 CText::~CText()
 {
     
+}
+
+// =============================================================================
+// CClock constructor/destructor
+// -----------------------------------------------------------------------------
+CClock::CClock() : sf::Clock()
+{
+    
+}
+
+CClock::~CClock()
+{
+    
+}
+
+// =============================================================================
+// CSprite constructor/destructor
+// -----------------------------------------------------------------------------
+CSprite::CSprite(std::string filename) : sf::Sprite()
+{
+    mTexture = new sf::Texture();
+    bool result = mTexture->loadFromFile(CSystemUtilities::GetResourcePath()
+                                        + filename);
+    if (!result)
+    {
+        DEBUG_LOG("Texture loading failed: %s", filename.c_str());
+    }
+    setTexture(*mTexture);
+}
+
+
+CSprite::~CSprite()
+{
+    SAFE_DELETE(mTexture);
 }
 
 
