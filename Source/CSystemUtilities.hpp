@@ -1,54 +1,27 @@
-////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2013 Marco Antognini (antognini.marco@gmail.com),
-//                         Laurent Gomila (laurent.gom@gmail.com),
+//  CSystemUtilities.hpp
+//  SwingGame
 //
-// This software is provided 'as-is', without any express or implied warranty.
-// In no event will the authors be held liable for any damages arising from the use of this software.
+//  Created by Tim Brier on 26/09/2014.
+//  Copyright (c) 2014 tbrier. All rights reserved.
 //
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it freely,
-// subject to the following restrictions:
-//
-// 1. The origin of this software must not be misrepresented;
-//    you must not claim that you wrote the original software.
-//    If you use this software in a product, an acknowledgment
-//    in the product documentation would be appreciated but is not required.
-//
-// 2. Altered source versions must be plainly marked as such,
-//    and must not be misrepresented as being the original software.
-//
-// 3. This notice may not be removed or altered from any source distribution.
-//
-////////////////////////////////////////////////////////////
 
-#ifndef RESOURCE_PATH_HPP
-#define RESOURCE_PATH_HPP
+#ifndef __SwingGame__CSystemUtilities__
+#define __SwingGame__CSystemUtilities__
 
-////////////////////////////////////////////////////////////
-// Headers
-////////////////////////////////////////////////////////////
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
 #include <string>
 
-////////////////////////////////////////////////////////////
-/// \brief Return the path to the resource folder.
-///
-/// \return The path to the resource folder associate
-/// with the main bundle or an empty string is there is no bundle.
-///
-////////////////////////////////////////////////////////////
-#if defined(_WIN64) // Temporary solution
-#include <windows.h>
-std::string resourcePath(void)
-{ 
-	char buffer[MAX_PATH];
-    GetModuleFileName( NULL, buffer, MAX_PATH );
-    std::string::size_type pos = std::string( buffer ).find_last_of( "\\/" );
-    return std::string( buffer ).substr( 0, pos+1);
-}
-#else
-std::string resourcePath(void);
-#endif
+// =============================================================================
+// Class definition
+// -----------------------------------------------------------------------------
+class CSystemUtilities
+{
+public:
+    // Return the platform specific path to the resource location
+    static std::string GetResourcePath();
+};
 
-#endif
+#endif /* defined(__SwingGame__CSystemUtilities__) */

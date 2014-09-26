@@ -1,52 +1,43 @@
-////////////////////////////////////////////////////////////
 //
-// SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2013 Marco Antognini (antognini.marco@gmail.com),
-//                         Laurent Gomila (laurent.gom@gmail.com),
+//  CSystemUtilities.mm
+//  SwingGame
 //
-// This software is provided 'as-is', without any express or implied warranty.
-// In no event will the authors be held liable for any damages arising from the use of this software.
+//  Created by Tim Brier on 26/09/2014.
+//  Copyright (c) 2014 tbrier. All rights reserved.
 //
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it freely,
-// subject to the following restrictions:
-//
-// 1. The origin of this software must not be misrepresented;
-//    you must not claim that you wrote the original software.
-//    If you use this software in a product, an acknowledgment
-//    in the product documentation would be appreciated but is not required.
-//
-// 2. Altered source versions must be plainly marked as such,
-//    and must not be misrepresented as being the original software.
-//
-// 3. This notice may not be removed or altered from any source distribution.
-//
-////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////
-// Headers
-////////////////////////////////////////////////////////////
-#include "ResourcePath.hpp"
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CSystemUtilities.hpp"
+#if SG_MAC
 #import <Foundation/Foundation.h>
+#endif
 
-////////////////////////////////////////////////////////////
-std::string resourcePath(void)
+// =============================================================================
+// CSystemUtilities::GetResourcePath
+// Return the platform specific path to the resource location
+// -----------------------------------------------------------------------------
+std::string CSystemUtilities::GetResourcePath()
 {
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    std::string theReturnPath;
 
-    std::string rpath;
+#if SG_MAC
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     NSBundle* bundle = [NSBundle mainBundle];
 
-    if (bundle == nil) {
-#ifdef DEBUG
-        NSLog(@"bundle is nil... thus no resources path can be found.");
-#endif
-    } else {
+    if (bundle == nil)
+    {
+        DEBUG_LOG("Resource location can't be found: bundle is nil");
+    }
+    else
+    {
         NSString* path = [bundle resourcePath];
-        rpath = [path UTF8String] + std::string("/");
+        theReturnPath = [path UTF8String] + std::string("/");
     }
 
     [pool drain];
+#endif
 
-    return rpath;
+    return theReturnPath;
 }
