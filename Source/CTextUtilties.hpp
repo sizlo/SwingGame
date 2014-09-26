@@ -26,6 +26,9 @@ public:
     // Delete all loaded fonts
     static void DeleteFonts();
     
+    // Cleanup before quitting
+    static void Cleanup();
+    
 private:
     static std::string GetFontFileName(EFontType fontType);
     

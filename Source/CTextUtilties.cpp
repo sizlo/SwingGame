@@ -66,3 +66,12 @@ std::string CTextUtilities::GetFontFileName(EFontType fontType)
     
     return theResult;
 }
+
+// =============================================================================
+// CTextUtilities::Cleanup
+// Cleanup before quitting
+// -----------------------------------------------------------------------------
+void CTextUtilities::Cleanup()
+{
+    DeleteFonts();
+}
