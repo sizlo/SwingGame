@@ -14,7 +14,7 @@
 // Configuration
 // Must be before includes so Debug config is sorted
 // -----------------------------------------------------------------------------
-#if defined(DEBUG)
+#if defined(DEBUG) || defined(_DEBUG)
 #define SG_DEBUG 1
 #else
 #define SG_DEBUG 0
