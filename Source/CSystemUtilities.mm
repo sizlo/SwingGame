@@ -10,8 +10,12 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CSystemUtilities.hpp"
+
 #if SG_MAC
 #import <Foundation/Foundation.h>
+#elif SG_WINDOWS
+#include <windows.h>
+#include <Shlwapi.h>
 #endif
 
 // =============================================================================
@@ -37,6 +41,18 @@ std::string CSystemUtilities::GetResourcePath()
     }
 
     [pool drain];
+#elif SG_WINDOWS
+	char buffer[MAX_PATH];
+	DWORD result = GetModuleFileName(NULL, buffer, MAX_PATH);
+	if (result == 0)
+	{
+		DEBUG_LOG("Failed to get module filename, error code %d", GetLastError());
+	}
+	else
+	{
+		PathRemoveFileSpec(buffer);
+		theReturnPath = std::string(buffer) + std::string("\\");
+	}
 #endif
 
     return theReturnPath;
