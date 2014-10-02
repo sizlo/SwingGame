@@ -22,7 +22,7 @@ class CUpdateable
 {
 public:
     virtual void Update(CTime elapsedTime) = 0;
-    //virtual bool ShouldUpdateForState(EGameState theState);
+    virtual bool ShouldUpdateForState(EGameState theState){return true;};
 };
 
 #endif

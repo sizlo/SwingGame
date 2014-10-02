@@ -251,7 +251,11 @@ void CSwingGame::Update(CTime elapsedTime)
          it != smTheUpdateables.end();
          ++it)
     {
-        (*it)->Update(elapsedTime);
+        // Only update when in an appropriate state
+        if ((*it)->ShouldUpdateForState(smGameState))
+        {
+            (*it)->Update(elapsedTime);
+        }
     }
     
     // Remove any updateables whice were requested this cycle
