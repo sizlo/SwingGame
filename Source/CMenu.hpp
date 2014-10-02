@@ -26,6 +26,8 @@ public:
     virtual void Enter() = 0;
     virtual void Draw(CWindow *theWindow) = 0;
     virtual void Update(CTime elapsedTime) = 0;
+private:
+    virtual void Exit() = 0;
 };
 
 #endif
