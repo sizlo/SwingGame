@@ -13,7 +13,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration.hpp"
-#include "FontEnums.hpp"
+#include "Enums.hpp"
 
 // =============================================================================
 // Class Definition

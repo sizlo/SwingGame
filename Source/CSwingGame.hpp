@@ -14,17 +14,10 @@
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration.hpp"
 #include "CTextUtilties.hpp"
-
-// =============================================================================
-// Enums
-// -----------------------------------------------------------------------------
-enum EGameState
-{
-    kGameStateFrontEnd  = 1 << 0,
-    kGameStateInGame    = 1 << 1,
-    kGameStatePaused    = 1 << 2,
-    kGameStateInactive  = 1 << 3
-};
+#include "CUpdateable.hpp"
+#include "CDrawable.hpp"
+#include "CMenu.hpp"
+#include <list>
 
 // =============================================================================
 // Class Definition
@@ -42,11 +35,23 @@ public:
     // Cleanup before quitting
     void Cleanup();
     
+    // Exit the game
+    static void ExitGame();
+    
     // Set/unset GameState flags
-    void SetGameState       (EGameState theState);
-    void UnsetGameState     (EGameState theState);
+    static void SetGameState       (EGameState theState);
+    static void UnsetGameState     (EGameState theState);
     // Returns true only if the current gamestate has all the given flags
-    bool HasAllGameStates   (EGameState theState);
+    static bool HasAllGameStates   (EGameState theState);
+    
+    // Register/unregister updatable/drawables
+    static void RegisterUpdateable  (CUpdateable    *theUpdateable);
+    static void RegisterDrawable    (CDrawable      *theDrawable);
+    static void UnregisterUpdateable(CUpdateable    *theUpdateable);
+    static void UnregisterDrawable  (CDrawable      *theDrawable);
+    
+    // Was a keypress event recieved for the given key this cycle
+    static bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
     
 private:
     // Process all events recieved this cylce
@@ -64,12 +69,22 @@ private:
     
     // The code returned on program exit
     int mExitCode;
+    // Has an exit been requested
+    static bool smExitRequested;
     
     // The current game state
-    EGameState mGameState;
+    static EGameState smGameState;
     
-    // Temporary
-    CSprite *mSprite;
+    // Updateable and drawable lists
+    static std::list<CUpdateable *> smTheUpdateables;
+    static std::list<CUpdateable *> smTheUpdateablesToRemove;
+    static std::list<CDrawable *>   smTheDrawables;
+    
+    // Key/mouse event lists
+    static std::list<CEvent> smTheKeyPresses;
+    
+    // The front end menu
+    CMenu *mFrontEndMenu;
 };
 
 

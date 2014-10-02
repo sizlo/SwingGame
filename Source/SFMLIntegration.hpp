@@ -13,17 +13,20 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
-#include "FontEnums.hpp"
+#include "Enums.hpp"
 
 // =============================================================================
 // Helper methods
 // -----------------------------------------------------------------------------
-static void InitSFML()
+static void InitSFML(sf::RenderWindow *theWindow)
 {
     // When we're not in debug mode redirect SFML errors to nowhere
 #if !SG_DEBUG
     sf::err().rdbuf(NULL);
 #endif
+    
+    // Don't repeat keypress events
+    theWindow->setKeyRepeatEnabled(false);
 }
 
 // =============================================================================
@@ -94,6 +97,16 @@ public:
     
 private:
     sf::Texture *mTexture;
+};
+
+class CKeyboard : public sf::Keyboard
+{
+    // Static class, no constructors
+};
+
+class CMouse : public sf::Mouse
+{
+    // Static class, no constructors
 };
 
 
