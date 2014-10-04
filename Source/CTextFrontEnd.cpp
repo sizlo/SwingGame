@@ -67,13 +67,11 @@ void CTextFrontEnd::Update(CTime elapsedTime)
 {
     if (CSwingGame::WasKeyPressedThisCycle(CKeyboard::Num1))
     {
-        DEBUG_LOG("Enter level 1");
         CSwingGame::GoToLocation(kGameLocationLevel1);
     }
     
     if (CSwingGame::WasKeyPressedThisCycle(CKeyboard::Escape))
     {
-        DEBUG_LOG("Exit requested");
         CSwingGame::ExitGame();
     }
 }
