@@ -15,6 +15,7 @@
 		2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2250710E19D4745B00F1179D /* CTextUtilties.cpp */; };
 		229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */; };
 		22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */; };
+		22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77D419E033C1000A507F /* CTextureBank.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		22C3F3EE19D313880043264D /* SwingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SFMLIntegration.cpp; sourceTree = "<group>"; };
 		22C8293D19D4690800B5C77A /* SFMLIntegration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SFMLIntegration.hpp; sourceTree = "<group>"; };
+		22FC77D419E033C1000A507F /* CTextureBank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureBank.cpp; sourceTree = "<group>"; };
+		22FC77D519E033C1000A507F /* CTextureBank.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTextureBank.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */,
 				229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */,
 				229FAC0A19DDCBCD001CEFA6 /* CTextFrontEnd.hpp */,
+				22FC77D419E033C1000A507F /* CTextureBank.cpp */,
+				22FC77D519E033C1000A507F /* CTextureBank.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -202,6 +207,7 @@
 				229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */,
+				22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */,
 				2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* CSystemUtilities.mm in Sources */,
 				222AEBD219D5BC690057F737 /* CSwingGame.cpp in Sources */,

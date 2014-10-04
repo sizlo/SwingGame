@@ -94,9 +94,13 @@ class CSprite : public sf::Sprite
 public:
     CSprite(std::string filename);
     ~CSprite();
-    
-private:
-    sf::Texture *mTexture;
+};
+
+class CTexture : public sf::Texture
+{
+public:
+    CTexture();
+    ~CTexture();
 };
 
 class CKeyboard : public sf::Keyboard

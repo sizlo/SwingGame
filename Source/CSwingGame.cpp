@@ -11,6 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "CSwingGame.hpp"
 #include "CTextFrontEnd.hpp"
+#include "CTextureBank.hpp"
 
 // =============================================================================
 // Static members
@@ -87,6 +88,7 @@ void CSwingGame::Cleanup()
     SAFE_DELETE(mWindow);
     SAFE_DELETE(mFrontEndMenu);
     CTextUtilities::Cleanup();
+    CTextureBank::Cleanup();
 }
 
 // =============================================================================

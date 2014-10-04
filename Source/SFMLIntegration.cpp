@@ -12,6 +12,7 @@
 #include "SFMLIntegration.hpp"
 #include "CTextUtilties.hpp"
 #include "CSystemUtilities.hpp"
+#include "CTextureBank.hpp"
 
 // =============================================================================
 // CColour constructors/destructors
@@ -121,20 +122,27 @@ CClock::~CClock()
 // -----------------------------------------------------------------------------
 CSprite::CSprite(std::string filename) : sf::Sprite()
 {
-    mTexture = new sf::Texture();
-    bool result = mTexture->loadFromFile(CSystemUtilities::GetResourcePath()
-                                        + filename);
-    if (!result)
-    {
-        DEBUG_LOG("Texture loading failed: %s", filename.c_str());
-    }
-    setTexture(*mTexture);
+    CTexture *theTexture = CTextureBank::GetTexture(filename);
+    setTexture(*theTexture);
 }
 
 
 CSprite::~CSprite()
 {
-    SAFE_DELETE(mTexture);
+
+}
+
+// =============================================================================
+// CTexture constructor/destructor
+// -----------------------------------------------------------------------------
+CTexture::CTexture() : sf::Texture()
+{
+    
+}
+
+CTexture::~CTexture()
+{
+    
 }
 
 
