@@ -16,6 +16,7 @@
 		229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */; };
 		22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */; };
 		22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77D419E033C1000A507F /* CTextureBank.cpp */; };
+		22FC77DF19E04417000A507F /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77DD19E04417000A507F /* pugixml.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,10 @@
 		22C8293D19D4690800B5C77A /* SFMLIntegration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SFMLIntegration.hpp; sourceTree = "<group>"; };
 		22FC77D419E033C1000A507F /* CTextureBank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureBank.cpp; sourceTree = "<group>"; };
 		22FC77D519E033C1000A507F /* CTextureBank.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTextureBank.hpp; sourceTree = "<group>"; };
+		22FC77DC19E04417000A507F /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
+		22FC77DD19E04417000A507F /* pugixml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pugixml.cpp; sourceTree = "<group>"; };
+		22FC77DE19E04417000A507F /* pugixml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugixml.hpp; sourceTree = "<group>"; };
+		22FC77E019E045EE000A507F /* CGameLocation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGameLocation.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 		2218B5F619D3143E002A2EB7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				22FC77DA19E04417000A507F /* Libraries */,
 				2218B5F819D3143E002A2EB7 /* CSystemUtilities.hpp */,
 				2218B5F919D3143E002A2EB7 /* CSystemUtilities.mm */,
 				22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */,
@@ -77,6 +83,7 @@
 				229FAC0A19DDCBCD001CEFA6 /* CTextFrontEnd.hpp */,
 				22FC77D419E033C1000A507F /* CTextureBank.cpp */,
 				22FC77D519E033C1000A507F /* CTextureBank.hpp */,
+				22FC77E019E045EE000A507F /* CGameLocation.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -122,6 +129,24 @@
 				2218B5FF19D31462002A2EB7 /* sansation.ttf */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		22FC77DA19E04417000A507F /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				22FC77DB19E04417000A507F /* pugixml */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		22FC77DB19E04417000A507F /* pugixml */ = {
+			isa = PBXGroup;
+			children = (
+				22FC77DC19E04417000A507F /* pugiconfig.hpp */,
+				22FC77DD19E04417000A507F /* pugixml.cpp */,
+				22FC77DE19E04417000A507F /* pugixml.hpp */,
+			);
+			path = pugixml;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +235,7 @@
 				22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */,
 				2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* CSystemUtilities.mm in Sources */,
+				22FC77DF19E04417000A507F /* pugixml.cpp in Sources */,
 				222AEBD219D5BC690057F737 /* CSwingGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

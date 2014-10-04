@@ -31,4 +31,13 @@ enum EGameState
     kGameStateUpdating  = 1 << 4
 };
 
+// =============================================================================
+// Game location
+// -----------------------------------------------------------------------------
+enum EGameLocation
+{
+    kGameLocationFrontEnd,
+    kGameLocationLevel1
+};
+
 #endif

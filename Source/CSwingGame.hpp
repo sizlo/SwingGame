@@ -16,7 +16,7 @@
 #include "CTextUtilties.hpp"
 #include "CUpdateable.hpp"
 #include "CDrawable.hpp"
-#include "CMenu.hpp"
+#include "CGameLocation.hpp"
 #include <list>
 
 // =============================================================================
@@ -53,6 +53,9 @@ public:
     // Was a keypress event recieved for the given key this cycle
     static bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
     
+    // Go to a game location
+    static void GoToLocation(EGameLocation theLocation);
+    
 private:
     // Process all events recieved this cylce
     void ProcessEvents();
@@ -77,14 +80,15 @@ private:
     
     // Updateable and drawable lists
     static std::list<CUpdateable *> smTheUpdateables;
+    static std::list<CUpdateable *> smTheUpdateablesToAdd;
     static std::list<CUpdateable *> smTheUpdateablesToRemove;
     static std::list<CDrawable *>   smTheDrawables;
     
     // Key/mouse event lists
     static std::list<CEvent> smTheKeyPresses;
     
-    // The front end menu
-    CMenu *mFrontEndMenu;
+    // The current game location (menu/level)
+    static CGameLocation *smCurrentLocation;
 };
 
 

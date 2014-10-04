@@ -1,32 +1,28 @@
 //
-//  CMenu.hpp
+//  CGameLocation.hpp
 //  SwingGame
 //
-//  Created by Tim Brier on 02/10/2014.
+//  Created by Tim Brier on 04/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CMenu_hpp
-#define SwingGame_CMenu_hpp
+#ifndef SwingGame_CGameLocation_hpp
+#define SwingGame_CGameLocation_hpp
 
 // =============================================================================
-// Include Files
+// Include files
 // -----------------------------------------------------------------------------
-#include "CDrawable.hpp"
-#include "CUpdateable.hpp"
-#include "CGameLocation.hpp"
+#include "Enums.hpp"
 
 // =============================================================================
 // Abstract class definition
 // -----------------------------------------------------------------------------
-class CMenu : public CDrawable, public CUpdateable, public CGameLocation
+class CGameLocation
 {
 public:
-    virtual ~CMenu(){};
+    virtual ~CGameLocation(){};
     
     virtual void Enter() = 0;
-    virtual void Draw(CWindow *theWindow) = 0;
-    virtual void Update(CTime elapsedTime) = 0;
     virtual void Exit() = 0;
 };
 

@@ -19,20 +19,21 @@
 bool                        CSwingGame::smExitRequested = false;
 EGameState                  CSwingGame::smGameState = kGameStateFrontEnd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateables;
+std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToAdd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToRemove;
 std::list<CDrawable *>      CSwingGame::smTheDrawables;
 std::list<CEvent>           CSwingGame::smTheKeyPresses;
+CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 
 
 // =============================================================================
 // CSwingGame constructor/destructor
 // -----------------------------------------------------------------------------
 CSwingGame::CSwingGame() :  mWindowWidth(1024),
-                            mWindowHeight(800),
+                            mWindowHeight(768),
                             mWindowTitle("SwingGame v0.0"),
                             mWindow(NULL),
-                            mExitCode(EXIT_SUCCESS),
-                            mFrontEndMenu(NULL)
+                            mExitCode(EXIT_SUCCESS)
 {
     
 }
@@ -52,8 +53,7 @@ void CSwingGame::Init()
     mWindow = new CWindow(mWindowWidth, mWindowHeight, mWindowTitle);
     
     // Enter the front end menu
-    mFrontEndMenu = new CTextFrontEnd();
-    mFrontEndMenu->Enter();
+    GoToLocation(kGameLocationFrontEnd);
     
     // Initialise other systems
     InitSFML(mWindow);
@@ -86,7 +86,7 @@ int CSwingGame::Run()
 void CSwingGame::Cleanup()
 {
     SAFE_DELETE(mWindow);
-    SAFE_DELETE(mFrontEndMenu);
+    SAFE_DELETE(smCurrentLocation);
     CTextUtilities::Cleanup();
     CTextureBank::Cleanup();
 }
@@ -134,7 +134,16 @@ bool CSwingGame::HasAllGameStates(EGameState theState)
 // -----------------------------------------------------------------------------
 void CSwingGame::RegisterUpdateable(CUpdateable *theUpdateable)
 {
-    smTheUpdateables.push_back(theUpdateable);
+    // If we're not updating then we can add it now, otherwise add it to a list
+    // to be added after the current update cycle
+    if (!HasAllGameStates(kGameStateUpdating))
+    {
+        smTheUpdateables.push_back(theUpdateable);
+    }
+    else
+    {
+        smTheUpdateablesToAdd.push_back(theUpdateable);
+    }
 }
 
 // =============================================================================
@@ -192,6 +201,34 @@ bool CSwingGame::WasKeyPressedThisCycle(CKeyboard::Key theKey)
     }
     
     return theResult;
+}
+
+// =============================================================================
+// CSwingGame::GoToLocation
+// Go to a game location (level/menu)
+// -----------------------------------------------------------------------------
+void CSwingGame::GoToLocation(EGameLocation theLocation)
+{
+    // If we're already in a location leave it
+    if (smCurrentLocation != NULL)
+    {
+        smCurrentLocation->Exit();
+        SAFE_DELETE(smCurrentLocation);
+    }
+    
+    switch (theLocation)
+    {
+        case kGameLocationFrontEnd:
+            smCurrentLocation = new CTextFrontEnd();
+            break;
+            
+        default:
+            DEBUG_LOG("Unimplemented game location - going to front end");
+            smCurrentLocation = new CTextFrontEnd();
+            break;
+    }
+    
+    smCurrentLocation->Enter();
 }
 
 // =============================================================================
@@ -265,6 +302,12 @@ void CSwingGame::Update(CTime elapsedTime)
     {
         smTheUpdateables.remove(smTheUpdateablesToRemove.front());
         smTheUpdateablesToRemove.pop_front();
+    }
+    // Add any updateables which were requested this cycle
+    while (!smTheUpdateablesToAdd.empty())
+    {
+        smTheUpdateables.push_back(smTheUpdateablesToAdd.front());
+        smTheUpdateablesToAdd.pop_front();
     }
     
     // Unset game state

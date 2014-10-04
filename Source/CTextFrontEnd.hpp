@@ -29,8 +29,6 @@ public:
     void Draw(CWindow *theWindow);
     // Update the menu
     void Update(CTime elapsedTime);
-
-private:
     // Exit the menu
     void Exit();
 };

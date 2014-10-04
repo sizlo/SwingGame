@@ -68,8 +68,7 @@ void CTextFrontEnd::Update(CTime elapsedTime)
     if (CSwingGame::WasKeyPressedThisCycle(CKeyboard::Num1))
     {
         DEBUG_LOG("Enter level 1");
-        // Here we would exit the menu and enter the requested level
-        // Do nothing for now since we don't have entering levels implemented
+        CSwingGame::GoToLocation(kGameLocationLevel1);
     }
     
     if (CSwingGame::WasKeyPressedThisCycle(CKeyboard::Escape))
