@@ -1,0 +1,111 @@
+<level id="0" name="Test Level">
+  
+  <start>
+    <position>
+      <x>50</x>
+      <y>50</y>
+    </position>
+    <swingLocation>
+      <x>80</x>
+      <y>50</y>
+    </swingLocation>
+  </start>
+
+  <end>
+    <position>
+      <x>800</x>
+      <y>500</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>50</x>
+      <y>50</y>
+    </size>
+    <texture>TestLevelEnd.png</texture>
+  </end>
+
+  <background>TestLevelBackground.png</background>
+
+  <obstacle id="0">
+    <position>
+      <x>900</x>
+      <y>400</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>50</x>
+      <y>30</y>
+    </size>
+    <texture>TestLevelBlock0.png</texture>
+  </obstacle>
+
+  <obstacle id="1">
+    <position>
+      <x>200</x>
+      <y>700</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>40</x>
+      <y>40</y>
+    </size>
+    <texture>TestLevelBlock1.png</texture>
+  </obstacle>
+
+  <!-- border top -->
+  <obstacle id="2">
+    <position>
+      <x>0</x>
+      <y>0</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>1024</x>
+      <y>20</y>
+    </size>
+    <texture>TestLevelBorderX.png</texture>
+  </obstacle>
+
+  <!-- border bottom -->
+  <obstacle id="3">
+    <position>
+      <x>0</x>
+      <y>748</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>1024</x>
+      <y>20</y>
+    </size>
+    <texture rotation="180">TestLevelBorderX.png</texture>
+  </obstacle>
+
+  <!-- border left -->
+  <obstacle id="4">
+    <position>
+      <x>0</x>
+      <y>0</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>20</x>
+      <y>768</y>
+    </size>
+    <texture>TestLevelBorderY.png</texture>
+  </obstacle>
+
+  <!-- border right -->
+  <obstacle id="5">
+    <position>
+      <x>1004</x>
+      <y>0</y>
+    </position>
+    <shape>Rect</shape>
+    <size>
+      <x>20</x>
+      <y>768</y>
+    </size>
+    <texture rotation="180">TestLevelBorderY.png</texture>
+  </obstacle>
+
+</level>
