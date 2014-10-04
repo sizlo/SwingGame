@@ -12,6 +12,9 @@
 #include "CSwingGame.hpp"
 #include "CTextFrontEnd.hpp"
 #include "CTextureBank.hpp"
+#include "CLevel.hpp"
+#include "CGameOptions.hpp"
+#include <sstream>
 
 // =============================================================================
 // Static members
@@ -29,10 +32,10 @@ CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 // =============================================================================
 // CSwingGame constructor/destructor
 // -----------------------------------------------------------------------------
-CSwingGame::CSwingGame() :  mWindowWidth(1024),
-                            mWindowHeight(768),
-                            mWindowTitle("SwingGame v0.0"),
+CSwingGame::CSwingGame() :  mWindowTitle("SwingGame v0.0"),
                             mWindow(NULL),
+                            mFPS(0),
+                            mUPS(0),
                             mExitCode(EXIT_SUCCESS)
 {
     
@@ -50,7 +53,9 @@ CSwingGame::~CSwingGame()
 void CSwingGame::Init()
 {
     // Create the game window
-    mWindow = new CWindow(mWindowWidth, mWindowHeight, mWindowTitle);
+    mWindow = new CWindow(CGameOptions::smWindowWidth,
+                          CGameOptions::smWindowHeight,
+                          mWindowTitle);
     
     // Enter the front end menu
     GoToLocation(kGameLocationFrontEnd);
@@ -71,9 +76,20 @@ int CSwingGame::Run()
     {
         CTime elapsedTime = theClock.restart();
         
+        static CTime accumulatingTime;
+        accumulatingTime += elapsedTime;
+        
         ProcessEvents();
+        
         Update(elapsedTime);
-        Render();
+        
+        // Only render if vsync is off or enough time has past
+        if (!CGameOptions::smVsync
+            || accumulatingTime.asSeconds() >= 1.0f / CGameOptions::smMaxFPS)
+        {
+            accumulatingTime = CTime();
+            Render();
+        }
     }
     
     return mExitCode;
@@ -97,6 +113,7 @@ void CSwingGame::Cleanup()
 // -----------------------------------------------------------------------------
 void CSwingGame::ExitGame()
 {
+    DEBUG_LOG("Exit requested");
     smExitRequested = true;
 }
 
@@ -219,7 +236,13 @@ void CSwingGame::GoToLocation(EGameLocation theLocation)
     switch (theLocation)
     {
         case kGameLocationFrontEnd:
+            DEBUG_LOG("Front end requested");
             smCurrentLocation = new CTextFrontEnd();
+            break;
+            
+        case kGameLocationLevel1:
+            DEBUG_LOG("Level 1 requested");
+            smCurrentLocation = new CLevel("testLevel.xml");
             break;
             
         default:
@@ -285,6 +308,19 @@ void CSwingGame::Update(CTime elapsedTime)
     // Set game state
     SetGameState(kGameStateUpdating);
     
+    // Count updates
+    static int numUpdates;
+    static CTime accumulatingElapsedTime;
+    
+    numUpdates++;
+    accumulatingElapsedTime += elapsedTime;
+    if (accumulatingElapsedTime.asSeconds() >= 1.0f) // Every second
+    {
+        mUPS = numUpdates;
+        numUpdates = 0;
+        accumulatingElapsedTime = CTime();
+    }
+    
     // Iterate through the registered updateables, updating each in turn
     for (std::list<CUpdateable *>::iterator it = smTheUpdateables.begin();
          it != smTheUpdateables.end();
@@ -320,6 +356,20 @@ void CSwingGame::Update(CTime elapsedTime)
 // -----------------------------------------------------------------------------
 void CSwingGame::Render()
 {
+    // Count frames
+    static int numFrames = 0;
+    static CClock theClock;
+    static CTime elapsedTime;
+    
+    numFrames++;
+    elapsedTime += theClock.restart();
+    if (elapsedTime.asSeconds() >= 1.0f) // Every second
+    {
+        mFPS = numFrames;
+        numFrames = 0;
+        elapsedTime = CTime();
+    }
+    
     // Clear the window
     mWindow->clear();
     
@@ -330,6 +380,17 @@ void CSwingGame::Render()
     {
         (*it)->Draw(mWindow);
     }
+    
+    // In debug draw frame/update rate over everything else
+#if SG_DEBUG
+    std::stringstream theStream;
+    theStream << "FPS: " << mFPS << std::endl;
+    theStream << "UPS: " << mUPS;
+    mWindow->DrawTextAt(theStream.str(),
+                        CGameOptions::smWindowWidth - 100,
+                        5,
+                        CColour::Red);
+#endif
     
     // Display the new window contents
     mWindow->display();

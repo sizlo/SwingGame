@@ -65,10 +65,12 @@ private:
     void Render();
     
     // The game window
-    const unsigned int mWindowWidth;
-    const unsigned int mWindowHeight;
     std::string mWindowTitle;
     CWindow *mWindow;
+    
+    // Frames per second and updates per second
+    int mFPS;
+    int mUPS;
     
     // The code returned on program exit
     int mExitCode;
