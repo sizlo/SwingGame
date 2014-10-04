@@ -120,6 +120,11 @@ CClock::~CClock()
 // =============================================================================
 // CSprite constructor/destructor
 // -----------------------------------------------------------------------------
+CSprite::CSprite() : sf::Sprite()
+{
+    
+}
+
 CSprite::CSprite(std::string filename) : sf::Sprite()
 {
     CTexture *theTexture = CTextureBank::GetTexture(filename);

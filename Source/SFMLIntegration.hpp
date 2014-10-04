@@ -92,6 +92,7 @@ public:
 class CSprite : public sf::Sprite
 {
 public:
+    CSprite();
     CSprite(std::string filename);
     ~CSprite();
 };
