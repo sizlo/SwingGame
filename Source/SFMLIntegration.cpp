@@ -13,6 +13,7 @@
 #include "CTextUtilties.hpp"
 #include "CSystemUtilities.hpp"
 #include "CTextureBank.hpp"
+#include "CDebugOptions.hpp"
 
 // =============================================================================
 // CColour constructors/destructors
@@ -70,6 +71,47 @@ void CWindow::DrawTextAt(std::string theString,
     theText.setPosition((float) x, (float) y);
     
     draw(theText);
+}
+
+// =============================================================================
+// CWindow::DrawSprite
+// Draw a sprite
+// Can also draw debug info like bounds and origin
+// -----------------------------------------------------------------------------
+void CWindow::DrawSprite(CSprite theSprite)
+{
+    draw(theSprite);
+    
+#if SG_DEBUG // Draw debug information
+    // Draw the origin
+    if (CDebugOptions::smDrawSpriteOrigins)
+    {
+        CVector2f theOrigin = theSprite.getPosition();
+        sf::Vertex lines[] =
+        {
+            sf::Vertex(CVector2f(theOrigin.x-5, theOrigin.y), CColour::Red),
+            sf::Vertex(CVector2f(theOrigin.x+5, theOrigin.y), CColour::Red),
+            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y-5), CColour::Red),
+            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y+5), CColour::Red)
+        };
+        draw(lines, 2, sf::Lines);
+        draw(&lines[2], 2, sf::Lines);
+    }
+    
+    // Draw the global bounds
+    if (CDebugOptions::smDrawSpriteBounds)
+    {
+        sf::FloatRect theGlobalBounds = theSprite.getGlobalBounds();
+        sf::RectangleShape theGlobalBoundsShape(
+                    CVector2f(theGlobalBounds.width,theGlobalBounds.height));
+        theGlobalBoundsShape.setPosition(theGlobalBounds.left,
+                                         theGlobalBounds.top);
+        theGlobalBoundsShape.setOutlineColor(CColour::Red);
+        theGlobalBoundsShape.setOutlineThickness(1.0f);
+        theGlobalBoundsShape.setFillColor(CColour::Transparent);
+        draw(theGlobalBoundsShape);
+    }
+#endif
 }
 
 // =============================================================================
@@ -131,10 +173,29 @@ CSprite::CSprite(std::string filename) : sf::Sprite()
     setTexture(*theTexture);
 }
 
+CSprite::CSprite(std::string filename, bool flipX, bool flipY) : sf::Sprite()
+{
+    CTexture *theTexture = CTextureBank::GetTexture(filename, flipX, flipY);
+    setTexture(*theTexture);
+}
+
 
 CSprite::~CSprite()
 {
 
+}
+
+// =============================================================================
+// CImage constructor/destructor
+// -----------------------------------------------------------------------------
+CImage::CImage() : sf::Image()
+{
+    
+}
+
+CImage::~CImage()
+{
+    
 }
 
 // =============================================================================

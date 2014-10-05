@@ -16,6 +16,11 @@
 #include "Enums.hpp"
 
 // =============================================================================
+// Forward declarations
+// -----------------------------------------------------------------------------
+class CSprite;
+
+// =============================================================================
 // Helper methods
 // -----------------------------------------------------------------------------
 static void InitSFML(sf::RenderWindow *theWindow)
@@ -55,6 +60,8 @@ public:
                     CColour theColour = CColour::Black,
                     unsigned int fontSize = 12,
                     EFontType fontType = kFontTypeDefault);
+    // Draw a sprite
+    void DrawSprite(CSprite theSprite);
 };
 
 class CFont : public sf::Font
@@ -76,12 +83,6 @@ class CEvent : public sf::Event
     
 };
 
-// The SFML Time interface doesn't provide anyway of constructing a Time object
-// with an initial value or setting the value so I can't create a conversion
-// from sf::Time to a derived class. I don't imagine I'll need to add any
-// extensions to this so a typedef should do
-typedef sf::Time CTime;
-
 class CClock : public sf::Clock
 {
 public:
@@ -94,6 +95,7 @@ class CSprite : public sf::Sprite
 public:
     CSprite();
     CSprite(std::string filename);
+    CSprite(std::string filename, bool flipX, bool flipY);
     ~CSprite();
 };
 
@@ -102,6 +104,13 @@ class CTexture : public sf::Texture
 public:
     CTexture();
     ~CTexture();
+};
+
+class CImage : public sf::Image
+{
+public:
+    CImage();
+    ~CImage();
 };
 
 class CKeyboard : public sf::Keyboard
@@ -113,6 +122,18 @@ class CMouse : public sf::Mouse
 {
     // Static class, no constructors
 };
+
+// =============================================================================
+// Typedefs
+// -----------------------------------------------------------------------------
+// The SFML Time interface doesn't provide anyway of constructing a Time object
+// with an initial value or setting the value so I can't create a conversion
+// from sf::Time to a derived class. I don't imagine I'll need to add any
+// extensions to this so a typedef should do
+typedef sf::Time CTime;
+
+// I won't need to extend vectors in any way
+typedef sf::Vector2f CVector2f;
 
 
 #endif /* defined(__SwingGame__SFMLIntegration__) */
