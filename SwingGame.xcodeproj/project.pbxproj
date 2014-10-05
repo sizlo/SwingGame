@@ -19,6 +19,14 @@
 		22FC77DF19E04417000A507F /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77DD19E04417000A507F /* pugixml.cpp */; };
 		22FC77E319E04B22000A507F /* CLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77E119E04B22000A507F /* CLevel.cpp */; };
 		22FC77E519E0564D000A507F /* testLevel.xml in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77E419E0564D000A507F /* testLevel.xml */; };
+		22FC77ED19E16A17000A507F /* TestLevelBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77E719E16A17000A507F /* TestLevelBackground.png */; };
+		22FC77EE19E16A17000A507F /* TestLevelBlock0.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77E819E16A17000A507F /* TestLevelBlock0.png */; };
+		22FC77EF19E16A17000A507F /* TestLevelBlock1.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77E919E16A17000A507F /* TestLevelBlock1.png */; };
+		22FC77F019E16A17000A507F /* TestLevelBorderX.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77EA19E16A17000A507F /* TestLevelBorderX.png */; };
+		22FC77F119E16A17000A507F /* TestLevelBorderY.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77EB19E16A17000A507F /* TestLevelBorderY.png */; };
+		22FC77F419E18145000A507F /* TestLevelGoal.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77F319E18145000A507F /* TestLevelGoal.png */; };
+		22FC77F819E19144000A507F /* CDebugOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F619E19144000A507F /* CDebugOptions.cpp */; };
+		22FC77FB19E1917A000A507F /* CGameOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F919E1917A000A507F /* CGameOptions.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +60,16 @@
 		22FC77E119E04B22000A507F /* CLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CLevel.cpp; sourceTree = "<group>"; };
 		22FC77E219E04B22000A507F /* CLevel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLevel.hpp; sourceTree = "<group>"; };
 		22FC77E419E0564D000A507F /* testLevel.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testLevel.xml; path = Data/testLevel.xml; sourceTree = SOURCE_ROOT; };
-		22FC77E619E06522000A507F /* CGameOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CGameOptions.hpp; sourceTree = "<group>"; };
+		22FC77E719E16A17000A507F /* TestLevelBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBackground.png; path = Data/TestLevelBackground.png; sourceTree = SOURCE_ROOT; };
+		22FC77E819E16A17000A507F /* TestLevelBlock0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBlock0.png; path = Data/TestLevelBlock0.png; sourceTree = SOURCE_ROOT; };
+		22FC77E919E16A17000A507F /* TestLevelBlock1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBlock1.png; path = Data/TestLevelBlock1.png; sourceTree = SOURCE_ROOT; };
+		22FC77EA19E16A17000A507F /* TestLevelBorderX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBorderX.png; path = Data/TestLevelBorderX.png; sourceTree = SOURCE_ROOT; };
+		22FC77EB19E16A17000A507F /* TestLevelBorderY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBorderY.png; path = Data/TestLevelBorderY.png; sourceTree = SOURCE_ROOT; };
+		22FC77F319E18145000A507F /* TestLevelGoal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelGoal.png; path = Data/TestLevelGoal.png; sourceTree = SOURCE_ROOT; };
+		22FC77F619E19144000A507F /* CDebugOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDebugOptions.cpp; sourceTree = "<group>"; };
+		22FC77F719E19144000A507F /* CDebugOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CDebugOptions.hpp; sourceTree = "<group>"; };
+		22FC77F919E1917A000A507F /* CGameOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGameOptions.cpp; sourceTree = "<group>"; };
+		22FC77FA19E1917A000A507F /* CGameOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CGameOptions.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +109,10 @@
 				22FC77E019E045EE000A507F /* CGameLocation.hpp */,
 				22FC77E119E04B22000A507F /* CLevel.cpp */,
 				22FC77E219E04B22000A507F /* CLevel.hpp */,
-				22FC77E619E06522000A507F /* CGameOptions.hpp */,
+				22FC77F619E19144000A507F /* CDebugOptions.cpp */,
+				22FC77F719E19144000A507F /* CDebugOptions.hpp */,
+				22FC77F919E1917A000A507F /* CGameOptions.cpp */,
+				22FC77FA19E1917A000A507F /* CGameOptions.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -134,6 +154,12 @@
 		22C3F3F819D313880043264D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22FC77E719E16A17000A507F /* TestLevelBackground.png */,
+				22FC77F319E18145000A507F /* TestLevelGoal.png */,
+				22FC77E819E16A17000A507F /* TestLevelBlock0.png */,
+				22FC77E919E16A17000A507F /* TestLevelBlock1.png */,
+				22FC77EA19E16A17000A507F /* TestLevelBorderX.png */,
+				22FC77EB19E16A17000A507F /* TestLevelBorderY.png */,
 				22FC77E419E0564D000A507F /* testLevel.xml */,
 				2247444D19D608780017EE1F /* square.png */,
 				2218B5FF19D31462002A2EB7 /* sansation.ttf */,
@@ -211,8 +237,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FC77EE19E16A17000A507F /* TestLevelBlock0.png in Resources */,
 				2247444E19D608780017EE1F /* square.png in Resources */,
 				22FC77E519E0564D000A507F /* testLevel.xml in Resources */,
+				22FC77ED19E16A17000A507F /* TestLevelBackground.png in Resources */,
+				22FC77F019E16A17000A507F /* TestLevelBorderX.png in Resources */,
+				22FC77EF19E16A17000A507F /* TestLevelBlock1.png in Resources */,
+				22FC77F419E18145000A507F /* TestLevelGoal.png in Resources */,
+				22FC77F119E16A17000A507F /* TestLevelBorderY.png in Resources */,
 				2218B60319D31462002A2EB7 /* sansation.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,6 +276,8 @@
 				229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */,
+				22FC77FB19E1917A000A507F /* CGameOptions.cpp in Sources */,
+				22FC77F819E19144000A507F /* CDebugOptions.cpp in Sources */,
 				22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */,
 				2250711019D4745B00F1179D /* CTextUtilties.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* CSystemUtilities.mm in Sources */,
