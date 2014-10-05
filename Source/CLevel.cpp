@@ -11,8 +11,85 @@
 // -----------------------------------------------------------------------------
 #include "CLevel.hpp"
 #include "CSwingGame.hpp"
-#include "Libraries/pugixml/pugixml.hpp"
 #include "CSystemUtilities.hpp"
+
+// =============================================================================
+// Helper methods
+// -----------------------------------------------------------------------------
+CVector2f GetVector2f(pugi::xml_node theNode)
+{
+    CHECK_CHILD(theNode, "x");
+    CHECK_CHILD(theNode, "y");
+    
+    CVector2f theResult;
+    theResult.x = theNode.child("x").text().as_float();
+    theResult.y = theNode.child("y").text().as_float();
+    
+    return theResult;
+}
+
+SLevelItem GetLevelItem(pugi::xml_node theRoot)
+{
+    CHECK_CHILD(theRoot, "position");
+    CHECK_CHILD(theRoot, "shape");
+    CHECK_CHILD(theRoot, "size");
+    CHECK_CHILD(theRoot, "texture");
+    
+    SLevelItem theResult;
+    
+    // Process each child
+    for (pugi::xml_node theNode = theRoot.first_child();
+         theNode;
+         theNode = theNode.next_sibling())
+    {
+        if (strcmp(theNode.name(), "position") == 0)
+        {
+            theResult.mPosition = GetVector2f(theNode);
+        }
+        else if (strcmp(theNode.name(), "shape") == 0)
+        {
+            if (strcmp(theNode.text().as_string(), "Rect") == 0)
+            {
+                theResult.mShape = kLevelItemShapeRect;
+            }
+            else
+            {
+                DEBUG_LOG("Unknown level item shape: %s",
+                          theNode.text().as_string());
+            }
+        }
+        else if (strcmp(theNode.name(), "size") == 0)
+        {
+            theResult.mSize = GetVector2f(theNode);
+        }
+        else if (strcmp(theNode.name(), "texture") == 0)
+        {
+            bool flipX = false;
+            bool flipY = false;
+            
+            if (theNode.attribute("flipX") != NULL)
+            {
+                flipX = theNode.attribute("flipX").as_bool();
+            }
+            if (theNode.attribute("flipY") != NULL)
+            {
+                flipY = theNode.attribute("flipY").as_bool();
+            }
+            
+            std::string filename = theNode.text().as_string();
+            theResult.mSprite = CSprite(filename, flipX, flipY);
+        }
+        else
+        {
+            DEBUG_LOG("Unknown xml node: %s", theNode.name());
+        }
+    }
+    
+    // Set the position of the sprite
+    theResult.mSprite.setPosition(theResult.mPosition);
+    
+    return theResult;
+}
 
 // =============================================================================
 // CLevel constructor/destructor
@@ -34,6 +111,10 @@ void CLevel::Enter()
 {
     // Set the game state
     CSwingGame::SetGameState(kGameStateInGame);
+    
+    // Register any drawables and updateables
+    CSwingGame::RegisterDrawable(this);
+    CSwingGame::RegisterUpdateable(this);
 }
 
 // =============================================================================
@@ -43,6 +124,10 @@ void CLevel::Exit()
 {
     // Unset the game state
     CSwingGame::UnsetGameState(kGameStateInGame);
+    
+    // Unregister all drawables
+    CSwingGame::UnregisterDrawable(this);
+    CSwingGame::UnregisterUpdateable(this);
 }
 
 // =============================================================================
@@ -51,6 +136,8 @@ void CLevel::Exit()
 // -----------------------------------------------------------------------------
 void CLevel::InitFromFile(std::string filename)
 {
+    DEBUG_LOG("Loading level from %s", filename.c_str());
+    
     // Read the file
     pugi::xml_document theDocument;
     std::string fullName = CSystemUtilities::GetResourcePath() + filename;
@@ -62,6 +149,131 @@ void CLevel::InitFromFile(std::string filename)
         DEBUG_LOG("Status code: %d", theResult.status);
     }
     
-    // TODO: Interpret the xml and populate the level
-    DEBUG_LOG("InitFromFile - Not fully implemented");
+    // Begin processing the level(root) node
+    DEBUG_LOG("Processing level node");
+    
+    // Get the name and ID from the root element
+    pugi::xml_node theRoot = theDocument.document_element();
+    CHECK_ATTRIBUTE(theRoot, "name");
+    mName = theRoot.attribute("name").value();
+    
+    // Report missing required nodes
+    CHECK_CHILD(theRoot, "start");
+    CHECK_CHILD(theRoot, "goal");
+    CHECK_CHILD(theRoot, "background");
+    // Don't check for obstacles, stricly speaking they are not required
+    
+    // Go through all children of the root and process each in turn
+    for (pugi::xml_node theNode = theRoot.first_child();
+         theNode;
+         theNode = theNode.next_sibling())
+    {
+        if (strcmp(theNode.name(), "start") == 0)
+        {
+            ProcessStartXML(theNode);
+        }
+        else if (strcmp(theNode.name(), "goal") == 0)
+        {
+            ProcessGoalXML(theNode);
+        }
+        else if (strcmp(theNode.name(), "background") == 0)
+        {
+            DEBUG_LOG("Processing background node");
+            mBackground = CSprite(theNode.text().as_string());
+        }
+        else if (strcmp(theNode.name(), "obstacle") == 0)
+        {
+            ProcessObstacleXML(theNode);
+        }
+        else
+        {
+            DEBUG_LOG("Unknown xml node: %s", theNode.name());
+        }
+    }
 }
+
+// =============================================================================
+// CLevel::ProcessStartXML
+// Build the start position from the xml
+// -----------------------------------------------------------------------------
+void CLevel::ProcessStartXML(pugi::xml_node theRoot)
+{
+    DEBUG_LOG("Processing start node");
+    CHECK_CHILD(theRoot, "position");
+    CHECK_CHILD(theRoot, "swingTarget");
+
+    for (pugi::xml_node theNode = theRoot.first_child();
+         theNode;
+         theNode = theNode.next_sibling())
+    {
+        if (strcmp(theNode.name(), "position") == 0)
+        {
+            mStartPosition.mPosition = GetVector2f(theNode);
+        }
+        else if (strcmp(theNode.name(), "swingTarget") == 0)
+        {
+            mStartPosition.mSwingTarget = GetVector2f(theNode);
+        }
+        else
+        {
+            DEBUG_LOG("Unknown xml node: %s", theNode.name());
+        }
+    }
+}
+
+// =============================================================================
+// CLevel::ProcessGoalXML
+// Build the goal from the xml
+// -----------------------------------------------------------------------------
+void CLevel::ProcessGoalXML(pugi::xml_node theRoot)
+{
+    DEBUG_LOG("Processing goal node");
+
+    mGoal = GetLevelItem(theRoot);
+}
+
+// =============================================================================
+// CLevel::ProcessObstacleXML
+// Build an obstacle from the xml
+// -----------------------------------------------------------------------------
+void CLevel::ProcessObstacleXML(pugi::xml_node theRoot)
+{
+    DEBUG_LOG("Processing obstacle node");
+
+    mLevelItems.push_back(GetLevelItem(theRoot));
+}
+
+// =============================================================================
+// CLevel::Update
+// Update the level
+// -----------------------------------------------------------------------------
+void CLevel::Update(CTime elapsedTime)
+{
+    
+}
+
+// =============================================================================
+// CLevel::Draw
+// Draw the level
+// -----------------------------------------------------------------------------
+void CLevel::Draw(CWindow *theWindow)
+{
+    // Draw the background
+    theWindow->draw(mBackground);
+    
+    // Draw the goal
+    theWindow->DrawSprite(mGoal.mSprite);
+    
+    // Draw all level items
+    for (std::list<SLevelItem>::iterator it = mLevelItems.begin();
+         it != mLevelItems.end();
+         ++it)
+    {
+        theWindow->DrawSprite((*it).mSprite);
+    }
+}
+
+
+
+
+

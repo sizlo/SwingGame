@@ -14,34 +14,47 @@
 // -----------------------------------------------------------------------------
 #include "CGameLocation.hpp"
 #include "SFMLIntegration.hpp"
+#include "Libraries/pugixml/pugixml.hpp"
+#include "CDrawable.hpp"
+#include "CUpdateable.hpp"
 #include <list>
+
+// =============================================================================
+// Macros
+// -----------------------------------------------------------------------------
+#define CHECK_ATTRIBUTE(node, attr)                 \
+    if (node.attribute(attr) == NULL)               \
+    {                                               \
+        DEBUG_LOG("Missing attribute: %s", attr);   \
+    }
+
+#define CHECK_CHILD(root, childName)                \
+    if (root.child(childName) == NULL)              \
+    {                                               \
+        DEBUG_LOG("Missing child: %s", childName);  \
+    }
 
 // =============================================================================
 // Data structures
 // -----------------------------------------------------------------------------
 struct SStartPosition
 {
-    float mX;
-    float mY;
-    float mSwingTargetX;
-    float mSwingTargetY;
+    CVector2f mPosition;
+    CVector2f mSwingTarget;
 };
 
 struct SLevelItem
 {
-    bool                mRigid;
-    float               mY;
-    float               mX;
+    CVector2f           mPosition;
     ELevelItemShapes    mShape;
-    float               mSizeX;
-    float               mSizeY;
+    CVector2f           mSize;
     CSprite             mSprite;
 };
 
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
-class CLevel : public CGameLocation
+class CLevel : public CGameLocation, public CDrawable, public CUpdateable
 {
 public:
     CLevel(std::string filename);
@@ -51,15 +64,22 @@ public:
     void Exit();
     
     // Read a level from an xml file
-    void InitFromFile(std::string filename);
+    void InitFromFile       (std::string filename);
+    void ProcessStartXML    (pugi::xml_node theRoot);
+    void ProcessGoalXML     (pugi::xml_node theRoot);
+    void ProcessObstacleXML (pugi::xml_node theRoot);
+    
+    // Update the level
+    void Update(CTime elapsedTime);
+    // Draw the level
+    void Draw(CWindow *theWindow);
     
 private:
-    int                     mID;
     std::string             mName;
     
     // Start and goal
     SStartPosition          mStartPosition;
-    SLevelItem              mEndPosition;
+    SLevelItem              mGoal;
     
     // Background sprite
     CSprite                 mBackground;
