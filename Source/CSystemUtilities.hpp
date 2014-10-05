@@ -32,6 +32,8 @@ public:
     static void ClearInputEvents();
     // Was a given key pressed this cycle
     static bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
+    // Get the mouse position relative to the window
+    static CVector2i GetMousePosition();
     
 private:
     static std::list<CEvent> smTheInputEvents;

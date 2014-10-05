@@ -111,3 +111,13 @@ bool CSystemUtilities::WasKeyPressedThisCycle(CKeyboard::Key theKey)
     
     return theResult;
 }
+
+// =============================================================================
+// CSystemUtilities::GetMousePosition
+// Get the mouse position relative to the window
+// -----------------------------------------------------------------------------
+CVector2i CSystemUtilities::GetMousePosition()
+{
+    return CMouse::getPosition(*smGameWindow);
+}
+

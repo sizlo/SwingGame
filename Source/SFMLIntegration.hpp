@@ -134,6 +134,7 @@ typedef sf::Time CTime;
 
 // I won't need to extend vectors in any way
 typedef sf::Vector2f CVector2f;
+typedef sf::Vector2i CVector2i;
 
 
 #endif /* defined(__SwingGame__SFMLIntegration__) */
