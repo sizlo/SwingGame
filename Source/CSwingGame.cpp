@@ -15,6 +15,7 @@
 #include "CLevel.hpp"
 #include "CGameOptions.hpp"
 #include "CDebugOptions.hpp"
+#include "CSystemUtilities.hpp"
 #include <sstream>
 
 // =============================================================================
@@ -26,7 +27,6 @@ std::list<CUpdateable *>    CSwingGame::smTheUpdateables;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToAdd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToRemove;
 std::list<CDrawable *>      CSwingGame::smTheDrawables;
-std::list<CEvent>           CSwingGame::smTheKeyPresses;
 CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 
 
@@ -62,6 +62,7 @@ void CSwingGame::Init()
     GoToLocation(kGameLocationFrontEnd);
     
     // Initialise other systems
+    CSystemUtilities::Init(mWindow);
     InitSFML(mWindow);
 }
 
@@ -201,27 +202,6 @@ void CSwingGame::UnregisterDrawable(CDrawable *theDrawable)
 }
 
 // =============================================================================
-// CSwingGame::WasKeyPressedThisCycle
-// Was a keypress event recieved for the given key this cycle
-// -----------------------------------------------------------------------------
-bool CSwingGame::WasKeyPressedThisCycle(CKeyboard::Key theKey)
-{
-    bool theResult = false;
-    
-    for (std::list<CEvent>::iterator it = smTheKeyPresses.begin();
-         it != smTheKeyPresses.end();
-         ++it)
-    {
-        if ((*it).type == CEvent::KeyPressed && (*it).key.code == theKey)
-        {
-            theResult = true;
-        }
-    }
-    
-    return theResult;
-}
-
-// =============================================================================
 // CSwingGame::GoToLocation
 // Go to a game location (level/menu)
 // -----------------------------------------------------------------------------
@@ -271,7 +251,7 @@ void CSwingGame::ProcessEvents()
     }
     
     // Clear the last cycles keypress/mouse event list
-    smTheKeyPresses.clear();
+    CSystemUtilities::ClearInputEvents();
     
     CEvent theEvent;
     while (mWindow->pollEvent(theEvent))
@@ -280,7 +260,7 @@ void CSwingGame::ProcessEvents()
         {
             case CEvent::KeyPressed:
                 // Keep a list of keypress events this cycle
-                smTheKeyPresses.push_back(theEvent);
+                CSystemUtilities::AddInputEvent(theEvent);
                 break;
                 
             case CEvent::Closed:
