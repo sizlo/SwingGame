@@ -11,6 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "CTextureBank.hpp"
 #include "CSystemUtilities.hpp"
+#include <sstream>
 
 // =============================================================================
 // Static members
@@ -33,6 +34,37 @@ CTexture * CTextureBank::GetTexture(std::string filename)
     }
     
     return smTextures[filename];
+}
+
+// =============================================================================
+// CTextureBank::GetTexture
+// Get or load a texture which has a flip applied to the image file
+// -----------------------------------------------------------------------------
+CTexture * CTextureBank::GetTexture(std::string filename, bool flipX, bool flipY)
+{
+    std::string theIdentifier = filename;
+    if (flipX)
+        theIdentifier += "flipx";
+    if (flipY)
+        theIdentifier += "flipy";
+    
+    // Load a texture if we don't have it
+    if (smTextures[theIdentifier] == NULL)
+    {
+        // Load and flip the image
+        CImage theImage;
+        theImage.loadFromFile(CSystemUtilities::GetResourcePath() + filename);
+        if (flipX)
+            theImage.flipHorizontally();
+        if (flipY)
+            theImage.flipVertically();
+        
+        CTexture *theTexture = new CTexture();
+        theTexture->loadFromImage(theImage);
+        smTextures[theIdentifier] = theTexture;
+    }
+    
+    return smTextures[theIdentifier];
 }
 
 // =============================================================================

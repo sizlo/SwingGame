@@ -22,6 +22,7 @@ class CTextureBank
 public:
     // Load or get a loaded texture
     static CTexture * GetTexture(std::string filename);
+    static CTexture * GetTexture(std::string filename, bool flipX, bool flipY);
     // Delete all loaded textures
     static void Cleanup();
     
