@@ -14,6 +14,7 @@
 #include "CTextureBank.hpp"
 #include "CLevel.hpp"
 #include "CGameOptions.hpp"
+#include "CDebugOptions.hpp"
 #include <sstream>
 
 // =============================================================================
@@ -383,13 +384,16 @@ void CSwingGame::Render()
     
     // In debug draw frame/update rate over everything else
 #if SG_DEBUG
-    std::stringstream theStream;
-    theStream << "FPS: " << mFPS << std::endl;
-    theStream << "UPS: " << mUPS;
-    mWindow->DrawTextAt(theStream.str(),
-                        CGameOptions::smWindowWidth - 100,
-                        5,
-                        CColour::Red);
+    if (CDebugOptions::smShowFramerate)
+    {
+        std::stringstream theStream;
+        theStream << "FPS: " << mFPS << std::endl;
+        theStream << "UPS: " << mUPS;
+        mWindow->DrawTextAt(theStream.str(),
+                            CGameOptions::smWindowWidth - 100,
+                            5,
+                            CColour::Red);
+    }
 #endif
     
     // Display the new window contents
