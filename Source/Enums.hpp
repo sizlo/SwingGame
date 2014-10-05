@@ -45,7 +45,7 @@ enum EGameLocation
 // -----------------------------------------------------------------------------
 enum ELevelItemShapes
 {
-    kLevelItemRect
+    kLevelItemShapeRect
 };
 
 #endif
