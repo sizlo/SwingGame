@@ -1,17 +1,17 @@
-<level id="0" name="Test Level">
+<level name="Test Level">
   
   <start>
     <position>
       <x>50</x>
       <y>50</y>
     </position>
-    <swingLocation>
+    <swingTarget>
       <x>80</x>
       <y>50</y>
-    </swingLocation>
+    </swingTarget>
   </start>
 
-  <end>
+  <goal>
     <position>
       <x>800</x>
       <y>500</y>
@@ -21,12 +21,12 @@
       <x>50</x>
       <y>50</y>
     </size>
-    <texture>TestLevelEnd.png</texture>
-  </end>
+    <texture>TestLevelGoal.png</texture>
+  </goal>
 
   <background>TestLevelBackground.png</background>
 
-  <obstacle id="0">
+  <obstacle>
     <position>
       <x>900</x>
       <y>400</y>
@@ -39,7 +39,7 @@
     <texture>TestLevelBlock0.png</texture>
   </obstacle>
 
-  <obstacle id="1">
+  <obstacle>
     <position>
       <x>200</x>
       <y>700</y>
@@ -53,7 +53,7 @@
   </obstacle>
 
   <!-- border top -->
-  <obstacle id="2">
+  <obstacle>
     <position>
       <x>0</x>
       <y>0</y>
@@ -67,7 +67,7 @@
   </obstacle>
 
   <!-- border bottom -->
-  <obstacle id="3">
+  <obstacle>
     <position>
       <x>0</x>
       <y>748</y>
@@ -77,11 +77,11 @@
       <x>1024</x>
       <y>20</y>
     </size>
-    <texture rotation="180">TestLevelBorderX.png</texture>
+    <texture flipY="true">TestLevelBorderX.png</texture>
   </obstacle>
 
   <!-- border left -->
-  <obstacle id="4">
+  <obstacle>
     <position>
       <x>0</x>
       <y>0</y>
@@ -95,7 +95,7 @@
   </obstacle>
 
   <!-- border right -->
-  <obstacle id="5">
+  <obstacle>
     <position>
       <x>1004</x>
       <y>0</y>
@@ -105,7 +105,7 @@
       <x>20</x>
       <y>768</y>
     </size>
-    <texture rotation="180">TestLevelBorderY.png</texture>
+    <texture flipX="true">TestLevelBorderY.png</texture>
   </obstacle>
 
 </level>
