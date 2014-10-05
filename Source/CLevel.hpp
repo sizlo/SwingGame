@@ -86,6 +86,9 @@ private:
     
     // Obstacles
     std::list<SLevelItem>   mLevelItems;
+    
+    // Temporary
+    CSprite                 mPlayer;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

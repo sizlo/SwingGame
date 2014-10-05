@@ -94,7 +94,7 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
 // =============================================================================
 // CLevel constructor/destructor
 // -----------------------------------------------------------------------------
-CLevel::CLevel(std::string filename)
+CLevel::CLevel(std::string filename)    :   mPlayer("player.png")
 {
     InitFromFile(filename);
 }
@@ -249,7 +249,18 @@ void CLevel::ProcessObstacleXML(pugi::xml_node theRoot)
 // -----------------------------------------------------------------------------
 void CLevel::Update(CTime elapsedTime)
 {
+    // Temporary
+    CVector2i playerPos = CSystemUtilities::GetMousePosition();
+    playerPos.x = std::max(0, playerPos.x);
+    playerPos.x = std::min(1024-20, playerPos.x);
+    playerPos.y = std::max(0, playerPos.y);
+    playerPos.y = std::min(768-40, playerPos.y);
+    mPlayer.setPosition(playerPos.x, playerPos.y);
     
+    if (CKeyboard::isKeyPressed(CKeyboard::R))
+    {
+        mPlayer.rotate(360 * elapsedTime.asSeconds());
+    }
 }
 
 // =============================================================================
@@ -271,6 +282,9 @@ void CLevel::Draw(CWindow *theWindow)
     {
         theWindow->DrawSprite((*it).mSprite);
     }
+    
+    // Temporary
+    theWindow->DrawSprite(mPlayer);
 }
 
 
