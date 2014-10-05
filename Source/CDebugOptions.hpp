@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CDebugOptions_hpp
-#define SwingGame_CDebugOptions_hpp
+#ifndef __SwingGame__CDebugOptions__
+#define __SwingGame__CDebugOptions__
 
 // =============================================================================
 // Class definition
@@ -20,8 +20,4 @@ public:
     static bool smDrawSpriteOrigins;
 };
 
-bool CDebugOptions::smShowFramerate     = true;
-bool CDebugOptions::smDrawSpriteBounds  = true;
-bool CDebugOptions::smDrawSpriteOrigins = true;
-
-#endif
+#endif /* defined(__SwingGame__CDebugOptions__) */
