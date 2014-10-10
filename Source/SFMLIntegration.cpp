@@ -13,7 +13,7 @@
 #include "TextUtilties.hpp"
 #include "SystemUtilities.hpp"
 #include "CTextureBank.hpp"
-#include "CDebugOptions.hpp"
+#include "DebugOptions.hpp"
 
 // =============================================================================
 // CColour constructors/destructors
@@ -84,7 +84,7 @@ void CWindow::DrawSprite(CSprite theSprite)
     
 #if SG_DEBUG // Draw debug information
     // Draw the origin
-    if (CDebugOptions::smDrawSpriteOrigins)
+    if (DebugOptions::drawSpriteOrigins)
     {
         CVector2f theOrigin = theSprite.getPosition();
         sf::Vertex lines[] =
@@ -99,7 +99,7 @@ void CWindow::DrawSprite(CSprite theSprite)
     }
     
     // Draw the global bounds
-    if (CDebugOptions::smDrawSpriteBounds)
+    if (DebugOptions::drawSpriteBounds)
     {
         sf::FloatRect theGlobalBounds = theSprite.getGlobalBounds();
         sf::RectangleShape theGlobalBoundsShape(

@@ -24,8 +24,8 @@
 		22FC77F019E16A17000A507F /* TestLevelBorderX.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77EA19E16A17000A507F /* TestLevelBorderX.png */; };
 		22FC77F119E16A17000A507F /* TestLevelBorderY.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77EB19E16A17000A507F /* TestLevelBorderY.png */; };
 		22FC77F419E18145000A507F /* TestLevelGoal.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77F319E18145000A507F /* TestLevelGoal.png */; };
-		22FC77F819E19144000A507F /* CDebugOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F619E19144000A507F /* CDebugOptions.cpp */; };
-		22FC77FB19E1917A000A507F /* CGameOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F919E1917A000A507F /* CGameOptions.cpp */; };
+		22FC77F819E19144000A507F /* DebugOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F619E19144000A507F /* DebugOptions.cpp */; };
+		22FC77FB19E1917A000A507F /* GameOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77F919E1917A000A507F /* GameOptions.cpp */; };
 		22FC77FD19E195C0000A507F /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 22FC77FC19E195C0000A507F /* player.png */; };
 /* End PBXBuildFile section */
 
@@ -65,10 +65,10 @@
 		22FC77EA19E16A17000A507F /* TestLevelBorderX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBorderX.png; path = Data/TestLevelBorderX.png; sourceTree = SOURCE_ROOT; };
 		22FC77EB19E16A17000A507F /* TestLevelBorderY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelBorderY.png; path = Data/TestLevelBorderY.png; sourceTree = SOURCE_ROOT; };
 		22FC77F319E18145000A507F /* TestLevelGoal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TestLevelGoal.png; path = Data/TestLevelGoal.png; sourceTree = SOURCE_ROOT; };
-		22FC77F619E19144000A507F /* CDebugOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDebugOptions.cpp; sourceTree = "<group>"; };
-		22FC77F719E19144000A507F /* CDebugOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CDebugOptions.hpp; sourceTree = "<group>"; };
-		22FC77F919E1917A000A507F /* CGameOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CGameOptions.cpp; sourceTree = "<group>"; };
-		22FC77FA19E1917A000A507F /* CGameOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CGameOptions.hpp; sourceTree = "<group>"; };
+		22FC77F619E19144000A507F /* DebugOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DebugOptions.cpp; sourceTree = "<group>"; };
+		22FC77F719E19144000A507F /* DebugOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DebugOptions.hpp; sourceTree = "<group>"; };
+		22FC77F919E1917A000A507F /* GameOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOptions.cpp; sourceTree = "<group>"; };
+		22FC77FA19E1917A000A507F /* GameOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameOptions.hpp; sourceTree = "<group>"; };
 		22FC77FC19E195C0000A507F /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = player.png; path = Data/player.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -109,10 +109,10 @@
 				22FC77E019E045EE000A507F /* CGameLocation.hpp */,
 				22FC77E119E04B22000A507F /* CLevel.cpp */,
 				22FC77E219E04B22000A507F /* CLevel.hpp */,
-				22FC77F619E19144000A507F /* CDebugOptions.cpp */,
-				22FC77F719E19144000A507F /* CDebugOptions.hpp */,
-				22FC77F919E1917A000A507F /* CGameOptions.cpp */,
-				22FC77FA19E1917A000A507F /* CGameOptions.hpp */,
+				22FC77F619E19144000A507F /* DebugOptions.cpp */,
+				22FC77F719E19144000A507F /* DebugOptions.hpp */,
+				22FC77F919E1917A000A507F /* GameOptions.cpp */,
+				22FC77FA19E1917A000A507F /* GameOptions.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -276,8 +276,8 @@
 				229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */,
-				22FC77FB19E1917A000A507F /* CGameOptions.cpp in Sources */,
-				22FC77F819E19144000A507F /* CDebugOptions.cpp in Sources */,
+				22FC77FB19E1917A000A507F /* GameOptions.cpp in Sources */,
+				22FC77F819E19144000A507F /* DebugOptions.cpp in Sources */,
 				22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */,
 				2250711019D4745B00F1179D /* TextUtilties.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* SystemUtilities.mm in Sources */,

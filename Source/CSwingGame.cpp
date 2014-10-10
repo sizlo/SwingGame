@@ -13,8 +13,8 @@
 #include "CTextFrontEnd.hpp"
 #include "CTextureBank.hpp"
 #include "CLevel.hpp"
-#include "CGameOptions.hpp"
-#include "CDebugOptions.hpp"
+#include "GameOptions.hpp"
+#include "DebugOptions.hpp"
 #include "SystemUtilities.hpp"
 #include <sstream>
 
@@ -54,8 +54,8 @@ CSwingGame::~CSwingGame()
 void CSwingGame::Init()
 {
     // Create the game window
-    mWindow = new CWindow(CGameOptions::smWindowWidth,
-                          CGameOptions::smWindowHeight,
+    mWindow = new CWindow(GameOptions::windowWidth,
+                          GameOptions::windowHeight,
                           mWindowTitle);
     
     // Enter the front end menu
@@ -86,8 +86,8 @@ int CSwingGame::Run()
         Update(elapsedTime);
         
         // Only render if vsync is off or enough time has past
-        if (!CGameOptions::smVsync
-            || accumulatingTime.asSeconds() >= 1.0f / CGameOptions::smMaxFPS)
+        if (!GameOptions::doVsync
+            || accumulatingTime.asSeconds() >= 1.0f / GameOptions::maxFPS)
         {
             accumulatingTime = CTime();
             Render();
@@ -364,13 +364,13 @@ void CSwingGame::Render()
     
     // In debug draw frame/update rate over everything else
 #if SG_DEBUG
-    if (CDebugOptions::smShowFramerate)
+    if (DebugOptions::showFramerate)
     {
         std::stringstream theStream;
         theStream << "FPS: " << mFPS << std::endl;
         theStream << "UPS: " << mUPS;
         mWindow->DrawTextAt(theStream.str(),
-                            CGameOptions::smWindowWidth - 100,
+                            GameOptions::windowWidth - 100,
                             5,
                             CColour::Red);
     }

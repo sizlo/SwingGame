@@ -1,5 +1,5 @@
 //
-//  CDebugOptions.cpp
+//  GameOptions.cpp
 //  SwingGame
 //
 //  Created by Tim Brier on 05/10/2014.
@@ -9,11 +9,17 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "CDebugOptions.hpp"
+#include "GameOptions.hpp"
+
+namespace GameOptions
+{
 
 // =============================================================================
-// Static members
+// Namespace gloabals
 // -----------------------------------------------------------------------------
-bool CDebugOptions::smShowFramerate     = true;
-bool CDebugOptions::smDrawSpriteBounds  = true;
-bool CDebugOptions::smDrawSpriteOrigins = true;
+unsigned int    windowHeight    = 768;
+unsigned int    windowWidth     = 1024;
+bool            doVsync         = true;
+unsigned int    maxFPS          = 60;
+
+} // namespace GameOptions
