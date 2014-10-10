@@ -15,7 +15,7 @@
 #include "SFMLIntegration.hpp"
 #include "CTextUtilties.hpp"
 #include "CUpdateable.hpp"
-#include "CDrawable.hpp"
+#include "CRenderable.hpp"
 #include "CGameLocation.hpp"
 #include <list>
 
@@ -44,11 +44,11 @@ public:
     // Returns true only if the current gamestate has all the given flags
     static bool HasAllGameStates   (EGameState theState);
     
-    // Register/unregister updatable/drawables
+    // Register/unregister updatable/renderables
     static void RegisterUpdateable  (CUpdateable    *theUpdateable);
-    static void RegisterDrawable    (CDrawable      *theDrawable);
+    static void RegisterRenderable  (CRenderable    *theRenderable);
     static void UnregisterUpdateable(CUpdateable    *theUpdateable);
-    static void UnregisterDrawable  (CDrawable      *theDrawable);
+    static void UnregisterRenderable(CRenderable    *theRenderable);
     
     // Go to a game location
     static void GoToLocation(EGameLocation theLocation);
@@ -77,11 +77,11 @@ private:
     // The current game state
     static EGameState smGameState;
     
-    // Updateable and drawable lists
+    // Updateable and renderable lists
     static std::list<CUpdateable *> smTheUpdateables;
     static std::list<CUpdateable *> smTheUpdateablesToAdd;
     static std::list<CUpdateable *> smTheUpdateablesToRemove;
-    static std::list<CDrawable *>   smTheDrawables;
+    static std::list<CRenderable *> smTheRenderables;
     
     // The current game location (menu/level)
     static CGameLocation *smCurrentLocation;

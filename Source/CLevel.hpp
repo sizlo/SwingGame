@@ -15,7 +15,7 @@
 #include "CGameLocation.hpp"
 #include "SFMLIntegration.hpp"
 #include "Libraries/pugixml/pugixml.hpp"
-#include "CDrawable.hpp"
+#include "CRenderable.hpp"
 #include "CUpdateable.hpp"
 #include <list>
 
@@ -54,7 +54,7 @@ struct SLevelItem
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
-class CLevel : public CGameLocation, public CDrawable, public CUpdateable
+class CLevel : public CGameLocation, public CRenderable, public CUpdateable
 {
 public:
     CLevel(std::string filename);

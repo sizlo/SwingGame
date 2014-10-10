@@ -112,8 +112,8 @@ void CLevel::Enter()
     // Set the game state
     CSwingGame::SetGameState(kGameStateInGame);
     
-    // Register any drawables and updateables
-    CSwingGame::RegisterDrawable(this);
+    // Register any renderables and updateables
+    CSwingGame::RegisterRenderable(this);
     CSwingGame::RegisterUpdateable(this);
 }
 
@@ -125,8 +125,8 @@ void CLevel::Exit()
     // Unset the game state
     CSwingGame::UnsetGameState(kGameStateInGame);
     
-    // Unregister all drawables
-    CSwingGame::UnregisterDrawable(this);
+    // Unregister all renderables and updateables
+    CSwingGame::UnregisterRenderable(this);
     CSwingGame::UnregisterUpdateable(this);
 }
 

@@ -26,7 +26,7 @@ EGameState                  CSwingGame::smGameState = kGameStateFrontEnd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateables;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToAdd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToRemove;
-std::list<CDrawable *>      CSwingGame::smTheDrawables;
+std::list<CRenderable *>    CSwingGame::smTheRenderables;
 CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 
 
@@ -166,12 +166,12 @@ void CSwingGame::RegisterUpdateable(CUpdateable *theUpdateable)
 }
 
 // =============================================================================
-// CSwingGame::RegisterDrawable
-// Add a drawable to the list
+// CSwingGame::RegisterRenderable
+// Add a renderable to the list
 // -----------------------------------------------------------------------------
-void CSwingGame::RegisterDrawable(CDrawable *theDrawable)
+void CSwingGame::RegisterRenderable(CRenderable *theRenderable)
 {
-    smTheDrawables.push_back(theDrawable);
+    smTheRenderables.push_back(theRenderable);
 }
 
 // =============================================================================
@@ -193,12 +193,12 @@ void CSwingGame::UnregisterUpdateable(CUpdateable *theUpdateable)
 }
 
 // =============================================================================
-// CSwingGame::UnregisterDrawable
-// Remove a given drawable from the list
+// CSwingGame::UnregisterRenderable
+// Remove a given renderable from the list
 // -----------------------------------------------------------------------------
-void CSwingGame::UnregisterDrawable(CDrawable *theDrawable)
+void CSwingGame::UnregisterRenderable(CRenderable *theRenderable)
 {
-    smTheDrawables.remove(theDrawable);
+    smTheRenderables.remove(theRenderable);
 }
 
 // =============================================================================
@@ -333,7 +333,7 @@ void CSwingGame::Update(CTime elapsedTime)
 
 // =============================================================================
 // CSwingGame::Render
-// Render all CDrawables registered
+// Render all CRenderable registered
 // -----------------------------------------------------------------------------
 void CSwingGame::Render()
 {
@@ -354,9 +354,9 @@ void CSwingGame::Render()
     // Clear the window
     mWindow->clear();
     
-    // Iterate through all registered drawables, drawing them all
-    for (std::list<CDrawable *>::iterator it = smTheDrawables.begin();
-         it != smTheDrawables.end();
+    // Iterate through all registered renderables, drawing them all
+    for (std::list<CRenderable *>::iterator it = smTheRenderables.begin();
+         it != smTheRenderables.end();
          ++it)
     {
         (*it)->Draw(mWindow);

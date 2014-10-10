@@ -42,7 +42,7 @@
 		2250711119D4C58D00F1179D /* Enums.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Enums.hpp; sourceTree = "<group>"; };
 		2250711219D4C88C00F1179D /* SwingGame_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwingGame_Prefix.pch; sourceTree = "<group>"; };
 		2250711319D4CA3F00F1179D /* Macros.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Macros.hpp; sourceTree = "<group>"; };
-		229FAC0319DDC997001CEFA6 /* CDrawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CDrawable.hpp; sourceTree = "<group>"; };
+		229FAC0319DDC997001CEFA6 /* CRenderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CRenderable.hpp; sourceTree = "<group>"; };
 		229FAC0419DDCA1B001CEFA6 /* CUpdateable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CUpdateable.hpp; sourceTree = "<group>"; };
 		229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CMenu.hpp; sourceTree = "<group>"; };
 		229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextFrontEnd.cpp; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				222AEBD019D5BC690057F737 /* CSwingGame.cpp */,
 				222AEBD119D5BC690057F737 /* CSwingGame.hpp */,
 				2247444519D5F6C80017EE1F /* Main.cpp */,
-				229FAC0319DDC997001CEFA6 /* CDrawable.hpp */,
+				229FAC0319DDC997001CEFA6 /* CRenderable.hpp */,
 				229FAC0419DDCA1B001CEFA6 /* CUpdateable.hpp */,
 				229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */,
 				229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */,

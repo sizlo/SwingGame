@@ -32,9 +32,9 @@ CTextFrontEnd::~CTextFrontEnd()
 // -----------------------------------------------------------------------------
 void CTextFrontEnd::Enter()
 {
-    // Register any updateables and drawables
+    // Register any updateables and renderables
     CSwingGame::RegisterUpdateable(this);
-    CSwingGame::RegisterDrawable(this);
+    CSwingGame::RegisterRenderable(this);
     
     // Set the game state
     CSwingGame::SetGameState(kGameStateFrontEnd);
@@ -79,9 +79,9 @@ void CTextFrontEnd::Update(CTime elapsedTime)
 
 void CTextFrontEnd::Exit()
 {
-    // Unregister all updateables and drawables
+    // Unregister all updateables and renderables
     CSwingGame::UnregisterUpdateable(this);
-    CSwingGame::UnregisterDrawable(this);
+    CSwingGame::UnregisterRenderable(this);
     
     // Unset the game state
     CSwingGame::UnsetGameState(kGameStateFrontEnd);

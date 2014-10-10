@@ -12,14 +12,14 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "CDrawable.hpp"
+#include "CRenderable.hpp"
 #include "CUpdateable.hpp"
 #include "CGameLocation.hpp"
 
 // =============================================================================
 // Abstract class definition
 // -----------------------------------------------------------------------------
-class CMenu : public CDrawable, public CUpdateable, public CGameLocation
+class CMenu : public CRenderable, public CUpdateable, public CGameLocation
 {
 public:
     virtual ~CMenu(){};
