@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "CTextFrontEnd.hpp"
 #include "CSwingGame.hpp"
-#include "CSystemUtilities.hpp"
+#include "SystemUtilities.hpp"
 
 // =============================================================================
 // CTextFrontEnd constructor/destructor
@@ -66,12 +66,12 @@ void CTextFrontEnd::Draw(CWindow *theWindow)
 // -----------------------------------------------------------------------------
 void CTextFrontEnd::Update(CTime elapsedTime)
 {
-    if (CSystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num1))
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num1))
     {
         CSwingGame::GoToLocation(kGameLocationLevel1);
     }
     
-    if (CSystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
     {
         CSwingGame::ExitGame();
     }

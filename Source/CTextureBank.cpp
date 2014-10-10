@@ -10,7 +10,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CTextureBank.hpp"
-#include "CSystemUtilities.hpp"
+#include "SystemUtilities.hpp"
 #include <sstream>
 
 // =============================================================================
@@ -29,7 +29,7 @@ CTexture * CTextureBank::GetTexture(std::string filename)
     if (smTextures[filename] == NULL)
     {
         CTexture *theTexture = new CTexture();
-        theTexture->loadFromFile(CSystemUtilities::GetResourcePath() + filename);
+        theTexture->loadFromFile(SystemUtilities::GetResourcePath() + filename);
         smTextures[filename] = theTexture;
     }
     
@@ -53,7 +53,7 @@ CTexture * CTextureBank::GetTexture(std::string filename, bool flipX, bool flipY
     {
         // Load and flip the image
         CImage theImage;
-        theImage.loadFromFile(CSystemUtilities::GetResourcePath() + filename);
+        theImage.loadFromFile(SystemUtilities::GetResourcePath() + filename);
         if (flipX)
             theImage.flipHorizontally();
         if (flipY)

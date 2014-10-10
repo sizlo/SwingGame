@@ -10,8 +10,8 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration.hpp"
-#include "CTextUtilties.hpp"
-#include "CSystemUtilities.hpp"
+#include "TextUtilties.hpp"
+#include "SystemUtilities.hpp"
 #include "CTextureBank.hpp"
 #include "CDebugOptions.hpp"
 
@@ -64,7 +64,7 @@ void CWindow::DrawTextAt(std::string theString,
                          EFontType fontType /* = kFontTypeDefault */)
 {
     CFont *theFont = NULL;
-    theFont = CTextUtilities::GetFont(fontType);
+    theFont = TextUtilities::GetFont(fontType);
     
     CText theText(theString, *theFont, fontSize);
     theText.setColor(theColour);
@@ -120,7 +120,7 @@ void CWindow::DrawSprite(CSprite theSprite)
 // Loads the font from the given filename
 CFont::CFont(std::string filename) : sf::Font()
 {
-    bool result = loadFromFile(CSystemUtilities::GetResourcePath() + filename);
+    bool result = loadFromFile(SystemUtilities::GetResourcePath() + filename);
     if (!result)
     {
         DEBUG_LOG("Error loading font file: %s", filename.c_str());

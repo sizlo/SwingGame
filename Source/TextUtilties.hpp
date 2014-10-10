@@ -1,13 +1,13 @@
 //
-//  CTextUtilties.hpp
+//  TextUtilties.hpp
 //  SwingGame
 //
 //  Created by Tim Brier on 25/09/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef __SwingGame__CTextUtilties__
-#define __SwingGame__CTextUtilties__
+#ifndef __SwingGame__TextUtilties__
+#define __SwingGame__TextUtilties__
 
 // =============================================================================
 // Include Files
@@ -18,21 +18,15 @@
 // =============================================================================
 // Class Definition
 // -----------------------------------------------------------------------------
-class CTextUtilities
+namespace TextUtilities
 {
-public:
     // Load or get the desired font
-    static CFont * GetFont(EFontType fontType);
+    CFont * GetFont(EFontType fontType);
     // Delete all loaded fonts
-    static void DeleteFonts();
+    void DeleteFonts();
     
     // Cleanup before quitting
-    static void Cleanup();
-    
-private:
-    static std::string GetFontFileName(EFontType fontType);
-    
-    static CFont *smFonts[kFontTypeMax];
+    void Cleanup();
 };
 
-#endif /* defined(__SwingGame__CTextUtilties__) */
+#endif /* defined(__SwingGame__TextUtilties__) */

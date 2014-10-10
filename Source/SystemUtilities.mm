@@ -1,5 +1,5 @@
 //
-//  CSystemUtilities.mm
+//  SystemUtilities.mm
 //  SwingGame
 //
 //  Created by Tim Brier on 26/09/2014.
@@ -9,7 +9,7 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "CSystemUtilities.hpp"
+#include "SystemUtilities.hpp"
 
 #if SG_MAC
 #import <Foundation/Foundation.h>
@@ -18,26 +18,29 @@
 #include <Shlwapi.h>
 #endif
 
+namespace SystemUtilities
+{
+    
 // =============================================================================
-// Static members
+// Namespace globals
 // -----------------------------------------------------------------------------
-std::list<CEvent>   CSystemUtilities::smTheInputEvents;
-CWindow             *CSystemUtilities::smGameWindow = NULL;
-
+std::list<CEvent>   theInputEvents;
+CWindow             *theGameWindow;
+    
 // =============================================================================
-// CSystemUtilities::Init
+// SystemUtilities::Init
 // Initialise at program launch
 // -----------------------------------------------------------------------------
-void CSystemUtilities::Init(CWindow *theWindow)
+void Init(CWindow *theWindow)
 {
-    smGameWindow = theWindow;
+    theGameWindow = theWindow;
 }
 
 // =============================================================================
-// CSystemUtilities::GetResourcePath
+// SystemUtilities::GetResourcePath
 // Return the platform specific path to the resource location
 // -----------------------------------------------------------------------------
-std::string CSystemUtilities::GetResourcePath()
+std::string GetResourcePath()
 {
     std::string theReturnPath;
 
@@ -74,33 +77,33 @@ std::string CSystemUtilities::GetResourcePath()
 }
 
 // =============================================================================
-// CSystemUtilities::AddInputEvent
+// SystemUtilities::AddInputEvent
 // Add an input event to this of them recieved this cycle
 // -----------------------------------------------------------------------------
-void CSystemUtilities::AddInputEvent(CEvent theEvent)
+void AddInputEvent(CEvent theEvent)
 {
-    smTheInputEvents.push_back(theEvent);
+    theInputEvents.push_back(theEvent);
 }
 
 // =============================================================================
-// CSystemUtilities::ClearInputEvents
+// SystemUtilities::ClearInputEvents
 // Clear the list of input events
 // -----------------------------------------------------------------------------
-void CSystemUtilities::ClearInputEvents()
+void ClearInputEvents()
 {
-    smTheInputEvents.clear();
+    theInputEvents.clear();
 }
 
 // =============================================================================
-// CSystemUtilities::WasKeyPressedThisCycle
+// SystemUtilities::WasKeyPressedThisCycle
 // Was a keypress event recieved for the given key this cycle
 // -----------------------------------------------------------------------------
-bool CSystemUtilities::WasKeyPressedThisCycle(CKeyboard::Key theKey)
+bool WasKeyPressedThisCycle(CKeyboard::Key theKey)
 {
     bool theResult = false;
     
-    for (std::list<CEvent>::iterator it = smTheInputEvents.begin();
-         it != smTheInputEvents.end();
+    for (std::list<CEvent>::iterator it = theInputEvents.begin();
+         it != theInputEvents.end();
          ++it)
     {
         if ((*it).type == CEvent::KeyPressed && (*it).key.code == theKey)
@@ -113,11 +116,13 @@ bool CSystemUtilities::WasKeyPressedThisCycle(CKeyboard::Key theKey)
 }
 
 // =============================================================================
-// CSystemUtilities::GetMousePosition
+// SystemUtilities::GetMousePosition
 // Get the mouse position relative to the window
 // -----------------------------------------------------------------------------
-CVector2i CSystemUtilities::GetMousePosition()
+CVector2i GetMousePosition()
 {
-    return CMouse::getPosition(*smGameWindow);
+    return CMouse::getPosition(*theGameWindow);
 }
+    
+} // namespace SystemUtilities
 

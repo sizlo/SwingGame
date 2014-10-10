@@ -1,5 +1,5 @@
 //
-//  CTextUtilties.cpp
+//  TextUtilties.cpp
 //  SwingGame
 //
 //  Created by Tim Brier on 25/09/2014.
@@ -9,51 +9,20 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "CTextUtilties.hpp"
+#include "TextUtilties.hpp"
 
-// =============================================================================
-// Static member variables
-// -----------------------------------------------------------------------------
-CFont * CTextUtilities::smFonts[kFontTypeMax];
-
-// =============================================================================
-// CTextUtilities::GetFont
-// Load or get the desired font
-// -----------------------------------------------------------------------------
-CFont * CTextUtilities::GetFont(EFontType fontType)
+namespace TextUtilities
 {
-    // If this is the first time we're loading a font initialise smFonts
-    static bool firstRun = true;
-    if (firstRun)
-    {
-        firstRun = false;
-        for (int i = 0; i < kFontTypeMax; i++)
-            smFonts[i] = NULL;
-    }
-    
-    // Load the font file if we haven't already
-    if (smFonts[fontType] == NULL)
-    {
-        smFonts[fontType] = new CFont(GetFontFileName(fontType));
-    }
-    
-    return smFonts[fontType];
-}
 
 // =============================================================================
-// CTextUtilities::DeleteFonts
-// Delete all loaded fonts
+// Namespace globals
 // -----------------------------------------------------------------------------
-void CTextUtilities::DeleteFonts()
-{
-    for (int i = 0; i < kFontTypeMax; i++)
-        SAFE_DELETE(smFonts[i]);
-}
+CFont * theFonts[kFontTypeMax];
 
 // =============================================================================
-// CTextUtilities::GetFontFileName
+// Helper methods
 // -----------------------------------------------------------------------------
-std::string CTextUtilities::GetFontFileName(EFontType fontType)
+std::string GetFontFileName(EFontType fontType)
 {
     std::string theResult;
     
@@ -68,10 +37,46 @@ std::string CTextUtilities::GetFontFileName(EFontType fontType)
 }
 
 // =============================================================================
+// TextUtilities::GetFont
+// Load or get the desired font
+// -----------------------------------------------------------------------------
+CFont * GetFont(EFontType fontType)
+{
+    // If this is the first time we're loading a font initialise smFonts
+    static bool firstRun = true;
+    if (firstRun)
+    {
+        firstRun = false;
+        for (int i = 0; i < kFontTypeMax; i++)
+            theFonts[i] = NULL;
+    }
+    
+    // Load the font file if we haven't already
+    if (theFonts[fontType] == NULL)
+    {
+        theFonts[fontType] = new CFont(GetFontFileName(fontType));
+    }
+    
+    return theFonts[fontType];
+}
+
+// =============================================================================
+// TextUtilities::DeleteFonts
+// Delete all loaded fonts
+// -----------------------------------------------------------------------------
+void DeleteFonts()
+{
+    for (int i = 0; i < kFontTypeMax; i++)
+        SAFE_DELETE(theFonts[i]);
+}
+
+// =============================================================================
 // CTextUtilities::Cleanup
 // Cleanup before quitting
 // -----------------------------------------------------------------------------
-void CTextUtilities::Cleanup()
+void Cleanup()
 {
     DeleteFonts();
 }
+
+} // namespace TextUtilities

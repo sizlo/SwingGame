@@ -15,7 +15,7 @@
 #include "CLevel.hpp"
 #include "CGameOptions.hpp"
 #include "CDebugOptions.hpp"
-#include "CSystemUtilities.hpp"
+#include "SystemUtilities.hpp"
 #include <sstream>
 
 // =============================================================================
@@ -62,7 +62,7 @@ void CSwingGame::Init()
     GoToLocation(kGameLocationFrontEnd);
     
     // Initialise other systems
-    CSystemUtilities::Init(mWindow);
+    SystemUtilities::Init(mWindow);
     InitSFML(mWindow);
 }
 
@@ -105,7 +105,7 @@ void CSwingGame::Cleanup()
 {
     SAFE_DELETE(mWindow);
     SAFE_DELETE(smCurrentLocation);
-    CTextUtilities::Cleanup();
+    TextUtilities::Cleanup();
     CTextureBank::Cleanup();
 }
 
@@ -251,7 +251,7 @@ void CSwingGame::ProcessEvents()
     }
     
     // Clear the last cycles keypress/mouse event list
-    CSystemUtilities::ClearInputEvents();
+    SystemUtilities::ClearInputEvents();
     
     CEvent theEvent;
     while (mWindow->pollEvent(theEvent))
@@ -260,7 +260,7 @@ void CSwingGame::ProcessEvents()
         {
             case CEvent::KeyPressed:
                 // Keep a list of keypress events this cycle
-                CSystemUtilities::AddInputEvent(theEvent);
+                SystemUtilities::AddInputEvent(theEvent);
                 break;
                 
             case CEvent::Closed:

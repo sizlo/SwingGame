@@ -13,7 +13,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration.hpp"
-#include "CTextUtilties.hpp"
+#include "TextUtilties.hpp"
 #include "CUpdateable.hpp"
 #include "CRenderable.hpp"
 #include "CGameLocation.hpp"

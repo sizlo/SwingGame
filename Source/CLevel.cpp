@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "CLevel.hpp"
 #include "CSwingGame.hpp"
-#include "CSystemUtilities.hpp"
+#include "SystemUtilities.hpp"
 
 // =============================================================================
 // Helper methods
@@ -140,7 +140,7 @@ void CLevel::InitFromFile(std::string filename)
     
     // Read the file
     pugi::xml_document theDocument;
-    std::string fullName = CSystemUtilities::GetResourcePath() + filename;
+    std::string fullName = SystemUtilities::GetResourcePath() + filename;
     pugi::xml_parse_result theResult = theDocument.load_file(fullName.c_str());
     
     if (theResult.status != pugi::status_ok)
@@ -250,7 +250,7 @@ void CLevel::ProcessObstacleXML(pugi::xml_node theRoot)
 void CLevel::Update(CTime elapsedTime)
 {
     // Temporary
-    CVector2i playerPos = CSystemUtilities::GetMousePosition();
+    CVector2i playerPos = SystemUtilities::GetMousePosition();
     playerPos.x = std::max(0, playerPos.x);
     playerPos.x = std::min(1024-20, playerPos.x);
     playerPos.y = std::max(0, playerPos.y);

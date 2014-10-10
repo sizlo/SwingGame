@@ -1,13 +1,13 @@
 //
-//  CSystemUtilities.hpp
+//  SystemUtilities.hpp
 //  SwingGame
 //
 //  Created by Tim Brier on 26/09/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef __SwingGame__CSystemUtilities__
-#define __SwingGame__CSystemUtilities__
+#ifndef __SwingGame__SystemUtilities__
+#define __SwingGame__SystemUtilities__
 
 // =============================================================================
 // Include Files
@@ -17,27 +17,22 @@
 #include <list>
 
 // =============================================================================
-// Class definition
+// Namespace definition
 // -----------------------------------------------------------------------------
-class CSystemUtilities
+namespace SystemUtilities
 {
-public:
     // Initialise at program launch
-    static void Init(CWindow *theWindow);
+    void Init(CWindow *theWindow);
     // Return the platform specific path to the resource location
-    static std::string GetResourcePath();
+    std::string GetResourcePath();
     // Add an input event to the list
-    static void AddInputEvent(CEvent theEvent);
+    void AddInputEvent(CEvent theEvent);
     // Clear the input event list
-    static void ClearInputEvents();
+    void ClearInputEvents();
     // Was a given key pressed this cycle
-    static bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
+    bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
     // Get the mouse position relative to the window
-    static CVector2i GetMousePosition();
-    
-private:
-    static std::list<CEvent> smTheInputEvents;
-    static CWindow *smGameWindow;
+    CVector2i GetMousePosition();
 };
 
-#endif /* defined(__SwingGame__CSystemUtilities__) */
+#endif /* defined(__SwingGame__SystemUtilities__) */
