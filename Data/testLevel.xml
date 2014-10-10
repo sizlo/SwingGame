@@ -11,45 +11,90 @@
     </swingTarget>
   </start>
 
+  <!-- Square goal -->
   <goal>
     <position>
       <x>800</x>
       <y>500</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
       <x>50</x>
       <y>50</y>
-    </size>
-    <texture>TestLevelGoal.png</texture>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
   </goal>
 
   <background>TestLevelBackground.png</background>
 
+  <!-- Triangle obstacle -->
   <obstacle>
     <position>
-      <x>900</x>
-      <y>400</y>
+      <x>300</x>
+      <y>250</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
       <x>50</x>
-      <y>30</y>
-    </size>
-    <texture>TestLevelBlock0.png</texture>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
   </obstacle>
 
+  <!-- Octagon obstacle -->
   <obstacle>
     <position>
-      <x>200</x>
-      <y>700</y>
+      <x>600</x>
+      <y>500</y>
     </position>
-    <shape>Rect</shape>
-    <size>
-      <x>40</x>
-      <y>40</y>
-    </size>
-    <texture>TestLevelBlock1.png</texture>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>60</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>80</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>80</x>
+      <y>60</y>
+    </point>
+    <point>
+      <x>60</x>
+      <y>80</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>80</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>60</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
   </obstacle>
 
   <!-- border top -->
@@ -58,12 +103,22 @@
       <x>0</x>
       <y>0</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>0</y>
+    </point>
+    <point>
       <x>1024</x>
       <y>20</y>
-    </size>
-    <texture>TestLevelBorderX.png</texture>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
   </obstacle>
 
   <!-- border bottom -->
@@ -72,12 +127,22 @@
       <x>0</x>
       <y>748</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>0</y>
+    </point>
+    <point>
       <x>1024</x>
       <y>20</y>
-    </size>
-    <texture flipY="true">TestLevelBorderX.png</texture>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
   </obstacle>
 
   <!-- border left -->
@@ -86,12 +151,22 @@
       <x>0</x>
       <y>0</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
       <x>20</x>
       <y>768</y>
-    </size>
-    <texture>TestLevelBorderY.png</texture>
+    </point>
+    <point>
+      <x>0</x>
+      <y>768</y>
+    </point>
   </obstacle>
 
   <!-- border right -->
@@ -100,12 +175,22 @@
       <x>1004</x>
       <y>0</y>
     </position>
-    <shape>Rect</shape>
-    <size>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
       <x>20</x>
       <y>768</y>
-    </size>
-    <texture flipX="true">TestLevelBorderY.png</texture>
+    </point>
+    <point>
+      <x>0</x>
+      <y>768</y>
+    </point>
   </obstacle>
 
 </level>

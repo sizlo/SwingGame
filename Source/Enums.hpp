@@ -40,12 +40,4 @@ enum EGameLocation
     kGameLocationLevel1
 };
 
-// =============================================================================
-// Level item shapes
-// -----------------------------------------------------------------------------
-enum ELevelItemShapes
-{
-    kLevelItemShapeRect
-};
-
 #endif

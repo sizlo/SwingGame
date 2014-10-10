@@ -17,8 +17,8 @@ namespace DebugOptions
 // =============================================================================
 // Namespace globals
 // -----------------------------------------------------------------------------
-bool showFramerate     = true;
-bool drawSpriteBounds  = true;
-bool drawSpriteOrigins = true;
+bool showFramerate      = true;
+bool drawBounds         = true;
+bool drawOrigins        = true;
 
 } // namespace DebugOptions

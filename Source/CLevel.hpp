@@ -46,9 +46,7 @@ struct SStartPosition
 struct SLevelItem
 {
     CVector2f           mPosition;
-    ELevelItemShapes    mShape;
-    CVector2f           mSize;
-    CSprite             mSprite;
+    CConvexShape        mShape;
 };
 
 // =============================================================================

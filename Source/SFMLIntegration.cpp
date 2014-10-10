@@ -75,43 +75,28 @@ void CWindow::DrawTextAt(std::string theString,
 
 // =============================================================================
 // CWindow::DrawSprite
-// Draw a sprite
-// Can also draw debug info like bounds and origin
+// Draw a sprite with any requested debug info
 // -----------------------------------------------------------------------------
 void CWindow::DrawSprite(CSprite theSprite)
 {
     draw(theSprite);
     
-#if SG_DEBUG // Draw debug information
-    // Draw the origin
-    if (DebugOptions::drawSpriteOrigins)
-    {
-        CVector2f theOrigin = theSprite.getPosition();
-        sf::Vertex lines[] =
-        {
-            sf::Vertex(CVector2f(theOrigin.x-5, theOrigin.y), CColour::Red),
-            sf::Vertex(CVector2f(theOrigin.x+5, theOrigin.y), CColour::Red),
-            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y-5), CColour::Red),
-            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y+5), CColour::Red)
-        };
-        draw(lines, 2, sf::Lines);
-        draw(&lines[2], 2, sf::Lines);
-    }
+    // Draw debug info
+    DRAW_ORIGIN(theSprite);
+    DRAW_BOUNDS(theSprite);
+}
+
+// =============================================================================
+// CWindow::DrawShape
+// Draw a shape with any requested debug info
+// -----------------------------------------------------------------------------
+void CWindow::DrawShape(CConvexShape theShape)
+{
+    draw(theShape);
     
-    // Draw the global bounds
-    if (DebugOptions::drawSpriteBounds)
-    {
-        sf::FloatRect theGlobalBounds = theSprite.getGlobalBounds();
-        sf::RectangleShape theGlobalBoundsShape(
-                    CVector2f(theGlobalBounds.width,theGlobalBounds.height));
-        theGlobalBoundsShape.setPosition(theGlobalBounds.left,
-                                         theGlobalBounds.top);
-        theGlobalBoundsShape.setOutlineColor(CColour::Red);
-        theGlobalBoundsShape.setOutlineThickness(1.0f);
-        theGlobalBoundsShape.setFillColor(CColour::Transparent);
-        draw(theGlobalBoundsShape);
-    }
-#endif
+    // Draw debug info
+    DRAW_ORIGIN(theShape);
+    DRAW_BOUNDS(theShape);
 }
 
 // =============================================================================
@@ -183,6 +168,34 @@ CSprite::CSprite(std::string filename, bool flipX, bool flipY) : sf::Sprite()
 CSprite::~CSprite()
 {
 
+}
+
+// =============================================================================
+// CConvexShape constructor/destructor
+// -----------------------------------------------------------------------------
+CConvexShape::CConvexShape(unsigned int pointCount /* = 0 */)
+: sf::ConvexShape(pointCount)
+{
+    
+}
+
+CConvexShape::CConvexShape(std::list<CVector2f> &thePoints)
+: sf::ConvexShape(thePoints.size())
+{
+    int theIndex = 0;
+    
+    for (std::list<CVector2f>::iterator it = thePoints.begin();
+         it != thePoints.end();
+         ++it)
+    {
+        setPoint(theIndex, (*it));
+        theIndex++;
+    }
+}
+
+CConvexShape::~CConvexShape()
+{
+    
 }
 
 // =============================================================================

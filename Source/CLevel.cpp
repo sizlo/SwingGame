@@ -31,11 +31,10 @@ CVector2f GetVector2f(pugi::xml_node theNode)
 SLevelItem GetLevelItem(pugi::xml_node theRoot)
 {
     CHECK_CHILD(theRoot, "position");
-    CHECK_CHILD(theRoot, "shape");
-    CHECK_CHILD(theRoot, "size");
     CHECK_CHILD(theRoot, "texture");
     
     SLevelItem theResult;
+    std::list<CVector2f> thePoints;
     
     // Process each child
     for (pugi::xml_node theNode = theRoot.first_child();
@@ -45,22 +44,6 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
         if (strcmp(theNode.name(), "position") == 0)
         {
             theResult.mPosition = GetVector2f(theNode);
-        }
-        else if (strcmp(theNode.name(), "shape") == 0)
-        {
-            if (strcmp(theNode.text().as_string(), "Rect") == 0)
-            {
-                theResult.mShape = kLevelItemShapeRect;
-            }
-            else
-            {
-                DEBUG_LOG("Unknown level item shape: %s",
-                          theNode.text().as_string());
-            }
-        }
-        else if (strcmp(theNode.name(), "size") == 0)
-        {
-            theResult.mSize = GetVector2f(theNode);
         }
         else if (strcmp(theNode.name(), "texture") == 0)
         {
@@ -77,7 +60,13 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
             }
             
             std::string filename = theNode.text().as_string();
-            theResult.mSprite = CSprite(filename, flipX, flipY);
+            // TODO: Texture item shapes
+            DEBUG_LOG("Texturing level items not implemented");
+        }
+        else if (strcmp(theNode.name(), "point") == 0)
+        {
+            CVector2f thePoint = GetVector2f(theNode);
+            thePoints.push_back(thePoint);
         }
         else
         {
@@ -86,7 +75,8 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
     }
     
     // Set the position of the sprite
-    theResult.mSprite.setPosition(theResult.mPosition);
+    theResult.mShape = CConvexShape(thePoints);
+    theResult.mShape.setPosition(theResult.mPosition);
     
     return theResult;
 }
@@ -230,6 +220,9 @@ void CLevel::ProcessGoalXML(pugi::xml_node theRoot)
     DEBUG_LOG("Processing goal node");
 
     mGoal = GetLevelItem(theRoot);
+    
+    // Default goal to green
+    mGoal.mShape.setFillColor(CColour::Green);
 }
 
 // =============================================================================
@@ -240,7 +233,12 @@ void CLevel::ProcessObstacleXML(pugi::xml_node theRoot)
 {
     DEBUG_LOG("Processing obstacle node");
 
-    mLevelItems.push_back(GetLevelItem(theRoot));
+    SLevelItem theObstacle = GetLevelItem(theRoot);
+    
+    // Default obstacles to black
+    theObstacle.mShape.setFillColor(CColour::Black);
+    
+    mLevelItems.push_back(theObstacle);
 }
 
 // =============================================================================
@@ -273,14 +271,14 @@ void CLevel::Draw(CWindow *theWindow)
     theWindow->draw(mBackground);
     
     // Draw the goal
-    theWindow->DrawSprite(mGoal.mSprite);
+    theWindow->DrawShape(mGoal.mShape);
     
     // Draw all level items
     for (std::list<SLevelItem>::iterator it = mLevelItems.begin();
          it != mLevelItems.end();
          ++it)
     {
-        theWindow->DrawSprite((*it).mSprite);
+        theWindow->DrawShape((*it).mShape);
     }
     
     // Temporary

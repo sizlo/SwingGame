@@ -16,8 +16,8 @@ namespace DebugOptions
 {
     // Public globals
     extern bool showFramerate;
-    extern bool drawSpriteBounds;
-    extern bool drawSpriteOrigins;
+    extern bool drawBounds;
+    extern bool drawOrigins;
 };
 
 #endif /* defined(__SwingGame__DebugOptions__) */

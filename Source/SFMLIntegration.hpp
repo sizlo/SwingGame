@@ -14,11 +14,68 @@
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
 #include "Enums.hpp"
+#include <list>
+
+// =============================================================================
+// Macros
+// -----------------------------------------------------------------------------
+#if SG_DEBUG
+
+// Draw the origin of a transformable it is requested
+#define DRAW_ORIGIN(transformable)                                          \
+    if (DebugOptions::drawOrigins)                                          \
+    {                                                                       \
+        CVector2f theOrigin = transformable.getPosition();                  \
+        sf::Vertex lines[] =                                                \
+        {                                                                   \
+            sf::Vertex(CVector2f(theOrigin.x-5, theOrigin.y), CColour::Red),\
+            sf::Vertex(CVector2f(theOrigin.x+5, theOrigin.y), CColour::Red),\
+            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y-5), CColour::Red),\
+            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y+5), CColour::Red) \
+        };                                                                  \
+        draw(lines, 2, sf::Lines);                                          \
+        draw(&lines[2], 2, sf::Lines);                                      \
+    }
+
+// Draw the bounds of a transformable if it is requested
+#define DRAW_BOUNDS(transformable)                                          \
+    if (DebugOptions::drawBounds)                                           \
+    {                                                                       \
+        sf::FloatRect theGlobalBounds = transformable.getGlobalBounds();    \
+        sf::RectangleShape theGlobalBoundsShape(                            \
+                CVector2f(theGlobalBounds.width,theGlobalBounds.height));   \
+        theGlobalBoundsShape.setPosition(theGlobalBounds.left,              \
+                                         theGlobalBounds.top);              \
+        theGlobalBoundsShape.setOutlineColor(CColour::Red);                 \
+        theGlobalBoundsShape.setOutlineThickness(1.0f);                     \
+        theGlobalBoundsShape.setFillColor(CColour::Transparent);            \
+        draw(theGlobalBoundsShape);                                         \
+    }                                                                       \
+
+#else
+#define DRAW_ORIGIN(transformable)
+#define DRAW_BOUNDS(transformable)
+#endif
+
+
+// =============================================================================
+// Typedefs
+// -----------------------------------------------------------------------------
+// The SFML Time interface doesn't provide anyway of constructing a Time object
+// with an initial value or setting the value so I can't create a conversion
+// from sf::Time to a derived class. I don't imagine I'll need to add any
+// extensions to this so a typedef should do
+typedef sf::Time CTime;
+
+// I won't need to extend vectors in any way
+typedef sf::Vector2f CVector2f;
+typedef sf::Vector2i CVector2i;
 
 // =============================================================================
 // Forward declarations
 // -----------------------------------------------------------------------------
 class CSprite;
+class CConvexShape;
 
 // =============================================================================
 // Helper methods
@@ -62,6 +119,8 @@ public:
                     EFontType fontType = kFontTypeDefault);
     // Draw a sprite
     void DrawSprite(CSprite theSprite);
+    // Draw a shape
+    void DrawShape(CConvexShape);
 };
 
 class CFont : public sf::Font
@@ -99,6 +158,14 @@ public:
     ~CSprite();
 };
 
+class CConvexShape : public sf::ConvexShape
+{
+public:
+    CConvexShape(unsigned int pointCount = 0);
+    CConvexShape(std::list<CVector2f> &thePoints);
+    ~CConvexShape();
+};
+
 class CTexture : public sf::Texture
 {
 public:
@@ -122,19 +189,5 @@ class CMouse : public sf::Mouse
 {
     // Static class, no constructors
 };
-
-// =============================================================================
-// Typedefs
-// -----------------------------------------------------------------------------
-// The SFML Time interface doesn't provide anyway of constructing a Time object
-// with an initial value or setting the value so I can't create a conversion
-// from sf::Time to a derived class. I don't imagine I'll need to add any
-// extensions to this so a typedef should do
-typedef sf::Time CTime;
-
-// I won't need to extend vectors in any way
-typedef sf::Vector2f CVector2f;
-typedef sf::Vector2i CVector2i;
-
 
 #endif /* defined(__SwingGame__SFMLIntegration__) */
