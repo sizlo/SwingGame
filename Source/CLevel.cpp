@@ -12,12 +12,11 @@
 #include "CLevel.hpp"
 #include "CSwingGame.hpp"
 #include "XMLInterpreter.hpp"
-#include "SystemUtilities.hpp"
 
 // =============================================================================
 // CLevel constructor/destructor
 // -----------------------------------------------------------------------------
-CLevel::CLevel(std::string filename)    :   mPlayer("player.png")
+CLevel::CLevel(std::string filename)
 {
     XMLInterpreter::ProcessLevel(filename, this);
 }
@@ -38,6 +37,9 @@ void CLevel::Enter()
     // Register any renderables and updateables
     CSwingGame::RegisterRenderable(this);
     CSwingGame::RegisterUpdateable(this);
+    
+    // Initialise anything we need to
+    mPlayer.Init();
 }
 
 // =============================================================================
@@ -51,6 +53,9 @@ void CLevel::Exit()
     // Unregister all renderables and updateables
     CSwingGame::UnregisterRenderable(this);
     CSwingGame::UnregisterUpdateable(this);
+    
+    // Cleanup anything we need to
+    mPlayer.Cleanup();
 }
 
 // =============================================================================
@@ -99,18 +104,7 @@ void CLevel::AddObstacle(SLevelItem theObstacle)
 // -----------------------------------------------------------------------------
 void CLevel::Update(CTime elapsedTime)
 {
-    // Temporary
-    CVector2i playerPos = SystemUtilities::GetMousePosition();
-    playerPos.x = std::max(0, playerPos.x);
-    playerPos.x = std::min(1024-20, playerPos.x);
-    playerPos.y = std::max(0, playerPos.y);
-    playerPos.y = std::min(768-40, playerPos.y);
-    mPlayer.setPosition(playerPos.x, playerPos.y);
-    
-    if (CKeyboard::isKeyPressed(CKeyboard::R))
-    {
-        mPlayer.rotate(360 * elapsedTime.asSeconds());
-    }
+
 }
 
 // =============================================================================
@@ -132,9 +126,6 @@ void CLevel::Draw(CWindow *theWindow)
     {
         theWindow->DrawShape((*it).mShape);
     }
-    
-    // Temporary
-    theWindow->DrawSprite(mPlayer);
 }
 
 

@@ -16,6 +16,7 @@
 #include "SFMLIntegration.hpp"
 #include "CRenderable.hpp"
 #include "CUpdateable.hpp"
+#include "CPlayer.hpp"
 #include <list>
 
 // =============================================================================
@@ -70,8 +71,8 @@ private:
     // Obstacles
     std::list<SLevelItem>   mObstacles;
     
-    // Temporary
-    CSprite                 mPlayer;
+    // The player
+    CPlayer                 mPlayer;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
