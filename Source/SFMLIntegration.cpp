@@ -42,8 +42,13 @@ CColour::~CColour()
 // =============================================================================
 // CWindow constructor/destructor
 // -----------------------------------------------------------------------------
-CWindow::CWindow(unsigned int width, unsigned int height, std::string title)
-: sf::RenderWindow(sf::VideoMode(width, height), title, sf::Style::Close)
+CWindow::CWindow(   unsigned int width,
+                    unsigned int height,
+                    std::string title)
+: sf::RenderWindow( sf::VideoMode(width, height),
+                    title,
+                    sf::Style::Close,
+                    sf::ContextSettings(0, 0, 8)) // 8XAA
 {
     
 }
