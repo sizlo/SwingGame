@@ -18,6 +18,8 @@ namespace DebugOptions
     extern bool showFramerate;
     extern bool drawBounds;
     extern bool drawOrigins;
+    extern bool drawShapePoints;
+    extern bool drawShapeNormals;
 };
 
 #endif /* defined(__SwingGame__DebugOptions__) */

@@ -20,5 +20,7 @@ namespace DebugOptions
 bool showFramerate      = true;
 bool drawBounds         = true;
 bool drawOrigins        = true;
+bool drawShapePoints    = true;
+bool drawShapeNormals   = true;
 
 } // namespace DebugOptions

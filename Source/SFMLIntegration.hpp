@@ -26,15 +26,7 @@
     if (DebugOptions::drawOrigins)                                          \
     {                                                                       \
         CVector2f theOrigin = transformable.getPosition();                  \
-        sf::Vertex lines[] =                                                \
-        {                                                                   \
-            sf::Vertex(CVector2f(theOrigin.x-5, theOrigin.y), CColour::Red),\
-            sf::Vertex(CVector2f(theOrigin.x+5, theOrigin.y), CColour::Red),\
-            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y-5), CColour::Red),\
-            sf::Vertex(CVector2f(theOrigin.x, theOrigin.y+5), CColour::Red) \
-        };                                                                  \
-        draw(lines, 2, sf::Lines);                                          \
-        draw(&lines[2], 2, sf::Lines);                                      \
+        DrawDebugPoint(theOrigin, CColour::Green);                          \
     }
 
 // Draw the bounds of a transformable if it is requested
@@ -57,7 +49,6 @@
 #define DRAW_BOUNDS(transformable)
 #endif
 
-
 // =============================================================================
 // Typedefs
 // -----------------------------------------------------------------------------
@@ -76,6 +67,7 @@ typedef sf::Vector2i CVector2i;
 // -----------------------------------------------------------------------------
 class CSprite;
 class CConvexShape;
+class CLine;
 
 // =============================================================================
 // Helper methods
@@ -91,9 +83,6 @@ static void InitSFML(sf::RenderWindow *theWindow)
     theWindow->setKeyRepeatEnabled(false);
 }
 
-// =============================================================================
-// Class Definitions
-// -----------------------------------------------------------------------------
 class CColour : public sf::Color
 {
 public:
@@ -120,7 +109,9 @@ public:
     // Draw a sprite
     void DrawSprite(CSprite theSprite);
     // Draw a shape
-    void DrawShape(CConvexShape);
+    void DrawShape(CConvexShape theShape);
+    // Draw a point
+    void DrawDebugPoint(CVector2f thePoint, CColour theColour = CColour::Red);
 };
 
 class CFont : public sf::Font
@@ -164,6 +155,8 @@ public:
     CConvexShape(unsigned int pointCount = 0);
     CConvexShape(std::list<CVector2f> &thePoints);
     ~CConvexShape();
+    // Build and return a list of lines within the shape
+    std::list<CLine> GetGlobalLines();
 };
 
 class CTexture : public sf::Texture
