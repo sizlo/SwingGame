@@ -39,7 +39,8 @@ void CLevel::Enter()
     CSwingGame::RegisterUpdateable(this);
     
     // Initialise anything we need to
-    mPlayer.Init();
+    mPlayer = new CPlayer(this);
+    mPlayer->Init();
 }
 
 // =============================================================================
@@ -55,7 +56,15 @@ void CLevel::Exit()
     CSwingGame::UnregisterUpdateable(this);
     
     // Cleanup anything we need to
-    mPlayer.Cleanup();
+    mPlayer->Cleanup();
+    SAFE_DELETE(mPlayer);
+    
+    for (std::list<SLevelItem *>::iterator it = mObstacles.begin();
+         it != mObstacles.end();
+         ++it)
+    {
+        SAFE_DELETE((*it));
+    }
 }
 
 // =============================================================================
@@ -95,7 +104,15 @@ void CLevel::SetBackground(CSprite theBackground)
 // -----------------------------------------------------------------------------
 void CLevel::AddObstacle(SLevelItem theObstacle)
 {
-    mObstacles.push_back(theObstacle);
+    mObstacles.push_back(new SLevelItem(theObstacle));
+}
+
+// =============================================================================
+// CLevel::GetObstacles
+// -----------------------------------------------------------------------------
+std::list<SLevelItem *> CLevel::GetObstacles()
+{
+    return mObstacles;
 }
 
 // =============================================================================
@@ -120,11 +137,11 @@ void CLevel::Draw(CWindow *theWindow)
     theWindow->DrawShape(mGoal.mShape);
     
     // Draw all level items
-    for (std::list<SLevelItem>::iterator it = mObstacles.begin();
+    for (std::list<SLevelItem *>::iterator it = mObstacles.begin();
          it != mObstacles.end();
          ++it)
     {
-        theWindow->DrawShape((*it).mShape);
+        theWindow->DrawShape((*it)->mShape);
     }
 }
 

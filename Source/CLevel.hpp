@@ -53,6 +53,9 @@ public:
     void SetBackground      (CSprite        theBackground);
     void AddObstacle        (SLevelItem     theObstacle);
     
+    // Getters
+    std::list<SLevelItem *> GetObstacles();
+    
     // Update the level
     void Update(CTime elapsedTime);
     // Draw the level
@@ -69,10 +72,10 @@ private:
     CSprite                 mBackground;
     
     // Obstacles
-    std::list<SLevelItem>   mObstacles;
+    std::list<SLevelItem *> mObstacles;
     
     // The player
-    CPlayer                 mPlayer;
+    CPlayer                 *mPlayer;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

@@ -12,11 +12,13 @@
 #include "CPlayer.hpp"
 #include "SystemUtilities.hpp"
 #include "CSwingGame.hpp"
+#include "CLevel.hpp"
+#include "CLine.hpp"
 
 // =============================================================================
 // CPlayer constructor/destrctor
 // -----------------------------------------------------------------------------
-CPlayer::CPlayer()
+CPlayer::CPlayer(CLevel *theParentLevel) : mParentLevel(theParentLevel)
 {
     // Create the shape
     std::list<CVector2f> thePoints;
@@ -49,6 +51,8 @@ void CPlayer::Update(CTime elapsedTime)
     thePosition.y = std::max(0.0f,              thePosition.y);
     
     mShape.setPosition(thePosition);
+    
+    HandleCollisions();
 }
 
 // =============================================================================
@@ -77,4 +81,68 @@ void CPlayer::Cleanup()
     // Unregister update/renderables
     CSwingGame::UnregisterUpdateable(this);
     CSwingGame::UnregisterRenderable(this);
+}
+
+// =============================================================================
+// CPlayer::HandleCollisions
+// -----------------------------------------------------------------------------
+void CPlayer::HandleCollisions()
+{
+    // Reset player colour
+    mShape.setFillColor(CColour::Yellow);
+    
+    std::list<SLevelItem *> theObstacles = mParentLevel->GetObstacles();
+    
+    for (std::list<SLevelItem *>::iterator it = theObstacles.begin();
+         it != theObstacles.end();
+         ++it)
+    {
+        // Reset each obstacle colour
+        (*it)->mShape.setFillColor(CColour::Black);
+        
+        if (IsCollidingWith(*(*it)))
+        {
+            // For now just change highlight the colliding objects
+            mShape.setFillColor(CColour::Red);
+            (*it)->mShape.setFillColor(CColour::Red);
+        }
+    }
+}
+
+// =============================================================================
+// CPlayer::IsCollidingWith
+// -----------------------------------------------------------------------------
+bool CPlayer::IsCollidingWith(SLevelItem theObstacle)
+{
+    bool theResult = false;
+    
+    // Check global bounding rects initially
+    CFloatRect ourBounds = mShape.getGlobalBounds();
+    CFloatRect theirBounds = theObstacle.mShape.getGlobalBounds();
+    
+    if (ourBounds.intersects(theirBounds))
+    {
+        // Now check each line of the player against each line of the obstacle
+        // If there's an intersection we have a collision
+        std::list<CLine> ourLines = mShape.GetGlobalLines();
+        std::list<CLine> theirLines = theObstacle.mShape.GetGlobalLines();
+        
+        for (std::list<CLine>::iterator ourLine = ourLines.begin();
+             ourLine != ourLines.end();
+             ++ourLine)
+        {
+            for (std::list<CLine>::iterator theirLine = theirLines.begin();
+                 theirLine != theirLines.end();
+                 ++theirLine)
+            {
+                if ((*ourLine).Intersects((*theirLine)))
+                {
+                    // We have an intersection, therefore we are colliding
+                    theResult = true;
+                }
+            }
+        }
+    }
+    
+    return theResult;
 }

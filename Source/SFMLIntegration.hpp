@@ -62,6 +62,8 @@ typedef sf::Time CTime;
 typedef sf::Vector2f CVector2f;
 typedef sf::Vector2i CVector2i;
 
+typedef sf::FloatRect CFloatRect;
+
 // =============================================================================
 // Forward declarations
 // -----------------------------------------------------------------------------

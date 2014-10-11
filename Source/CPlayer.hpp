@@ -16,12 +16,18 @@
 #include "CRenderable.hpp"
 
 // =============================================================================
+// Forward declarations
+// -----------------------------------------------------------------------------
+class CLevel;
+struct SLevelItem;
+
+// =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
 class CPlayer : public CUpdateable, public CRenderable
 {
 public:
-    CPlayer();
+    CPlayer(CLevel *theParentLevel);
     ~CPlayer();
     
     void Update(CTime elapsedTime);
@@ -31,7 +37,11 @@ public:
     void Cleanup();
     
 private:
+    void HandleCollisions();
+    bool IsCollidingWith(SLevelItem theObstacle);
+    
     CConvexShape    mShape;
+    CLevel          *mParentLevel;
 };
 
 #endif /* defined(__SwingGame__CPlayer__) */

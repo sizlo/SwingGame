@@ -23,8 +23,13 @@ public:
     CLine(CVector2f start, CVector2f end);
     ~CLine();
     
+    // Getters
+    CVector2f GetStart();
+    CVector2f GetEnd();
     CVector2f GetMidpoint();
     CVector2f GetNormal();
+    
+    bool Intersects(CLine other);
     
 private:
     CVector2f mStart;
