@@ -10,6 +10,20 @@
 #define __SwingGame__DebugOptions__
 
 // =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CUpdateable.hpp"
+
+// =============================================================================
+// Macros
+// -----------------------------------------------------------------------------
+#define TOGGLE_DEBUG_OPTION(key, option)                        \
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::key))\
+    {                                                           \
+        option = !option;                                       \
+    }
+
+// =============================================================================
 // namespace definition
 // -----------------------------------------------------------------------------
 namespace DebugOptions
@@ -20,6 +34,17 @@ namespace DebugOptions
     extern bool drawOrigins;
     extern bool drawShapePoints;
     extern bool drawShapeNormals;
+};
+
+// =============================================================================
+// Class definition
+// -----------------------------------------------------------------------------
+class CDebugHelper : public CUpdateable
+{
+public:
+    CDebugHelper();
+    ~CDebugHelper();
+    void Update(CTime elapsedTime);
 };
 
 #endif /* defined(__SwingGame__DebugOptions__) */

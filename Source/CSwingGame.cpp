@@ -29,6 +29,12 @@ std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToRemove;
 std::list<CRenderable *>    CSwingGame::smTheRenderables;
 CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 
+// =============================================================================
+// Non member variables
+// -----------------------------------------------------------------------------
+#if SG_DEBUG
+CDebugHelper *theDebugHelper;
+#endif
 
 // =============================================================================
 // CSwingGame constructor/destructor
@@ -64,6 +70,12 @@ void CSwingGame::Init()
     // Initialise other systems
     SystemUtilities::Init(mWindow);
     InitSFML(mWindow);
+    
+    // Create and register any lifetime updateables
+#if SG_DEBUG
+    theDebugHelper = new CDebugHelper();
+    RegisterUpdateable(theDebugHelper);
+#endif
 }
 
 // =============================================================================
@@ -105,6 +117,9 @@ void CSwingGame::Cleanup()
 {
     SAFE_DELETE(mWindow);
     SAFE_DELETE(smCurrentLocation);
+#if SG_DEBUG
+    SAFE_DELETE(theDebugHelper);
+#endif
     TextUtilities::Cleanup();
     CTextureBank::Cleanup();
 }
