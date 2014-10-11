@@ -141,7 +141,7 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
         }
     }
     
-    // Set the position of the sprite
+    // Create and initialise the shape
     theResult.mShape = CConvexShape(thePoints);
     theResult.mShape.setPosition(theResult.mPosition);
     
