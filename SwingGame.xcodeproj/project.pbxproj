@@ -15,6 +15,7 @@
 		229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */; };
 		22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8293C19D4690800B5C77A /* SFMLIntegration.cpp */; };
 		22F8593419E88DA800A1002C /* CLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22F8593219E88DA800A1002C /* CLine.cpp */; };
+		22F8593919E946E000A1002C /* XMLInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22F8593719E946E000A1002C /* XMLInterpreter.cpp */; };
 		22FC77D619E033C1000A507F /* CTextureBank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77D419E033C1000A507F /* CTextureBank.cpp */; };
 		22FC77DF19E04417000A507F /* pugixml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77DD19E04417000A507F /* pugixml.cpp */; };
 		22FC77E319E04B22000A507F /* CLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FC77E119E04B22000A507F /* CLevel.cpp */; };
@@ -53,6 +54,8 @@
 		22C8293D19D4690800B5C77A /* SFMLIntegration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SFMLIntegration.hpp; sourceTree = "<group>"; };
 		22F8593219E88DA800A1002C /* CLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CLine.cpp; sourceTree = "<group>"; };
 		22F8593319E88DA800A1002C /* CLine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLine.hpp; sourceTree = "<group>"; };
+		22F8593719E946E000A1002C /* XMLInterpreter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XMLInterpreter.cpp; sourceTree = "<group>"; };
+		22F8593819E946E000A1002C /* XMLInterpreter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = XMLInterpreter.hpp; sourceTree = "<group>"; };
 		22FC77D419E033C1000A507F /* CTextureBank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextureBank.cpp; sourceTree = "<group>"; };
 		22FC77D519E033C1000A507F /* CTextureBank.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTextureBank.hpp; sourceTree = "<group>"; };
 		22FC77DC19E04417000A507F /* pugiconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pugiconfig.hpp; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 				22FC77FA19E1917A000A507F /* GameOptions.hpp */,
 				22F8593219E88DA800A1002C /* CLine.cpp */,
 				22F8593319E88DA800A1002C /* CLine.hpp */,
+				22F8593719E946E000A1002C /* XMLInterpreter.cpp */,
+				22F8593819E946E000A1002C /* XMLInterpreter.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -281,6 +286,7 @@
 				229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22C8293E19D4690800B5C77A /* SFMLIntegration.cpp in Sources */,
+				22F8593919E946E000A1002C /* XMLInterpreter.cpp in Sources */,
 				22FC77FB19E1917A000A507F /* GameOptions.cpp in Sources */,
 				22F8593419E88DA800A1002C /* CLine.cpp in Sources */,
 				22FC77F819E19144000A507F /* DebugOptions.cpp in Sources */,

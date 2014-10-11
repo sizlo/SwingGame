@@ -14,25 +14,9 @@
 // -----------------------------------------------------------------------------
 #include "CGameLocation.hpp"
 #include "SFMLIntegration.hpp"
-#include "Libraries/pugixml/pugixml.hpp"
 #include "CRenderable.hpp"
 #include "CUpdateable.hpp"
 #include <list>
-
-// =============================================================================
-// Macros
-// -----------------------------------------------------------------------------
-#define CHECK_ATTRIBUTE(node, attr)                 \
-    if (node.attribute(attr) == NULL)               \
-    {                                               \
-        DEBUG_LOG("Missing attribute: %s", attr);   \
-    }
-
-#define CHECK_CHILD(root, childName)                \
-    if (root.child(childName) == NULL)              \
-    {                                               \
-        DEBUG_LOG("Missing child: %s", childName);  \
-    }
 
 // =============================================================================
 // Data structures
@@ -61,11 +45,12 @@ public:
     void Enter();
     void Exit();
     
-    // Read a level from an xml file
-    void InitFromFile       (std::string filename);
-    void ProcessStartXML    (pugi::xml_node theRoot);
-    void ProcessGoalXML     (pugi::xml_node theRoot);
-    void ProcessObstacleXML (pugi::xml_node theRoot);
+    // Setters
+    void SetName            (std::string    theName);
+    void SetStartPosition   (SStartPosition thePosition);
+    void SetGoal            (SLevelItem     theGoal);
+    void SetBackground      (CSprite        theBackground);
+    void AddObstacle        (SLevelItem     theObstacle);
     
     // Update the level
     void Update(CTime elapsedTime);
@@ -83,7 +68,7 @@ private:
     CSprite                 mBackground;
     
     // Obstacles
-    std::list<SLevelItem>   mLevelItems;
+    std::list<SLevelItem>   mObstacles;
     
     // Temporary
     CSprite                 mPlayer;
