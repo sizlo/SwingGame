@@ -84,24 +84,23 @@ void CSwingGame::Init()
 // -----------------------------------------------------------------------------
 int CSwingGame::Run()
 {
-    CClock theClock;
+    CClock  theUpdateClock;
+    CClock  theRenderClock;
+    CTime   timeSinceLastRender = CTime::Zero;
     
     while (mWindow->isOpen())
     {
-        CTime elapsedTime = theClock.restart();
-        
-        static CTime accumulatingTime;
-        accumulatingTime += elapsedTime;
-        
         ProcessEvents();
         
-        Update(elapsedTime);
+        CTime timeSinceLastUpdate = theUpdateClock.restart();
+        Update(timeSinceLastUpdate);
         
         // Only render if vsync is off or enough time has past
+        timeSinceLastRender += theRenderClock.restart();
         if (!GameOptions::doVsync
-            || accumulatingTime.asSeconds() >= 1.0f / GameOptions::maxFPS)
+            || timeSinceLastRender.asSeconds() >= 1.0f / GameOptions::maxFPS)
         {
-            accumulatingTime = CTime::Zero;
+            timeSinceLastRender = CTime::Zero;
             Render();
         }
     }
