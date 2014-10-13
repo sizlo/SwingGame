@@ -101,7 +101,7 @@ int CSwingGame::Run()
         if (!GameOptions::doVsync
             || accumulatingTime.asSeconds() >= 1.0f / GameOptions::maxFPS)
         {
-            accumulatingTime = CTime();
+            accumulatingTime = CTime::Zero;
             Render();
         }
     }
@@ -314,7 +314,7 @@ void CSwingGame::Update(CTime elapsedTime)
     {
         mUPS = numUpdates;
         numUpdates = 0;
-        accumulatingElapsedTime = CTime();
+        accumulatingElapsedTime = CTime::Zero;
     }
     
     // Iterate through the registered updateables, updating each in turn
@@ -363,7 +363,7 @@ void CSwingGame::Render()
     {
         mFPS = numFrames;
         numFrames = 0;
-        elapsedTime = CTime();
+        elapsedTime = CTime::Zero;
     }
     
     // Clear the window
