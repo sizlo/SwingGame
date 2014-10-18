@@ -1,33 +1,25 @@
 //
-//  CGameLocation.hpp
+//  CClock.cpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CClock.hpp"
 
 // =============================================================================
-// Game location enum
+// CClock constructor/destructor
 // -----------------------------------------------------------------------------
-enum EGameLocation
+CClock::CClock() : sf::Clock()
 {
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
-
-// =============================================================================
-// Abstract class definition
-// -----------------------------------------------------------------------------
-class CGameLocation
-{
-public:
-    virtual ~CGameLocation(){};
     
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
-};
+}
 
-#endif
+CClock::~CClock()
+{
+    
+}

@@ -13,7 +13,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CGameLocation.hpp"
-#include "SFMLIntegration.hpp"
+#include "CVector2.hpp"
 #include "CRenderable.hpp"
 #include "CUpdateable.hpp"
 #include "CPlayer.hpp"

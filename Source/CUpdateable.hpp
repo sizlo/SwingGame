@@ -12,8 +12,8 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "SFMLIntegration.hpp"
-#include "Enums.hpp"
+#include "SFMLIntegration/SFMLIntegration.hpp"
+#include "GameState.hpp"
 
 // =============================================================================
 // Abstract class definition

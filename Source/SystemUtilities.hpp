@@ -12,7 +12,7 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "SFMLIntegration.hpp"
+#include "SFMLIntegration/SFMLIntegration.hpp"
 #include <string>
 #include <list>
 

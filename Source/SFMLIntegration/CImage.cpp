@@ -1,33 +1,25 @@
 //
-//  CGameLocation.hpp
+//  CImage.cpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CImage.hpp"
 
 // =============================================================================
-// Game location enum
+// CImage constructor/destructor
 // -----------------------------------------------------------------------------
-enum EGameLocation
+CImage::CImage() : sf::Image()
 {
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
-
-// =============================================================================
-// Abstract class definition
-// -----------------------------------------------------------------------------
-class CGameLocation
-{
-public:
-    virtual ~CGameLocation(){};
     
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
-};
+}
 
-#endif
+CImage::~CImage()
+{
+    
+}

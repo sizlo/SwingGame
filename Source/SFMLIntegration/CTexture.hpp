@@ -1,33 +1,27 @@
 //
-//  CGameLocation.hpp
+//  CTexture.hpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+#ifndef __SwingGame__CTexture__
+#define __SwingGame__CTexture__
 
 // =============================================================================
-// Game location enum
+// Include files
 // -----------------------------------------------------------------------------
-enum EGameLocation
-{
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
+#include <SFML/Graphics.hpp>
 
 // =============================================================================
-// Abstract class definition
+// Class definition
 // -----------------------------------------------------------------------------
-class CGameLocation
+class CTexture : public sf::Texture
 {
 public:
-    virtual ~CGameLocation(){};
-    
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
+    CTexture();
+    ~CTexture();
 };
 
-#endif
+#endif /* defined(__SwingGame__CTexture__) */

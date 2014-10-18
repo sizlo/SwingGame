@@ -1,33 +1,26 @@
 //
-//  CGameLocation.hpp
+//  CText.cpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CText.hpp"
 
 // =============================================================================
-// Game location enum
+// CText constructor/destructor
 // -----------------------------------------------------------------------------
-enum EGameLocation
+CText::CText(std::string theString, CFont &theFont, unsigned int theFontSize /* = 12 */)
+: sf::Text(theString, theFont, theFontSize)
 {
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
-
-// =============================================================================
-// Abstract class definition
-// -----------------------------------------------------------------------------
-class CGameLocation
-{
-public:
-    virtual ~CGameLocation(){};
     
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
-};
+}
 
-#endif
+CText::~CText()
+{
+    
+}

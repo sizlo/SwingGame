@@ -10,7 +10,6 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CLine.hpp"
-#include <math.h>
 
 // =============================================================================
 // CLine constructor/destructor
@@ -23,11 +22,8 @@ CLine::CLine(CVector2f start, CVector2f end) :  mStart(start),
     mNormal.x = startToEnd.y;
     mNormal.y = -startToEnd.x;
     
-    // Normalise the normal vector
-    float normalLength = sqrt(mNormal.x * mNormal.x
-                              + mNormal.y * mNormal.y);
-    mNormal.x /= normalLength;
-    mNormal.y /= normalLength;
+    // Normalise the normal vactor
+    mNormal.Normalise();
 }
 
 CLine::~CLine()

@@ -12,7 +12,8 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "SFMLIntegration.hpp"
+// Only include the vector header to get around circular include issue
+#include "SFMLIntegration/CVector2.hpp"
 
 // =============================================================================
 // Class definition

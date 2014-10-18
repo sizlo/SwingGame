@@ -1,33 +1,25 @@
 //
-//  CGameLocation.hpp
+//  CKeyboard.hpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+#ifndef SwingGame_CKeyboard_hpp
+#define SwingGame_CKeyboard_hpp
 
 // =============================================================================
-// Game location enum
+// Include files
 // -----------------------------------------------------------------------------
-enum EGameLocation
-{
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
+#include <SFML/System.hpp>
 
 // =============================================================================
-// Abstract class definition
+// Class definition
 // -----------------------------------------------------------------------------
-class CGameLocation
+class CKeyboard : public sf::Keyboard
 {
-public:
-    virtual ~CGameLocation(){};
-    
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
+    // Static class, no constructors
 };
 
 #endif

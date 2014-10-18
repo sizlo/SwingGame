@@ -1,33 +1,30 @@
 //
-//  CGameLocation.hpp
+//  CTime.cpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CTime.hpp"
 
 // =============================================================================
-// Game location enum
+// CTime constructor/destructor
 // -----------------------------------------------------------------------------
-enum EGameLocation
+CTime::CTime() : sf::Time()
 {
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
-
-// =============================================================================
-// Abstract class definition
-// -----------------------------------------------------------------------------
-class CGameLocation
-{
-public:
-    virtual ~CGameLocation(){};
     
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
-};
+}
 
-#endif
+CTime::CTime(sf::Time other) : sf::Time(other)
+{
+    
+}
+
+CTime::~CTime()
+{
+    
+}

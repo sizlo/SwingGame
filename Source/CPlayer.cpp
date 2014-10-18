@@ -9,6 +9,7 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
+#include "SFMLIntegration/SFMLIntegration.hpp"
 #include "CPlayer.hpp"
 #include "SystemUtilities.hpp"
 #include "CSwingGame.hpp"
@@ -42,7 +43,7 @@ CPlayer::~CPlayer()
 void CPlayer::Update(CTime elapsedTime)
 {
     // Temporarily follow the mouse cursor
-    CVector2f thePosition = (CVector2f) SystemUtilities::GetMousePosition();
+    CVector2f thePosition = SystemUtilities::GetMousePosition();
 
     // Constrain to window
     thePosition.x = std::min(1024.0f - 20.0f,   thePosition.x);

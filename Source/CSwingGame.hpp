@@ -12,11 +12,12 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "SFMLIntegration.hpp"
+#include "SFMLIntegration/SFMLIntegration.hpp"
 #include "TextUtilties.hpp"
 #include "CUpdateable.hpp"
 #include "CRenderable.hpp"
 #include "CGameLocation.hpp"
+#include "GameState.hpp"
 #include <list>
 
 // =============================================================================

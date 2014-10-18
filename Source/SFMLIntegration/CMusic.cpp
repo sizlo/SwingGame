@@ -1,33 +1,26 @@
 //
-//  CGameLocation.hpp
+//  CMusic.cpp
 //  SwingGame
 //
-//  Created by Tim Brier on 04/10/2014.
+//  Created by Tim Brier on 18/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef SwingGame_CGameLocation_hpp
-#define SwingGame_CGameLocation_hpp
+// =============================================================================
+// Include Files
+// -----------------------------------------------------------------------------
+#include "CMusic.hpp"
+#include "../SystemUtilities.hpp"
 
 // =============================================================================
-// Game location enum
+// CMusic constructor/destructor
 // -----------------------------------------------------------------------------
-enum EGameLocation
+CMusic::CMusic(std::string filename) : sf::Music()
 {
-    kGameLocationFrontEnd,
-    kGameLocationLevel1
-};
+    openFromFile(SystemUtilities::GetResourcePath() + filename);
+}
 
-// =============================================================================
-// Abstract class definition
-// -----------------------------------------------------------------------------
-class CGameLocation
+CMusic::~CMusic()
 {
-public:
-    virtual ~CGameLocation(){};
     
-    virtual void Enter() = 0;
-    virtual void Exit() = 0;
-};
-
-#endif
+}
