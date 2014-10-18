@@ -275,6 +275,16 @@ void CSwingGame::ProcessEvents()
             case CEvent::KeyPressed:
                 // Keep a list of keypress events this cycle
                 SystemUtilities::AddInputEvent(theEvent);
+                
+#if SG_MAC
+                // Hack to enable cmd+q functionality
+                if (theEvent.key.code == CKeyboard::Q
+                    && (CKeyboard::isKeyPressed(CKeyboard::LSystem)
+                        || CKeyboard::isKeyPressed(CKeyboard::RSystem)))
+                {
+                    ExitGame();
+                }
+#endif
                 break;
                 
             case CEvent::Closed:
