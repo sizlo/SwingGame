@@ -302,4 +302,15 @@ CTexture::~CTexture()
     
 }
 
+// =============================================================================
+// CMusic constructor/destructor
+// -----------------------------------------------------------------------------
+CMusic::CMusic(std::string filename) : sf::Music()
+{
+    openFromFile(SystemUtilities::GetResourcePath() + filename);
+}
 
+CMusic::~CMusic()
+{
+    
+}

@@ -13,6 +13,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Enums.hpp"
 #include <list>
 
@@ -183,6 +184,13 @@ class CKeyboard : public sf::Keyboard
 class CMouse : public sf::Mouse
 {
     // Static class, no constructors
+};
+
+class CMusic : public sf::Music
+{
+public:
+    CMusic(std::string filename);
+    ~CMusic();
 };
 
 #endif /* defined(__SwingGame__SFMLIntegration__) */
