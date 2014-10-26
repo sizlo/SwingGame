@@ -284,6 +284,13 @@ void CSwingGame::ProcessEvents()
                 {
                     ExitGame();
                 }
+#elif SG_WINDOWS
+                // Hack to enable alt+f4 functionality
+                if (theEvent.key.code == CKeyboard::F4
+                    && (CKeyboard::isKeyPressed(CKeyboard::LAlt)))
+                {
+                    ExitGame();
+                }
 #endif
                 break;
                 
