@@ -19,24 +19,73 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CLevel.cpp" />
+    <ClCompile Include="Source\CLine.cpp" />
+    <ClCompile Include="Source\CPlayer.cpp" />
     <ClCompile Include="Source\CSwingGame.cpp" />
-    <ClCompile Include="Source\CTextUtilties.cpp" />
+    <ClCompile Include="Source\CTextFrontEnd.cpp" />
+    <ClCompile Include="Source\CTextureBank.cpp" />
+    <ClCompile Include="Source\DebugOptions.cpp" />
+    <ClCompile Include="Source\GameOptions.cpp" />
+    <ClCompile Include="Source\Libraries\pugixml\pugixml.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\SFMLIntegration.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CClock.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CColour.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CConvexShape.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CFloatRect.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CFont.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CImage.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CMusic.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CSprite.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CText.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CTexture.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CTime.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CVector2.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CWindow.cpp" />
+    <ClCompile Include="Source\TextUtilties.cpp" />
+    <ClCompile Include="Source\XMLInterpreter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\CGameLocation.hpp" />
+    <ClInclude Include="Source\CLevel.hpp" />
+    <ClInclude Include="Source\CLine.hpp" />
+    <ClInclude Include="Source\CMenu.hpp" />
+    <ClInclude Include="Source\CPlayer.hpp" />
+    <ClInclude Include="Source\CRenderable.hpp" />
     <ClInclude Include="Source\CSwingGame.hpp" />
-    <ClInclude Include="Source\CSystemUtilities.hpp" />
-    <ClInclude Include="Source\CTextUtilties.hpp" />
-    <ClInclude Include="Source\FontEnums.hpp" />
+    <ClInclude Include="Source\CTextFrontEnd.hpp" />
+    <ClInclude Include="Source\CTextureBank.hpp" />
+    <ClInclude Include="Source\CUpdateable.hpp" />
+    <ClInclude Include="Source\DebugOptions.hpp" />
+    <ClInclude Include="Source\GameOptions.hpp" />
+    <ClInclude Include="Source\GameState.hpp" />
+    <ClInclude Include="Source\Libraries\pugixml\pugiconfig.hpp" />
+    <ClInclude Include="Source\Libraries\pugixml\pugixml.hpp" />
     <ClInclude Include="Source\Macros.hpp" />
-    <ClInclude Include="Source\SFMLIntegration.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CClock.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CColour.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CConvexShape.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CEvent.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CFloatRect.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CFont.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CImage.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CKeyboard.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CMouse.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CMusic.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CSprite.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CText.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CTexture.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CTime.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CVector2.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CWindow.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\SFMLIntegration.hpp" />
+    <ClInclude Include="Source\SystemUtilities.hpp" />
+    <ClInclude Include="Source\TextUtilties.hpp" />
+    <ClInclude Include="Source\XMLInterpreter.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\CSystemUtilities.mm">
-      <FileType>Document</FileType>
-    </ClCompile>
     <None Include="Source\SwingGame_Prefix.pch" />
+    <None Include="Source\SystemUtilities.mm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{765CCDB7-8E6E-480F-9A57-D168804A34E5}</ProjectGuid>

@@ -5,21 +5,90 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\Libraries">
+      <UniqueIdentifier>{5acabe63-16ab-427d-a7bf-68a158b76c46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libraries\pugixml">
+      <UniqueIdentifier>{0292d0a9-1953-4597-9e09-a95d09f3df7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SFMLIntegration">
+      <UniqueIdentifier>{2e40d147-cc16-40e1-8fcc-8d1ca20f63be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\CSwingGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CTextUtilties.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SFMLIntegration.cpp">
+    <ClCompile Include="Source\Libraries\pugixml\pugixml.cpp">
+      <Filter>Source Files\Libraries\pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CClock.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CColour.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CConvexShape.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CFloatRect.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CFont.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CImage.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CMusic.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CSprite.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CText.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CTexture.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CTime.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CVector2.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CWindow.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DebugOptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CSystemUtilities.mm">
+    <ClCompile Include="Source\GameOptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextUtilties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\XMLInterpreter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CTextFrontEnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CTextureBank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,24 +96,117 @@
     <ClInclude Include="Source\CSwingGame.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CSystemUtilities.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CTextUtilties.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FontEnums.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Macros.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SFMLIntegration.hpp">
+    <ClInclude Include="Source\Libraries\pugixml\pugixml.hpp">
+      <Filter>Source Files\Libraries\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Libraries\pugixml\pugiconfig.hpp">
+      <Filter>Source Files\Libraries\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CClock.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CColour.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CConvexShape.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CEvent.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CFloatRect.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CFont.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CImage.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CKeyboard.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CMouse.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CMusic.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CSprite.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CText.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CTexture.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CTime.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CVector2.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CWindow.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\SFMLIntegration.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DebugOptions.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameOptions.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameState.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SystemUtilities.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextUtilties.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\XMLInterpreter.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CGameLocation.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CLevel.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CLine.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CMenu.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CPlayer.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CRenderable.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CTextFrontEnd.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CTextureBank.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CUpdateable.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\SwingGame_Prefix.pch">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Source\SystemUtilities.mm">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
