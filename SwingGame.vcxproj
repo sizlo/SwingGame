@@ -88,7 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\SwingGame_Prefix.pch" />
-    <None Include="Source\SystemUtilities.mm" />
+    <ClCompile Include="Source\SystemUtilities.mm">
+      <FileType>Document</FileType>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{765CCDB7-8E6E-480F-9A57-D168804A34E5}</ProjectGuid>

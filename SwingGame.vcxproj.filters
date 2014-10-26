@@ -88,6 +88,9 @@
     <ClCompile Include="Source\CTextureBank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SystemUtilities.mm">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CSwingGame.hpp">
@@ -204,9 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\SwingGame_Prefix.pch">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="Source\SystemUtilities.mm">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
