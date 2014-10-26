@@ -58,9 +58,6 @@
     <ClCompile Include="Source\SFMLIntegration\CTime.cpp">
       <Filter>Source Files\SFMLIntegration</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SFMLIntegration\CVector2.cpp">
-      <Filter>Source Files\SFMLIntegration</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SFMLIntegration\CWindow.cpp">
       <Filter>Source Files\SFMLIntegration</Filter>
     </ClCompile>
@@ -200,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="Source\CUpdateable.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CVector2.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

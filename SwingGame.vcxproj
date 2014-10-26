@@ -40,7 +40,10 @@
     <ClCompile Include="Source\SFMLIntegration\CText.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTexture.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTime.cpp" />
-    <ClCompile Include="Source\SFMLIntegration\CVector2.cpp" />
+    <ClInclude Include="Source\SFMLIntegration\CVector2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </ClInclude>
     <ClCompile Include="Source\SFMLIntegration\CWindow.cpp" />
     <ClCompile Include="Source\TextUtilties.cpp" />
     <ClCompile Include="Source\XMLInterpreter.cpp" />
