@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------------
 #include "CSprite.hpp"
 #include "CTexture.hpp"
-#include "CTextureBank.hpp"
+#include "../CTextureBank.hpp"
 
 // =============================================================================
 // CSprite constructor/destructor

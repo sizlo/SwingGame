@@ -12,7 +12,7 @@
 #include "CWindow.hpp"
 #include "../TextUtilties.hpp"
 #include "CText.hpp"
-#include "CLine.hpp"
+#include "../CLine.hpp"
 
 // =============================================================================
 // CWindow constructor/destructor

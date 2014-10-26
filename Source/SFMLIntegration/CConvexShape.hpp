@@ -15,7 +15,7 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 #include "CVector2.hpp"
-#include "CLine.hpp"
+#include "../CLine.hpp"
 
 // =============================================================================
 // Class definition
