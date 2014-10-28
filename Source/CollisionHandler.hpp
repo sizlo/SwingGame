@@ -20,9 +20,14 @@
 namespace CollisionHandler
 {
     // Check for collisions between 2 convex shapes
-    bool AreColliding(CConvexShape &lhs, CConvexShape &rhs);
+    bool AreColliding(CConvexShape &lhs,
+                      CConvexShape &rhs,
+                      CVector2f *correctionVector);
     // Check if 2 shapes overlap in an axis
-    bool AreOverlapping(CConvexShape &lhs, CConvexShape &rhs, CVector2f axis);
+    bool AreOverlapping(CConvexShape &lhs,
+                        CConvexShape &rhs,
+                        CVector2f axis,
+                        CVector2f *correctionVector);
     // Project a point onto an axis
     float Project(CVector2f point, CVector2f axis);
 }

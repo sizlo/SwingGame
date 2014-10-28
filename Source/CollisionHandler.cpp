@@ -18,7 +18,9 @@ namespace CollisionHandler
 // CollisionHandler::AreColliding
 // Check for collisions between 2 convex shapes
 // -----------------------------------------------------------------------------
-bool AreColliding(CConvexShape &lhs, CConvexShape &rhs)
+bool AreColliding(CConvexShape &lhs,
+                  CConvexShape &rhs,
+                  CVector2f *correctionVector)
 {
     // First check the bounding box as an early out
     if (!lhs.getGlobalBounds().intersects(rhs.getGlobalBounds()))
@@ -35,6 +37,9 @@ bool AreColliding(CConvexShape &lhs, CConvexShape &rhs)
     //
     // The axis we need to try project onto are the ones each side of each shape
     // lies on
+    
+    // Keep track of whether we've overlapped on an axis already
+    bool haveOverlapped = false;
     
     // Keep a list of the axes we've already checked so we don't check dupes
     std::list<CVector2f> projectionAxesChecked;
@@ -67,10 +72,24 @@ bool AreColliding(CConvexShape &lhs, CConvexShape &rhs)
             // We haven't checked this axis yet
             // See if we're overlapping in it, if we're not then the shapes
             // can't be colliding
-            if (!AreOverlapping(lhs, rhs, axis))
+            CVector2f thisCV;
+            if (!AreOverlapping(lhs, rhs, axis, &thisCV))
             {
                 // There is no collision
                 return false;
+            }
+            else
+            {
+                // If the correction vector for this overlap is the smallest yet
+                // then remember it
+                if (thisCV.GetMagnitude() < correctionVector->GetMagnitude()
+                    || !haveOverlapped)
+                {
+                    *correctionVector = thisCV;
+                }
+                
+                // We've now had an overlap
+                haveOverlapped = true;
             }
             
             // Add this axis to the list of checked ones and move on to the next
@@ -85,7 +104,10 @@ bool AreColliding(CConvexShape &lhs, CConvexShape &rhs)
 // =============================================================================
 // CollisionHandler::AreOverlapping
 // -----------------------------------------------------------------------------
-bool AreOverlapping(CConvexShape &lhs, CConvexShape &rhs, CVector2f axis)
+bool AreOverlapping(CConvexShape &lhs,
+                    CConvexShape &rhs,
+                    CVector2f axis,
+                    CVector2f *correctionVector)
 {
     bool theResult = false;
     
@@ -122,6 +144,27 @@ bool AreOverlapping(CConvexShape &lhs, CConvexShape &rhs, CVector2f axis)
         || (rhsMax >= lhsMin && rhsMax <= lhsMax))
     {
         theResult = true;
+        
+        // Find the smallest distance we have to move on this axis to escape
+        // the collision
+        // We assume that the lhs object is the one to move
+        float leftEscapeDistance = lhsMax - rhsMin;
+        float rightEscapeDistance = rhsMax - lhsMin;
+        
+        // The vector will be a scaled value of the current axis
+        correctionVector->x = axis.x;
+        correctionVector->y = axis.y;
+        
+        // If we're moving left the vector will be negatively scaled, if right
+        // it will be positively scaled
+        if (leftEscapeDistance < rightEscapeDistance)
+        {
+            *correctionVector *= -leftEscapeDistance;
+        }
+        else
+        {
+            *correctionVector *= rightEscapeDistance;
+        }
     }
     
     return theResult;
