@@ -46,12 +46,21 @@ CVector2<T>::CVector2(CVector2<U> other) : sf::Vector2<T>(other)
 }
 
 // =============================================================================
+// CVector2::GetMagnitude
+// -----------------------------------------------------------------------------
+template <typename T>
+T CVector2<T>::GetMagnitude()
+{
+    return sqrt(this->x * this->x + this->y * this->y);
+}
+
+// =============================================================================
 // CVector2::Normalise
 // -----------------------------------------------------------------------------
 template <typename T>
 void CVector2<T>::Normalise()
 {
-    T length = sqrt(this->x * this->x + this->y * this->y);
+    T length = GetMagnitude();
     this->x /= length;
     this->y /= length;
 }

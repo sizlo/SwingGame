@@ -28,6 +28,9 @@ public:
     // Conversion from another vector type
     template <typename U> CVector2(CVector2<U> other);
     
+    // Get the magnitude of the vector
+    T GetMagnitude();
+    
     // Normalise a vector to unit length 1
     void Normalise();
     
