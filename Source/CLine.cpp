@@ -17,12 +17,13 @@
 CLine::CLine(CVector2f start, CVector2f end) :  mStart(start),
                                                 mEnd(end)
 {
-    // Find the direction of the normal vector
-    CVector2f startToEnd = mEnd - mStart;
-    mNormal.x = startToEnd.y;
-    mNormal.y = -startToEnd.x;
+    // Find the direction and normal vector
+    mDirection = mEnd - mStart;
+    mNormal.x = mDirection.y;
+    mNormal.y = -mDirection.x;
     
-    // Normalise the normal vactor
+    // Normalise the vectors
+    mDirection.Normalise();
     mNormal.Normalise();
 }
 
@@ -62,6 +63,14 @@ CVector2f CLine::GetMidpoint()
     theResult.y = mStart.y + (startToEnd.y / 2.0f);
     
     return theResult;
+}
+
+// =============================================================================
+// CLine::GetDirection
+// -----------------------------------------------------------------------------
+CVector2f CLine::GetDirection()
+{
+    return mDirection;
 }
 
 // =============================================================================

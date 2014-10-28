@@ -28,6 +28,7 @@ public:
     CVector2f GetStart();
     CVector2f GetEnd();
     CVector2f GetMidpoint();
+    CVector2f GetDirection();
     CVector2f GetNormal();
     
     bool Intersects(CLine other);
@@ -35,6 +36,7 @@ public:
 private:
     CVector2f mStart;
     CVector2f mEnd;
+    CVector2f mDirection;
     CVector2f mNormal;
 };
 
