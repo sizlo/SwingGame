@@ -40,7 +40,7 @@ void CLevel::Enter()
     
     // Initialise anything we need to
     mPlayer = new CPlayer(this);
-    mPlayer->Init();
+    mPlayer->Init(mStartPosition);
 }
 
 // =============================================================================

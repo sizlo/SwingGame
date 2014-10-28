@@ -26,8 +26,8 @@ CPlayer::CPlayer(CLevel *theParentLevel) : mParentLevel(theParentLevel)
     std::list<CVector2f> thePoints;
     thePoints.push_back(CVector2f(0.0f,     0.0f));
     thePoints.push_back(CVector2f(20.0f,    0.0f));
-    thePoints.push_back(CVector2f(20.0f,    40.0f));
-    thePoints.push_back(CVector2f(0.0f,     40.0f));
+    thePoints.push_back(CVector2f(20.0f,    20.0f));
+    thePoints.push_back(CVector2f(0.0f,     20.0f));
     
     mShape = CConvexShape(thePoints);
     mShape.setFillColor(CColour::Yellow);
@@ -43,7 +43,7 @@ CPlayer::~CPlayer()
 // -----------------------------------------------------------------------------
 void CPlayer::Update(CTime elapsedTime)
 {
-    HandleInput();
+    HandleInput(elapsedTime);
     HandleCollisions();
 }
 
@@ -58,11 +58,13 @@ void CPlayer::Draw(CWindow *theWindow)
 // =============================================================================
 // CPlayer::Init
 // -----------------------------------------------------------------------------
-void CPlayer::Init()
+void CPlayer::Init(SStartPosition theStartPos)
 {
     // Register any update/renderables
     CSwingGame::RegisterUpdateable(this);
     CSwingGame::RegisterRenderable(this);
+    
+    mShape.setPosition(theStartPos.mPosition);
 }
 
 // =============================================================================
@@ -78,18 +80,28 @@ void CPlayer::Cleanup()
 // =============================================================================
 // CPlayer::HandleInput
 // -----------------------------------------------------------------------------
-void CPlayer::HandleInput()
+void CPlayer::HandleInput(CTime elapsedTime)
 {
-    // Temporarily follow the mouse cursor
-    CVector2f thePosition = SystemUtilities::GetMousePosition();
+    // Temporarily:
+    // Move to the cursor if mouse is clicked
+    // Move downwards if space is down
+    if (CMouse::isButtonPressed(CMouse::Left))
+    {
+        CVector2f thePosition = SystemUtilities::GetMousePosition();
+        
+        // Constrain to window
+        thePosition.x = std::min(1024.0f - 20.0f,   thePosition.x);
+        thePosition.x = std::max(0.0f,              thePosition.x);
+        thePosition.y = std::min(768.0f - 40.0f,    thePosition.y);
+        thePosition.y = std::max(0.0f,              thePosition.y);
+        
+        mShape.setPosition(thePosition);
+    }
     
-    // Constrain to window
-    thePosition.x = std::min(1024.0f - 20.0f,   thePosition.x);
-    thePosition.x = std::max(0.0f,              thePosition.x);
-    thePosition.y = std::min(768.0f - 40.0f,    thePosition.y);
-    thePosition.y = std::max(0.0f,              thePosition.y);
-    
-    mShape.setPosition(thePosition);
+    if (CKeyboard::isKeyPressed(CKeyboard::Space))
+    {
+        mShape.move(0.0f, 1000.0f * elapsedTime.asSeconds());
+    }
 }
 
 // =============================================================================
@@ -97,21 +109,19 @@ void CPlayer::HandleInput()
 // -----------------------------------------------------------------------------
 void CPlayer::HandleCollisions()
 {
-    // Reset player colour
-    mShape.setFillColor(CColour::Yellow);
-    
+    // Check for collisions against all level obstacles
     std::list<SLevelItem *> theObstacles = mParentLevel->GetObstacles();
     
+    CVector2f correctionVector;
     FOR_EACH_IN_LIST(SLevelItem *, theObstacles)
     {
-        // Reset each obstacle colour
-        (*it)->mShape.setFillColor(CColour::Black);
-        
-        if (CollisionHandler::AreColliding(mShape, (*it)->mShape))
+        if (CollisionHandler::AreColliding(mShape,
+                                           (*it)->mShape,
+                                           &correctionVector))
         {
-            // For now just highlight the colliding objects
-            mShape.setFillColor(CColour::Red);
-            (*it)->mShape.setFillColor(CColour::Red);
+            // If we're colliding move by the smallest correction vector
+            // found during collision detection
+            mShape.move(correctionVector);
         }
     }
 }

@@ -20,6 +20,7 @@
 // -----------------------------------------------------------------------------
 class CLevel;
 struct SLevelItem;
+struct SStartPosition;
 
 // =============================================================================
 // Class definition
@@ -33,11 +34,11 @@ public:
     void Update(CTime elapsedTime);
     void Draw(CWindow *theWindow);
     
-    void Init();
+    void Init(SStartPosition theStartPos);
     void Cleanup();
     
 private:
-    void HandleInput();
+    void HandleInput(CTime elapsedTime);
     void HandleCollisions();
     
     CConvexShape    mShape;
