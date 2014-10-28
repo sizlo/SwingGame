@@ -29,6 +29,8 @@
 #include "CText.hpp"
 #include "CWindow.hpp"
 
+#include "../GameOptions.hpp"
+
 
 // =============================================================================
 // Helper methods
@@ -42,6 +44,14 @@ static void InitSFML(sf::Window *theWindow)
     
     // Don't repeat keypress events
     theWindow->setKeyRepeatEnabled(false);
+    
+#if USE_SFML_VSYNC
+    // Set frame rate limit
+    if (GameOptions::doVsync)
+    {
+        theWindow->setFramerateLimit(GameOptions::maxFPS);
+    }
+#endif
 }
 
 #endif

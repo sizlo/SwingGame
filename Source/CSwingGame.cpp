@@ -42,7 +42,9 @@ CDebugHelper *theDebugHelper;
 CSwingGame::CSwingGame() :  mWindowTitle("SwingGame v0.0"),
                             mWindow(NULL),
                             mFPS(0),
+#if !USE_SFML_VSYNC
                             mUPS(0),
+#endif
                             mExitCode(EXIT_SUCCESS)
 {
     
@@ -85,8 +87,10 @@ void CSwingGame::Init()
 int CSwingGame::Run()
 {
     CClock  theUpdateClock;
+#if !USE_SFML_VSYNC
     CClock  theRenderClock;
     CTime   timeSinceLastRender = CTime::Zero;
+#endif
     
     while (mWindow->isOpen())
     {
@@ -94,7 +98,8 @@ int CSwingGame::Run()
         
         CTime timeSinceLastUpdate = theUpdateClock.restart();
         Update(timeSinceLastUpdate);
-        
+       
+#if !USE_SFML_VSYNC
         // Only render if vsync is off or enough time has past
         timeSinceLastRender += theRenderClock.restart();
         if (!GameOptions::doVsync
@@ -103,6 +108,9 @@ int CSwingGame::Run()
             timeSinceLastRender = CTime::Zero;
             Render();
         }
+#else
+        Render();
+#endif
     }
     
     return mExitCode;
@@ -320,6 +328,7 @@ void CSwingGame::Update(CTime elapsedTime)
     // Set game state
     SetGameState(kGameStateUpdating);
     
+#if !USE_SFML_VSYNC
     // Count updates
     static int numUpdates;
     static CTime accumulatingElapsedTime;
@@ -332,6 +341,7 @@ void CSwingGame::Update(CTime elapsedTime)
         numUpdates = 0;
         accumulatingElapsedTime = CTime::Zero;
     }
+#endif
     
     // Iterate through the registered updateables, updating each in turn
     FOR_EACH_IN_LIST(CUpdateable *, smTheUpdateables)
@@ -394,8 +404,10 @@ void CSwingGame::Render()
     if (DebugOptions::showFramerate)
     {
         std::stringstream theStream;
-        theStream << "FPS: " << mFPS << std::endl;
-        theStream << "UPS: " << mUPS;
+        theStream << "FPS: " << mFPS;
+#if !USE_SFML_VSYNC
+        theStream << std::endl << "UPS: " << mUPS;
+#endif
         mWindow->DrawTextAt(theStream.str(),
                             GameOptions::windowWidth - 100,
                             5,

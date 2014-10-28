@@ -68,7 +68,9 @@ private:
     
     // Frames per second and updates per second
     int mFPS;
+#if !USE_SFML_VSYNC
     int mUPS;
+#endif
     
     // The code returned on program exit
     int mExitCode;

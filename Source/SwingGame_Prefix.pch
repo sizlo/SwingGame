@@ -29,6 +29,15 @@
 #endif
 
 // =============================================================================
+// Codepath switches
+// -----------------------------------------------------------------------------
+// SFML has it's own system to limit framerate but it is pretty inaccurate
+// When set to 60fps I'm normally seeing 56-57fps
+// However with my method the game is constantly updating and spamming the CPU
+// Use this switch to alternate between my vsync and SFMLs vsync
+#define USE_SFML_VSYNC 1
+
+// =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
 #include "Macros.hpp"
