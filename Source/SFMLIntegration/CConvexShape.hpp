@@ -26,8 +26,11 @@ public:
     CConvexShape(unsigned int pointCount = 0);
     CConvexShape(std::list<CVector2f> &thePoints);
     ~CConvexShape();
+    
     // Build and return a list of lines within the shape
     std::list<CLine> GetGlobalLines();
+    // Return a point in global coordinates
+    CVector2f GetGlobalPoint(unsigned int index);
 };
 
 #endif /* defined(__SwingGame__CConvexShape__) */

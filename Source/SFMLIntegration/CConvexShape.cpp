@@ -60,3 +60,12 @@ std::list<CLine> CConvexShape::GetGlobalLines()
     
     return theResult;
 }
+
+// =============================================================================
+// CConvexShape::GetGlobalPoint
+// Get the indexth point in the shape in global coords
+// -----------------------------------------------------------------------------
+CVector2f CConvexShape::GetGlobalPoint(unsigned int index)
+{
+    return getPosition() + getPoint(index);
+}

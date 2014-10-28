@@ -103,7 +103,7 @@ void CWindow::DrawShape(CConvexShape theShape)
     {
         for (int i = 0; i < theShape.getPointCount(); i++)
         {
-            DrawDebugPoint(theShape.getPosition() + theShape.getPoint(i));
+            DrawDebugPoint(theShape.GetGlobalPoint(i));
         }
     }
     
