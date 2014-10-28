@@ -57,6 +57,30 @@
     </point>
   </obstacle>
 
+  <!-- Long this line obstacle -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>700</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>350</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>350</x>
+      <y>1</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>1</y>
+    </point>
+  </obstacle>
+
   <!-- Octagon obstacle -->
   <obstacle>
     <position>
