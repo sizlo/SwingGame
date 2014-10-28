@@ -31,4 +31,12 @@
 #define DEBUG_LOG(fmt, ...)
 #endif
 
+// =============================================================================
+// Iterate over lists
+// -----------------------------------------------------------------------------
+#define FOR_EACH_IN_LIST(type, listName)                            \
+    for (std::list<type>::iterator it = listName.begin();           \
+         it != listName.end();                                      \
+         ++it)
+
 #endif
