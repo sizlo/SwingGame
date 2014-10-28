@@ -23,11 +23,13 @@
 CPlayer::CPlayer(CLevel *theParentLevel) : mParentLevel(theParentLevel)
 {
     // Create the shape
+    mSmallestRadius = 10.0f;
+    
     std::list<CVector2f> thePoints;
-    thePoints.push_back(CVector2f(0.0f,     0.0f));
-    thePoints.push_back(CVector2f(20.0f,    0.0f));
-    thePoints.push_back(CVector2f(20.0f,    20.0f));
-    thePoints.push_back(CVector2f(0.0f,     20.0f));
+    thePoints.push_back(CVector2f(0.0f,                 0.0f));
+    thePoints.push_back(CVector2f(2 * mSmallestRadius,  0.0f));
+    thePoints.push_back(CVector2f(2 * mSmallestRadius,  2 * mSmallestRadius));
+    thePoints.push_back(CVector2f(0.0f,                 2 * mSmallestRadius));
     
     mShape = CConvexShape(thePoints);
     mShape.setFillColor(CColour::Yellow);
@@ -78,6 +80,36 @@ void CPlayer::Cleanup()
 }
 
 // =============================================================================
+// CPlayer::Move
+// -----------------------------------------------------------------------------
+void CPlayer::Move(float offsetX, float offsetY)
+{
+    Move(CVector2f(offsetX, offsetY));
+}
+
+void CPlayer::Move(CVector2f offset)
+{
+    // Find a smaller offset which is less than the shapes smallest "radius"
+    float totalDistanceToMove = offset.GetMagnitude();
+    float moveSplitFactor = (totalDistanceToMove / mSmallestRadius) + 1.0f;
+    CVector2f smallOffset = offset / moveSplitFactor;
+    
+    // Move by that offset until another move would go too far
+    CVector2f movedSoFar(0.0f, 0.0f);
+    do
+    {
+        mShape.move(smallOffset);
+        movedSoFar += smallOffset;
+        
+        // After each move handle collisions
+        HandleCollisions();
+    } while (movedSoFar.GetMagnitude() < totalDistanceToMove);
+    
+    // If we didn't collide move by remaining offset
+    mShape.move(offset - movedSoFar);
+}
+
+// =============================================================================
 // CPlayer::HandleInput
 // -----------------------------------------------------------------------------
 void CPlayer::HandleInput(CTime elapsedTime)
@@ -100,7 +132,7 @@ void CPlayer::HandleInput(CTime elapsedTime)
     
     if (CKeyboard::isKeyPressed(CKeyboard::Space))
     {
-        mShape.move(0.0f, 1000.0f * elapsedTime.asSeconds());
+        Move(0.0f, 1000.0f * elapsedTime.asSeconds());
     }
 }
 
