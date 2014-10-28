@@ -37,6 +37,7 @@ public:
     void Cleanup();
     
 private:
+    void HandleInput();
     void HandleCollisions();
     
     CConvexShape    mShape;
