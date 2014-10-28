@@ -15,6 +15,7 @@
 #include "CSwingGame.hpp"
 #include "CLevel.hpp"
 #include "CLine.hpp"
+#include "CollisionHandler.hpp"
 
 // =============================================================================
 // CPlayer constructor/destrctor
@@ -101,49 +102,11 @@ void CPlayer::HandleCollisions()
         // Reset each obstacle colour
         (*it)->mShape.setFillColor(CColour::Black);
         
-        if (IsCollidingWith(*(*it)))
+        if (CollisionHandler::AreColliding(mShape, (*it)->mShape))
         {
-            // For now just change highlight the colliding objects
+            // For now just highlight the colliding objects
             mShape.setFillColor(CColour::Red);
             (*it)->mShape.setFillColor(CColour::Red);
         }
     }
-}
-
-// =============================================================================
-// CPlayer::IsCollidingWith
-// -----------------------------------------------------------------------------
-bool CPlayer::IsCollidingWith(SLevelItem theObstacle)
-{
-    bool theResult = false;
-    
-    // Check global bounding rects initially
-    CFloatRect ourBounds = mShape.getGlobalBounds();
-    CFloatRect theirBounds = theObstacle.mShape.getGlobalBounds();
-    
-    if (ourBounds.intersects(theirBounds))
-    {
-        // Now check each line of the player against each line of the obstacle
-        // If there's an intersection we have a collision
-        std::list<CLine> ourLines = mShape.GetGlobalLines();
-        std::list<CLine> theirLines = theObstacle.mShape.GetGlobalLines();
-        
-        for (std::list<CLine>::iterator ourLine = ourLines.begin();
-             ourLine != ourLines.end();
-             ++ourLine)
-        {
-            for (std::list<CLine>::iterator theirLine = theirLines.begin();
-                 theirLine != theirLines.end();
-                 ++theirLine)
-            {
-                if ((*ourLine).Intersects((*theirLine)))
-                {
-                    // We have an intersection, therefore we are colliding
-                    theResult = true;
-                }
-            }
-        }
-    }
-    
-    return theResult;
 }

@@ -38,7 +38,6 @@ public:
     
 private:
     void HandleCollisions();
-    bool IsCollidingWith(SLevelItem theObstacle);
     
     CConvexShape    mShape;
     CLevel          *mParentLevel;
