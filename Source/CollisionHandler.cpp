@@ -35,8 +35,8 @@ bool AreColliding(CConvexShape &lhs,
     // either shape overlaps the other
     // If we can't then we have a collision
     //
-    // The axis we need to try project onto are the ones each side of each shape
-    // lies on
+    // The axis we need to try project onto are the normals to each side of each
+    // shape
     
     // Keep track of whether we've overlapped on an axis already
     bool haveOverlapped = false;
@@ -54,7 +54,7 @@ bool AreColliding(CConvexShape &lhs,
     FOR_EACH_IN_LIST(CLine, theLines)
     {
         // Get the vector for this axis
-        CVector2f axis = (*it).GetDirection();
+        CVector2f axis = (*it).GetNormal();
         
         // Make sure we've not already checked this axis, or it's inverse
         CVector2f inverseAxis = -axis;
