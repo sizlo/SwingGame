@@ -134,6 +134,8 @@ void CPlayer::HandleInput(CTime elapsedTime)
         thePosition.y = std::max(0.0f,              thePosition.y);
         
         mShape.setPosition(thePosition);
+        
+        HandleCollisions();
     }
     
     if (CKeyboard::isKeyPressed(CKeyboard::Space))
