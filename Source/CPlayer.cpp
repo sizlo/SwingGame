@@ -95,9 +95,7 @@ void CPlayer::HandleCollisions()
     
     std::list<SLevelItem *> theObstacles = mParentLevel->GetObstacles();
     
-    for (std::list<SLevelItem *>::iterator it = theObstacles.begin();
-         it != theObstacles.end();
-         ++it)
+    FOR_EACH_IN_LIST(SLevelItem *, theObstacles)
     {
         // Reset each obstacle colour
         (*it)->mShape.setFillColor(CColour::Black);

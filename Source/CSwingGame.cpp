@@ -334,9 +334,7 @@ void CSwingGame::Update(CTime elapsedTime)
     }
     
     // Iterate through the registered updateables, updating each in turn
-    for (std::list<CUpdateable *>::iterator it = smTheUpdateables.begin();
-         it != smTheUpdateables.end();
-         ++it)
+    FOR_EACH_IN_LIST(CUpdateable *, smTheUpdateables)
     {
         // Only update when in an appropriate state
         if ((*it)->ShouldUpdateForState(smGameState))
@@ -386,9 +384,7 @@ void CSwingGame::Render()
     mWindow->clear();
     
     // Iterate through all registered renderables, drawing them all
-    for (std::list<CRenderable *>::iterator it = smTheRenderables.begin();
-         it != smTheRenderables.end();
-         ++it)
+    FOR_EACH_IN_LIST(CRenderable *, smTheRenderables)
     {
         (*it)->Draw(mWindow);
     }

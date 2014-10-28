@@ -111,9 +111,7 @@ void CWindow::DrawShape(CConvexShape theShape)
     if (DebugOptions::drawShapeNormals)
     {
         std::list<CLine> theLines = theShape.GetGlobalLines();
-        for (std::list<CLine>::iterator it = theLines.begin();
-             it != theLines.end();
-             ++it)
+        FOR_EACH_IN_LIST(CLine, theLines)
         {
             CVector2f normal = (*it).GetNormal();
             CVector2f start = (*it).GetMidpoint();

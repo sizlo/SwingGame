@@ -25,9 +25,7 @@ CConvexShape::CConvexShape(std::list<CVector2f> &thePoints)
 {
     int theIndex = 0;
     
-    for (std::list<CVector2f>::iterator it = thePoints.begin();
-         it != thePoints.end();
-         ++it)
+    FOR_EACH_IN_LIST(CVector2f, thePoints)
     {
         setPoint(theIndex, (*it));
         theIndex++;

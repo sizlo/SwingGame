@@ -102,9 +102,7 @@ bool WasKeyPressedThisCycle(CKeyboard::Key theKey)
 {
     bool theResult = false;
     
-    for (std::list<CEvent>::iterator it = theInputEvents.begin();
-         it != theInputEvents.end();
-         ++it)
+    FOR_EACH_IN_LIST(CEvent, theInputEvents)
     {
         if ((*it).type == CEvent::KeyPressed && (*it).key.code == theKey)
         {

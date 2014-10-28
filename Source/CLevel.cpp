@@ -59,9 +59,7 @@ void CLevel::Exit()
     mPlayer->Cleanup();
     SAFE_DELETE(mPlayer);
     
-    for (std::list<SLevelItem *>::iterator it = mObstacles.begin();
-         it != mObstacles.end();
-         ++it)
+    FOR_EACH_IN_LIST(SLevelItem *, mObstacles)
     {
         SAFE_DELETE((*it));
     }
@@ -137,9 +135,7 @@ void CLevel::Draw(CWindow *theWindow)
     theWindow->DrawShape(mGoal.mShape);
     
     // Draw all level items
-    for (std::list<SLevelItem *>::iterator it = mObstacles.begin();
-         it != mObstacles.end();
-         ++it)
+    FOR_EACH_IN_LIST(SLevelItem *, mObstacles)
     {
         theWindow->DrawShape((*it)->mShape);
     }
