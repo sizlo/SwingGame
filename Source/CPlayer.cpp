@@ -89,22 +89,26 @@ void CPlayer::Move(float offsetX, float offsetY)
 void CPlayer::Move(CVector2f offset)
 {
     // Find a smaller offset which is less than the shapes smallest "radius"
-    CVector2f unitOffsetVector = offset;
+    CVector2f   unitOffsetVector = offset;
     unitOffsetVector.Normalise();
-    CVector2f smallOffset = unitOffsetVector * (mSmallestRadius - 1.0f);
+    CVector2f   smallOffset = unitOffsetVector * (mSmallestRadius - 1.0f);
+    float       smallDistance = smallOffset.GetMagnitude();
     
     // Move by that offset until another move would go too far
-    float totalDistanceToMove = offset.GetMagnitude();
-    CVector2f movedSoFar(0.0f, 0.0f);
+    float       totalDistanceToMove = offset.GetMagnitude();
+    CVector2f   movedSoFar(0.0f, 0.0f);
+    float       distanceSoFar = 0.0f;
     
-    do
+    while (distanceSoFar + smallDistance < totalDistanceToMove)
     {
         mShape.move(smallOffset);
+        
         movedSoFar += smallOffset;
+        distanceSoFar += smallDistance;
         
         // After each move handle collisions
         HandleCollisions();
-    } while (movedSoFar.GetMagnitude() < totalDistanceToMove);
+    }
     
     // Move by remaining offset
     mShape.move(offset - movedSoFar);
