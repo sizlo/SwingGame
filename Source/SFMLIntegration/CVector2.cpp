@@ -55,3 +55,12 @@ void CVector2<T>::Normalise()
     this->x /= length;
     this->y /= length;
 }
+
+// =============================================================================
+// CVector2::DotProduct
+// -----------------------------------------------------------------------------
+template <typename T>
+T CVector2<T>::DotProduct(CVector2<T> rhs)
+{
+    return (this->x * rhs.x) + (this->y * rhs.y);
+}
