@@ -46,7 +46,6 @@ CPlayer::~CPlayer()
 void CPlayer::Update(CTime elapsedTime)
 {
     HandleInput(elapsedTime);
-    HandleCollisions();
 }
 
 // =============================================================================
@@ -105,8 +104,9 @@ void CPlayer::Move(CVector2f offset)
         HandleCollisions();
     } while (movedSoFar.GetMagnitude() < totalDistanceToMove);
     
-    // If we didn't collide move by remaining offset
+    // Move by remaining offset
     mShape.move(offset - movedSoFar);
+    HandleCollisions();
 }
 
 // =============================================================================
