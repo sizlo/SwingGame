@@ -32,7 +32,7 @@ namespace SystemUtilities
     // Was a given key pressed this cycle
     bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
     // Get the mouse position relative to the window
-    CVector2i GetMousePosition();
+    CVector2f GetMousePosition();
 };
 
 #endif /* defined(__SwingGame__SystemUtilities__) */

@@ -66,6 +66,17 @@ void CSwingGame::Init()
                           GameOptions::windowHeight,
                           mWindowTitle);
     
+    // Use a view to make the game resolution independant
+    CView theView(CFloatRect(GameOptions::viewLeft, GameOptions::viewTop,
+                             GameOptions::viewWidth, GameOptions::viewHeight));
+    mWindow->setView(theView);
+    
+    if ((GameOptions::windowWidth * 1.0f) / GameOptions::windowHeight
+        != GameOptions::viewWidth / GameOptions::viewHeight)
+    {
+        DEBUG_LOG("View aspect ratio doesn't match window aspect ratio");
+    }
+    
     // Enter the front end menu
     GoToLocation(kGameLocationFrontEnd);
     

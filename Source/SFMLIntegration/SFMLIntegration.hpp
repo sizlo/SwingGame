@@ -28,6 +28,7 @@
 #include "CSprite.hpp"
 #include "CText.hpp"
 #include "CWindow.hpp"
+#include "CView.hpp"
 
 #include "../GameOptions.hpp"
 

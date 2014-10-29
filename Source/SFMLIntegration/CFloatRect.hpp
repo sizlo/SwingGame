@@ -22,6 +22,7 @@ class CFloatRect : public sf::FloatRect
 public:
     CFloatRect();
     CFloatRect(sf::FloatRect other);
+    CFloatRect(float left, float top, float width, float height);
     ~CFloatRect();
 };
 

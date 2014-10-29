@@ -17,6 +17,10 @@ namespace GameOptions
     // Public globals
     extern unsigned int windowHeight;
     extern unsigned int windowWidth;
+    extern float        viewLeft;
+    extern float        viewTop;
+    extern float        viewHeight;
+    extern float        viewWidth;
     extern bool         doVsync;
     extern unsigned int maxFPS;
 };

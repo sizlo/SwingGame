@@ -1,10 +1,13 @@
 //
-//  CFloatRect.cpp
+//  CView.hpp
 //  SwingGame
 //
-//  Created by Tim Brier on 18/10/2014.
+//  Created by Tim Brier on 29/10/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
+
+#ifndef __SwingGame__CView__
+#define __SwingGame__CView__
 
 // =============================================================================
 // Include Files
@@ -12,25 +15,14 @@
 #include "CFloatRect.hpp"
 
 // =============================================================================
-// CFloatRect constructor/destructor
+// Class Definition
 // -----------------------------------------------------------------------------
-CFloatRect::CFloatRect() : sf::FloatRect()
+class CView : public sf::View
 {
-    
-}
+public:
+    CView();
+    CView(CFloatRect theRect);
+    ~CView();
+};
 
-CFloatRect::CFloatRect(sf::FloatRect other) : sf::FloatRect(other)
-{
-    
-}
-
-CFloatRect::CFloatRect(float left, float top, float width, float height)
-:   sf::FloatRect(left, top, width, height)
-{
-    
-}
-
-CFloatRect::~CFloatRect()
-{
-    
-}
+#endif /* defined(__SwingGame__CView__) */

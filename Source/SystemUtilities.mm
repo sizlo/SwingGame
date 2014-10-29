@@ -115,11 +115,14 @@ bool WasKeyPressedThisCycle(CKeyboard::Key theKey)
 
 // =============================================================================
 // SystemUtilities::GetMousePosition
-// Get the mouse position relative to the window
+// Get the mouse position relative to the windows current view
 // -----------------------------------------------------------------------------
-CVector2i GetMousePosition()
+CVector2f GetMousePosition()
 {
-    return CMouse::getPosition(*theGameWindow);
+    CVector2i windowPosition = CMouse::getPosition(*theGameWindow);
+    CVector2f viewPosition = theGameWindow->mapPixelToCoords(windowPosition);
+    
+    return viewPosition;
 }
     
 } // namespace SystemUtilities
