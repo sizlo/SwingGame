@@ -114,6 +114,33 @@ bool WasKeyPressedThisCycle(CKeyboard::Key theKey)
 }
 
 // =============================================================================
+// SystemUtilities::WasButtonPressedThisCycle
+// Was a mouse press event recieved for the given button this cycle
+// Fills an ouput vector with the position when pressed
+// -----------------------------------------------------------------------------
+bool WasButtonPressedThisCycle(CMouse::Button theButton,
+                               CVector2f *thePosition)
+{
+    bool theResult = false;
+    
+    FOR_EACH_IN_LIST(CEvent, theInputEvents)
+    {
+        if ((*it).type == CEvent::MouseButtonPressed
+            && (*it).mouseButton.button == theButton)
+        {
+            theResult = true;
+            
+            // Set the output position to the cursor position when the button
+            // was pressed
+            thePosition->x = (*it).mouseButton.x;
+            thePosition->y = (*it).mouseButton.y;
+        }
+    }
+    
+    return theResult;
+}
+    
+// =============================================================================
 // SystemUtilities::GetMousePosition
 // Get the mouse position relative to the windows current view
 // -----------------------------------------------------------------------------

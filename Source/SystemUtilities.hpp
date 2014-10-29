@@ -31,6 +31,9 @@ namespace SystemUtilities
     void ClearInputEvents();
     // Was a given key pressed this cycle
     bool WasKeyPressedThisCycle(CKeyboard::Key theKey);
+    // Was a given button pressed this cycle
+    bool WasButtonPressedThisCycle(CMouse::Button theButton,
+                                   CVector2f *thePosition);
     // Get the mouse position relative to the window
     CVector2f GetMousePosition();
 };
