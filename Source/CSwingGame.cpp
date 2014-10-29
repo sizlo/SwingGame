@@ -292,11 +292,8 @@ void CSwingGame::ProcessEvents()
         switch (theEvent.type)
         {
             case CEvent::KeyPressed:
-                // Keep a list of keypress events this cycle
-                SystemUtilities::AddInputEvent(theEvent);
-                
+                // Hack to enable cmd+q / alt+f4 functionality
 #if SG_MAC
-                // Hack to enable cmd+q functionality
                 if (theEvent.key.code == CKeyboard::Q
                     && (CKeyboard::isKeyPressed(CKeyboard::LSystem)
                         || CKeyboard::isKeyPressed(CKeyboard::RSystem)))
@@ -304,14 +301,19 @@ void CSwingGame::ProcessEvents()
                     ExitGame();
                 }
 #elif SG_WINDOWS
-                // Hack to enable alt+f4 functionality
                 if (theEvent.key.code == CKeyboard::F4
                     && (CKeyboard::isKeyPressed(CKeyboard::LAlt)))
                 {
                     ExitGame();
                 }
 #endif
+                // Fall through to mouse press
+                
+            case CEvent::MouseButtonPressed:
+                // Keep a list of key and mouse press events this cycle
+                SystemUtilities::AddInputEvent(theEvent);
                 break;
+                
                 
             case CEvent::Closed:
                 // Exit on close event
