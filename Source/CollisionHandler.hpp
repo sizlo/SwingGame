@@ -13,6 +13,18 @@
 // Include files
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration/SFMLIntegration.hpp"
+#include "CPhysicsBody.hpp"
+
+// =============================================================================
+// Enums
+// -----------------------------------------------------------------------------
+enum ECollisionResolveOptions
+{
+    // Which object(s) to move when seperating the colliding objects
+    kCRMoveLeft         = 1 << 0,
+    kCRMoveRight        = 1 << 1,
+    kCRMoveBoth         = 1 << 2
+};
 
 // =============================================================================
 // Namespace definition
@@ -30,6 +42,12 @@ namespace CollisionHandler
                         CVector2f *correctionVector);
     // Project a point onto an axis
     float Project(CVector2f point, CVector2f axis);
+    
+    // Resolve a collision
+    void Resolve(CPhysicsBody *lhs,
+                 CPhysicsBody *rhs,
+                 CVector2f correctionVector,
+                 ECollisionResolveOptions = kCRMoveLeft);
 }
 
 

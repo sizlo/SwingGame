@@ -11,6 +11,17 @@
 // -----------------------------------------------------------------------------
 #include "CollisionHandler.hpp"
 
+// =============================================================================
+// Helper methods
+// -----------------------------------------------------------------------------
+bool CROptionHasAllFlags(ECollisionResolveOptions theOptions,
+                         ECollisionResolveOptions theFlags)
+{
+    ECollisionResolveOptions theResult =
+                static_cast<ECollisionResolveOptions>(theOptions & theFlags);
+    return theResult == theFlags;
+}
+
 namespace CollisionHandler
 {
     
@@ -177,6 +188,40 @@ float Project(CVector2f point, CVector2f axis)
 {
     // Project a point onto an axis by performing the dot product between them
     return point.DotProduct(axis);
+}
+
+// =============================================================================
+// CollisionHandler::Resolve
+// -----------------------------------------------------------------------------
+void Resolve(CPhysicsBody *lhs,
+             CPhysicsBody *rhs,
+             CVector2f correctionVector,
+             ECollisionResolveOptions theOptions /* = kCRMoveLeft */)
+{
+    // Move either one or both of the shapes by the correction vector so they
+    // aren't penetrating anymore
+    // The vector will be assuming the lhs body is moving so it will need
+    // adjusting if this is not the case
+    ECollisionResolveOptions bothSides =
+            static_cast<ECollisionResolveOptions>(kCRMoveLeft | kCRMoveRight);
+    if (CROptionHasAllFlags(theOptions, kCRMoveBoth)
+        || CROptionHasAllFlags(theOptions, bothSides))
+    {
+        lhs->GetShape()->move(0.5f * correctionVector);
+        rhs->GetShape()->move(-0.5f * correctionVector);
+    }
+    else if (CROptionHasAllFlags(theOptions, kCRMoveLeft))
+    {
+        lhs->GetShape()->move(correctionVector);
+    }
+    else if (CROptionHasAllFlags(theOptions, kCRMoveRight))
+    {
+        rhs->GetShape()->move(-correctionVector);
+    }
+    else
+    {
+        DEBUG_LOG("No valid option");
+    }
 }
     
 } // namespace CollsionHandler
