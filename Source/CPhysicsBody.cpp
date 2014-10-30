@@ -10,11 +10,14 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CPhysicsBody.hpp"
+#include <limits>
 
 // =============================================================================
 // CPhysicsBody constructor
 // -----------------------------------------------------------------------------
-CPhysicsBody::CPhysicsBody() :  mMass(1.0f),
+CPhysicsBody::CPhysicsBody() :  // Initialise mass to max value since most
+                                // objects will be static 
+                                mMass(std::numeric_limits<float>::max()),
                                 mVelocity(0.0f, 0.0f),
                                 mForce(0.0f, 0.0f)
 {
