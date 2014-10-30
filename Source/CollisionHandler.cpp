@@ -196,14 +196,33 @@ float Project(CVector2f point, CVector2f axis)
 void Resolve(CPhysicsBody *lhs,
              CPhysicsBody *rhs,
              CVector2f correctionVector,
+             float friction /* = 0.0f */,
+             float elasticity /* = 1.0f */,
              ECollisionResolveOptions theOptions /* = kCRMoveLeft */)
+{
+    Seperate(lhs, rhs, correctionVector, friction, elasticity, theOptions);
+    
+    // Normalise the correction vector before responding
+    correctionVector.Normalise();
+    Respond(lhs, rhs, correctionVector, friction, elasticity, theOptions);
+}
+
+// =============================================================================
+// CollisionHandler::Seperate
+// -----------------------------------------------------------------------------
+void Seperate(CPhysicsBody *lhs,
+              CPhysicsBody *rhs,
+              CVector2f correctionVector,
+              float friction,
+              float elasticity,
+              ECollisionResolveOptions theOptions)
 {
     // Move either one or both of the shapes by the correction vector so they
     // aren't penetrating anymore
     // The vector will be assuming the lhs body is moving so it will need
     // adjusting if this is not the case
-    ECollisionResolveOptions bothSides =
-            static_cast<ECollisionResolveOptions>(kCRMoveLeft | kCRMoveRight);
+    ECollisionResolveOptions bothSides = static_cast<ECollisionResolveOptions>
+    (kCRMoveLeft | kCRMoveRight);
     if (CROptionHasAllFlags(theOptions, kCRMoveBoth)
         || CROptionHasAllFlags(theOptions, bothSides))
     {
@@ -220,8 +239,40 @@ void Resolve(CPhysicsBody *lhs,
     }
     else
     {
-        DEBUG_LOG("No valid option");
+        DEBUG_LOG("No valid collision resolve option");
     }
+}
+    
+// =============================================================================
+// CollisionHandler::Respond
+// -----------------------------------------------------------------------------
+void Respond(CPhysicsBody *lhs,
+             CPhysicsBody *rhs,
+             CVector2f normal,
+             float friction,
+             float elasticity,
+             ECollisionResolveOptions theOptions)
+{
+    // Compute the collision response using the relative velocity of both
+    // bodies and the normal to the collision
+    CVector2f relativeVelocity = lhs->GetVelocity() - rhs->GetVelocity();
+    
+    // Work out the components of this relative velocity which are
+    // perpendicular to the normal and paralel to the normal
+    CVector2f perpComp = (relativeVelocity.DotProduct(normal)) * normal;
+    CVector2f parComp = relativeVelocity - perpComp;
+    
+    // Reflect these components and scale based on friction and elasticity
+    perpComp *= -(1.0f + elasticity);
+    parComp *= -friction;
+    
+    // Combine them into the response
+    CVector2f response = perpComp + parComp;
+    
+    // Scale this response based on each bodies relative mass and apply it
+    float bothInvMasses = lhs->GetInverseMass() + rhs->GetInverseMass();
+    lhs->AddVelocity(response * (lhs->GetInverseMass() / bothInvMasses));
+    rhs->AddVelocity(-response * (rhs->GetInverseMass() / bothInvMasses));
 }
     
 } // namespace CollsionHandler

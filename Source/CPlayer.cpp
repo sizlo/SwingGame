@@ -51,7 +51,8 @@ CPlayer::CPlayer(CLevel *theParentLevel) :  mParentLevel(theParentLevel)
     SetShape(CConvexShape(thePoints));
     GetShape()->setFillColor(CColour::Yellow);
     
-    SetMass(1.0f); // Read from file?
+    float mass = 1.0f; // Read from file?
+    SetInverseMass(1.0f / mass);
 }
 
 CPlayer::~CPlayer()
@@ -64,8 +65,6 @@ CPlayer::~CPlayer()
 // -----------------------------------------------------------------------------
 void CPlayer::Update(CTime elapsedTime)
 {
-    DEBUG_LOG("UPDATE START - elapsedTime: %f", elapsedTime.asSeconds());
-    
     HandleInput();
     
     // Now simulate the physics until we've simulated the entire elapsedTime
@@ -79,19 +78,11 @@ void CPlayer::Update(CTime elapsedTime)
         // And zero the force out now we've applied it
         SetForce(CVector2f(0.0f, 0.0f));
         
-        DEBUG_LOG("Attempting to simulate with u=(%f,%f), a=(%f,%f), t=%f",
-                  GetVelocity().x, GetVelocity().y,
-                  acceleration.x, acceleration.y,
-                  elapsedTime.asSeconds());
-        
         // Now try to move based on our velocity
         CTime timeSimulated = MoveUntilCollision(elapsedTime, acceleration);
         elapsedTime -= timeSimulated;
         
-        DEBUG_LOG("Simulated %f", timeSimulated.asSeconds());
     }
-    
-    DEBUG_LOG("UPDATE END");
 }
 
 // =============================================================================
@@ -112,7 +103,7 @@ void CPlayer::Init(SStartPosition theStartPos)
     CSwingGame::RegisterRenderable(this);
     
     GetShape()->setPosition(theStartPos.mPosition);
-    SetVelocity(CVector2f(0.0f, 0.0f));
+    SetVelocity(CVector2f(100.0f, 0.0f));
     SetForce(CVector2f(0.0f, 0.0f));
 }
 

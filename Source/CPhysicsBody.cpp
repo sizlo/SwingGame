@@ -15,21 +15,33 @@
 // =============================================================================
 // CPhysicsBody constructor
 // -----------------------------------------------------------------------------
-CPhysicsBody::CPhysicsBody() :  // Initialise mass to max value since most
-                                // objects will be static 
-                                mMass(std::numeric_limits<float>::max()),
+CPhysicsBody::CPhysicsBody() :  mInverseMass(0.0f), // Infinite mass by default
                                 mVelocity(0.0f, 0.0f),
                                 mForce(0.0f, 0.0f)
 {
-    
+
 }
 
 // =============================================================================
 // Getters
 // -----------------------------------------------------------------------------
+float CPhysicsBody::GetInverseMass()
+{
+    return mInverseMass;
+}
+
 float CPhysicsBody::GetMass()
 {
-    return mMass;
+    // Check for divide by 0
+    if (mInverseMass == 0.0f)
+    {
+        DEBUG_LOG("Requesting infinite mass")
+        return std::numeric_limits<float>::max();
+    }
+    else
+    {
+        return 1.0f / mInverseMass;
+    }
 }
 
 CVector2f CPhysicsBody::GetVelocity()
@@ -50,9 +62,9 @@ CConvexShape * CPhysicsBody::GetShape()
 // =============================================================================
 // Setters
 // -----------------------------------------------------------------------------
-void CPhysicsBody::SetMass(float theMass)
+void CPhysicsBody::SetInverseMass(float theInverseMass)
 {
-    mMass = theMass;
+    mInverseMass = theInverseMass;
 }
 
 void CPhysicsBody::SetVelocity(CVector2f theVelocity)

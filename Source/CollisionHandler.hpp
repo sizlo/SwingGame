@@ -47,7 +47,25 @@ namespace CollisionHandler
     void Resolve(CPhysicsBody *lhs,
                  CPhysicsBody *rhs,
                  CVector2f correctionVector,
-                 ECollisionResolveOptions = kCRMoveLeft);
+                 float friction = 0.1f,
+                 float elasticity = 0.9f,
+                 ECollisionResolveOptions theOptions = kCRMoveLeft);
+    
+    // Seperate the 2 penetrating bodies
+    void Seperate(CPhysicsBody *lhs,
+                  CPhysicsBody *rhs,
+                  CVector2f correctionVector,
+                  float friction,
+                  float elasticity,
+                  ECollisionResolveOptions theOptions);
+    
+    // Calculate and apply the response to the collision
+    void Respond(CPhysicsBody *lhs,
+                 CPhysicsBody *rhs,
+                 CVector2f normal,
+                 float friction,
+                 float elasticity,
+                 ECollisionResolveOptions theOptions);
 }
 
 
