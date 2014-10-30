@@ -19,6 +19,7 @@
 CLevel::CLevel(std::string filename)
 {
     XMLInterpreter::ProcessLevel(filename, this);
+    mGravityAcceleration = CVector2f(0.0f, 500.0f); // Read from file?
 }
 
 CLevel::~CLevel()
@@ -59,7 +60,7 @@ void CLevel::Exit()
     mPlayer->Cleanup();
     SAFE_DELETE(mPlayer);
     
-    FOR_EACH_IN_LIST(SLevelItem *, mObstacles)
+    FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
         SAFE_DELETE((*it));
     }
@@ -84,7 +85,7 @@ void CLevel::SetStartPosition(SStartPosition thePosition)
 // =============================================================================
 // CLevel::SetGoal
 // -----------------------------------------------------------------------------
-void CLevel::SetGoal(SLevelItem theGoal)
+void CLevel::SetGoal(CPhysicsBody theGoal)
 {
     mGoal = theGoal;
 }
@@ -100,17 +101,25 @@ void CLevel::SetBackground(CSprite theBackground)
 // =============================================================================
 // CLevel::AddObstacle
 // -----------------------------------------------------------------------------
-void CLevel::AddObstacle(SLevelItem theObstacle)
+void CLevel::AddObstacle(CPhysicsBody theObstacle)
 {
-    mObstacles.push_back(new SLevelItem(theObstacle));
+    mObstacles.push_back(new CPhysicsBody(theObstacle));
 }
 
 // =============================================================================
 // CLevel::GetObstacles
 // -----------------------------------------------------------------------------
-std::list<SLevelItem *> CLevel::GetObstacles()
+std::list<CPhysicsBody *> CLevel::GetObstacles()
 {
     return mObstacles;
+}
+
+// =============================================================================
+// CLevel::GetGravityForce
+// -----------------------------------------------------------------------------
+CVector2f CLevel::GetGravityAcceleration()
+{
+    return mGravityAcceleration;
 }
 
 // =============================================================================
@@ -132,12 +141,12 @@ void CLevel::Draw(CWindow *theWindow)
     theWindow->draw(mBackground);
     
     // Draw the goal
-    theWindow->DrawShape(mGoal.mShape);
+    theWindow->DrawShape(*(mGoal.GetShape()));
     
     // Draw all level items
-    FOR_EACH_IN_LIST(SLevelItem *, mObstacles)
+    FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
-        theWindow->DrawShape((*it)->mShape);
+        theWindow->DrawShape(*((*it)->GetShape()));
     }
 }
 

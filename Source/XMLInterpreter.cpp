@@ -95,13 +95,14 @@ CVector2f GetVector2f(pugi::xml_node theRoot)
 // =============================================================================
 // XMLInterpreter::GetLevelItem
 // -----------------------------------------------------------------------------
-SLevelItem GetLevelItem(pugi::xml_node theRoot)
+CPhysicsBody GetLevelItem(pugi::xml_node theRoot)
 {
     CHECK_CHILD(theRoot, "position");
     CHECK_CHILD(theRoot, "texture");
     
-    SLevelItem theResult;
+    CPhysicsBody theResult;
     std::list<CVector2f> thePoints;
+    CVector2f thePosition = CVector2f(0.0f, 0.0f);
     
     // Process each child
     for (pugi::xml_node theNode = theRoot.first_child();
@@ -110,7 +111,7 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
     {
         if (strcmp(theNode.name(), "position") == 0)
         {
-            theResult.mPosition = GetVector2f(theNode);
+            thePosition = GetVector2f(theNode);
         }
         else if (strcmp(theNode.name(), "texture") == 0)
         {
@@ -142,8 +143,8 @@ SLevelItem GetLevelItem(pugi::xml_node theRoot)
     }
     
     // Create and initialise the shape
-    theResult.mShape = CConvexShape(thePoints);
-    theResult.mShape.setPosition(theResult.mPosition);
+    theResult.SetShape(CConvexShape(thePoints));
+    theResult.GetShape()->setPosition(thePosition);
     
     return theResult;
 }
@@ -183,14 +184,14 @@ SStartPosition GetStartPosition(pugi::xml_node theRoot)
 // =============================================================================
 // XMLInterpreter::GetGoal
 // -----------------------------------------------------------------------------
-SLevelItem GetGoal(pugi::xml_node theRoot)
+CPhysicsBody GetGoal(pugi::xml_node theRoot)
 {
     DEBUG_LOG("Processing goal node");
     
-    SLevelItem theResult = XMLInterpreter::GetLevelItem(theRoot);
+    CPhysicsBody theResult = XMLInterpreter::GetLevelItem(theRoot);
     
     // Default goal to green
-    theResult.mShape.setFillColor(CColour::Green);
+    theResult.GetShape()->setFillColor(CColour::Green);
     
     return theResult;
 }
@@ -198,14 +199,14 @@ SLevelItem GetGoal(pugi::xml_node theRoot)
 // =============================================================================
 // XMLInterpreter::GetObstacle
 // -----------------------------------------------------------------------------
-SLevelItem GetObstacle(pugi::xml_node theRoot)
+CPhysicsBody GetObstacle(pugi::xml_node theRoot)
 {
     DEBUG_LOG("Processing goal node");
     
-    SLevelItem theResult = XMLInterpreter::GetLevelItem(theRoot);
+    CPhysicsBody theResult = XMLInterpreter::GetLevelItem(theRoot);
     
     // Default obstacle to black
-    theResult.mShape.setFillColor(CColour::Black);
+    theResult.GetShape()->setFillColor(CColour::Black);
     
     return theResult;
 }

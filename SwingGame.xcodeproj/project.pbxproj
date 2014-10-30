@@ -14,6 +14,7 @@
 		2250711019D4745B00F1179D /* TextUtilties.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2250710E19D4745B00F1179D /* TextUtilties.cpp */; };
 		2266696819FFC84D00BB750D /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2266696619FFC84D00BB750D /* CollisionHandler.cpp */; };
 		2266696B1A01097D00BB750D /* CView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226669691A01097D00BB750D /* CView.cpp */; };
+		2266696E1A02C94F00BB750D /* CPhysicsBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2266696C1A02C94F00BB750D /* CPhysicsBody.cpp */; };
 		2267170219F291B100BF72D6 /* CColour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267170019F291B100BF72D6 /* CColour.cpp */; };
 		2267170819F292C300BF72D6 /* CWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267170619F292C300BF72D6 /* CWindow.cpp */; };
 		2267170B19F293C900BF72D6 /* CFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267170919F293C900BF72D6 /* CFont.cpp */; };
@@ -61,6 +62,8 @@
 		2266696719FFC84D00BB750D /* CollisionHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionHandler.hpp; sourceTree = "<group>"; };
 		226669691A01097D00BB750D /* CView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CView.cpp; sourceTree = "<group>"; };
 		2266696A1A01097D00BB750D /* CView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CView.hpp; sourceTree = "<group>"; };
+		2266696C1A02C94F00BB750D /* CPhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPhysicsBody.cpp; sourceTree = "<group>"; };
+		2266696D1A02C94F00BB750D /* CPhysicsBody.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CPhysicsBody.hpp; sourceTree = "<group>"; };
 		2267170019F291B100BF72D6 /* CColour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CColour.cpp; sourceTree = "<group>"; };
 		2267170119F291B100BF72D6 /* CColour.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CColour.hpp; sourceTree = "<group>"; };
 		2267170319F2926300BF72D6 /* CVector2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CVector2.cpp; sourceTree = "<group>"; };
@@ -174,6 +177,8 @@
 				22E8816F19F2B0180053D142 /* GameState.hpp */,
 				2266696619FFC84D00BB750D /* CollisionHandler.cpp */,
 				2266696719FFC84D00BB750D /* CollisionHandler.hpp */,
+				2266696C1A02C94F00BB750D /* CPhysicsBody.cpp */,
+				2266696D1A02C94F00BB750D /* CPhysicsBody.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -377,6 +382,7 @@
 				2267170219F291B100BF72D6 /* CColour.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22F8593919E946E000A1002C /* XMLInterpreter.cpp in Sources */,
+				2266696E1A02C94F00BB750D /* CPhysicsBody.cpp in Sources */,
 				22FC77FB19E1917A000A507F /* GameOptions.cpp in Sources */,
 				22F8593C19E95A6100A1002C /* CPlayer.cpp in Sources */,
 				22F8593419E88DA800A1002C /* CLine.cpp in Sources */,

@@ -14,18 +14,18 @@
 // -----------------------------------------------------------------------------
 #include "CUpdateable.hpp"
 #include "CRenderable.hpp"
+#include "CPhysicsBody.hpp"
 
 // =============================================================================
 // Forward declarations
 // -----------------------------------------------------------------------------
 class CLevel;
-struct SLevelItem;
 struct SStartPosition;
 
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
-class CPlayer : public CUpdateable, public CRenderable
+class CPlayer : public CUpdateable, public CRenderable, public CPhysicsBody
 {
 public:
     CPlayer(CLevel *theParentLevel);
@@ -37,16 +37,15 @@ public:
     void Init(SStartPosition theStartPos);
     void Cleanup();
     
-    // Move by the given offset in a way that prevents the player phasing
-    // through objects
-    void Move(float offsetX, float offsetY);
-    void Move(CVector2f offset);
-    
 private:
-    void HandleInput(CTime elapsedTime);
-    void HandleCollisions();
+    void HandleInput        ();
+    void HandlePhysics      ();
+    bool HandleCollisions   ();
     
-    CConvexShape    mShape;
+    // Move for the given amount of time with the given acceleration or until
+    // we collide
+    CTime MoveUntilCollision(CTime elapsedTime, CVector2f acceleration);
+    
     CLevel          *mParentLevel;
     
     // The smallest distance from the centre of the player to it's outer edge

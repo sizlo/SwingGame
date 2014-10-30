@@ -40,10 +40,10 @@ namespace XMLInterpreter
     
     // Get a given data type from an xml node
     CVector2f       GetVector2f     (pugi::xml_node theRoot);
-    SLevelItem      GetLevelItem    (pugi::xml_node theRoot);
+    CPhysicsBody    GetLevelItem    (pugi::xml_node theRoot);
     SStartPosition  GetStartPosition(pugi::xml_node theRoot);
-    SLevelItem      GetGoal         (pugi::xml_node theRoot);
-    SLevelItem      GetObstacle     (pugi::xml_node theRoot);
+    CPhysicsBody    GetGoal         (pugi::xml_node theRoot);
+    CPhysicsBody    GetObstacle     (pugi::xml_node theRoot);
 }
 
 #endif /* defined(__SwingGame__XMLInterpreter__) */

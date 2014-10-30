@@ -27,12 +27,6 @@ struct SStartPosition
     CVector2f mSwingTarget;
 };
 
-struct SLevelItem
-{
-    CVector2f           mPosition;
-    CConvexShape        mShape;
-};
-
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
@@ -48,12 +42,13 @@ public:
     // Setters
     void SetName            (std::string    theName);
     void SetStartPosition   (SStartPosition thePosition);
-    void SetGoal            (SLevelItem     theGoal);
+    void SetGoal            (CPhysicsBody   theGoal);
     void SetBackground      (CSprite        theBackground);
-    void AddObstacle        (SLevelItem     theObstacle);
+    void AddObstacle        (CPhysicsBody   theObstacle);
     
     // Getters
-    std::list<SLevelItem *> GetObstacles();
+    std::list<CPhysicsBody *>   GetObstacles();
+    CVector2f                   GetGravityAcceleration();
     
     // Update the level
     void Update(CTime elapsedTime);
@@ -61,20 +56,23 @@ public:
     void Draw(CWindow *theWindow);
     
 private:
-    std::string             mName;
+    std::string                 mName;
     
     // Start and goal
-    SStartPosition          mStartPosition;
-    SLevelItem              mGoal;
+    SStartPosition              mStartPosition;
+    CPhysicsBody                mGoal;
     
     // Background sprite
-    CSprite                 mBackground;
+    CSprite                     mBackground;
     
     // Obstacles
-    std::list<SLevelItem *> mObstacles;
+    std::list<CPhysicsBody *>   mObstacles;
     
     // The player
-    CPlayer                 *mPlayer;
+    CPlayer                     *mPlayer;
+    
+    // Physics parameters
+    CVector2f                   mGravityAcceleration;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
