@@ -50,6 +50,11 @@ void CSwing::AttemptToAttach(CVector2f theAimPoint)
         mOrigin = anchorPoint;
         mLength = GetDistanceToBob();
         
+        // Throw away any velocity that isn't perpendicular to the swing
+        CVector2f v = mBob->GetVelocity();
+        CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
+        mBob->SetVelocity(newV);
+        
         // Register ourselves now we're active
         CSwingGame::RegisterRenderable(this);
         CSwingGame::RegisterUpdateable(this);
@@ -99,10 +104,11 @@ void CSwing::Draw(CWindow *theWindow)
 // -----------------------------------------------------------------------------
 void CSwing::Update(CTime elapsedTime)
 {
-    // Throw away any velocity of the bob that isn't perpendicular to the
-    // swing
+    // Adjust the velocity so it is perpendicular to the swing
     CVector2f v = mBob->GetVelocity();
     CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
+    newV.Normalise();
+    newV *= v.GetMagnitude();
     mBob->SetVelocity(newV);
     
     // Make sure the bob isn't further away from the origin than the length of
