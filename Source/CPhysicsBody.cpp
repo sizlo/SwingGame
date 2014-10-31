@@ -16,8 +16,7 @@
 // CPhysicsBody constructor
 // -----------------------------------------------------------------------------
 CPhysicsBody::CPhysicsBody() :  mInverseMass(0.0f), // Infinite mass by default
-                                mVelocity(0.0f, 0.0f),
-                                mForce(0.0f, 0.0f)
+                                mVelocity(0.0f, 0.0f)
 {
 
 }
@@ -49,14 +48,14 @@ CVector2f CPhysicsBody::GetVelocity()
     return mVelocity;
 }
 
-CVector2f CPhysicsBody::GetForce()
-{
-    return mForce;
-}
-
 CConvexShape * CPhysicsBody::GetShape()
 {
     return &mShape;
+}
+
+CVector2f CPhysicsBody::GetPosition()
+{
+    return mShape.getPosition();
 }
 
 // =============================================================================
@@ -75,16 +74,6 @@ void CPhysicsBody::SetVelocity(CVector2f theVelocity)
 void CPhysicsBody::AddVelocity(CVector2f theVelocity)
 {
     mVelocity += theVelocity;
-}
-
-void CPhysicsBody::SetForce(CVector2f theForce)
-{
-    mForce = theForce;
-}
-
-void CPhysicsBody::ApplyForce(CVector2f theForce)
-{
-    mForce += theForce;
 }
 
 void CPhysicsBody::SetShape(CConvexShape theShape)

@@ -29,6 +29,7 @@
 #include "CText.hpp"
 #include "CWindow.hpp"
 #include "CView.hpp"
+#include "CVertex.hpp"
 
 #include "../GameOptions.hpp"
 

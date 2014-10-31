@@ -259,7 +259,7 @@ void Respond(CPhysicsBody *lhs,
     
     // Work out the components of this relative velocity which are
     // perpendicular to the normal and paralel to the normal
-    CVector2f perpComp = (relativeVelocity.DotProduct(normal)) * normal;
+    CVector2f perpComp = relativeVelocity.GetComponentInDirection(normal);
     CVector2f parComp = relativeVelocity - perpComp;
     
     // Reflect these components and scale based on friction and elasticity

@@ -70,18 +70,12 @@ void CPlayer::Update(CTime elapsedTime)
     // Now simulate the physics until we've simulated the entire elapsedTime
     while (elapsedTime > CTime::Zero)
     {
-        // Find the forces applied by any physics items
-        HandlePhysics();
-        
-        // Find acceleration using f=ma
-        CVector2f acceleration = GetForce() / GetMass();
-        // And zero the force out now we've applied it
-        SetForce(CVector2f(0.0f, 0.0f));
+        // Find the acceleration applied by any physics items
+        CVector2f acceleration = HandlePhysics();
         
         // Now try to move based on our velocity
         CTime timeSimulated = MoveUntilCollision(elapsedTime, acceleration);
         elapsedTime -= timeSimulated;
-        
     }
 }
 
@@ -103,8 +97,9 @@ void CPlayer::Init(SStartPosition theStartPos)
     CSwingGame::RegisterRenderable(this);
     
     GetShape()->setPosition(theStartPos.mPosition);
-    SetVelocity(CVector2f(100.0f, 0.0f));
-    SetForce(CVector2f(0.0f, 0.0f));
+    SetVelocity(CVector2f(0.0f, 0.0f));
+    
+    mSwing = new CSwing(this);
 }
 
 // =============================================================================
@@ -112,6 +107,8 @@ void CPlayer::Init(SStartPosition theStartPos)
 // -----------------------------------------------------------------------------
 void CPlayer::Cleanup()
 {
+    SAFE_DELETE(mSwing);
+    
     // Unregister update/renderables
     CSwingGame::UnregisterUpdateable(this);
     CSwingGame::UnregisterRenderable(this);
@@ -122,11 +119,8 @@ void CPlayer::Cleanup()
 // -----------------------------------------------------------------------------
 void CPlayer::HandleInput()
 {
-#if SG_DEBUG    // In debug move the player to the mouse pos on left click if
-                // right shift is down
-    CVector2f mousePos;
-    if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Left, &mousePos)
-        && CKeyboard::isKeyPressed(CKeyboard::RShift))
+#if SG_DEBUG    // In debug move the player to the mouse pos if r shift is down
+    if (CKeyboard::isKeyPressed(CKeyboard::RShift))
     {
         GetShape()->setPosition(SystemUtilities::GetMousePosition());
         HandleCollisions();
@@ -135,15 +129,28 @@ void CPlayer::HandleInput()
         SetVelocity(CVector2f(0.0f, 0.0f));
     }
 #endif
+    
+    // Connect the swing on left mouse click
+    CVector2f mousePos;
+    if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Left, &mousePos))
+    {
+        mSwing->AttemptToAttach(mousePos);
+    }
+    
+    // Disconnect on right click
+    if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Right, &mousePos))
+    {
+        mSwing->Detach();
+    }
 }
 
 // =============================================================================
 // CPlayer::HandlePhysics
+// Return the resulting acceleration of the player
 // -----------------------------------------------------------------------------
-void CPlayer::HandlePhysics()
+CVector2f CPlayer::HandlePhysics()
 {
-    // Add a downward force from gravity
-    ApplyForce(GetMass() * mParentLevel->GetGravityAcceleration());
+    return mSwing->AttenuateGravity(mParentLevel->GetGravityAcceleration());
 }
 
 // =============================================================================
@@ -186,6 +193,12 @@ CTime CPlayer::MoveUntilCollision(CTime elapsedTime, CVector2f acceleration)
     CVector2f totalOffset;
     totalOffset = GetVectorMoved(GetVelocity(), elapsedTime, acceleration);
     float totalDistance = totalOffset.GetMagnitude();
+    
+    // If we don't need to move bail out
+    if (totalDistance == 0)
+    {
+        return elapsedTime;
+    }
     
     // Find how many timesteps we should use to make sure we don't move by
     // more than the shapes smallest "radius"

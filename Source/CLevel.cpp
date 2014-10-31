@@ -115,7 +115,7 @@ std::list<CPhysicsBody *> CLevel::GetObstacles()
 }
 
 // =============================================================================
-// CLevel::GetGravityForce
+// CLevel::GetGravityAcceleration
 // -----------------------------------------------------------------------------
 CVector2f CLevel::GetGravityAcceleration()
 {

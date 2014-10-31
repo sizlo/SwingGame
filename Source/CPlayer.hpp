@@ -15,6 +15,7 @@
 #include "CUpdateable.hpp"
 #include "CRenderable.hpp"
 #include "CPhysicsBody.hpp"
+#include "CSwing.hpp"
 
 // =============================================================================
 // Forward declarations
@@ -38,18 +39,21 @@ public:
     void Cleanup();
     
 private:
-    void HandleInput        ();
-    void HandlePhysics      ();
-    bool HandleCollisions   ();
+    void        HandleInput        ();
+    CVector2f   HandlePhysics      ();
+    bool        HandleCollisions   ();
     
     // Move for the given amount of time with the given acceleration or until
     // we collide
     CTime MoveUntilCollision(CTime elapsedTime, CVector2f acceleration);
     
-    CLevel          *mParentLevel;
+    CLevel *mParentLevel;
     
     // The smallest distance from the centre of the player to it's outer edge
     float mSmallestRadius;
+    
+    // The swing we're currently attached to
+    CSwing *mSwing;
 };
 
 #endif /* defined(__SwingGame__CPlayer__) */

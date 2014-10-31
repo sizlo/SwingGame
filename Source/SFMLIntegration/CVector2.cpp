@@ -61,6 +61,13 @@ template <typename T>
 void CVector2<T>::Normalise()
 {
     T length = GetMagnitude();
+    
+    // Bail out if our length is 0
+    if (length == 0)
+    {
+        return;
+    }
+    
     this->x /= length;
     this->y /= length;
 }
@@ -72,4 +79,16 @@ template <typename T>
 T CVector2<T>::DotProduct(CVector2<T> rhs)
 {
     return (this->x * rhs.x) + (this->y * rhs.y);
+}
+
+// =============================================================================
+// CVector2::GetComponentInDirection
+// -----------------------------------------------------------------------------
+template <typename T>
+CVector2<T> CVector2<T>::GetComponentInDirection(CVector2<T> direction)
+{
+    // Normalise the direction
+    direction.Normalise();
+    
+    return DotProduct(direction) * direction;
 }

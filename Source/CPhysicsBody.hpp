@@ -25,20 +25,17 @@ public:
     float           GetInverseMass();
     float           GetMass();
     CVector2f       GetVelocity();
-    CVector2f       GetForce();
     CConvexShape *  GetShape();
+    CVector2f       GetPosition();
     
-    void        SetInverseMass  (float          theInverseMass);
-    void        SetVelocity     (CVector2f      theVelocity);
-    void        AddVelocity     (CVector2f      theVelocity);
-    void        SetForce        (CVector2f      theForce);
-    void        ApplyForce      (CVector2f      theForce);
-    void        SetShape        (CConvexShape   theShape);
+    void            SetInverseMass  (float          theInverseMass);
+    void            SetVelocity     (CVector2f      theVelocity);
+    void            AddVelocity     (CVector2f      theVelocity);
+    void            SetShape        (CConvexShape   theShape);
 
 private:
     float           mInverseMass;
     CVector2f       mVelocity;
-    CVector2f       mForce;
     CConvexShape    mShape;
 };
 

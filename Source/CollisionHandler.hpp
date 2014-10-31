@@ -48,7 +48,7 @@ namespace CollisionHandler
                  CPhysicsBody *rhs,
                  CVector2f correctionVector,
                  float friction = 0.1f,
-                 float elasticity = 0.9f,
+                 float elasticity = 1.0f,
                  ECollisionResolveOptions theOptions = kCRMoveLeft);
     
     // Seperate the 2 penetrating bodies
