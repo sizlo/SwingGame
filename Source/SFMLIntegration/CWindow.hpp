@@ -74,6 +74,8 @@ public:
     void DrawShape(CConvexShape theShape);
     // Draw a point
     void DrawDebugPoint(CVector2f thePoint, CColour theColour = CColour::Red);
+    // Draw a 1 pixel wide line
+    void DrawLine(CVector2f start, CVector2f end);
 };
 
 #endif /* defined(__SwingGame__CWindow__) */

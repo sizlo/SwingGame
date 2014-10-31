@@ -127,3 +127,12 @@ void CWindow::DrawShape(CConvexShape theShape)
     }
 #endif
 }
+
+// =============================================================================
+// CWindow::DrawLine
+// -----------------------------------------------------------------------------
+void CWindow::DrawLine(CVector2f start, CVector2f end)
+{
+    CVertex theLine[] = {start, end};
+    draw(theLine, 2, sf::Lines);
+}
