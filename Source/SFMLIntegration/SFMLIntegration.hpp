@@ -48,11 +48,7 @@ static void InitSFML(sf::Window *theWindow)
     theWindow->setKeyRepeatEnabled(false);
     
 #if USE_SFML_VSYNC
-    // Set frame rate limit
-    if (GameOptions::doVsync)
-    {
-        theWindow->setFramerateLimit(GameOptions::maxFPS);
-    }
+    theWindow->setVerticalSyncEnabled(GameOptions::doVsync);
 #endif
 }
 
