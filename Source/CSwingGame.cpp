@@ -422,7 +422,7 @@ void CSwingGame::Render()
         theStream << std::endl << "UPS: " << mUPS;
 #endif
         mWindow->DrawTextAt(theStream.str(),
-                            GameOptions::windowWidth - 100,
+                            GameOptions::viewWidth - 100,
                             5,
                             CColour::Red);
     }
