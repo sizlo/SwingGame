@@ -75,7 +75,7 @@ public:
     // Draw a point
     void DrawDebugPoint(CVector2f thePoint, CColour theColour = CColour::Red);
     // Draw a 1 pixel wide line
-    void DrawLine(CVector2f start, CVector2f end);
+    void DrawLine(CVector2f start, CVector2f end, CColour theColour);
 };
 
 #endif /* defined(__SwingGame__CWindow__) */

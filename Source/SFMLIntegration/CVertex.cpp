@@ -19,7 +19,8 @@ CVertex::CVertex() : sf::Vertex()
     
 }
 
-CVertex::CVertex(CVector2f thePosition) : sf::Vertex(thePosition)
+CVertex::CVertex(CVector2f thePosition, CColour theColour)
+:   sf::Vertex(thePosition, theColour)
 {
     
 }

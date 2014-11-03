@@ -96,7 +96,7 @@ CVector2f CSwing::AttenuateGravity(CVector2f gravity)
 // -----------------------------------------------------------------------------
 void CSwing::Draw(CWindow *theWindow)
 {
-    theWindow->DrawLine(mBob->GetPosition(), mOrigin);
+    theWindow->DrawLine(mBob->GetPosition(), mOrigin, CColour::Black);
 }
 
 // =============================================================================

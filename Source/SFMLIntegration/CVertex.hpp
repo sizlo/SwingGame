@@ -14,6 +14,7 @@
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
 #include "CVector2.hpp"
+#include "CColour.hpp"
 
 // =============================================================================
 // Class definition
@@ -22,7 +23,7 @@ class CVertex : public sf::Vertex
 {
 public:
     CVertex();
-    CVertex(CVector2f thePosition);
+    CVertex(CVector2f thePosition, CColour theColour);
     ~CVertex();
 };
 
