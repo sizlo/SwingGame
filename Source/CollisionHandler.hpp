@@ -35,11 +35,18 @@ namespace CollisionHandler
     bool AreColliding(CConvexShape &lhs,
                       CConvexShape &rhs,
                       CVector2f *correctionVector);
+    
     // Check if 2 shapes overlap in an axis
     bool AreOverlapping(CConvexShape &lhs,
                         CConvexShape &rhs,
                         CVector2f axis,
                         CVector2f *correctionVector);
+    
+    // Check if a line intersects a shape
+    bool AreIntersecting(CLine &theLine,
+                         CConvexShape &theShape,
+                         std::list<CVector2f> *intersectionPoints);
+    
     // Project a point onto an axis
     float Project(CVector2f point, CVector2f axis);
     

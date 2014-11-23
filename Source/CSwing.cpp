@@ -11,12 +11,17 @@
 // -----------------------------------------------------------------------------
 #include "CSwing.hpp"
 #include "CSwingGame.hpp"
+#include "CLevel.hpp"
+#include "CollisionHandler.hpp"
 
 // =============================================================================
 // CSwing constructor/destructor
 // -----------------------------------------------------------------------------
-CSwing::CSwing(CPhysicsBody *theBob) :  mBob(theBob),
-                                        mAttached(false)
+CSwing::CSwing(CPhysicsBody *theBob, CLevel *theParentLevel)
+:   mBob(theBob),
+    mParentLevel(theParentLevel),
+    mAttached(false),
+    mMaxLength(500.0f)
 {
     
 }
@@ -140,9 +145,47 @@ float CSwing::GetDistanceToBob()
 // -----------------------------------------------------------------------------
 bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
 {
-    // For now just say the aim point is valid
-    *anchor = theAimPoint;
-    return true;
+    bool theResult = false;
+    
+    // Find the direction from the bob to the aim point
+    CVector2f bobPosition = mBob->GetPosition();
+    CVector2f aimDirection = theAimPoint - bobPosition;
+    aimDirection.Normalise();
+    
+    // Create a line from the bob to the max distance away that a swing could
+    // reach in the aim direction
+    CLine longestPossile = CLine(bobPosition,
+                                 bobPosition + (aimDirection * mMaxLength));
+    
+    // Find the closest intersection of this line and any obstacle lines to the
+    // bob
+    *anchor = longestPossile.GetEnd();
+    float currentDistanceToAnchor = mMaxLength;
+    
+    std::list<CPhysicsBody *> theObstacles = mParentLevel->GetObstacles();
+    FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
+    {
+        std::list<CVector2f> theIntersections;
+        if (CollisionHandler::AreIntersecting(longestPossile,
+                                              *((*it)->GetShape()),
+                                              &theIntersections))
+        {
+            theResult = true;
+            FOR_EACH_IN_LIST(CVector2f, theIntersections)
+            {
+                CVector2f thisIntersection = (*it);
+                CVector2f bobToThis = thisIntersection - bobPosition;
+                float distanceToThis = bobToThis.GetMagnitude();
+                if (distanceToThis < currentDistanceToAnchor)
+                {
+                    *anchor = thisIntersection;
+                    currentDistanceToAnchor = distanceToThis;
+                }
+            }
+        }
+    }
+    
+    return theResult;
 }
 
 // =============================================================================

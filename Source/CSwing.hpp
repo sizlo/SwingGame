@@ -17,12 +17,17 @@
 #include "CRenderable.hpp"
 
 // =============================================================================
+// Forward declarations
+// -----------------------------------------------------------------------------
+class CLevel;
+
+// =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
 class CSwing : public CRenderable, public CUpdateable
 {
 public:
-    CSwing(CPhysicsBody *theBob);
+    CSwing(CPhysicsBody *theBob, CLevel *theParentLevel);
     ~CSwing();
     
     void AttemptToAttach(CVector2f theAimPoint);
@@ -41,7 +46,9 @@ private:
     bool                    mAttached;
     CVector2f               mOrigin;
     float                   mLength;
+    float                   mMaxLength;
     CPhysicsBody            *mBob;
+    CLevel                  *mParentLevel;
 };
 
 

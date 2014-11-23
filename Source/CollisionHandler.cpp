@@ -184,6 +184,44 @@ bool AreOverlapping(CConvexShape &lhs,
 // =============================================================================
 // CollisionHandler::Project
 // -----------------------------------------------------------------------------
+bool AreIntersecting(CLine &theLine,
+                     CConvexShape &theShape,
+                     std::list<CVector2f> *intersectionPoints)
+{
+    bool theResult = false;
+    
+    // Create a bounding box for the line
+    float minX = std::min(theLine.GetStart().x, theLine.GetEnd().x);
+    float minY = std::min(theLine.GetStart().y, theLine.GetEnd().y);
+    float maxX = std::max(theLine.GetStart().x, theLine.GetEnd().x);
+    float maxY = std::max(theLine.GetStart().y, theLine.GetEnd().y);
+    CFloatRect lineBounds = CFloatRect(minX, minY, maxX - minX, maxY - minY);
+    
+    // Check the bounding box first
+    if (!theShape.getGlobalBounds().intersects(lineBounds))
+    {
+        return false;
+    }
+    
+    // Now check each line in the shape
+    std::list<CLine> shapeLines = theShape.GetGlobalLines();
+    FOR_EACH_IN_LIST(CLine, shapeLines)
+    {
+        CLine thisShapeLine = (*it);
+        CVector2f thisIntersectionPoint;
+        if (theLine.Intersects(thisShapeLine, &thisIntersectionPoint))
+        {
+            intersectionPoints->push_back(thisIntersectionPoint);
+            theResult = true;
+        }
+    }
+    
+    return theResult;
+}
+    
+// =============================================================================
+// CollisionHandler::Project
+// -----------------------------------------------------------------------------
 float Project(CVector2f point, CVector2f axis)
 {
     // Project a point onto an axis by performing the dot product between them

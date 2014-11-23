@@ -82,10 +82,20 @@ CVector2f CLine::GetNormal()
 }
 
 // =============================================================================
+// CLine::GetLength
+// -----------------------------------------------------------------------------
+float CLine::GetLength()
+{
+    CVector2f startToEnd = mEnd - mStart;
+    return startToEnd.GetMagnitude();
+}
+
+// =============================================================================
 // CLine::Intersects
 // Does the given line intersect this line
+// Returns the intersection point in a parameter
 // -----------------------------------------------------------------------------
-bool CLine::Intersects(CLine other)
+bool CLine::Intersects(CLine other, CVector2f *intersectionPoint)
 {
     bool theResult = false;
     
@@ -109,20 +119,28 @@ bool CLine::Intersects(CLine other)
         float otherToThisStartY = mStart.y - other.GetStart().y;
         float otherToThisStartX = mStart.x - other.GetStart().x;
         
-        float percentageAlongThisLine =     ((otherDX * otherToThisStartY)
-                                             - (otherDY * otherToThisStartX))
-                                            / denominator;
-        float percentageAlongOtherLine =    ((thisDX * otherToThisStartY)
-                                             - (thisDY * otherToThisStartX))
-                                            / denominator;
+        float percentageAlongThis =     (
+                                            (otherDX * otherToThisStartY)
+                                            - (otherDY * otherToThisStartX)
+                                        )
+                                        / denominator;
+        float percentageAlongOther =    (
+                                            (thisDX * otherToThisStartY)
+                                            - (thisDY * otherToThisStartX)
+                                        )
+                                        / denominator;
         
-        if (percentageAlongThisLine >= 0.0f
-            && percentageAlongThisLine <= 1.0f
-            && percentageAlongOtherLine >= 0.0f
-            && percentageAlongOtherLine <= 1.0f)
+        if (percentageAlongThis >= 0.0f
+            && percentageAlongThis <= 1.0f
+            && percentageAlongOther >= 0.0f
+            && percentageAlongOther <= 1.0f)
         {
             // This point lies on both lines so we have an intersection
             theResult = true;
+            
+            // Populate the intersectinoPoint parameter
+            CVector2f offsetToEnd = mDirection * GetLength();
+            *intersectionPoint = mStart + (percentageAlongThis * offsetToEnd);
         }
     }
     

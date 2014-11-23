@@ -30,8 +30,9 @@ public:
     CVector2f GetMidpoint();
     CVector2f GetDirection();
     CVector2f GetNormal();
+    float     GetLength();
     
-    bool Intersects(CLine other);
+    bool Intersects(CLine other, CVector2f *intersectinoPoint);
     
 private:
     CVector2f mStart;

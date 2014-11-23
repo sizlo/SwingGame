@@ -99,7 +99,7 @@ void CPlayer::Init(SStartPosition theStartPos)
     GetShape()->setPosition(theStartPos.mPosition);
     SetVelocity(CVector2f(0.0f, 0.0f));
     
-    mSwing = new CSwing(this);
+    mSwing = new CSwing(this, mParentLevel);
 }
 
 // =============================================================================
