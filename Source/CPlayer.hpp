@@ -38,6 +38,8 @@ public:
     void Init(SStartPosition theStartPos);
     void Cleanup();
     
+    void MoveFixedDistanceUntilCollision(CVector2f offset);
+    
 private:
     void        HandleInput        ();
     CVector2f   HandlePhysics      ();

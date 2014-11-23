@@ -13,13 +13,13 @@
 // Include files
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration/SFMLIntegration.hpp"
-#include "CPhysicsBody.hpp"
 #include "CRenderable.hpp"
 
 // =============================================================================
 // Forward declarations
 // -----------------------------------------------------------------------------
 class CLevel;
+class CPlayer;
 
 // =============================================================================
 // Class definition
@@ -27,7 +27,7 @@ class CLevel;
 class CSwing : public CRenderable, public CUpdateable
 {
 public:
-    CSwing(CPhysicsBody *theBob, CLevel *theParentLevel);
+    CSwing(CPlayer *theBob, CLevel *theParentLevel);
     ~CSwing();
     
     void AttemptToAttach(CVector2f theAimPoint);
@@ -44,12 +44,14 @@ private:
     float       GetDistanceToBob();
     bool        IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor);
     CVector2f   GetPerpendicularDirection();
+    
+    void        HandleInput(CTime elapsedTime);
     void        HandleCollisions();
     
     bool                    mAttached;
     CVector2f               mOrigin;
     float                   mLength;
-    CPhysicsBody            *mBob;
+    CPlayer                 *mBob;
     CLevel                  *mParentLevel;
 };
 

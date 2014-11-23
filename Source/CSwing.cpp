@@ -18,11 +18,12 @@
 // Static variables
 // -----------------------------------------------------------------------------
 static float sMaxLength = 500.0f;
+static float sClimbSpeed = 100.0f;
 
 // =============================================================================
 // CSwing constructor/destructor
 // -----------------------------------------------------------------------------
-CSwing::CSwing(CPhysicsBody *theBob, CLevel *theParentLevel)
+CSwing::CSwing(CPlayer *theBob, CLevel *theParentLevel)
 :   mBob(theBob),
     mParentLevel(theParentLevel),
     mAttached(false)
@@ -115,6 +116,8 @@ void CSwing::Update(CTime elapsedTime)
 {
     if (mAttached)
     {
+        HandleInput(elapsedTime);
+        
         // Adjust the velocity so it is perpendicular to the swing
         CVector2f v = mBob->GetVelocity();
         CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
@@ -122,8 +125,8 @@ void CSwing::Update(CTime elapsedTime)
         newV *= v.GetMagnitude();
         mBob->SetVelocity(newV);
         
-        // Make sure the bob isn't further away from the origin than the length of
-        // the swing
+        // Make sure the bob isn't further away from the origin than the length
+        // of the swing
         CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
         float distance = bobToOrigin.GetMagnitude();
         if (distance > mLength)
@@ -218,6 +221,34 @@ CVector2f CSwing::GetPerpendicularDirection()
     perpendicularDirection.y = -originToBob.x;
     
     return perpendicularDirection;
+}
+
+// =============================================================================
+// CSwing::HandleInput
+// -----------------------------------------------------------------------------
+void CSwing::HandleInput(CTime elapsedTime)
+{
+    CVector2f climbOffset = CVector2f(0.0f, 0.0f);
+    CVector2f climbDirection = mOrigin - mBob->GetPosition();
+    climbDirection.Normalise();
+    
+    // Climb while w is pressed
+    if (CKeyboard::isKeyPressed(CKeyboard::W))
+    {
+        climbOffset += climbDirection * sClimbSpeed * elapsedTime.asSeconds();
+    }
+    
+    // Descend while s is presses
+    if (CKeyboard::isKeyPressed(CKeyboard::S))
+    {
+        climbOffset -= climbDirection * sClimbSpeed * elapsedTime.asSeconds();
+    }
+    
+    if (climbOffset .GetMagnitude() > 0)
+    {
+        mBob->MoveFixedDistanceUntilCollision(climbOffset);
+        mLength = GetDistanceToBob();
+    }
 }
 
 // =============================================================================

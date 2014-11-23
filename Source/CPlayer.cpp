@@ -243,3 +243,26 @@ CTime CPlayer::MoveUntilCollision(CTime elapsedTime, CVector2f acceleration)
     
     return timeSimulatedSoFar;
 }
+
+// =============================================================================
+// CPlayer::MoveFixedDistanceUntilCollision
+// -----------------------------------------------------------------------------
+void CPlayer::MoveFixedDistanceUntilCollision(CVector2f offset)
+{
+    // Find out how far we want to move
+    CVector2f totalOffset = offset;
+    float totalDistance = totalOffset.GetMagnitude();
+    
+    // Break it down into a number of smaller offsets
+    int numSteps = ceil(totalDistance / mSmallestRadius);
+    CVector2f smallOffset = totalOffset / (numSteps * 1.0f);
+    
+    // Apply these until we collide
+    bool haveCollided = false;
+    for (int i = 0; i < numSteps && !haveCollided; i++)
+    {
+        // Move by the small offset
+        GetShape()->move(smallOffset);
+        haveCollided = HandleCollisions();
+    }
+}
