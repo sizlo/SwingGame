@@ -248,6 +248,7 @@ void CSwing::HandleInput(CTime elapsedTime)
     {
         mBob->MoveFixedDistanceUntilCollision(climbOffset);
         mLength = GetDistanceToBob();
+        mLength = std::min(mLength, sMaxLength);
     }
 }
 
