@@ -15,13 +15,17 @@
 #include "CollisionHandler.hpp"
 
 // =============================================================================
+// Static variables
+// -----------------------------------------------------------------------------
+float sMaxLength = 500.0f;
+
+// =============================================================================
 // CSwing constructor/destructor
 // -----------------------------------------------------------------------------
 CSwing::CSwing(CPhysicsBody *theBob, CLevel *theParentLevel)
 :   mBob(theBob),
     mParentLevel(theParentLevel),
-    mAttached(false),
-    mMaxLength(500.0f)
+    mAttached(false)
 {
     
 }
@@ -128,6 +132,8 @@ void CSwing::Update(CTime elapsedTime)
         bobToOrigin *= moveDistance;
         mBob->GetShape()->move(bobToOrigin);
     }
+    
+    HandleCollisions();
 }
 
 // =============================================================================
@@ -155,12 +161,12 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
     // Create a line from the bob to the max distance away that a swing could
     // reach in the aim direction
     CLine longestPossile = CLine(bobPosition,
-                                 bobPosition + (aimDirection * mMaxLength));
+                                 bobPosition + (aimDirection * sMaxLength));
     
     // Find the closest intersection of this line and any obstacle lines to the
     // bob
     *anchor = longestPossile.GetEnd();
-    float currentDistanceToAnchor = mMaxLength;
+    float currentDistanceToAnchor = sMaxLength;
     
     std::list<CPhysicsBody *> theObstacles = mParentLevel->GetObstacles();
     FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
@@ -201,4 +207,12 @@ CVector2f CSwing::GetPerpendicularDirection()
     perpendicularDirection.y = -originToBob.x;
     
     return perpendicularDirection;
+}
+
+// =============================================================================
+// CSwing::HandleCollisions
+// -----------------------------------------------------------------------------
+void CSwing::HandleCollisions()
+{
+    
 }

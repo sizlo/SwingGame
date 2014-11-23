@@ -42,11 +42,11 @@ private:
     float       GetDistanceToBob();
     bool        IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor);
     CVector2f   GetPerpendicularDirection();
+    void        HandleCollisions();
     
     bool                    mAttached;
     CVector2f               mOrigin;
     float                   mLength;
-    float                   mMaxLength;
     CPhysicsBody            *mBob;
     CLevel                  *mParentLevel;
 };
