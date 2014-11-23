@@ -18,6 +18,11 @@
 #include "CollisionHandler.hpp"
 
 // =============================================================================
+// Static variables
+// -----------------------------------------------------------------------------
+static CVector2f sJumpVelocity = CVector2f(0.0f, -250.0f);
+
+// =============================================================================
 // SUVAT Helper Methods
 // -----------------------------------------------------------------------------
 CVector2f GetVectorMoved(CVector2f u, CTime t, CVector2f a)
@@ -141,6 +146,17 @@ void CPlayer::HandleInput()
     if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Right, &mousePos))
     {
         mSwing->Detach();
+    }
+    
+    // Jump on space
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Space))
+    {
+        // Only jump if we're attached to a swing, and detach it when we do
+        if (mSwing->IsAttached())
+        {
+            mSwing->Detach();
+            SetVelocity(GetVelocity() + sJumpVelocity);
+        }
     }
 }
 

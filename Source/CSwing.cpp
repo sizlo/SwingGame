@@ -17,7 +17,7 @@
 // =============================================================================
 // Static variables
 // -----------------------------------------------------------------------------
-float sMaxLength = 500.0f;
+static float sMaxLength = 500.0f;
 
 // =============================================================================
 // CSwing constructor/destructor
@@ -113,27 +113,38 @@ void CSwing::Draw(CWindow *theWindow)
 // -----------------------------------------------------------------------------
 void CSwing::Update(CTime elapsedTime)
 {
-    // Adjust the velocity so it is perpendicular to the swing
-    CVector2f v = mBob->GetVelocity();
-    CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
-    newV.Normalise();
-    newV *= v.GetMagnitude();
-    mBob->SetVelocity(newV);
-    
-    // Make sure the bob isn't further away from the origin than the length of
-    // the swing
-    CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
-    float distance = bobToOrigin.GetMagnitude();
-    if (distance > mLength)
+    if (mAttached)
     {
-        // Move by the difference between the distance and length
-        float moveDistance = distance - mLength;
-        bobToOrigin.Normalise();
-        bobToOrigin *= moveDistance;
-        mBob->GetShape()->move(bobToOrigin);
+        // Adjust the velocity so it is perpendicular to the swing
+        CVector2f v = mBob->GetVelocity();
+        CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
+        newV.Normalise();
+        newV *= v.GetMagnitude();
+        mBob->SetVelocity(newV);
+        
+        // Make sure the bob isn't further away from the origin than the length of
+        // the swing
+        CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
+        float distance = bobToOrigin.GetMagnitude();
+        if (distance > mLength)
+        {
+            // Move by the difference between the distance and length
+            float moveDistance = distance - mLength;
+            bobToOrigin.Normalise();
+            bobToOrigin *= moveDistance;
+            mBob->GetShape()->move(bobToOrigin);
+        }
+        
+        HandleCollisions();
     }
-    
-    HandleCollisions();
+}
+
+// =============================================================================
+// CSwing::IsAttached
+// -----------------------------------------------------------------------------
+bool CSwing::IsAttached()
+{
+    return mAttached;
 }
 
 // =============================================================================

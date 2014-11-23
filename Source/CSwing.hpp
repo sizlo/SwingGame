@@ -38,6 +38,8 @@ public:
     void Draw(CWindow *theWindow);
     void Update(CTime elapsedTime);
     
+    bool IsAttached();
+    
 private:
     float       GetDistanceToBob();
     bool        IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor);
