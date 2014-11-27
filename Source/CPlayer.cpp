@@ -54,7 +54,7 @@ CPlayer::CPlayer(CLevel *theParentLevel) :  mParentLevel(theParentLevel)
     thePoints.push_back(CVector2f(0.0f,                 2 * mSmallestRadius));
     
     SetShape(CConvexShape(thePoints));
-    GetShape()->setFillColor(CColour::Yellow);
+    GetShape()->setFillColor(CColour(255, 0, 255));
     
     float mass = 1.0f; // Read from file?
     SetInverseMass(1.0f / mass);

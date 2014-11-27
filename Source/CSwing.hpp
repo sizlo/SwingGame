@@ -47,9 +47,11 @@ private:
     
     void        HandleInput(CTime elapsedTime);
     void        HandleCollisions();
+    void        RespondToCollisionAt(float distanceFromOrigin);
     
     bool                    mAttached;
     CVector2f               mOrigin;
+    CVector2f               mOriginDrawPoint;
     float                   mLength;
     CPlayer                 *mBob;
     CLevel                  *mParentLevel;

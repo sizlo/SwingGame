@@ -19,6 +19,9 @@
 // -----------------------------------------------------------------------------
 static float sMaxLength = 500.0f;
 static float sClimbSpeed = 100.0f;
+static float sCollisionIgnoreDistance = 0.0f;
+static float sAnchorGap = 5.0f;
+static float sReflectionScaleFactor = -1.0f;
 
 // =============================================================================
 // CSwing constructor/destructor
@@ -59,6 +62,11 @@ void CSwing::AttemptToAttach(CVector2f theAimPoint)
         
         mOrigin = anchorPoint;
         mLength = GetDistanceToBob();
+        
+        // Find where we should draw the origin
+        CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
+        bobToOrigin.Normalise();
+        mOriginDrawPoint = mOrigin + (bobToOrigin * sAnchorGap);
         
         // Throw away any velocity that isn't perpendicular to the swing
         CVector2f v = mBob->GetVelocity();
@@ -106,7 +114,17 @@ CVector2f CSwing::AttenuateGravity(CVector2f gravity)
 // -----------------------------------------------------------------------------
 void CSwing::Draw(CWindow *theWindow)
 {
+    // The line
     theWindow->DrawLine(CLine(mOrigin, mBob->GetPosition()), CColour::Black);
+    
+    // The anchor
+    sf::CircleShape theOrigin(sAnchorGap);
+    theOrigin.setOrigin(CVector2f(sAnchorGap, sAnchorGap));
+    theOrigin.setPosition(mOrigin);
+    theOrigin.setOutlineColor(CColour::Black);
+    theOrigin.setOutlineThickness(1.0f);
+    theOrigin.setFillColor(CColour::Transparent);
+    theWindow->draw(theOrigin);
 }
 
 // =============================================================================
@@ -196,10 +214,13 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
                 CVector2f thisIntersection = (*it);
                 CVector2f bobToThis = thisIntersection - bobPosition;
                 float distanceToThis = bobToThis.GetMagnitude();
-                if (distanceToThis < currentDistanceToAnchor)
+                if (distanceToThis < currentDistanceToAnchor
+                    && distanceToThis > sAnchorGap)
                 {
-                    *anchor = thisIntersection;
-                    currentDistanceToAnchor = distanceToThis;
+                    float distanceToUse = distanceToThis - sAnchorGap;
+                    bobToThis.Normalise();
+                    *anchor = bobPosition + (bobToThis * distanceToUse);
+                    currentDistanceToAnchor = distanceToUse;
                 }
             }
         }
@@ -257,5 +278,54 @@ void CSwing::HandleInput(CTime elapsedTime)
 // -----------------------------------------------------------------------------
 void CSwing::HandleCollisions()
 {
+    // Keep track of the closest intersection to the origin we care about
+    bool validIntersectionFound = false;
+    float distanceToIntersection = sMaxLength;
     
+    // Check for collisions with all obstacles in the level
+    CLine theLine = CLine(mOrigin, mBob->GetPosition());
+    std::list<CPhysicsBody *> theObstacles = mParentLevel->GetObstacles();
+    FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
+    {
+        CPhysicsBody *theObs = (*it);
+        CConvexShape theShape = *(theObs->GetShape());
+        
+        std::list<CVector2f> theIntPoints;
+        if (CollisionHandler::AreIntersecting(theLine, theShape, &theIntPoints))
+        {
+            FOR_EACH_IN_LIST(CVector2f, theIntPoints)
+            {
+                CVector2f thisIntersection = (*it);
+                CVector2f originToInt = thisIntersection - mOrigin;
+                float distanceToThisIntersection = originToInt.GetMagnitude();
+                
+                if (distanceToThisIntersection > sCollisionIgnoreDistance)
+                {
+                    validIntersectionFound = true;
+                    
+                    // Only record this if its closer to the origin
+                    if (distanceToThisIntersection < distanceToIntersection)
+                    {
+                        distanceToIntersection = distanceToThisIntersection;
+                    }
+                }
+            }
+        }
+    }
+    
+    // If we found a collision we care about then handle it
+    if (validIntersectionFound)
+    {
+        RespondToCollisionAt(distanceToIntersection);
+    }
+}
+
+// =============================================================================
+// CSwing::RespondToCollisionAt
+// -----------------------------------------------------------------------------
+void CSwing::RespondToCollisionAt(float distanceFromOrigin)
+{
+    // For this rigid swing we'll just reflect the players velocity
+    // Apply a scaling factor as well so we can dampen it
+    mBob->SetVelocity(mBob->GetVelocity() * sReflectionScaleFactor);
 }
