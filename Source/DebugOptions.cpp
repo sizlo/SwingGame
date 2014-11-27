@@ -23,6 +23,7 @@ bool drawBounds         = false;
 bool drawOrigins        = false;
 bool drawShapePoints    = false;
 bool drawShapeNormals   = false;
+bool useSlowMotion      = false;
 
 } // namespace DebugOptions
 
@@ -52,5 +53,6 @@ void CDebugHelper::Update(CTime elapsedTime)
         TOGGLE_DEBUG_OPTION(O, DebugOptions::drawOrigins);
         TOGGLE_DEBUG_OPTION(P, DebugOptions::drawShapePoints);
         TOGGLE_DEBUG_OPTION(N, DebugOptions::drawShapeNormals);
+        TOGGLE_DEBUG_OPTION(S, DebugOptions::useSlowMotion);
     }
 }

@@ -34,6 +34,7 @@ namespace DebugOptions
     extern bool drawOrigins;
     extern bool drawShapePoints;
     extern bool drawShapeNormals;
+    extern bool useSlowMotion;
 };
 
 // =============================================================================

@@ -356,6 +356,13 @@ void CSwingGame::Update(CTime elapsedTime)
     }
 #endif
     
+#if SG_DEBUG
+    if (DebugOptions::useSlowMotion)
+    {
+        elapsedTime /= 2.0f;
+    }
+#endif
+    
     // Iterate through the registered updateables, updating each in turn
     FOR_EACH_IN_LIST(CUpdateable *, smTheUpdateables)
     {
