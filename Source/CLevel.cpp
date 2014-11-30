@@ -12,6 +12,7 @@
 #include "CLevel.hpp"
 #include "CSwingGame.hpp"
 #include "XMLInterpreter.hpp"
+#include "SystemUtilities.hpp"
 
 // =============================================================================
 // CLevel constructor/destructor
@@ -128,7 +129,18 @@ CVector2f CLevel::GetGravityAcceleration()
 // -----------------------------------------------------------------------------
 void CLevel::Update(CTime elapsedTime)
 {
-
+    // Pause game on esc
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
+    {
+        if (!CSwingGame::HasAllGameStates(kGameStatePaused))
+        {
+            CSwingGame::SetGameState(kGameStatePaused);
+        }
+        else
+        {
+            CSwingGame::UnsetGameState(kGameStatePaused);
+        }
+    }
 }
 
 // =============================================================================
