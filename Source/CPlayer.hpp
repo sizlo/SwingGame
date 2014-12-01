@@ -33,6 +33,7 @@ public:
     ~CPlayer();
     
     void Update(CTime elapsedTime);
+    bool ShouldUpdateForState(EGameState theState);
     void Draw(CWindow *theWindow);
     
     void Init(SStartPosition theStartPos);
@@ -54,8 +55,14 @@ private:
     // The smallest distance from the centre of the player to it's outer edge
     float mSmallestRadius;
     
+    // The different swing types
+    CSwing *mSwings[kSwingTypeMax];
+
+    // The swing type we'll fire next
+    ESwingTypes mSwingToFire;
+    
     // The swing we're currently attached to
-    CSwing *mSwing;
+    CSwing *mCurrentSwing;
 };
 
 #endif /* defined(__SwingGame__CPlayer__) */

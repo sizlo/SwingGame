@@ -26,6 +26,8 @@
 		2267171A19F295C700BF72D6 /* CConvexShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171819F295C700BF72D6 /* CConvexShape.cpp */; };
 		2267171D19F2960E00BF72D6 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171B19F2960E00BF72D6 /* CTexture.cpp */; };
 		229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */; };
+		22BBDBEE1A2B46B500775A51 /* CFlexibleSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */; };
+		22BBDBF11A2BBC6600775A51 /* CDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */; };
 		22E8815C19F297590053D142 /* CImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E8815A19F297590053D142 /* CImage.cpp */; };
 		22E8815F19F2979C0053D142 /* CMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E8815D19F2979C0053D142 /* CMusic.cpp */; };
 		22E8816A19F299D10053D142 /* CFloatRect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22E8816819F299D10053D142 /* CFloatRect.cpp */; };
@@ -94,6 +96,10 @@
 		229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CMenu.hpp; sourceTree = "<group>"; };
 		229FAC0919DDCBCD001CEFA6 /* CTextFrontEnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTextFrontEnd.cpp; sourceTree = "<group>"; };
 		229FAC0A19DDCBCD001CEFA6 /* CTextFrontEnd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTextFrontEnd.hpp; sourceTree = "<group>"; };
+		22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFlexibleSwing.cpp; sourceTree = "<group>"; };
+		22BBDBED1A2B46B500775A51 /* CFlexibleSwing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CFlexibleSwing.hpp; sourceTree = "<group>"; };
+		22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CDrawable.cpp; sourceTree = "<group>"; };
+		22BBDBF01A2BBC6600775A51 /* CDrawable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CDrawable.hpp; sourceTree = "<group>"; };
 		22C3F3EE19D313880043264D /* SwingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E8815A19F297590053D142 /* CImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CImage.cpp; sourceTree = "<group>"; };
 		22E8815B19F297590053D142 /* CImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CImage.hpp; sourceTree = "<group>"; };
@@ -187,6 +193,8 @@
 				2266696D1A02C94F00BB750D /* CPhysicsBody.hpp */,
 				2266696F1A03A92F00BB750D /* CSwing.cpp */,
 				226669701A03A92F00BB750D /* CSwing.hpp */,
+				22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */,
+				22BBDBED1A2B46B500775A51 /* CFlexibleSwing.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -228,6 +236,8 @@
 				2266696A1A01097D00BB750D /* CView.hpp */,
 				226669721A03B34200BB750D /* CVertex.cpp */,
 				226669731A03B34200BB750D /* CVertex.hpp */,
+				22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */,
+				22BBDBF01A2BBC6600775A51 /* CDrawable.hpp */,
 			);
 			path = SFMLIntegration;
 			sourceTree = "<group>";
@@ -387,8 +397,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BBDBEE1A2B46B500775A51 /* CFlexibleSwing.cpp in Sources */,
 				22FC77E319E04B22000A507F /* CLevel.cpp in Sources */,
 				229FAC0B19DDCBCD001CEFA6 /* CTextFrontEnd.cpp in Sources */,
+				22BBDBF11A2BBC6600775A51 /* CDrawable.cpp in Sources */,
 				2267170219F291B100BF72D6 /* CColour.cpp in Sources */,
 				2247444719D5F6C80017EE1F /* Main.cpp in Sources */,
 				22F8593919E946E000A1002C /* XMLInterpreter.cpp in Sources */,

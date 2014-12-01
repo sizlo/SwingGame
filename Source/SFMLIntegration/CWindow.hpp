@@ -18,40 +18,6 @@
 #include "CConvexShape.hpp"
 #include "CVector2.hpp"
 #include "CFont.hpp"
-#include "../DebugOptions.hpp"
-
-// =============================================================================
-// Macros
-// -----------------------------------------------------------------------------
-#if SG_DEBUG
-
-// Draw the origin of a transformable it is requested
-#define DRAW_ORIGIN(transformable)                                          \
-    if (DebugOptions::drawOrigins)                                          \
-    {                                                                       \
-        CVector2f theOrigin = transformable.getPosition();                  \
-        DrawDebugPoint(theOrigin, CColour::Green);                          \
-    }
-
-// Draw the bounds of a transformable if it is requested
-#define DRAW_BOUNDS(transformable)                                          \
-    if (DebugOptions::drawBounds)                                           \
-    {                                                                       \
-        sf::FloatRect theGlobalBounds = transformable.getGlobalBounds();    \
-        sf::RectangleShape theGlobalBoundsShape(                            \
-                CVector2f(theGlobalBounds.width,theGlobalBounds.height));   \
-        theGlobalBoundsShape.setPosition(theGlobalBounds.left,              \
-                                         theGlobalBounds.top);              \
-        theGlobalBoundsShape.setOutlineColor(CColour::Red);                 \
-        theGlobalBoundsShape.setOutlineThickness(1.0f);                     \
-        theGlobalBoundsShape.setFillColor(CColour::Transparent);            \
-        draw(theGlobalBoundsShape);                                         \
-    }                                                                       \
-
-#else
-    #define DRAW_ORIGIN(transformable)
-    #define DRAW_BOUNDS(transformable)
-#endif
 
 // =============================================================================
 // Class definition

@@ -235,6 +235,18 @@ void CSwingGame::UnregisterRenderable(CRenderable *theRenderable)
 }
 
 // =============================================================================
+// CSwingGame::GetDebugHelper
+// -----------------------------------------------------------------------------
+CDebugHelper * CSwingGame::GetDebugHelper()
+{
+#if SG_DEBUG
+    return theDebugHelper;
+#else
+    return NULL;
+#endif
+}
+
+// =============================================================================
 // CSwingGame::GoToLocation
 // Go to a game location (level/menu)
 // -----------------------------------------------------------------------------
@@ -359,7 +371,7 @@ void CSwingGame::Update(CTime elapsedTime)
 #if SG_DEBUG
     if (DebugOptions::useSlowMotion)
     {
-        elapsedTime /= 2.0f;
+        elapsedTime /= 10.0f;
     }
 #endif
     
@@ -433,6 +445,8 @@ void CSwingGame::Render()
                             5,
                             CColour::Red);
     }
+    
+    theDebugHelper->Draw(mWindow);
 #endif
     
     // Display the new window contents

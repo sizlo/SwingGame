@@ -56,3 +56,51 @@ void CDebugHelper::Update(CTime elapsedTime)
         TOGGLE_DEBUG_OPTION(S, DebugOptions::useSlowMotion);
     }
 }
+
+// =============================================================================
+// CDebugHelper::Draw
+// -----------------------------------------------------------------------------
+void CDebugHelper::Draw(CWindow *theWindow)
+{
+    FOR_EACH_IN_LIST(CConvexShape*, mShapes)
+    {
+        theWindow->draw(*(*it));
+    }
+    
+    FOR_EACH_IN_LIST(CLine, mLines)
+    {
+        theWindow->DrawLine((*it), CColour::Red);
+    }
+}
+
+// =============================================================================
+// CDebugHelper::AddShape
+// -----------------------------------------------------------------------------
+void CDebugHelper::AddShape(CConvexShape *theShape)
+{
+    mShapes.push_back(theShape);
+}
+
+// =============================================================================
+// CDebugHelper::RemoveShape
+// -----------------------------------------------------------------------------
+void CDebugHelper::RemoveShape(CConvexShape *theShape)
+{
+    mShapes.remove(theShape);
+}
+
+// =============================================================================
+// CDebugHelper::AddLine
+// -----------------------------------------------------------------------------
+void CDebugHelper::AddLine(CLine theLine)
+{
+    mLines.push_back(theLine);
+}
+
+// =============================================================================
+// CDebugHelper::RemoveLine
+// -----------------------------------------------------------------------------
+void CDebugHelper::RemoveLine(CLine theLine)
+{
+    mLines.remove(theLine);
+}

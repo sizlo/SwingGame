@@ -14,12 +14,23 @@
 // -----------------------------------------------------------------------------
 #include "SFMLIntegration/SFMLIntegration.hpp"
 #include "CRenderable.hpp"
+#include "CUpdateable.hpp"
 
 // =============================================================================
 // Forward declarations
 // -----------------------------------------------------------------------------
 class CLevel;
 class CPlayer;
+
+// =============================================================================
+// Enums
+// -----------------------------------------------------------------------------
+enum ESwingTypes
+{
+    kSwingTypeRigid,
+    kSwingTypeFlexible,
+    kSwingTypeMax
+};
 
 // =============================================================================
 // Class definition
@@ -30,31 +41,47 @@ public:
     CSwing(CPlayer *theBob, CLevel *theParentLevel);
     ~CSwing();
     
-    void AttemptToAttach(CVector2f theAimPoint);
-    void Detach();
+    virtual void AttemptToAttach(CVector2f theAimPoint);
+    virtual void Detach();
     
-    CVector2f AttenuateGravity(CVector2f gravity);
+    virtual CVector2f AttenuateGravity(CVector2f gravity);
     
-    void Draw(CWindow *theWindow);
-    void Update(CTime elapsedTime);
+    virtual void Draw(CWindow *theWindow);
+    virtual void Update(CTime elapsedTime);
+    virtual bool ShouldUpdateForState(EGameState theState);
     
-    bool IsAttached();
+    virtual bool IsAttached();
     
-private:
-    float       GetDistanceToBob();
-    bool        IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor);
-    CVector2f   GetPerpendicularDirection();
+protected:
+    virtual float       GetDistanceToBob();
+    virtual bool        IsThereAValidAnchor(CVector2f theAimPoint,
+                                            CVector2f *anchor);
+    virtual CVector2f   GetPerpendicularDirection();
     
-    void        HandleInput(CTime elapsedTime);
-    void        HandleCollisions();
-    void        RespondToCollisionAt(float distanceFromOrigin);
+    virtual void        HandleInput(CTime elapsedTime);
+    virtual void        HandleCollisions();
     
-    bool                    mAttached;
-    CVector2f               mOrigin;
-    CVector2f               mOriginDrawPoint;
-    float                   mLength;
-    CPlayer                 *mBob;
-    CLevel                  *mParentLevel;
+    virtual void        DrawAnchorPoint(CWindow *theWindow,
+                                        CVector2f theAnchor);
+    virtual void        DrawSwingSection(CWindow *theWindow,
+                                 CVector2f start,
+                                 CVector2f end);
+    
+    virtual void        RespondToCollisionAt(CVector2f intersectionPoint);
+    virtual void        AdjustDirectionToGoThrough(CVector2f targetPoint);
+    
+    bool                mAttached;
+    CVector2f           mOrigin;
+    CVector2f           mOriginDrawPoint;
+    float               mLength;
+    CPlayer             *mBob;
+    CLevel              *mParentLevel;
+    
+    static float        smMaxLength;
+    static float        smClimbSpeed;
+    static float        smCollisionIgnoreDistance;
+    static float        smAnchorGap;
+    static float        smReflectionScaleFactor;
 };
 
 

@@ -1,31 +1,26 @@
 //
-//  CTime.hpp
-//  ParticleSystem
+//  CDrawable.h
+//  SwingGame
 //
-//  Created by Tim Brier on 18/10/2014.
+//  Created by Tim Brier on 30/11/2014.
 //  Copyright (c) 2014 tbrier. All rights reserved.
 //
 
-#ifndef __ParticleSystem__CTime__
-#define __ParticleSystem__CTime__
+#ifndef __SwingGame__CDrawable__
+#define __SwingGame__CDrawable__
 
 // =============================================================================
 // Include files
 // -----------------------------------------------------------------------------
-#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
-class CTime : public sf::Time
+class CDrawable : public sf::Drawable
 {
-public:
-    CTime();
-    CTime(sf::Time other);
-    ~CTime();
-    
-    // Create a CTime with the given seconds
-    static CTime Seconds(float amount);
+    CDrawable();
+    ~CDrawable();
 };
 
-#endif /* defined(__ParticleSystem__CTime__) */
+#endif /* defined(__SwingGame__CDrawable__) */

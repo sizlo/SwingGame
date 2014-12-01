@@ -80,3 +80,8 @@ void CPhysicsBody::SetShape(CConvexShape theShape)
 {
     mShape = theShape;
 }
+
+void CPhysicsBody::SetPosition(CVector2f thePosition)
+{
+    mShape.setPosition(thePosition);
+}

@@ -186,7 +186,8 @@ bool AreOverlapping(CConvexShape &lhs,
 // -----------------------------------------------------------------------------
 bool AreIntersecting(CLine &theLine,
                      CConvexShape &theShape,
-                     std::list<CVector2f> *intersectionPoints)
+                     std::list<CVector2f> *intersectionPoints,
+                     bool returnCorners /* = true */)
 {
     bool theResult = false;
     
@@ -211,8 +212,75 @@ bool AreIntersecting(CLine &theLine,
         CVector2f thisIntersectionPoint;
         if (theLine.Intersects(thisShapeLine, &thisIntersectionPoint))
         {
+            if (returnCorners)
+            {
+                // Find the closest corner of the shape to this point, as a line
+                // will only ever collide at corners in the real world
+                CVector2f closestPoint = theShape.GetGlobalPoint(0);
+                CVector2f intToClosest = closestPoint - thisIntersectionPoint;
+                float distanceToClosest = intToClosest.GetMagnitude();
+                
+                int numPoints = theShape.getPointCount();
+                for (int i = 1; i < numPoints; i++)
+                {
+                    CVector2f thisPoint = theShape.GetGlobalPoint(i);
+                    CVector2f intToThis = thisPoint - thisIntersectionPoint;
+                    float distanceToThis = intToThis.GetMagnitude();
+                    if (distanceToThis < distanceToClosest)
+                    {
+                        closestPoint = thisPoint;
+                        intToClosest = intToThis;
+                        distanceToClosest = distanceToThis;
+                    }
+                }
+                
+                thisIntersectionPoint = closestPoint;
+            }
+            
             intersectionPoints->push_back(thisIntersectionPoint);
             theResult = true;
+        }
+    }
+    
+    // Remove duplicates from the intersection points list
+    intersectionPoints->unique();
+    
+    // If we're returning corners then move the intersection points out of the
+    // shape
+    if (returnCorners)
+    {
+        std::list<CVector2f> unalteredIntersectionPoints = *intersectionPoints;
+        intersectionPoints->clear();
+        
+        FOR_EACH_IN_LIST(CVector2f, unalteredIntersectionPoints)
+        {
+            CVector2f thisIntersection = (*it);
+            
+            std::list<CLine> linesWithThisPoint;
+            FOR_EACH_IN_LIST(CLine, shapeLines)
+            {
+                CLine thisLine = (*it);
+                if (thisLine.GetEnd() == thisIntersection
+                    || thisLine.GetStart() == thisIntersection)
+                {
+                    linesWithThisPoint.push_back(thisLine);
+                }
+            }
+            
+            // Average the normals of all points on this line
+            CVector2f normalAverage = CVector2f(0.0f, 0.0f);
+            FOR_EACH_IN_LIST(CLine, linesWithThisPoint)
+            {
+                normalAverage += (*it).GetNormal();
+            }
+            normalAverage /= (float)linesWithThisPoint.size();
+            normalAverage.Normalise();
+            
+            // Move the intersection point by 1 unit in the average normal
+            // direction
+            thisIntersection += normalAverage * 1.0f;
+            
+            intersectionPoints->push_back(thisIntersection);
         }
     }
     

@@ -45,7 +45,8 @@ namespace CollisionHandler
     // Check if a line intersects a shape
     bool AreIntersecting(CLine &theLine,
                          CConvexShape &theShape,
-                         std::list<CVector2f> *intersectionPoints);
+                         std::list<CVector2f> *intersectionPoints,
+                         bool returnCorners = true);
     
     // Project a point onto an axis
     float Project(CVector2f point, CVector2f axis);

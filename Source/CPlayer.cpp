@@ -16,6 +16,7 @@
 #include "CLevel.hpp"
 #include "CLine.hpp"
 #include "CollisionHandler.hpp"
+#include "CFlexibleSwing.hpp"
 
 // =============================================================================
 // Static variables
@@ -85,6 +86,20 @@ void CPlayer::Update(CTime elapsedTime)
 }
 
 // =============================================================================
+// CPlayer::ShouldUpdateForState
+// -----------------------------------------------------------------------------
+bool CPlayer::ShouldUpdateForState(EGameState theState)
+{
+    // Only update if we're not paused
+    if ((theState & kGameStatePaused) != 0)
+    {
+        return false;
+    }
+    
+    return CUpdateable::ShouldUpdateForState(theState);
+}
+
+// =============================================================================
 // CPlayer::Draw
 // -----------------------------------------------------------------------------
 void CPlayer::Draw(CWindow *theWindow)
@@ -104,7 +119,10 @@ void CPlayer::Init(SStartPosition theStartPos)
     GetShape()->setPosition(theStartPos.mPosition);
     SetVelocity(CVector2f(0.0f, 0.0f));
     
-    mSwing = new CSwing(this, mParentLevel);
+    mSwings[kSwingTypeRigid] = new CSwing(this, mParentLevel);
+    mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
+    mSwingToFire = kSwingTypeFlexible;
+    mCurrentSwing = mSwings[mSwingToFire];
 }
 
 // =============================================================================
@@ -112,7 +130,8 @@ void CPlayer::Init(SStartPosition theStartPos)
 // -----------------------------------------------------------------------------
 void CPlayer::Cleanup()
 {
-    SAFE_DELETE(mSwing);
+    SAFE_DELETE(mSwings[kSwingTypeRigid]);
+    SAFE_DELETE(mSwings[kSwingTypeFlexible]);
     
     // Unregister update/renderables
     CSwingGame::UnregisterUpdateable(this);
@@ -139,22 +158,27 @@ void CPlayer::HandleInput()
     CVector2f mousePos;
     if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Left, &mousePos))
     {
-        mSwing->AttemptToAttach(mousePos);
+        // Detach the current swing before we try to fire the next
+        mCurrentSwing->Detach();
+        
+        // Update the current swing type and try to attach it
+        mCurrentSwing = mSwings[mSwingToFire];
+        mCurrentSwing->AttemptToAttach(mousePos);
     }
     
     // Disconnect on right click
     if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Right, &mousePos))
     {
-        mSwing->Detach();
+        mCurrentSwing->Detach();
     }
     
     // Jump on space
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Space))
     {
         // Only jump if we're attached to a swing, and detach it when we do
-        if (mSwing->IsAttached())
+        if (mCurrentSwing->IsAttached())
         {
-            mSwing->Detach();
+            mCurrentSwing->Detach();
             SetVelocity(GetVelocity() + sJumpVelocity);
         }
     }
@@ -166,7 +190,11 @@ void CPlayer::HandleInput()
 // -----------------------------------------------------------------------------
 CVector2f CPlayer::HandlePhysics()
 {
-    return mSwing->AttenuateGravity(mParentLevel->GetGravityAcceleration());
+    CVector2f acceleration = mParentLevel->GetGravityAcceleration();
+    
+    acceleration = mCurrentSwing->AttenuateGravity(acceleration);
+    
+    return acceleration;
 }
 
 // =============================================================================

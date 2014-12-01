@@ -21,6 +21,11 @@
 #include <list>
 
 // =============================================================================
+// Forward Declarations
+// -----------------------------------------------------------------------------
+class CDebugHelper;
+
+// =============================================================================
 // Class Definition
 // -----------------------------------------------------------------------------
 class CSwingGame
@@ -54,6 +59,7 @@ public:
     // Go to a game location
     static void GoToLocation(EGameLocation theLocation);
     
+    static CDebugHelper * GetDebugHelper();
 private:
     // Process all events recieved this cylce
     void ProcessEvents();

@@ -32,6 +32,7 @@ public:
     void            SetVelocity     (CVector2f      theVelocity);
     void            AddVelocity     (CVector2f      theVelocity);
     void            SetShape        (CConvexShape   theShape);
+    void            SetPosition     (CVector2f      thePosition);
 
 private:
     float           mInverseMass;

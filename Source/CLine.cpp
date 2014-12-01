@@ -146,3 +146,11 @@ bool CLine::Intersects(CLine other, CVector2f *intersectionPoint)
     
     return theResult;
 }
+
+// =============================================================================
+// Operators
+// -----------------------------------------------------------------------------
+bool operator == (CLine lhs, CLine rhs)
+{
+    return lhs.GetStart() == rhs.GetStart() && lhs.GetEnd() == rhs.GetEnd();
+}
