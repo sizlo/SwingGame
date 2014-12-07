@@ -142,7 +142,6 @@ void CFlexibleSwing::HandleInput(CTime elapsedTime)
 // -----------------------------------------------------------------------------
 void CFlexibleSwing::RespondToCollisionAt(CVector2f intersectionPoint)
 {
-    // Move it away by the anchor gap in the perpendicular direction
     CVector2f newOrigin = intersectionPoint;
     
     // Calculate the new active length
