@@ -16,6 +16,7 @@
 #include "CRenderable.hpp"
 #include "CUpdateable.hpp"
 #include "CPlayer.hpp"
+#include "CollisionHandler.hpp"
 #include <list>
 
 // =============================================================================
@@ -56,6 +57,8 @@ public:
     void Draw(CWindow *theWindow);
     
 private:
+    bool HasPlayerReachedGoal();
+    
     std::string                 mName;
     
     // Start and goal

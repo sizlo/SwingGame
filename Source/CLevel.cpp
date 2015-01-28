@@ -141,6 +141,12 @@ void CLevel::Update(CTime elapsedTime)
             CSwingGame::UnsetGameState(kGameStatePaused);
         }
     }
+    
+    // Check for completion
+    if (HasPlayerReachedGoal())
+    {
+        DEBUG_LOG("GOAL!");
+    }
 }
 
 // =============================================================================
@@ -162,7 +168,24 @@ void CLevel::Draw(CWindow *theWindow)
     }
 }
 
-
+// =============================================================================
+// CLevel::HasPlayerReachedGoal
+// -----------------------------------------------------------------------------
+bool CLevel::HasPlayerReachedGoal()
+{
+    bool result = false;
+    
+    CVector2f cv;
+    if (CollisionHandler::AreColliding(*(mPlayer->GetShape()),
+                                       *(mGoal.GetShape()),
+                                       &cv,
+                                       kCDLhsInside))
+    {
+        result = true;
+    }
+    
+    return result;
+}
 
 
 
