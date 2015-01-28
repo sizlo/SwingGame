@@ -26,7 +26,8 @@ float CSpringSwing::smLaunchMultiplier = 500.0f;
 CSpringSwing::CSpringSwing(CPlayer *theBob, CLevel *theParentLevel)
 :   CSwing(theBob, theParentLevel)
 {
-    
+    // Make it purpley
+    mColour = CColour(135, 38, 87);
 }
 
 CSpringSwing::~CSpringSwing()

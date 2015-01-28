@@ -105,6 +105,8 @@ bool CPlayer::ShouldUpdateForState(EGameState theState)
 // -----------------------------------------------------------------------------
 void CPlayer::Draw(CWindow *theWindow)
 {
+    // Colour the player by the colour of the swing we will fire
+    GetShape()->setFillColor(mSwings[mSwingToFire]->GetColour());
     theWindow->DrawShape(*GetShape());
 }
 

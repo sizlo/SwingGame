@@ -29,7 +29,8 @@ float CSwing::smReflectionScaleFactor = -1.0f;
 CSwing::CSwing(CPlayer *theBob, CLevel *theParentLevel)
 :   mBob(theBob),
     mParentLevel(theParentLevel),
-    mAttached(false)
+    mAttached(false),
+    mColour(CColour::Black)
 {
     
 }
@@ -172,6 +173,14 @@ bool CSwing::ShouldUpdateForState(EGameState theState)
 bool CSwing::IsAttached()
 {
     return mAttached;
+}
+
+// =============================================================================
+// CSwing::GetColour
+// -----------------------------------------------------------------------------
+CColour CSwing::GetColour()
+{
+    return mColour;
 }
 
 // =============================================================================
@@ -351,7 +360,7 @@ void CSwing::DrawSwingSection(CWindow *theWindow,
                               CVector2f start,
                               CVector2f end)
 {
-    theWindow->DrawLine(CLine(start, end), CColour(139, 119, 101));
+    theWindow->DrawLine(CLine(start, end), mColour);
 }
 
 // =============================================================================

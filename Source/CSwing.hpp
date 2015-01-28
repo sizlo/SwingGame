@@ -52,6 +52,7 @@ public:
     virtual bool ShouldUpdateForState(EGameState theState);
     
     virtual bool IsAttached();
+    virtual CColour GetColour();
     
 protected:
     virtual float       GetDistanceToBob();
@@ -79,6 +80,7 @@ protected:
     float               mLength;
     CPlayer             *mBob;
     CLevel              *mParentLevel;
+    CColour             mColour;
     
     static float        smMaxLength;
     static float        smClimbSpeed;

@@ -20,7 +20,8 @@
 CFlexibleSwing::CFlexibleSwing(CPlayer *theBob, CLevel *theParentLevel)
 :   CSwing(theBob, theParentLevel)
 {
-    
+    // Make it brown
+    mColour = CColour(139, 119, 101);
 }
 
 CFlexibleSwing::~CFlexibleSwing()
