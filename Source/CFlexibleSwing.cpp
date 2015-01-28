@@ -33,20 +33,11 @@ CFlexibleSwing::~CFlexibleSwing()
 // -----------------------------------------------------------------------------
 void CFlexibleSwing::AttemptToAttach(CVector2f theAimPoint)
 {
+    // Make sure we clear the list of previous origins
+    mPreviousOrigins.clear();
+    
     // Call the parent method
     CSwing::AttemptToAttach(theAimPoint);
-}
-
-// =============================================================================
-// CFlexibleSwing::Detach
-// -----------------------------------------------------------------------------
-void CFlexibleSwing::Detach()
-{
-    // Call the parent method
-    CSwing::Detach();
-    
-    // Clear the list of previous origins
-    mPreviousOrigins.clear();
 }
 
 // =============================================================================

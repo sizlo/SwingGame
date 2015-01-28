@@ -24,7 +24,6 @@ public:
     ~CFlexibleSwing();
     
     virtual void AttemptToAttach(CVector2f theAimPoint);
-    virtual void Detach();
     
     virtual void Draw   (CWindow *theWindow);
     virtual void Update (CTime elapsedTime);
