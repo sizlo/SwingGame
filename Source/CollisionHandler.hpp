@@ -26,6 +26,13 @@ enum ECollisionResolveOptions
     kCRMoveBoth         = 1 << 2
 };
 
+enum ECollisionDetectionType
+{
+    kCDOverlapping,     // Do the shapes overlap at all
+    kCDLhsInside,       // Is the lhs shape completely inside the rhs shape
+    kCDRhsInside        // Is the rhs shape completely inside the lhs shape
+};
+
 // =============================================================================
 // Namespace definition
 // -----------------------------------------------------------------------------
@@ -34,13 +41,15 @@ namespace CollisionHandler
     // Check for collisions between 2 convex shapes
     bool AreColliding(CConvexShape &lhs,
                       CConvexShape &rhs,
-                      CVector2f *correctionVector);
+                      CVector2f *correctionVector,
+                      ECollisionDetectionType detectionType = kCDOverlapping);
     
-    // Check if 2 shapes overlap in an axis
-    bool AreOverlapping(CConvexShape &lhs,
-                        CConvexShape &rhs,
-                        CVector2f axis,
-                        CVector2f *correctionVector);
+    // Check if 2 shapes collide in an axis
+    bool AreCollidingInAxis(CConvexShape &lhs,
+                            CConvexShape &rhs,
+                            CVector2f axis,
+                            CVector2f *correctionVector,
+                            ECollisionDetectionType detectionType);
     
     // Check if a line intersects a shape
     bool AreIntersecting(CLine &theLine,

@@ -31,7 +31,8 @@ namespace CollisionHandler
 // -----------------------------------------------------------------------------
 bool AreColliding(CConvexShape &lhs,
                   CConvexShape &rhs,
-                  CVector2f *correctionVector)
+                  CVector2f *correctionVector,
+                  ECollisionDetectionType detectionType /* = kCDOverlapping */)
 {
     // First check the bounding box as an early out
     if (!lhs.getGlobalBounds().intersects(rhs.getGlobalBounds()))
@@ -84,7 +85,7 @@ bool AreColliding(CConvexShape &lhs,
             // See if we're overlapping in it, if we're not then the shapes
             // can't be colliding
             CVector2f thisCV;
-            if (!AreOverlapping(lhs, rhs, axis, &thisCV))
+            if (!AreCollidingInAxis(lhs, rhs, axis, &thisCV, detectionType))
             {
                 // There is no collision
                 return false;
@@ -113,12 +114,13 @@ bool AreColliding(CConvexShape &lhs,
 }
     
 // =============================================================================
-// CollisionHandler::AreOverlapping
+// CollisionHandler::AreCollidingInAxis
 // -----------------------------------------------------------------------------
-bool AreOverlapping(CConvexShape &lhs,
-                    CConvexShape &rhs,
-                    CVector2f axis,
-                    CVector2f *correctionVector)
+bool AreCollidingInAxis(CConvexShape &lhs,
+                        CConvexShape &rhs,
+                        CVector2f axis,
+                        CVector2f *correctionVector,
+                        ECollisionDetectionType detectionType)
 {
     bool theResult = false;
     
@@ -149,10 +151,37 @@ bool AreOverlapping(CConvexShape &lhs,
         rhsMax = std::max(rhsMax, projectionValue);
     }
     
-    // We're overlapping if the max projection point of either shape is in
-    // between the max or min of the other
-    if ((lhsMax >= rhsMin && lhsMax <= rhsMax)
-        || (rhsMax >= lhsMin && rhsMax <= lhsMax))
+    bool colliding = false;
+    if (detectionType == kCDOverlapping)
+    {
+        // We're colliding if the max projection point of either shape is in
+        // between the max or min of the other
+        if ((lhsMax >= rhsMin && lhsMax <= rhsMax)
+            || (rhsMax >= lhsMin && rhsMax <= lhsMax))
+        {
+            colliding = true;
+        }
+    }
+    else if (detectionType == kCDLhsInside)
+    {
+        // We're colliding if the lhs min projection point is larger than the
+        // rhs min, and the lhs max is smaller than the rhs max
+        if (lhsMin > rhsMin && lhsMax < rhsMax)
+        {
+            colliding = true;
+        }
+    }
+    else if (detectionType == kCDRhsInside)
+    {
+        // We're colliding if the rhs min projection point is larger than the
+        // lhs min, and the rhs max is smaller than the lhs max
+        if (rhsMin > lhsMin && rhsMax < lhsMax)
+        {
+            colliding = true;
+        }
+    }
+        
+    if (colliding)
     {
         theResult = true;
         
