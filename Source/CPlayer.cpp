@@ -123,7 +123,7 @@ void CPlayer::Init(SStartPosition theStartPos)
     mSwings[kSwingTypeRigid] = new CSwing(this, mParentLevel);
     mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
     mSwings[kSwingTypeSpring] = new CSpringSwing(this, mParentLevel);
-    mSwingToFire = kSwingTypeSpring;
+    mSwingToFire = kSwingTypeRigid;
     mCurrentSwing = mSwings[mSwingToFire];
 }
 
@@ -184,6 +184,20 @@ void CPlayer::HandleInput()
             mCurrentSwing->Detach();
             SetVelocity(GetVelocity() + sJumpVelocity);
         }
+    }
+    
+    // Change swing type
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num1))
+    {
+        mSwingToFire = kSwingTypeRigid;
+    }
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num2))
+    {
+        mSwingToFire = kSwingTypeFlexible;
+    }
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num3))
+    {
+        mSwingToFire = kSwingTypeSpring;
     }
 }
 
