@@ -29,6 +29,7 @@ enum ESwingTypes
 {
     kSwingTypeRigid,
     kSwingTypeFlexible,
+    kSwingTypeSpring,
     kSwingTypeMax
 };
 
@@ -42,7 +43,7 @@ public:
     ~CSwing();
     
     virtual void AttemptToAttach(CVector2f theAimPoint);
-    virtual void Detach();
+    virtual void Detach(bool shouldRespond = false);
     
     virtual CVector2f AttenuateGravity(CVector2f gravity);
     
@@ -67,6 +68,8 @@ protected:
                                  CVector2f start,
                                  CVector2f end);
     
+    virtual void        RespondToAttach();
+    virtual void        RespondToDetach();
     virtual void        RespondToCollisionAt(CVector2f intersectionPoint);
     virtual void        AdjustDirectionToGoThrough(CVector2f targetPoint);
     

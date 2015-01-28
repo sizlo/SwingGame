@@ -64,14 +64,7 @@ void CSwing::AttemptToAttach(CVector2f theAimPoint)
         mOriginDrawPoint = mOrigin;
         mLength = GetDistanceToBob();
         
-        // Find where we should draw the origin
-        CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
-        bobToOrigin.Normalise();
-        
-        // Throw away any velocity that isn't perpendicular to the swing
-        CVector2f v = mBob->GetVelocity();
-        CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
-        mBob->SetVelocity(newV);
+        RespondToAttach();
         
         // Register ourselves now we're active
         CSwingGame::RegisterRenderable(this);
@@ -82,13 +75,18 @@ void CSwing::AttemptToAttach(CVector2f theAimPoint)
 // =============================================================================
 // CSwing::Detach
 // -----------------------------------------------------------------------------
-void CSwing::Detach()
+void CSwing::Detach(bool shouldRespond /* = false */)
 {
     if (mAttached)
     {
         mAttached = false;
         CSwingGame::UnregisterUpdateable(this);
         CSwingGame::UnregisterRenderable(this);
+        
+        if (shouldRespond)
+        {
+            RespondToDetach();
+        }
     }
 }
 
@@ -354,6 +352,25 @@ void CSwing::DrawSwingSection(CWindow *theWindow,
                               CVector2f end)
 {
     theWindow->DrawLine(CLine(start, end), CColour(139, 119, 101));
+}
+
+// =============================================================================
+// CSwing::RespondToAttach
+// -----------------------------------------------------------------------------
+void CSwing::RespondToAttach()
+{
+    // Throw away any velocity that isn't perpendicular to the swing
+    CVector2f v = mBob->GetVelocity();
+    CVector2f newV = v.GetComponentInDirection(GetPerpendicularDirection());
+    mBob->SetVelocity(newV);
+}
+
+// =============================================================================
+// CSwing::RespondToDetach
+// -----------------------------------------------------------------------------
+void CSwing::RespondToDetach()
+{
+    // Do nothing for the basic swing type
 }
 
 // =============================================================================

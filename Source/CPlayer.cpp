@@ -17,6 +17,7 @@
 #include "CLine.hpp"
 #include "CollisionHandler.hpp"
 #include "CFlexibleSwing.hpp"
+#include "CSpringSwing.hpp"
 
 // =============================================================================
 // Static variables
@@ -121,7 +122,8 @@ void CPlayer::Init(SStartPosition theStartPos)
     
     mSwings[kSwingTypeRigid] = new CSwing(this, mParentLevel);
     mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
-    mSwingToFire = kSwingTypeFlexible;
+    mSwings[kSwingTypeSpring] = new CSpringSwing(this, mParentLevel);
+    mSwingToFire = kSwingTypeSpring;
     mCurrentSwing = mSwings[mSwingToFire];
 }
 
@@ -169,7 +171,8 @@ void CPlayer::HandleInput()
     // Disconnect on right click
     if (SystemUtilities::WasButtonPressedThisCycle(CMouse::Right, &mousePos))
     {
-        mCurrentSwing->Detach();
+        // We specifically requested this detach so respond to it
+        mCurrentSwing->Detach(true);
     }
     
     // Jump on space
