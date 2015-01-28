@@ -105,11 +105,6 @@ void CSpringSwing::RespondToDetach()
     {
         CVector2f launchVel = bobToOrigin * smLaunchMultiplier * stretchedFactor;
         mBob->SetVelocity(launchVel + mBob->GetVelocity());
-        
-        DEBUG_LOG("ogLength: %f", mOriginalLength);
-        DEBUG_LOG("finalLength: %f", finalLength);
-        DEBUG_LOG("stretchedFactor: %f", stretchedFactor);
-        DEBUG_LOG("launchVel: (%f, %f), magnitude: %f", launchVel.x, launchVel.y, launchVel.GetMagnitude());
     }
 }
 
