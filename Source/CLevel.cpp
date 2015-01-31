@@ -43,6 +43,7 @@ void CLevel::Enter()
     // Initialise anything we need to
     mPlayer = new CPlayer(this);
     mPlayer->Init();
+    mCompleteMenu = new CLevelCompleteMenu(this);
     
     // Start the level
     StartLevel();
@@ -63,6 +64,7 @@ void CLevel::Exit()
     // Cleanup anything we need to
     mPlayer->Cleanup();
     SAFE_DELETE(mPlayer);
+    SAFE_DELETE(mCompleteMenu);
     
     FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
@@ -76,6 +78,9 @@ void CLevel::Exit()
 // -----------------------------------------------------------------------------
 void CLevel::StartLevel()
 {
+    // Unpause
+    CSwingGame::UnsetGameState(kGameStatePaused);
+    
     mPlayer->StartLevel(mStartPosition);
 }
 
@@ -163,7 +168,9 @@ void CLevel::Update(CTime elapsedTime)
     // Check for completion
     if (HasPlayerReachedGoal())
     {
-        DEBUG_LOG("GOAL!");
+        // Pause the game
+        CSwingGame::SetGameState(kGameStatePaused);
+        mCompleteMenu->Enter();
     }
 }
 

@@ -17,6 +17,7 @@
 #include "CUpdateable.hpp"
 #include "CPlayer.hpp"
 #include "CollisionHandler.hpp"
+#include "CLevelCompleteMenu.hpp"
 #include <list>
 
 // =============================================================================
@@ -78,6 +79,8 @@ private:
     
     // Physics parameters
     CVector2f                   mGravityAcceleration;
+    
+    CLevelCompleteMenu          *mCompleteMenu;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
