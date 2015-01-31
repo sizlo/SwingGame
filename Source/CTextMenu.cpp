@@ -14,6 +14,16 @@
 #include "SystemUtilities.hpp"
 
 // =============================================================================
+// CTextMenu constructor
+// -----------------------------------------------------------------------------
+CTextMenu::CTextMenu(std::string theTitle, CFloatRect theShape)
+:   mTitle(theTitle),
+    mShape(theShape)
+{
+    
+}
+
+// =============================================================================
 // CTextMenu::Enter
 // -----------------------------------------------------------------------------
 void CTextMenu::Enter()
@@ -66,10 +76,30 @@ void CTextMenu::Update(CTime elapsedTime)
 // -----------------------------------------------------------------------------
 void CTextMenu::Draw(CWindow *theWindow)
 {
-    int xPosLeft    = 40;
-    int xPosRight   = 50;
-    int yPos        = 50;
+    int xPosLeft    = mShape.left +  40;
+    int xPosRight   = mShape.left + 50;
+    int yPos        = mShape.top + 50;
     int yOffset     = 20;
+    
+    // Draw the background
+    CVector2f heightOffset = CVector2f(0.0f, mShape.height);
+    CVector2f widthOffset = CVector2f(mShape.width, 0.0f);
+    CVector2f topLeft = CVector2f(mShape.left, mShape.top);
+    CVector2f topRight = topLeft + widthOffset;
+    CVector2f bottomLeft = topLeft + heightOffset;
+    CVector2f bottomRight = bottomLeft + widthOffset;
+    std::list<CVector2f> points;
+    points.push_back(topLeft);
+    points.push_back(topRight);
+    points.push_back(bottomRight);
+    points.push_back(bottomLeft);
+    CConvexShape background = CConvexShape(points);
+    background.setFillColor(CColour::Black);
+    theWindow->DrawShape(background);
+    
+    // Draw the title
+    theWindow->DrawTextAt(mTitle, xPosLeft, yPos, CColour::White);
+    yPos += yOffset + yOffset;
     
     // Draw each menu item
     int i = 0;

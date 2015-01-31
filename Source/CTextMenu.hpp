@@ -19,7 +19,9 @@
 // -----------------------------------------------------------------------------
 class CTextMenu : public CMenu
 {
-public:    
+public:
+    CTextMenu(std::string theTitle, CFloatRect theShape);
+    
     virtual void Enter();
     virtual void Exit();
     
@@ -30,8 +32,10 @@ public:
     virtual void AddMenuItem(std::string theItem);
 
 private:
+    std::string mTitle;
     std::list<std::string> mMenuItems;
     int mCurrentSelection;
+    CFloatRect mShape;
 };
 
 #endif /* defined(__SwingGame__CTextMenu__) */

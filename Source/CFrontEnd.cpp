@@ -14,9 +14,17 @@
 #include "SystemUtilities.hpp"
 
 // =============================================================================
+// Static members
+// -----------------------------------------------------------------------------
+std::string CFrontEnd::smTitle = "SwingGame";
+CFloatRect CFrontEnd::smShape = CFloatRect(0.0f, 0.0f,
+                                GameOptions::windowWidth,
+                                GameOptions::windowHeight);
+
+// =============================================================================
 // CFrontEnd constructor/destructor
 // -----------------------------------------------------------------------------
-CFrontEnd::CFrontEnd()
+CFrontEnd::CFrontEnd() : CTextMenu(smTitle, smShape)
 {
     // Add all the menu items
     AddMenuItem("Level 1");

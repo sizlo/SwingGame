@@ -38,6 +38,10 @@ public:
     void Exit();
     
     void ExecuteMenuItem(int choice);
+    
+private:
+    static std::string smTitle;
+    static CFloatRect smShape;
 };
 
 #endif /* defined(__SwingGame__CFrontEnd__) */
