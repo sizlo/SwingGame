@@ -42,7 +42,10 @@ void CLevel::Enter()
     
     // Initialise anything we need to
     mPlayer = new CPlayer(this);
-    mPlayer->Init(mStartPosition);
+    mPlayer->Init();
+    
+    // Start the level
+    StartLevel();
 }
 
 // =============================================================================
@@ -65,6 +68,15 @@ void CLevel::Exit()
     {
         SAFE_DELETE((*it));
     }
+}
+
+// =============================================================================
+// CLevel::Init
+// Starts the level
+// -----------------------------------------------------------------------------
+void CLevel::StartLevel()
+{
+    mPlayer->StartLevel(mStartPosition);
 }
 
 // =============================================================================
@@ -140,6 +152,12 @@ void CLevel::Update(CTime elapsedTime)
         {
             CSwingGame::UnsetGameState(kGameStatePaused);
         }
+    }
+    
+    // Restart the level on R
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::R))
+    {
+        StartLevel();
     }
     
     // Check for completion

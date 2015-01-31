@@ -113,20 +113,15 @@ void CPlayer::Draw(CWindow *theWindow)
 // =============================================================================
 // CPlayer::Init
 // -----------------------------------------------------------------------------
-void CPlayer::Init(SStartPosition theStartPos)
+void CPlayer::Init()
 {
     // Register any update/renderables
     CSwingGame::RegisterUpdateable(this);
     CSwingGame::RegisterRenderable(this);
     
-    GetShape()->setPosition(theStartPos.mPosition);
-    SetVelocity(CVector2f(0.0f, 0.0f));
-    
     mSwings[kSwingTypeRigid] = new CSwing(this, mParentLevel);
     mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
     mSwings[kSwingTypeSpring] = new CSpringSwing(this, mParentLevel);
-    mSwingToFire = kSwingTypeRigid;
-    mCurrentSwing = mSwings[mSwingToFire];
 }
 
 // =============================================================================
@@ -136,10 +131,28 @@ void CPlayer::Cleanup()
 {
     SAFE_DELETE(mSwings[kSwingTypeRigid]);
     SAFE_DELETE(mSwings[kSwingTypeFlexible]);
+    SAFE_DELETE(mSwings[kSwingTypeSpring]);
     
     // Unregister update/renderables
     CSwingGame::UnregisterUpdateable(this);
     CSwingGame::UnregisterRenderable(this);
+}
+
+// =============================================================================
+// CPlayer::StartLevel
+// -----------------------------------------------------------------------------
+void CPlayer::StartLevel(SStartPosition theStartPos)
+{
+    GetShape()->setPosition(theStartPos.mPosition);
+    SetVelocity(CVector2f(0.0f, 0.0f));
+    
+    for (int i = 0; i < kSwingTypeMax; i++)
+    {
+        mSwings[i]->Detach();
+    }
+    
+    mSwingToFire = kSwingTypeRigid;
+    mCurrentSwing = mSwings[mSwingToFire];
 }
 
 // =============================================================================

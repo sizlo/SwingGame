@@ -40,6 +40,8 @@ public:
     void Enter();
     void Exit();
     
+    void StartLevel();
+    
     // Setters
     void SetName            (std::string    theName);
     void SetStartPosition   (SStartPosition thePosition);

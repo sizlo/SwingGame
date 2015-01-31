@@ -36,8 +36,9 @@ public:
     bool ShouldUpdateForState(EGameState theState);
     void Draw(CWindow *theWindow);
     
-    void Init(SStartPosition theStartPos);
+    void Init();
     void Cleanup();
+    void StartLevel(SStartPosition theStartPos);
     
     void MoveFixedDistanceUntilCollision(CVector2f offset);
     
