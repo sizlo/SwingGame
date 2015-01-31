@@ -1,5 +1,5 @@
 //
-//  CTextFrontEnd.cpp
+//  CFrontEnd.cpp
 //  SwingGame
 //
 //  Created by Tim Brier on 02/10/2014.
@@ -9,81 +9,59 @@
 // =============================================================================
 // Include Files
 // -----------------------------------------------------------------------------
-#include "CTextFrontEnd.hpp"
+#include "CFrontEnd.hpp"
 #include "CSwingGame.hpp"
 #include "SystemUtilities.hpp"
 
 // =============================================================================
-// CTextFrontEnd constructor/destructor
+// CFrontEnd constructor/destructor
 // -----------------------------------------------------------------------------
-CTextFrontEnd::CTextFrontEnd()
+CFrontEnd::CFrontEnd()
 {
-    
+    // Add all the menu items
+    AddMenuItem("Level 1");
+    AddMenuItem("Exit");
 }
 
-CTextFrontEnd::~CTextFrontEnd()
+CFrontEnd::~CFrontEnd()
 {
     
 }
 
 // =============================================================================
-// CTextFrontEnd::Enter
+// CFrontEnd::Enter
 // Enter the menu
 // -----------------------------------------------------------------------------
-void CTextFrontEnd::Enter()
+void CFrontEnd::Enter()
 {
-    // Register any updateables and renderables
-    CSwingGame::RegisterUpdateable(this);
-    CSwingGame::RegisterRenderable(this);
+    // Call the parent
+    CTextMenu::Enter();
     
     // Set the game state
     CSwingGame::SetGameState(kGameStateFrontEnd);
 }
 
-// =============================================================================
-// CTextFrontEnd::Draw
-// Draw the menu
-// -----------------------------------------------------------------------------
-void CTextFrontEnd::Draw(CWindow *theWindow)
+void CFrontEnd::Exit()
 {
-    int xPosLeft    = 50;
-    int xPosRight   = 200;
-    int yPos        = 50;
-    int yOffset     = 20;
-    
-    theWindow->DrawTextAt("Level 1:", xPosLeft, yPos, CColour::White);
-    theWindow->DrawTextAt("1", xPosRight, yPos, CColour::White);
-    
-    yPos += yOffset;
-    
-    theWindow->DrawTextAt("Exit Game:", xPosLeft, yPos, CColour::White);
-    theWindow->DrawTextAt("Esc", xPosRight, yPos, CColour::White);
-}
-
-// =============================================================================
-// CTextFrontEnd::Update
-// Update the menu
-// -----------------------------------------------------------------------------
-void CTextFrontEnd::Update(CTime elapsedTime)
-{
-    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num1))
-    {
-        CSwingGame::GoToLocation(kGameLocationLevel1);
-    }
-    
-    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
-    {
-        CSwingGame::ExitGame();
-    }
-}
-
-void CTextFrontEnd::Exit()
-{
-    // Unregister all updateables and renderables
-    CSwingGame::UnregisterUpdateable(this);
-    CSwingGame::UnregisterRenderable(this);
+    // Call the parent
+    CTextMenu::Exit();
     
     // Unset the game state
     CSwingGame::UnsetGameState(kGameStateFrontEnd);
 }
 
+// =============================================================================
+// CFrontEnd::ExecuteMenuItem
+// -----------------------------------------------------------------------------
+void CFrontEnd::ExecuteMenuItem(int choice)
+{
+    switch (choice)
+    {
+        case kFEItemLevel1:
+            CSwingGame::GoToLocation(kGameLocationLevel1);
+            break;
+        case kFEItemExit: // Fall through
+        default:
+            CSwingGame::ExitGame();
+    }
+}

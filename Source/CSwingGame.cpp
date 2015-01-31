@@ -10,7 +10,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "CSwingGame.hpp"
-#include "CTextFrontEnd.hpp"
+#include "CFrontEnd.hpp"
 #include "CTextureBank.hpp"
 #include "CLevel.hpp"
 #include "GameOptions.hpp"
@@ -263,7 +263,7 @@ void CSwingGame::GoToLocation(EGameLocation theLocation)
     {
         case kGameLocationFrontEnd:
             DEBUG_LOG("Front end requested");
-            smCurrentLocation = new CTextFrontEnd();
+            smCurrentLocation = new CFrontEnd();
             break;
             
         case kGameLocationLevel1:
@@ -273,7 +273,7 @@ void CSwingGame::GoToLocation(EGameLocation theLocation)
             
         default:
             DEBUG_LOG("Unimplemented game location - going to front end");
-            smCurrentLocation = new CTextFrontEnd();
+            smCurrentLocation = new CFrontEnd();
             break;
     }
     
