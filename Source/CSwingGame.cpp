@@ -385,17 +385,17 @@ void CSwingGame::Update(CTime elapsedTime)
         }
     }
     
-    // Remove any updateables whice were requested this cycle
-    while (!smTheUpdateablesToRemove.empty())
-    {
-        smTheUpdateables.remove(smTheUpdateablesToRemove.front());
-        smTheUpdateablesToRemove.pop_front();
-    }
     // Add any updateables which were requested this cycle
     while (!smTheUpdateablesToAdd.empty())
     {
         smTheUpdateables.push_back(smTheUpdateablesToAdd.front());
         smTheUpdateablesToAdd.pop_front();
+    }
+    // Remove any updateables whice were requested this cycle
+    while (!smTheUpdateablesToRemove.empty())
+    {
+        smTheUpdateables.remove(smTheUpdateablesToRemove.front());
+        smTheUpdateablesToRemove.pop_front();
     }
     
     // Unset game state
