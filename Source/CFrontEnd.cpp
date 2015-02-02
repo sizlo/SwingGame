@@ -27,6 +27,9 @@ CFloatRect CFrontEnd::smShape = CFloatRect(0.0f, 0.0f,
 CFrontEnd::CFrontEnd() : CTextMenu(smTitle, smShape)
 {
     // Add all the menu items
+#if SG_DEBUG
+    AddMenuItem("Test level");
+#endif
     AddMenuItem("Level 1");
     AddMenuItem("Exit");
 }
@@ -65,6 +68,11 @@ void CFrontEnd::ExecuteMenuItem(int choice)
 {
     switch (choice)
     {
+#if SG_DEBUG
+        case kFEItemTestLevel:
+            CSwingGame::GoToLocation(kGameLocationTestLevel);
+            break;
+#endif
         case kFEItemLevel1:
             CSwingGame::GoToLocation(kGameLocationLevel1);
             break;

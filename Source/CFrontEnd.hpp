@@ -19,8 +19,11 @@
 // -----------------------------------------------------------------------------
 enum EFrontEndItems
 {
-    kFEItemLevel1 = 0,
-    kFEItemExit = 1
+#if SG_DEBUG
+    kFEItemTestLevel,
+#endif
+    kFEItemLevel1,
+    kFEItemExit
 };
 
 // =============================================================================
