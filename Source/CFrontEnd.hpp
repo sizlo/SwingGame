@@ -23,6 +23,7 @@ enum EFrontEndItems
     kFEItemTestLevel,
 #endif
     kFEItemLevel1,
+    kFEItemLevel2,
     kFEItemExit
 };
 

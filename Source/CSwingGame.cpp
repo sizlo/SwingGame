@@ -282,6 +282,11 @@ void CSwingGame::GoToLocation(EGameLocation theLocation)
             smCurrentLocation = new CLevel("level1.xml");
             break;
             
+        case kGameLocationLevel2:
+            DEBUG_LOG("Level 2 requested");
+            smCurrentLocation = new CLevel("level2.xml");
+            break;
+            
         default:
             DEBUG_LOG("Unimplemented game location - going to front end");
             smCurrentLocation = new CFrontEnd();

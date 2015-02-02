@@ -16,7 +16,8 @@ enum EGameLocation
 {
     kGameLocationFrontEnd,
     kGameLocationTestLevel,
-    kGameLocationLevel1
+    kGameLocationLevel1,
+    kGameLocationLevel2
 };
 
 // =============================================================================

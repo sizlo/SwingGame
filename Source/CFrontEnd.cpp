@@ -31,6 +31,7 @@ CFrontEnd::CFrontEnd() : CTextMenu(smTitle, smShape)
     AddMenuItem("Test level");
 #endif
     AddMenuItem("Level 1");
+    AddMenuItem("Level 2");
     AddMenuItem("Exit");
 }
 
@@ -73,9 +74,15 @@ void CFrontEnd::ExecuteMenuItem(int choice)
             CSwingGame::GoToLocation(kGameLocationTestLevel);
             break;
 #endif
+            
         case kFEItemLevel1:
             CSwingGame::GoToLocation(kGameLocationLevel1);
             break;
+            
+        case kFEItemLevel2:
+            CSwingGame::GoToLocation(kGameLocationLevel2);
+            break;
+            
         case kFEItemExit: // Fall through
         default:
             CSwingGame::ExitGame();

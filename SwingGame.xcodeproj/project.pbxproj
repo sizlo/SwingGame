@@ -16,6 +16,7 @@
 		2251F46B1A7D611500B7628B /* CTextMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2251F4691A7D611500B7628B /* CTextMenu.cpp */; };
 		2251F46E1A7D6E6500B7628B /* CLevelEndMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2251F46C1A7D6E6500B7628B /* CLevelEndMenu.cpp */; };
 		2251F4721A7FB27100B7628B /* level1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2251F4711A7FB27100B7628B /* level1.xml */; };
+		2251F4741A7FD12000B7628B /* level2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2251F4731A7FD12000B7628B /* level2.xml */; };
 		2266696819FFC84D00BB750D /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2266696619FFC84D00BB750D /* CollisionHandler.cpp */; };
 		2266696B1A01097D00BB750D /* CView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226669691A01097D00BB750D /* CView.cpp */; };
 		2266696E1A02C94F00BB750D /* CPhysicsBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2266696C1A02C94F00BB750D /* CPhysicsBody.cpp */; };
@@ -73,6 +74,7 @@
 		2251F46C1A7D6E6500B7628B /* CLevelEndMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CLevelEndMenu.cpp; sourceTree = "<group>"; };
 		2251F46D1A7D6E6500B7628B /* CLevelEndMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLevelEndMenu.hpp; sourceTree = "<group>"; };
 		2251F4711A7FB27100B7628B /* level1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1.xml; path = Data/level1.xml; sourceTree = SOURCE_ROOT; };
+		2251F4731A7FD12000B7628B /* level2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2.xml; path = Data/level2.xml; sourceTree = SOURCE_ROOT; };
 		2266696619FFC84D00BB750D /* CollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionHandler.cpp; sourceTree = "<group>"; };
 		2266696719FFC84D00BB750D /* CollisionHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionHandler.hpp; sourceTree = "<group>"; };
 		226669691A01097D00BB750D /* CView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CView.cpp; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 		22C3F3F819D313880043264D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2251F4731A7FD12000B7628B /* level2.xml */,
 				2251F4711A7FB27100B7628B /* level1.xml */,
 				22FC77FC19E195C0000A507F /* player.png */,
 				22FC77E719E16A17000A507F /* TestLevelBackground.png */,
@@ -386,6 +389,7 @@
 				22FC77ED19E16A17000A507F /* TestLevelBackground.png in Resources */,
 				22FC77F019E16A17000A507F /* TestLevelBorderX.png in Resources */,
 				22FC77EF19E16A17000A507F /* TestLevelBlock1.png in Resources */,
+				2251F4741A7FD12000B7628B /* level2.xml in Resources */,
 				22FC77FD19E195C0000A507F /* player.png in Resources */,
 				22FC77F419E18145000A507F /* TestLevelGoal.png in Resources */,
 				22FC77F119E16A17000A507F /* TestLevelBorderY.png in Resources */,

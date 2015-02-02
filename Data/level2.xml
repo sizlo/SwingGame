@@ -1,0 +1,88 @@
+<level name="Test Level">
+  
+  <start>
+    <position>
+      <x>275</x>
+      <y>625</y>
+    </position>
+    <swingTarget>
+      <x>350</x>
+      <y>600</y>
+    </swingTarget>
+  </start>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>450</x>
+      <y>500</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>300</x>
+      <y>580</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+    <!-- border bottom -->
+  <obstacle>
+    <position>
+      <x>0</x>
+      <y>748</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+</level>
