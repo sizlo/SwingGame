@@ -35,7 +35,7 @@ enum ELEMItems
 class CLevelEndMenu : public CTextMenu
 {
 public:
-    CLevelEndMenu(CLevel *theParent);
+    CLevelEndMenu(std::string theTitle, CLevel *theParent);
     ~CLevelEndMenu();
     
     void Enter();
@@ -46,7 +46,6 @@ public:
 private:
     CLevel *mParentLevel;
     
-    static std::string smTitle;
     static float smHalfWidth;
     static float smHalfHeight;
     static CVector2f smCenter;

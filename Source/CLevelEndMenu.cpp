@@ -16,7 +16,6 @@
 // =============================================================================
 // Static members
 // -----------------------------------------------------------------------------
-std::string CLevelEndMenu::smTitle = "Level completed";
 float CLevelEndMenu::smHalfWidth = 250;
 float CLevelEndMenu::smHalfHeight = 125;
 CVector2f CLevelEndMenu::smCenter = CVector2f(
@@ -31,8 +30,8 @@ CFloatRect CLevelEndMenu::smShape = CFloatRect(smCenter.y - smHalfHeight,
 // =============================================================================
 // CLevelCompleteMenu constructor/destructor
 // -----------------------------------------------------------------------------
-CLevelEndMenu::CLevelEndMenu(CLevel *theParent)
-:   CTextMenu(smTitle, smShape),
+CLevelEndMenu::CLevelEndMenu(std::string theTitle, CLevel *theParent)
+:   CTextMenu(theTitle, smShape),
     mParentLevel(theParent)
 {
     AddMenuItem("Restart level");

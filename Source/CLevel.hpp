@@ -81,7 +81,8 @@ private:
     // Physics parameters
     CVector2f                   mGravityAcceleration;
     
-    CLevelEndMenu               *mEndMenu;
+    CLevelEndMenu               *mCompletedMenu;
+    CLevelEndMenu               *mFailedMenu;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
