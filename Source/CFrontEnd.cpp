@@ -18,8 +18,8 @@
 // -----------------------------------------------------------------------------
 std::string CFrontEnd::smTitle = "SwingGame";
 CFloatRect CFrontEnd::smShape = CFloatRect(0.0f, 0.0f,
-                                GameOptions::windowWidth,
-                                GameOptions::windowHeight);
+                                GameOptions::viewWidth,
+                                GameOptions::viewHeight);
 
 // =============================================================================
 // CFrontEnd constructor/destructor

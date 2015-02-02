@@ -43,7 +43,7 @@ void CLevel::Enter()
     // Initialise anything we need to
     mPlayer = new CPlayer(this);
     mPlayer->Init();
-    mCompleteMenu = new CLevelCompleteMenu(this);
+    mEndMenu = new CLevelEndMenu(this);
     
     // Start the level
     StartLevel();
@@ -64,7 +64,7 @@ void CLevel::Exit()
     // Cleanup anything we need to
     mPlayer->Cleanup();
     SAFE_DELETE(mPlayer);
-    SAFE_DELETE(mCompleteMenu);
+    SAFE_DELETE(mEndMenu);
     
     FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
@@ -170,7 +170,14 @@ void CLevel::Update(CTime elapsedTime)
     {
         // Pause the game
         CSwingGame::SetGameState(kGameStatePaused);
-        mCompleteMenu->Enter();
+        mEndMenu->Enter();
+    }
+    
+    // Check for player leaving the level
+    if (HasPlayerLeftLevel())
+    {
+        // Kill them!
+        
     }
 }
 
@@ -210,6 +217,27 @@ bool CLevel::HasPlayerReachedGoal()
     }
     
     return result;
+}
+
+// =============================================================================
+// CLevel::HasPlayerLeftLevel
+// -----------------------------------------------------------------------------
+bool CLevel::HasPlayerLeftLevel()
+{
+    bool theResult = false;
+    
+    // Check if the player is completely outside any of the window boundaries
+    CFloatRect playerGlobalBounds = mPlayer->GetShape()->getGlobalBounds();
+    CFloatRect viewBounds = CFloatRect(GameOptions::viewLeft,
+                                       GameOptions::viewTop,
+                                       GameOptions::viewWidth,
+                                       GameOptions::viewHeight);
+    if (!playerGlobalBounds.intersects(viewBounds))
+    {
+        theResult = true;
+    }
+    
+    return theResult;
 }
 
 

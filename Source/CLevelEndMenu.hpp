@@ -1,13 +1,13 @@
 //
-//  CLevelCompleteMenu.hpp
+//  CLevelEndMenu.hpp
 //  SwingGame
 //
 //  Created by Tim Brier on 31/01/2015.
 //  Copyright (c) 2015 tbrier. All rights reserved.
 //
 
-#ifndef __SwingGame__CLevelCompleteMenu__
-#define __SwingGame__CLevelCompleteMenu__
+#ifndef __SwingGame__CLevelEndMenu__
+#define __SwingGame__CLevelEndMenu__
 
 // =============================================================================
 // Include files
@@ -22,21 +22,21 @@ class CLevel;
 // =============================================================================
 // Enums
 // -----------------------------------------------------------------------------
-enum ELCMItems
+enum ELEMItems
 {
-    kLCMRestart = 0,
-    kLCMFrontEnd = 1,
-    kLCMExitGame = 2
+    kLEMRestart = 0,
+    kLEMFrontEnd = 1,
+    kLEMExitGame = 2
 };
 
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
-class CLevelCompleteMenu : public CTextMenu
+class CLevelEndMenu : public CTextMenu
 {
 public:
-    CLevelCompleteMenu(CLevel *theParent);
-    ~CLevelCompleteMenu();
+    CLevelEndMenu(CLevel *theParent);
+    ~CLevelEndMenu();
     
     void Enter();
     void Exit();
@@ -53,4 +53,4 @@ private:
     static CFloatRect smShape;
 };
 
-#endif /* defined(__SwingGame__CLevelCompleteMenu__) */
+#endif /* defined(__SwingGame__CLevelEndMenu__) */

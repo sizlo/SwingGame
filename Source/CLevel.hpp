@@ -17,7 +17,7 @@
 #include "CUpdateable.hpp"
 #include "CPlayer.hpp"
 #include "CollisionHandler.hpp"
-#include "CLevelCompleteMenu.hpp"
+#include "CLevelEndMenu.hpp"
 #include <list>
 
 // =============================================================================
@@ -61,6 +61,7 @@ public:
     
 private:
     bool HasPlayerReachedGoal();
+    bool HasPlayerLeftLevel();
     
     std::string                 mName;
     
@@ -80,7 +81,7 @@ private:
     // Physics parameters
     CVector2f                   mGravityAcceleration;
     
-    CLevelCompleteMenu          *mCompleteMenu;
+    CLevelEndMenu               *mEndMenu;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

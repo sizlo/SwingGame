@@ -9,21 +9,21 @@
 // =============================================================================
 // Include files
 // -----------------------------------------------------------------------------
-#include "CLevelCompleteMenu.hpp"
+#include "CLevelEndMenu.hpp"
 #include "CSwingGame.hpp"
 #include "CLevel.hpp"
 
 // =============================================================================
 // Static members
 // -----------------------------------------------------------------------------
-std::string CLevelCompleteMenu::smTitle = "Level completed";
-float CLevelCompleteMenu::smHalfWidth = 250;
-float CLevelCompleteMenu::smHalfHeight = 125;
-CVector2f CLevelCompleteMenu::smCenter = CVector2f(
-                                            GameOptions::windowWidth / 2.0f,
-                                            GameOptions::windowHeight / 2.0f
-                                         );
-CFloatRect CLevelCompleteMenu::smShape = CFloatRect(smCenter.y - smHalfHeight,
+std::string CLevelEndMenu::smTitle = "Level completed";
+float CLevelEndMenu::smHalfWidth = 250;
+float CLevelEndMenu::smHalfHeight = 125;
+CVector2f CLevelEndMenu::smCenter = CVector2f(
+                                            GameOptions::viewWidth / 2.0f,
+                                            GameOptions::viewHeight / 2.0f
+                                              );
+CFloatRect CLevelEndMenu::smShape = CFloatRect(smCenter.y - smHalfHeight,
                                                     smCenter.x - smHalfWidth,
                                                     smHalfWidth * 2.0f,
                                                     smHalfHeight * 2.0f);
@@ -31,7 +31,7 @@ CFloatRect CLevelCompleteMenu::smShape = CFloatRect(smCenter.y - smHalfHeight,
 // =============================================================================
 // CLevelCompleteMenu constructor/destructor
 // -----------------------------------------------------------------------------
-CLevelCompleteMenu::CLevelCompleteMenu(CLevel *theParent)
+CLevelEndMenu::CLevelEndMenu(CLevel *theParent)
 :   CTextMenu(smTitle, smShape),
     mParentLevel(theParent)
 {
@@ -40,7 +40,7 @@ CLevelCompleteMenu::CLevelCompleteMenu(CLevel *theParent)
     AddMenuItem("Exit game");
 }
 
-CLevelCompleteMenu::~CLevelCompleteMenu()
+CLevelEndMenu::~CLevelEndMenu()
 {
     
 }
@@ -48,7 +48,7 @@ CLevelCompleteMenu::~CLevelCompleteMenu()
 // =============================================================================
 // CLevelCompleteMenu::Enter/Exit
 // -----------------------------------------------------------------------------
-void CLevelCompleteMenu::Enter()
+void CLevelEndMenu::Enter()
 {
     // Call parent
     CTextMenu::Enter();
@@ -57,7 +57,7 @@ void CLevelCompleteMenu::Enter()
     CSwingGame::UnregisterUpdateable(mParentLevel);
 }
 
-void CLevelCompleteMenu::Exit()
+void CLevelEndMenu::Exit()
 {
     // Call parent
     CTextMenu::Exit();
@@ -69,21 +69,21 @@ void CLevelCompleteMenu::Exit()
 // =============================================================================
 // CLevelCompleteMenu::ExecuteMenuChoice
 // -----------------------------------------------------------------------------
-void CLevelCompleteMenu::ExecuteMenuItem(int choice)
+void CLevelEndMenu::ExecuteMenuItem(int choice)
 {
     switch (choice)
     {
-        case kLCMRestart:
+        case kLEMRestart:
             Exit();
             mParentLevel->StartLevel();
             break;
             
-        case kLCMFrontEnd:
+        case kLEMFrontEnd:
             Exit();
             CSwingGame::GoToLocation(kGameLocationFrontEnd);
             break;
             
-        case kLCMExitGame:
+        case kLEMExitGame:
             Exit();
             CSwingGame::ExitGame();
             break;
