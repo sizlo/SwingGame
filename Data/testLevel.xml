@@ -3,11 +3,11 @@
   <start>
     <position>
       <x>50</x>
-      <y>200</y>
+      <y>50</y>
     </position>
     <swingTarget>
-      <x>80</x>
-      <y>50</y>
+      <x>200</x>
+      <y>0</y>
     </swingTarget>
   </start>
 

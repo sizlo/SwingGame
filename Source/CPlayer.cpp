@@ -153,6 +153,8 @@ void CPlayer::StartLevel(SStartPosition theStartPos)
     
     mSwingToFire = kSwingTypeRigid;
     mCurrentSwing = mSwings[mSwingToFire];
+    
+    mCurrentSwing->AttemptToAttach(theStartPos.mSwingTarget);
 }
 
 // =============================================================================
