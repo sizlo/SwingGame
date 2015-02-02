@@ -3,11 +3,11 @@
   <start>
     <position>
       <x>50</x>
-      <y>50</y>
+      <y>150</y>
     </position>
     <swingTarget>
-      <x>200</x>
-      <y>0</y>
+      <x>100</x>
+      <y>120</y>
     </swingTarget>
   </start>
 
@@ -15,7 +15,7 @@
   <goal>
     <position>
       <x>800</x>
-      <y>500</y>
+      <y>300</y>
     </position>
     <point>
       <x>0</x>
@@ -37,22 +37,118 @@
 
   <background>TestLevelBackground.png</background>
 
-  <!-- border top -->
+  <!-- swing platform -->
   <obstacle>
     <position>
-      <x>0</x>
-      <y>0</y>
+      <x>50</x>
+      <y>100</y>
     </position>
     <point>
       <x>0</x>
       <y>0</y>
     </point>
     <point>
-      <x>1024</x>
+      <x>100</x>
       <y>0</y>
     </point>
     <point>
-      <x>1024</x>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>250</x>
+      <y>100</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>450</x>
+      <y>100</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>650</x>
+      <y>100</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>850</x>
+      <y>100</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
       <y>20</y>
     </point>
     <point>
