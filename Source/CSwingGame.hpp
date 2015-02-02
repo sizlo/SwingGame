@@ -26,6 +26,15 @@
 class CDebugHelper;
 
 // =============================================================================
+// Structs
+// -----------------------------------------------------------------------------
+struct SUpdateableRegistrationRequest
+{
+    bool            mShouldRegister;
+    CUpdateable     *mUpdateable;
+};
+
+// =============================================================================
 // Class Definition
 // -----------------------------------------------------------------------------
 class CSwingGame
@@ -88,8 +97,8 @@ private:
     
     // Updateable and renderable lists
     static std::list<CUpdateable *> smTheUpdateables;
-    static std::list<CUpdateable *> smTheUpdateablesToAdd;
-    static std::list<CUpdateable *> smTheUpdateablesToRemove;
+    static std::list<SUpdateableRegistrationRequest>
+                                    smUpdateableRegistrationRequests;
     static std::list<CRenderable *> smTheRenderables;
     
     // The current game location (menu/level)

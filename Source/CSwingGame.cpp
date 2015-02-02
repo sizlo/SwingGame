@@ -24,8 +24,8 @@
 bool                        CSwingGame::smExitRequested = false;
 EGameState                  CSwingGame::smGameState = kGameStateFrontEnd;
 std::list<CUpdateable *>    CSwingGame::smTheUpdateables;
-std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToAdd;
-std::list<CUpdateable *>    CSwingGame::smTheUpdateablesToRemove;
+std::list<SUpdateableRegistrationRequest>
+                            CSwingGame::smUpdateableRegistrationRequests;
 std::list<CRenderable *>    CSwingGame::smTheRenderables;
 CGameLocation               *CSwingGame::smCurrentLocation = NULL;
 
@@ -194,7 +194,10 @@ void CSwingGame::RegisterUpdateable(CUpdateable *theUpdateable)
     }
     else
     {
-        smTheUpdateablesToAdd.push_back(theUpdateable);
+        SUpdateableRegistrationRequest theRequest;
+        theRequest.mShouldRegister = true;
+        theRequest.mUpdateable = theUpdateable;
+        smUpdateableRegistrationRequests.push_back(theRequest);
     }
 }
 
@@ -221,7 +224,10 @@ void CSwingGame::UnregisterUpdateable(CUpdateable *theUpdateable)
     }
     else
     {
-        smTheUpdateablesToRemove.push_back(theUpdateable);
+        SUpdateableRegistrationRequest theRequest;
+        theRequest.mShouldRegister = false;
+        theRequest.mUpdateable = theUpdateable;
+        smUpdateableRegistrationRequests.push_back(theRequest);
     }
 }
 
@@ -390,17 +396,21 @@ void CSwingGame::Update(CTime elapsedTime)
         }
     }
     
-    // Add any updateables which were requested this cycle
-    while (!smTheUpdateablesToAdd.empty())
+    // Add or remove any updateables that were requested this cycle
+    while (!smUpdateableRegistrationRequests.empty())
     {
-        smTheUpdateables.push_back(smTheUpdateablesToAdd.front());
-        smTheUpdateablesToAdd.pop_front();
-    }
-    // Remove any updateables whice were requested this cycle
-    while (!smTheUpdateablesToRemove.empty())
-    {
-        smTheUpdateables.remove(smTheUpdateablesToRemove.front());
-        smTheUpdateablesToRemove.pop_front();
+        SUpdateableRegistrationRequest thisRequest =
+                                    smUpdateableRegistrationRequests.front();
+        smUpdateableRegistrationRequests.pop_front();
+        
+        if (thisRequest.mShouldRegister)
+        {
+            smTheUpdateables.push_back(thisRequest.mUpdateable);
+        }
+        else
+        {
+            smTheUpdateables.remove(thisRequest.mUpdateable);
+        }
     }
     
     // Unset game state
