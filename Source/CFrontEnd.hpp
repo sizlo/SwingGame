@@ -24,6 +24,7 @@ enum EFrontEndItems
 #endif
     kFEItemLevel1,
     kFEItemLevel2,
+    kFEItemLevel3,
     kFEItemExit
 };
 
