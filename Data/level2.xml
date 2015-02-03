@@ -3,19 +3,19 @@
   <start>
     <position>
       <x>275</x>
-      <y>625</y>
+      <y>525</y>
     </position>
     <swingTarget>
       <x>350</x>
-      <y>600</y>
+      <y>500</y>
     </swingTarget>
   </start>
 
   <!-- Square goal -->
   <goal>
     <position>
-      <x>450</x>
-      <y>500</y>
+      <x>480</x>
+      <y>350</y>
     </position>
     <point>
       <x>0</x>
@@ -41,7 +41,7 @@
   <obstacle>
     <position>
       <x>300</x>
-      <y>580</y>
+      <y>480</y>
     </position>
     <point>
       <x>0</x>
