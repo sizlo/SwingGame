@@ -215,6 +215,7 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
     // bob
     *anchor = longestPossile.GetEnd();
     float currentDistanceToAnchor = smMaxLength;
+    bool intersectionFound = false;
     
     std::list<CPhysicsBody *> theObstacles = mParentLevel->GetObstacles();
     FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
@@ -225,7 +226,6 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
                                               &theIntersections,
                                               false))
         {
-            theResult = true;
             FOR_EACH_IN_LIST(CVector2f, theIntersections)
             {
                 CVector2f thisIntersection = (*it);
@@ -234,6 +234,7 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
                 if (distanceToThis < currentDistanceToAnchor
                     && distanceToThis > smAnchorGap)
                 {
+                    intersectionFound = true;
                     float distanceToUse = distanceToThis - smAnchorGap;
                     bobToThis.Normalise();
                     *anchor = bobPosition + (bobToThis * distanceToUse);
@@ -241,6 +242,12 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
                 }
             }
         }
+    }
+    
+    // Make sure the closest instersection point is valid
+    if (intersectionFound && currentDistanceToAnchor >= smMinLength)
+    {
+        theResult = true;
     }
     
     return theResult;
