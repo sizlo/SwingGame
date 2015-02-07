@@ -42,10 +42,12 @@ public:
     
     void MoveFixedDistanceUntilCollision(CVector2f offset);
     
+    bool IsColliding();
+    
 private:
     void        HandleInput();
     CVector2f   HandlePhysics();
-    bool        HandleCollisions();
+    bool        HandleCollisions(bool shouldResolve = true);
     
     // Move for the given amount of time with the given acceleration or until
     // we collide

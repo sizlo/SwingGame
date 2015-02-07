@@ -50,10 +50,10 @@ CPlayer::CPlayer(CLevel *theParentLevel) :  mParentLevel(theParentLevel)
     mSmallestRadius = 10.0f;
     
     std::list<CVector2f> thePoints;
-    thePoints.push_back(CVector2f(0.0f,                 0.0f));
-    thePoints.push_back(CVector2f(2 * mSmallestRadius,  0.0f));
-    thePoints.push_back(CVector2f(2 * mSmallestRadius,  2 * mSmallestRadius));
-    thePoints.push_back(CVector2f(0.0f,                 2 * mSmallestRadius));
+    thePoints.push_back(CVector2f(-mSmallestRadius, -mSmallestRadius));
+    thePoints.push_back(CVector2f(mSmallestRadius,  -mSmallestRadius));
+    thePoints.push_back(CVector2f(mSmallestRadius,  mSmallestRadius));
+    thePoints.push_back(CVector2f(-mSmallestRadius, mSmallestRadius));
     
     SetShape(CConvexShape(thePoints));
     GetShape()->setFillColor(CColour(255, 0, 255));
@@ -235,7 +235,7 @@ CVector2f CPlayer::HandlePhysics()
 // CPlayer::HandleCollisions
 // Return true if we resolved a collision
 // -----------------------------------------------------------------------------
-bool CPlayer::HandleCollisions()
+bool CPlayer::HandleCollisions(bool shouldResolve /* = false */)
 {
     bool didCollide = false;
     
@@ -251,8 +251,11 @@ bool CPlayer::HandleCollisions()
         {
             didCollide = true;
             
-            // Resolve the collision
-            CollisionHandler::Resolve(this, (*it), correctionVector);
+            if (shouldResolve)
+            {
+                // Resolve the collision
+                CollisionHandler::Resolve(this, (*it), correctionVector);
+            }
         }
     }
     
@@ -327,4 +330,13 @@ void CPlayer::MoveFixedDistanceUntilCollision(CVector2f offset)
         GetShape()->move(smallOffset);
         haveCollided = HandleCollisions();
     }
+}
+
+// =============================================================================
+// CPlayer::IsColliding
+// -----------------------------------------------------------------------------
+bool CPlayer::IsColliding()
+{
+    // Let HandleCollisions do this check
+    return HandleCollisions(false);
 }
