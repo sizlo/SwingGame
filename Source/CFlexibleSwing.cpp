@@ -138,11 +138,22 @@ void CFlexibleSwing::RespondToCollisionAt(CVector2f intersectionPoint)
     
     // Calculate the new active length
     CVector2f currentOriginToNew = newOrigin - mOrigin;
-    mLength -= currentOriginToNew.GetMagnitude();
+    float newLength = mLength - currentOriginToNew.GetMagnitude();
     
-    // And use the new origin
-    mPreviousOrigins.push_back(mOrigin);
-    mOrigin = newOrigin;
+    // Only split if we're not shorter than the min length
+    if (newLength >= smMinLength)
+    {
+        mLength = newLength;
+    
+        // And use the new origin
+        mPreviousOrigins.push_back(mOrigin);
+        mOrigin = newOrigin;
+    }
+    else
+    {
+        // Otherwise respond as if we were a rigid swing
+        CSwing::RespondToCollisionAt(intersectionPoint);
+    }
 }
 
 // =============================================================================

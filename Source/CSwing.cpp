@@ -18,6 +18,7 @@
 // Static members
 // -----------------------------------------------------------------------------
 float CSwing::smMaxLength = 500.0f;
+float CSwing::smMinLength = 25.0f;
 float CSwing::smClimbSpeed = 100.0f;
 float CSwing::smCollisionIgnoreDistance = 1.0f;
 float CSwing::smAnchorGap = 5.0f;
@@ -140,13 +141,13 @@ void CSwing::Update(CTime elapsedTime)
         // of the swing
         CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
         float distance = bobToOrigin.GetMagnitude();
-        if (distance > mLength)
+        if (distance != mLength)
         {
             // Move by the difference between the distance and length
             float moveDistance = distance - mLength;
             bobToOrigin.Normalise();
             bobToOrigin *= moveDistance;
-            mBob->GetShape()->move(bobToOrigin);
+            mBob->MoveFixedDistanceUntilCollision(bobToOrigin);
         }
         
         HandleCollisions();
@@ -286,6 +287,7 @@ void CSwing::HandleInput(CTime elapsedTime)
         mBob->MoveFixedDistanceUntilCollision(climbOffset);
         mLength = GetDistanceToBob();
         mLength = std::min(mLength, smMaxLength);
+        mLength = std::max(mLength, smMinLength);
     }
 }
 

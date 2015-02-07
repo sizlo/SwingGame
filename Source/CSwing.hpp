@@ -83,6 +83,7 @@ protected:
     CColour             mColour;
     
     static float        smMaxLength;
+    static float        smMinLength;
     static float        smClimbSpeed;
     static float        smCollisionIgnoreDistance;
     static float        smAnchorGap;
