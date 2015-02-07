@@ -331,8 +331,8 @@ float Project(CVector2f point, CVector2f axis)
 void Resolve(CPhysicsBody *lhs,
              CPhysicsBody *rhs,
              CVector2f correctionVector,
-             float friction /* = 0.0f */,
-             float elasticity /* = 1.0f */,
+             float friction /* = 0.3f */,
+             float elasticity /* = 0.5f */,
              ECollisionResolveOptions theOptions /* = kCRMoveLeft */)
 {
     Seperate(lhs, rhs, correctionVector, friction, elasticity, theOptions);
