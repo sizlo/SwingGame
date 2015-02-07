@@ -24,6 +24,7 @@ bool drawOrigins        = false;
 bool drawShapePoints    = false;
 bool drawShapeNormals   = false;
 bool useSlowMotion      = false;
+bool showMouseCoords    = false;
 
 } // namespace DebugOptions
 
@@ -54,6 +55,7 @@ void CDebugHelper::Update(CTime elapsedTime)
         TOGGLE_DEBUG_OPTION(P, DebugOptions::drawShapePoints);
         TOGGLE_DEBUG_OPTION(N, DebugOptions::drawShapeNormals);
         TOGGLE_DEBUG_OPTION(S, DebugOptions::useSlowMotion);
+        TOGGLE_DEBUG_OPTION(M, DebugOptions::showMouseCoords);
     }
 }
 
@@ -70,6 +72,14 @@ void CDebugHelper::Draw(CWindow *theWindow)
     FOR_EACH_IN_LIST(CLine, mLines)
     {
         theWindow->DrawLine((*it), CColour::Red);
+    }
+    
+    if (DebugOptions::showMouseCoords)
+    {
+        CVector2f coords = SystemUtilities::GetMousePosition();
+        char txt[32];
+        sprintf(txt, "(%f, %f)", coords.x, coords.y);
+        theWindow->DrawTextAt(txt, coords.x, coords.y - 15, CColour::Red);
     }
 }
 
