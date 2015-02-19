@@ -1,13 +1,13 @@
-<level name="Level 1">
+<level name="Tutorial 2">
   
   <start>
     <position>
       <x>50</x>
-      <y>150</y>
+      <y>250</y>
     </position>
     <swingTarget>
       <x>100</x>
-      <y>120</y>
+      <y>220</y>
     </swingTarget>
     <velocity>
       <x>0</x>
@@ -15,6 +15,12 @@
     </velocity>
     <swingType>rigid</swingType>
   </start>
+  
+  <tutorialText>
+      <text>Left click to fire a new swing</text>
+      <x>50</x>
+      <y>180</y>
+  </tutorialText>
 
   <!-- Square goal -->
   <goal>
@@ -46,7 +52,7 @@
   <obstacle>
     <position>
       <x>50</x>
-      <y>100</y>
+      <y>200</y>
     </position>
     <point>
       <x>0</x>
@@ -70,7 +76,7 @@
   <obstacle>
     <position>
       <x>250</x>
-      <y>100</y>
+      <y>200</y>
     </position>
     <point>
       <x>0</x>
@@ -94,7 +100,7 @@
   <obstacle>
     <position>
       <x>450</x>
-      <y>100</y>
+      <y>200</y>
     </position>
     <point>
       <x>0</x>
@@ -118,7 +124,7 @@
   <obstacle>
     <position>
       <x>650</x>
-      <y>100</y>
+      <y>200</y>
     </position>
     <point>
       <x>0</x>
@@ -142,7 +148,7 @@
   <obstacle>
     <position>
       <x>850</x>
-      <y>100</y>
+      <y>200</y>
     </position>
     <point>
       <x>0</x>
