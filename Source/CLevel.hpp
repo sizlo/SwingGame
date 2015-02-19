@@ -18,6 +18,7 @@
 #include "CPlayer.hpp"
 #include "CollisionHandler.hpp"
 #include "CLevelEndMenu.hpp"
+#include "CPauseMenu.hpp"
 #include <list>
 
 // =============================================================================
@@ -83,6 +84,7 @@ private:
     
     CLevelEndMenu               *mCompletedMenu;
     CLevelEndMenu               *mFailedMenu;
+    CPauseMenu                  *mPauseMenu;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

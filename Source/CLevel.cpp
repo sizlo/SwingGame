@@ -45,6 +45,7 @@ void CLevel::Enter()
     mPlayer->Init();
     mCompletedMenu = new CLevelEndMenu("Level completed", this);
     mFailedMenu = new CLevelEndMenu("Level failed", this);
+    mPauseMenu = new CPauseMenu(this);
     
     // Start the level
     StartLevel();
@@ -67,6 +68,7 @@ void CLevel::Exit()
     SAFE_DELETE(mPlayer);
     SAFE_DELETE(mCompletedMenu);
     SAFE_DELETE(mFailedMenu);
+    SAFE_DELETE(mPauseMenu);
     
     FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
@@ -151,14 +153,7 @@ void CLevel::Update(CTime elapsedTime)
     // Pause game on esc
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
     {
-        if (!CSwingGame::HasAllGameStates(kGameStatePaused))
-        {
-            CSwingGame::SetGameState(kGameStatePaused);
-        }
-        else
-        {
-            CSwingGame::UnsetGameState(kGameStatePaused);
-        }
+        mPauseMenu->Enter();
     }
     
     // Restart the level on R

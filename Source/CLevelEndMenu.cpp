@@ -1,5 +1,5 @@
 //
-//  CLevelCompleteMenu.cpp
+//  CLevelEndMenu.cpp
 //  SwingGame
 //
 //  Created by Tim Brier on 31/01/2015.
@@ -18,17 +18,15 @@
 // -----------------------------------------------------------------------------
 float CLevelEndMenu::smHalfWidth = 250;
 float CLevelEndMenu::smHalfHeight = 125;
-CVector2f CLevelEndMenu::smCenter = CVector2f(
-                                            GameOptions::viewWidth / 2.0f,
-                                            GameOptions::viewHeight / 2.0f
-                                              );
+CVector2f CLevelEndMenu::smCenter = CVector2f(GameOptions::viewWidth / 2.0f,
+                                              GameOptions::viewHeight / 2.0f);
 CFloatRect CLevelEndMenu::smShape = CFloatRect(smCenter.y - smHalfHeight,
-                                                    smCenter.x - smHalfWidth,
-                                                    smHalfWidth * 2.0f,
-                                                    smHalfHeight * 2.0f);
+                                               smCenter.x - smHalfWidth,
+                                               smHalfWidth * 2.0f,
+                                               smHalfHeight * 2.0f);
 
 // =============================================================================
-// CLevelCompleteMenu constructor/destructor
+// CLevelEndMenu constructor/destructor
 // -----------------------------------------------------------------------------
 CLevelEndMenu::CLevelEndMenu(std::string theTitle, CLevel *theParent)
 :   CTextMenu(theTitle, smShape),
@@ -45,7 +43,7 @@ CLevelEndMenu::~CLevelEndMenu()
 }
 
 // =============================================================================
-// CLevelCompleteMenu::Enter/Exit
+// CLevelEndMenu::Enter/Exit
 // -----------------------------------------------------------------------------
 void CLevelEndMenu::Enter()
 {
@@ -66,7 +64,7 @@ void CLevelEndMenu::Exit()
 }
 
 // =============================================================================
-// CLevelCompleteMenu::ExecuteMenuChoice
+// CLevelEndMenu::ExecuteMenuChoice
 // -----------------------------------------------------------------------------
 void CLevelEndMenu::ExecuteMenuItem(int choice)
 {
