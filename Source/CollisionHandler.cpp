@@ -220,19 +220,6 @@ bool AreIntersecting(CLine &theLine,
 {
     bool theResult = false;
     
-    // Create a bounding box for the line
-    float minX = std::min(theLine.GetStart().x, theLine.GetEnd().x);
-    float minY = std::min(theLine.GetStart().y, theLine.GetEnd().y);
-    float maxX = std::max(theLine.GetStart().x, theLine.GetEnd().x);
-    float maxY = std::max(theLine.GetStart().y, theLine.GetEnd().y);
-    CFloatRect lineBounds = CFloatRect(minX, minY, maxX - minX, maxY - minY);
-    
-    // Check the bounding box first
-    if (!theShape.getGlobalBounds().intersects(lineBounds))
-    {
-        return false;
-    }
-    
     // Now check each line in the shape
     std::list<CLine> shapeLines = theShape.GetGlobalLines();
     FOR_EACH_IN_LIST(CLine, shapeLines)
