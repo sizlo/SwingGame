@@ -31,6 +31,7 @@
 		2267171A19F295C700BF72D6 /* CConvexShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171819F295C700BF72D6 /* CConvexShape.cpp */; };
 		2267171D19F2960E00BF72D6 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171B19F2960E00BF72D6 /* CTexture.cpp */; };
 		2278E2ED1A963055006D95C1 /* CRigidSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */; };
+		2278E2F01A9648EB006D95C1 /* CCircleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2278E2EE1A9648EB006D95C1 /* CCircleShape.cpp */; };
 		229FAC0B19DDCBCD001CEFA6 /* CFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CFrontEnd.cpp */; };
 		22BBDBEE1A2B46B500775A51 /* CFlexibleSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */; };
 		22BBDBF11A2BBC6600775A51 /* CDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */; };
@@ -107,6 +108,8 @@
 		2267171C19F2960E00BF72D6 /* CTexture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTexture.hpp; sourceTree = "<group>"; };
 		2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRigidSwing.cpp; sourceTree = "<group>"; };
 		2278E2EC1A963055006D95C1 /* CRigidSwing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRigidSwing.hpp; sourceTree = "<group>"; };
+		2278E2EE1A9648EB006D95C1 /* CCircleShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCircleShape.cpp; sourceTree = "<group>"; };
+		2278E2EF1A9648EB006D95C1 /* CCircleShape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CCircleShape.hpp; sourceTree = "<group>"; };
 		229FAC0319DDC997001CEFA6 /* CRenderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CRenderable.hpp; sourceTree = "<group>"; };
 		229FAC0419DDCA1B001CEFA6 /* CUpdateable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CUpdateable.hpp; sourceTree = "<group>"; };
 		229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CMenu.hpp; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				226669731A03B34200BB750D /* CVertex.hpp */,
 				22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */,
 				22BBDBF01A2BBC6600775A51 /* CDrawable.hpp */,
+				2278E2EE1A9648EB006D95C1 /* CCircleShape.cpp */,
+				2278E2EF1A9648EB006D95C1 /* CCircleShape.hpp */,
 			);
 			path = SFMLIntegration;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				2267171D19F2960E00BF72D6 /* CTexture.cpp in Sources */,
 				2218B5FB19D3143E002A2EB7 /* SystemUtilities.mm in Sources */,
 				2267170E19F2943100BF72D6 /* CText.cpp in Sources */,
+				2278E2F01A9648EB006D95C1 /* CCircleShape.cpp in Sources */,
 				2251F46E1A7D6E6500B7628B /* CLevelEndMenu.cpp in Sources */,
 				22E8815F19F2979C0053D142 /* CMusic.cpp in Sources */,
 				22FC77DF19E04417000A507F /* pugixml.cpp in Sources */,

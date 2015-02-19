@@ -26,6 +26,7 @@
 #include "CFont.hpp"
 #include "CMusic.hpp"
 #include "CConvexShape.hpp"
+#include "CCircleShape.hpp"
 #include "CSprite.hpp"
 #include "CText.hpp"
 #include "CWindow.hpp"

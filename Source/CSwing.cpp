@@ -208,58 +208,43 @@ float CSwing::GetDistanceToBob()
 // -----------------------------------------------------------------------------
 bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
 {
-    bool theResult = false;
+    bool validPointFound = false;
     
     // Find the direction from the bob to the aim point
     CVector2f bobPosition = mBob->GetPosition();
     CVector2f aimDirection = theAimPoint - bobPosition;
     aimDirection.Normalise();
     
-    // Create a line from the bob to the max distance away that a swing could
-    // reach in the aim direction
-    CLine longestPossile = CLine(bobPosition,
-                                 bobPosition + (aimDirection * smMaxLength));
+    // Now start at the minimum swing length and sample at each unit point
+    // along the possible rope points until we reach the max swing length
+    // At each point see if an anchor collides with any obstacles
+    // As soon as it collides this is the anchor point
+    float currentLength = smMinLength;
+    CVector2f currentSamplePoint = bobPosition + (aimDirection * currentLength);
+    CCircleShape anchorShape(smAnchorGap);
+    std::list<CPhysicsBody *> obstacles = mParentLevel->GetObstacles();
+    CVector2f cv;
     
-    // Find the closest intersection of this line and any obstacle lines to the
-    // bob
-    *anchor = longestPossile.GetEnd();
-    float currentDistanceToAnchor = smMaxLength;
-    bool intersectionFound = false;
-    
-    std::list<CPhysicsBody *> theObstacles = mParentLevel->GetObstacles();
-    FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
+    while (!validPointFound && currentLength <= smMaxLength)
     {
-        std::list<CVector2f> theIntersections;
-        if (CollisionHandler::AreIntersecting(longestPossile,
-                                              *((*it)->GetShape()),
-                                              &theIntersections,
-                                              false))
+        anchorShape.setPosition(currentSamplePoint);
+        FOR_EACH_IN_LIST(CPhysicsBody*, obstacles)
         {
-            FOR_EACH_IN_LIST(CVector2f, theIntersections)
+            CConvexShape obstacleShape = *((*it)->GetShape());
+            if (CollisionHandler::AreColliding(anchorShape, obstacleShape, &cv))
             {
-                CVector2f thisIntersection = (*it);
-                CVector2f bobToThis = thisIntersection - bobPosition;
-                float distanceToThis = bobToThis.GetMagnitude();
-                if (distanceToThis < currentDistanceToAnchor
-                    && distanceToThis > smAnchorGap)
-                {
-                    intersectionFound = true;
-                    float distanceToUse = distanceToThis - smAnchorGap;
-                    bobToThis.Normalise();
-                    *anchor = bobPosition + (bobToThis * distanceToUse);
-                    currentDistanceToAnchor = distanceToUse;
-                }
+                validPointFound = true;
+                anchor->x = currentSamplePoint.x;
+                anchor->y = currentSamplePoint.y;
             }
         }
+        
+        // Now move to the next sample point
+        currentLength += 1.0f;
+        currentSamplePoint += aimDirection;
     }
     
-    // Make sure the closest instersection point is valid
-    if (intersectionFound && currentDistanceToAnchor >= smMinLength)
-    {
-        theResult = true;
-    }
-    
-    return theResult;
+    return validPointFound;
 }
 
 // =============================================================================
@@ -361,8 +346,7 @@ void CSwing::HandleCollisions()
 // -----------------------------------------------------------------------------
 void CSwing::DrawAnchorPoint(CWindow *theWindow, CVector2f theAnchor)
 {
-    sf::CircleShape theCircle(smAnchorGap);
-    theCircle.setOrigin(CVector2f(smAnchorGap, smAnchorGap));
+    CCircleShape theCircle = CCircleShape(smAnchorGap);
     theCircle.setPosition(theAnchor);
     theCircle.setOutlineColor(CColour::Black);
     theCircle.setOutlineThickness(1.0f);
