@@ -57,7 +57,7 @@ CFrontEnd::CFrontEnd() : CTextMenu(smTitle, smShape)
                     // Get the level name from the xml and add that to the menu list
                     filename = "Levels/" + filename;
                     std::string levelName = XMLInterpreter::GetLevelName(filename);
-                    AddMenuItem(levelName + " " + filename);
+                    AddMenuItem(levelName);
                     // Add the filename to our list
                     mFilenames.push_back(filename);
                 }
