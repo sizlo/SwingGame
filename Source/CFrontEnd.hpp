@@ -15,20 +15,6 @@
 #include "CTextMenu.hpp"
 
 // =============================================================================
-// Enums
-// -----------------------------------------------------------------------------
-enum EFrontEndItems
-{
-#if SG_DEBUG
-    kFEItemTestLevel,
-#endif
-    kFEItemLevel1,
-    kFEItemLevel2,
-    kFEItemLevel3,
-    kFEItemExit
-};
-
-// =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
 class CFrontEnd : public CTextMenu
@@ -47,6 +33,8 @@ public:
 private:
     static std::string smTitle;
     static CFloatRect smShape;
+    
+    std::vector<std::string>    mFilenames;
 };
 
 #endif /* defined(__SwingGame__CFrontEnd__) */

@@ -76,6 +76,30 @@ void ProcessLevel(std::string filename, CLevel *theLevel)
         }
     }
 }
+    
+// =============================================================================
+// XMLInterpreter::GetLevelName
+// -----------------------------------------------------------------------------
+std::string GetLevelName(std::string filename)
+{
+    // Read the file
+    pugi::xml_document theDocument;
+    std::string fullName = SystemUtilities::GetResourcePath() + filename;
+    pugi::xml_parse_result theResult = theDocument.load_file(fullName.c_str());
+    
+    if (theResult.status != pugi::status_ok)
+    {
+        DEBUG_LOG("Error parsisng level xml file: %s", filename.c_str());
+        DEBUG_LOG("Status code: %d", theResult.status);
+    }
+    
+    // Get the name and ID from the root element
+    pugi::xml_node theRoot = theDocument.document_element();
+    CHECK_ATTRIBUTE(theRoot, "name");
+    std::string theName = theRoot.attribute("name").as_string();
+    
+    return theName;
+}
 
 // =============================================================================
 // XMLInterpreter::GetVector2f

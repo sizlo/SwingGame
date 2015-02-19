@@ -256,7 +256,8 @@ CDebugHelper * CSwingGame::GetDebugHelper()
 // CSwingGame::GoToLocation
 // Go to a game location (level/menu)
 // -----------------------------------------------------------------------------
-void CSwingGame::GoToLocation(EGameLocation theLocation)
+void CSwingGame::GoToLocation(EGameLocation theLocation,
+                              std::string filename /* = std::string() */)
 {
     // If we're already in a location leave it
     if (smCurrentLocation != NULL)
@@ -272,24 +273,9 @@ void CSwingGame::GoToLocation(EGameLocation theLocation)
             smCurrentLocation = new CFrontEnd();
             break;
             
-        case kGameLocationTestLevel:
-            DEBUG_LOG("Test level requested");
-            smCurrentLocation = new CLevel("testLevel.xml");
-            break;
-            
-        case kGameLocationLevel1:
-            DEBUG_LOG("Level 1 requested");
-            smCurrentLocation = new CLevel("level1.xml");
-            break;
-            
-        case kGameLocationLevel2:
-            DEBUG_LOG("Level 2 requested");
-            smCurrentLocation = new CLevel("level2.xml");
-            break;
-            
-        case kGameLocationLevel3:
-            DEBUG_LOG("Level 3 requested");
-            smCurrentLocation = new CLevel("level3.xml");
+        case kGameLocationLevel:
+            DEBUG_LOG("%s requested", filename.c_str());
+            smCurrentLocation = new CLevel(filename);
             break;
             
         default:

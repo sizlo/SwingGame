@@ -66,7 +66,8 @@ public:
     static void UnregisterRenderable(CRenderable    *theRenderable);
     
     // Go to a game location
-    static void GoToLocation(EGameLocation theLocation);
+    static void GoToLocation(EGameLocation theLocation,
+                             std::string filename = std::string());
     
     static CDebugHelper * GetDebugHelper();
 private:

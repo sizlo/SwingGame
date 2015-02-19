@@ -38,6 +38,9 @@ namespace XMLInterpreter
     // Populate the given level using the given xml file
     void ProcessLevel(std::string filename, CLevel *theLevel);
     
+    // Get just a level name from a given xml file
+    std::string GetLevelName(std::string filename);
+    
     // Get a given data type from an xml node
     CVector2f       GetVector2f     (pugi::xml_node theRoot);
     CPhysicsBody    GetLevelItem    (pugi::xml_node theRoot);

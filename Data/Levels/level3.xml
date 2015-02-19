@@ -1,4 +1,4 @@
-<level name="Test Level">
+<level name="Level 3">
   
   <start>
     <position>
@@ -37,7 +37,7 @@
 
   <background>TestLevelBackground.png</background>
 
-  <!-- swing platform -->
+  <!-- start platform -->
   <obstacle>
     <position>
       <x>50</x>
@@ -61,11 +61,35 @@
     </point>
   </obstacle>
 
-  <!-- swing platform -->
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
   <obstacle>
     <position>
       <x>250</x>
-      <y>100</y>
+      <y>400</y>
     </position>
     <point>
       <x>0</x>
@@ -85,11 +109,11 @@
     </point>
   </obstacle>
 
-  <!-- swing platform -->
+  <!-- floor platform -->
   <obstacle>
     <position>
       <x>450</x>
-      <y>100</y>
+      <y>400</y>
     </position>
     <point>
       <x>0</x>
@@ -109,11 +133,11 @@
     </point>
   </obstacle>
 
-  <!-- swing platform -->
+  <!-- floor platform -->
   <obstacle>
     <position>
       <x>650</x>
-      <y>100</y>
+      <y>400</y>
     </position>
     <point>
       <x>0</x>
@@ -133,11 +157,11 @@
     </point>
   </obstacle>
 
-  <!-- swing platform -->
+  <!-- floor platform -->
   <obstacle>
     <position>
       <x>850</x>
-      <y>100</y>
+      <y>400</y>
     </position>
     <point>
       <x>0</x>
