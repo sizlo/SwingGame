@@ -18,6 +18,7 @@
 // CLevel constructor/destructor
 // -----------------------------------------------------------------------------
 CLevel::CLevel(std::string filename)
+: mTutorialText()
 {
     XMLInterpreter::ProcessLevel(filename, this);
     mGravityAcceleration = CVector2f(0.0f, 500.0f); // Read from file?
@@ -129,6 +130,15 @@ void CLevel::AddObstacle(CPhysicsBody theObstacle)
 }
 
 // =============================================================================
+// CLevel::SetTutorialText
+// -----------------------------------------------------------------------------
+void CLevel::SetTutorialText(CText theText)
+{
+    mTutorialText = theText;
+    mTutorialText.setColor(CColour::Black);
+}
+
+// =============================================================================
 // CLevel::GetObstacles
 // -----------------------------------------------------------------------------
 std::list<CPhysicsBody *> CLevel::GetObstacles()
@@ -196,6 +206,9 @@ void CLevel::Draw(CWindow *theWindow)
     {
         theWindow->DrawShape(*((*it)->GetShape()));
     }
+    
+    // Draw the tutorial text
+    theWindow->draw(mTutorialText);
 }
 
 // =============================================================================

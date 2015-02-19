@@ -14,6 +14,7 @@
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
 #include "CFont.hpp"
+#include "CVector2.hpp"
 
 // =============================================================================
 // Class definition
@@ -21,7 +22,9 @@
 class CText : public sf::Text
 {
 public:
-    CText(std::string theString, CFont &theFont, unsigned int fontSize = 12);
+    CText();
+    CText(std::string theString, CFont &theFont, unsigned int theFontSize = 12);
+    CText(std::string theString, CVector2f thePos, unsigned int theFontSize = 12);
     ~CText();
 };
 

@@ -52,6 +52,7 @@ public:
     void SetGoal            (CPhysicsBody   theGoal);
     void SetBackground      (CSprite        theBackground);
     void AddObstacle        (CPhysicsBody   theObstacle);
+    void SetTutorialText    (CText          theText);
     
     // Getters
     std::list<CPhysicsBody *>   GetObstacles();
@@ -87,6 +88,8 @@ private:
     CLevelEndMenu               *mCompletedMenu;
     CLevelEndMenu               *mFailedMenu;
     CPauseMenu                  *mPauseMenu;
+    
+    CText                       mTutorialText;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

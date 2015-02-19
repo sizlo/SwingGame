@@ -47,6 +47,7 @@ void ProcessLevel(std::string filename, CLevel *theLevel)
     CHECK_CHILD(theRoot, "goal");
     CHECK_CHILD(theRoot, "background");
     // Don't check for obstacles, strictly speaking they are not required
+    // Don't check tutorial text, it's not needed
     
     // Go through all children of the root and process each in turn
     for (pugi::xml_node theNode = theRoot.first_child();
@@ -69,6 +70,10 @@ void ProcessLevel(std::string filename, CLevel *theLevel)
         else if (strcmp(theNode.name(), "obstacle") == 0)
         {
             theLevel->AddObstacle(GetObstacle(theNode));
+        }
+        else if (strcmp(theNode.name(), "tutorialText") == 0)
+        {
+            theLevel->SetTutorialText(GetLevelText(theNode));
         }
         else
         {
@@ -265,6 +270,20 @@ ESwingTypes GetSwingType(pugi::xml_node theRoot)
         theResult = kSwingTypeSpring;
     }
     
+    return theResult;
+}
+    
+// =============================================================================
+// XMLInterpreter::GetLevelText
+// -----------------------------------------------------------------------------
+CText GetLevelText(pugi::xml_node theRoot)
+{
+    CHECK_CHILD(theRoot, "text");
+    
+    std::string theString = theRoot.child("text").text().as_string();
+    CVector2f thePos = GetVector2f(theRoot);
+    
+    CText theResult = CText(theString, thePos);
     return theResult;
 }
     

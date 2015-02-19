@@ -48,6 +48,7 @@ namespace XMLInterpreter
     CPhysicsBody    GetGoal         (pugi::xml_node theRoot);
     CPhysicsBody    GetObstacle     (pugi::xml_node theRoot);
     ESwingTypes     GetSwingType    (pugi::xml_node theRoot);
+    CText           GetLevelText    (pugi::xml_node theRoot);
 }
 
 #endif /* defined(__SwingGame__XMLInterpreter__) */
