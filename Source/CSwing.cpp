@@ -169,6 +169,15 @@ bool CSwing::ShouldUpdateForState(EGameState theState)
 }
 
 // =============================================================================
+// CSwing::CanJumpFrom
+// -----------------------------------------------------------------------------
+bool CSwing::CanJumpFrom()
+{
+    // Most swings can't be jumped from
+    return false;
+}
+
+// =============================================================================
 // CSwing::IsAttached
 // -----------------------------------------------------------------------------
 bool CSwing::IsAttached()

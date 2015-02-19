@@ -52,6 +52,7 @@ public:
     virtual bool ShouldUpdateForState(EGameState theState);
     
     virtual bool IsAttached();
+    virtual bool CanJumpFrom();
     virtual CColour GetColour();
     
 protected:

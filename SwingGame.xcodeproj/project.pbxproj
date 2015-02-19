@@ -30,6 +30,7 @@
 		2267171719F2957600BF72D6 /* CSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171519F2957600BF72D6 /* CSprite.cpp */; };
 		2267171A19F295C700BF72D6 /* CConvexShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171819F295C700BF72D6 /* CConvexShape.cpp */; };
 		2267171D19F2960E00BF72D6 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171B19F2960E00BF72D6 /* CTexture.cpp */; };
+		2278E2ED1A963055006D95C1 /* CRigidSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */; };
 		229FAC0B19DDCBCD001CEFA6 /* CFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CFrontEnd.cpp */; };
 		22BBDBEE1A2B46B500775A51 /* CFlexibleSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */; };
 		22BBDBF11A2BBC6600775A51 /* CDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */; };
@@ -104,6 +105,8 @@
 		2267171919F295C700BF72D6 /* CConvexShape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CConvexShape.hpp; sourceTree = "<group>"; };
 		2267171B19F2960E00BF72D6 /* CTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CTexture.cpp; sourceTree = "<group>"; };
 		2267171C19F2960E00BF72D6 /* CTexture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CTexture.hpp; sourceTree = "<group>"; };
+		2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CRigidSwing.cpp; sourceTree = "<group>"; };
+		2278E2EC1A963055006D95C1 /* CRigidSwing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRigidSwing.hpp; sourceTree = "<group>"; };
 		229FAC0319DDC997001CEFA6 /* CRenderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CRenderable.hpp; sourceTree = "<group>"; };
 		229FAC0419DDCA1B001CEFA6 /* CUpdateable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CUpdateable.hpp; sourceTree = "<group>"; };
 		229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CMenu.hpp; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				2251F46D1A7D6E6500B7628B /* CLevelEndMenu.hpp */,
 				2251F47C1A9623A500B7628B /* CPauseMenu.cpp */,
 				2251F47D1A9623A500B7628B /* CPauseMenu.hpp */,
+				2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */,
+				2278E2EC1A963055006D95C1 /* CRigidSwing.hpp */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -450,6 +455,7 @@
 				22E8815F19F2979C0053D142 /* CMusic.cpp in Sources */,
 				22FC77DF19E04417000A507F /* pugixml.cpp in Sources */,
 				22E8816E19F2A5E70053D142 /* CTime.cpp in Sources */,
+				2278E2ED1A963055006D95C1 /* CRigidSwing.cpp in Sources */,
 				2267171119F294A200BF72D6 /* CClock.cpp in Sources */,
 				222AEBD219D5BC690057F737 /* CSwingGame.cpp in Sources */,
 				2267171A19F295C700BF72D6 /* CConvexShape.cpp in Sources */,

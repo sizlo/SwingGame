@@ -16,6 +16,7 @@
 #include "CLevel.hpp"
 #include "CLine.hpp"
 #include "CollisionHandler.hpp"
+#include "CRigidSwing.hpp"
 #include "CFlexibleSwing.hpp"
 #include "CSpringSwing.hpp"
 
@@ -119,7 +120,7 @@ void CPlayer::Init()
     CSwingGame::RegisterUpdateable(this);
     CSwingGame::RegisterRenderable(this);
     
-    mSwings[kSwingTypeRigid] = new CSwing(this, mParentLevel);
+    mSwings[kSwingTypeRigid] = new CRigidSwing(this, mParentLevel);
     mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
     mSwings[kSwingTypeSpring] = new CSpringSwing(this, mParentLevel);
 }
@@ -196,7 +197,7 @@ void CPlayer::HandleInput()
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Space))
     {
         // Only jump if we're attached to a swing, and detach it when we do
-        if (mCurrentSwing->IsAttached())
+        if (mCurrentSwing->CanJumpFrom())
         {
             mCurrentSwing->Detach();
             SetVelocity(GetVelocity() + sJumpVelocity);
