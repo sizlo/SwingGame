@@ -182,6 +182,7 @@ SStartPosition GetStartPosition(pugi::xml_node theRoot)
     CHECK_CHILD(theRoot, "position");
     CHECK_CHILD(theRoot, "swingTarget");
     CHECK_CHILD(theRoot, "velocity")
+    CHECK_CHILD(theRoot, "swingType")
     
     SStartPosition theResult;
     
@@ -200,6 +201,10 @@ SStartPosition GetStartPosition(pugi::xml_node theRoot)
         else if (strcmp(theNode.name(), "velocity") == 0)
         {
             theResult.mVelocity = XMLInterpreter::GetVector2f(theNode);
+        }
+        else if (strcmp(theNode.name(), "swingType") == 0)
+        {
+            theResult.mSwingType = XMLInterpreter::GetSwingType(theNode);
         }
         else
         {
@@ -236,6 +241,29 @@ CPhysicsBody GetObstacle(pugi::xml_node theRoot)
     
     // Default obstacle to black
     theResult.GetShape()->setFillColor(CColour::Black);
+    
+    return theResult;
+}
+    
+// =============================================================================
+// XMLInterpreter::GetSwingType
+// -----------------------------------------------------------------------------
+ESwingTypes GetSwingType(pugi::xml_node theRoot)
+{
+    ESwingTypes theResult = kSwingTypeRigid;
+    
+    if (strcmp(theRoot.text().as_string(), "rigid") == 0)
+    {
+        theResult = kSwingTypeRigid;
+    }
+    else if (strcmp(theRoot.text().as_string(), "flexible") == 0)
+    {
+        theResult = kSwingTypeFlexible;
+    }
+    else if (strcmp(theRoot.text().as_string(), "spring") == 0)
+    {
+        theResult = kSwingTypeSpring;
+    }
     
     return theResult;
 }

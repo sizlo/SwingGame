@@ -26,9 +26,10 @@
 // -----------------------------------------------------------------------------
 struct SStartPosition
 {
-    CVector2f mPosition;
-    CVector2f mSwingTarget;
-    CVector2f mVelocity;
+    CVector2f   mPosition;
+    CVector2f   mSwingTarget;
+    CVector2f   mVelocity;
+    ESwingTypes mSwingType;
 };
 
 // =============================================================================

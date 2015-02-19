@@ -13,6 +13,7 @@
       <x>0</x>
       <y>0</y>
     </velocity>
+    <swingType>rigid</swingType>
   </start>
 
   <!-- Square goal -->

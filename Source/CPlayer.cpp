@@ -151,7 +151,7 @@ void CPlayer::StartLevel(SStartPosition theStartPos)
         mSwings[i]->Detach();
     }
     
-    mSwingToFire = kSwingTypeRigid;
+    mSwingToFire = theStartPos.mSwingType;
     mCurrentSwing = mSwings[mSwingToFire];
     
     mCurrentSwing->AttemptToAttach(theStartPos.mSwingTarget);
