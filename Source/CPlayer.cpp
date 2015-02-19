@@ -144,7 +144,7 @@ void CPlayer::Cleanup()
 void CPlayer::StartLevel(SStartPosition theStartPos)
 {
     GetShape()->setPosition(theStartPos.mPosition);
-    SetVelocity(CVector2f(0.0f, 0.0f));
+    SetVelocity(theStartPos.mVelocity);
     
     for (int i = 0; i < kSwingTypeMax; i++)
     {

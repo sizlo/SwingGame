@@ -28,6 +28,7 @@ struct SStartPosition
 {
     CVector2f mPosition;
     CVector2f mSwingTarget;
+    CVector2f mVelocity;
 };
 
 // =============================================================================

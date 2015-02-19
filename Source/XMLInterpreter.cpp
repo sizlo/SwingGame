@@ -181,6 +181,7 @@ SStartPosition GetStartPosition(pugi::xml_node theRoot)
     DEBUG_LOG("Processing start node");
     CHECK_CHILD(theRoot, "position");
     CHECK_CHILD(theRoot, "swingTarget");
+    CHECK_CHILD(theRoot, "velocity")
     
     SStartPosition theResult;
     
@@ -195,6 +196,10 @@ SStartPosition GetStartPosition(pugi::xml_node theRoot)
         else if (strcmp(theNode.name(), "swingTarget") == 0)
         {
             theResult.mSwingTarget = XMLInterpreter::GetVector2f(theNode);
+        }
+        else if (strcmp(theNode.name(), "velocity") == 0)
+        {
+            theResult.mVelocity = XMLInterpreter::GetVector2f(theNode);
         }
         else
         {
