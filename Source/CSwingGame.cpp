@@ -39,7 +39,7 @@ CDebugHelper *theDebugHelper;
 // =============================================================================
 // CSwingGame constructor/destructor
 // -----------------------------------------------------------------------------
-CSwingGame::CSwingGame() :  mWindowTitle("SwingGame v0.0"),
+CSwingGame::CSwingGame() :  mWindowTitle("SwingGame v" SG_VERSION_STRING),
                             mWindow(NULL),
                             mFPS(0),
 #if !USE_SFML_VSYNC
