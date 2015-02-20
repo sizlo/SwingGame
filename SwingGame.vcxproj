@@ -19,19 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CFlexibleSwing.cpp" />
+    <ClCompile Include="Source\CFrontEnd.cpp" />
     <ClCompile Include="Source\CLevel.cpp" />
+    <ClCompile Include="Source\CLevelEndMenu.cpp" />
     <ClCompile Include="Source\CLine.cpp" />
+    <ClCompile Include="Source\CollisionHandler.cpp" />
+    <ClCompile Include="Source\CPauseMenu.cpp" />
+    <ClCompile Include="Source\CPhysicsBody.cpp" />
     <ClCompile Include="Source\CPlayer.cpp" />
+    <ClCompile Include="Source\CRigidSwing.cpp" />
+    <ClCompile Include="Source\CSpringSwing.cpp" />
+    <ClCompile Include="Source\CSwing.cpp" />
     <ClCompile Include="Source\CSwingGame.cpp" />
-    <ClCompile Include="Source\CTextFrontEnd.cpp" />
+    <ClCompile Include="Source\CTextMenu.cpp" />
     <ClCompile Include="Source\CTextureBank.cpp" />
     <ClCompile Include="Source\DebugOptions.cpp" />
     <ClCompile Include="Source\GameOptions.cpp" />
     <ClCompile Include="Source\Libraries\pugixml\pugixml.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CCircleShape.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CClock.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CColour.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CConvexShape.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CDrawable.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CFloatRect.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CFont.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CImage.cpp" />
@@ -40,10 +51,25 @@
     <ClCompile Include="Source\SFMLIntegration\CText.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTexture.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTime.cpp" />
+    <ClInclude Include="Source\CFlexibleSwing.hpp" />
+    <ClInclude Include="Source\CFrontEnd.hpp" />
+    <ClInclude Include="Source\CLevelEndMenu.hpp" />
+    <ClInclude Include="Source\CollisionHandler.hpp" />
+    <ClInclude Include="Source\CPauseMenu.hpp" />
+    <ClInclude Include="Source\CPhysicsBody.hpp" />
+    <ClInclude Include="Source\CRigidSwing.hpp" />
+    <ClInclude Include="Source\CSpringSwing.hpp" />
+    <ClInclude Include="Source\CSwing.hpp" />
+    <ClInclude Include="Source\CTextMenu.hpp" />
+    <ClInclude Include="Source\Libraries\dirent.h" />
+    <ClInclude Include="Source\SFMLIntegration\CCircleShape.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CDrawable.hpp" />
     <ClInclude Include="Source\SFMLIntegration\CVector2.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </ClInclude>
+    <ClCompile Include="Source\SFMLIntegration\CVertex.cpp" />
+    <ClCompile Include="Source\SFMLIntegration\CView.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CWindow.cpp" />
     <ClCompile Include="Source\TextUtilties.cpp" />
     <ClCompile Include="Source\XMLInterpreter.cpp" />
@@ -56,7 +82,6 @@
     <ClInclude Include="Source\CPlayer.hpp" />
     <ClInclude Include="Source\CRenderable.hpp" />
     <ClInclude Include="Source\CSwingGame.hpp" />
-    <ClInclude Include="Source\CTextFrontEnd.hpp" />
     <ClInclude Include="Source\CTextureBank.hpp" />
     <ClInclude Include="Source\CUpdateable.hpp" />
     <ClInclude Include="Source\DebugOptions.hpp" />
@@ -80,6 +105,8 @@
     <ClInclude Include="Source\SFMLIntegration\CTexture.hpp" />
     <ClInclude Include="Source\SFMLIntegration\CTime.hpp" />
     <ClInclude Include="Source\SFMLIntegration\CVector2.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CVertex.hpp" />
+    <ClInclude Include="Source\SFMLIntegration\CView.hpp" />
     <ClInclude Include="Source\SFMLIntegration\CWindow.hpp" />
     <ClInclude Include="Source\SFMLIntegration\SFMLIntegration.hpp" />
     <ClInclude Include="Source\SystemUtilities.hpp" />

@@ -82,14 +82,53 @@
     <ClCompile Include="Source\CPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CTextFrontEnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CTextureBank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\SystemUtilities.mm">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CFlexibleSwing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CFrontEnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CLevelEndMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CPauseMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CPhysicsBody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CRigidSwing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CSpringSwing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CSwing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CTextMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CVertex.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CView.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CCircleShape.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SFMLIntegration\CDrawable.cpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +231,6 @@
     <ClInclude Include="Source\CRenderable.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CTextFrontEnd.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CTextureBank.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -203,6 +239,51 @@
     </ClInclude>
     <ClInclude Include="Source\SFMLIntegration\CVector2.cpp">
       <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CFlexibleSwing.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CFrontEnd.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CLevelEndMenu.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionHandler.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CPauseMenu.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CPhysicsBody.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CRigidSwing.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CSpringSwing.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CSwing.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CTextMenu.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CVertex.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CView.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CCircleShape.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SFMLIntegration\CDrawable.hpp">
+      <Filter>Source Files\SFMLIntegration</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Libraries\dirent.h">
+      <Filter>Source Files\Libraries</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
