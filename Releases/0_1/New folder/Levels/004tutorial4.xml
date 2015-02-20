@@ -1,0 +1,75 @@
+<level name="Tutorial 4">
+  
+  <start>
+    <position>
+      <x>366</x>
+      <y>260</y>
+    </position>
+    <swingTarget>
+      <x>550</x>
+      <y>250</y>
+    </swingTarget>
+    <velocity>
+      <x>0</x>
+      <y>0</y>
+    </velocity>
+    <swingType>rigid</swingType>
+  </start>
+  
+  <tutorialText>
+      <text>Press space to jump</text>
+      <x>400</x>
+      <y>370</y>
+  </tutorialText>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>530</x>
+      <y>190</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>400</x>
+      <y>230</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+</level>

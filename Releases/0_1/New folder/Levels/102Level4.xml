@@ -1,0 +1,141 @@
+<level name="Level 4">
+    
+    <start>
+        <position>
+            <x>94</x>
+            <y>100</y>
+        </position>
+        <swingTarget>
+            <x>94</x>
+            <y>50</y>
+        </swingTarget>
+        <velocity>
+            <x>0</x>
+            <y>0</y>
+        </velocity>
+        <swingType>flexible</swingType>
+    </start>
+    
+    <!-- Square goal -->
+    <goal>
+        <position>
+            <x>774</x>
+            <y>300</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>100</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>100</x>
+            <y>100</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>100</y>
+        </point>
+    </goal>
+    
+    <background>TestLevelBackground.png</background>
+    
+    <!-- starting platform -->
+    <obstacle>
+        <position>
+            <x>79</x>
+            <y>30</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>30</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>30</x>
+            <y>20</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>20</y>
+        </point>
+    </obstacle>
+    
+    <!-- first vertical obstacle -->
+    <obstacle>
+        <position>
+            <x>188</x>
+            <y>0</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>668</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>668</y>
+        </point>
+    </obstacle>
+    
+    <!-- second vertical obstacle -->
+    <obstacle>
+        <position>
+            <x>396</x>
+            <y>300</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>468</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>468</y>
+        </point>
+    </obstacle>
+    
+    <!-- third vertical obstacle -->
+    <obstacle>
+        <position>
+            <x>604</x>
+            <y>0</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>20</x>
+            <y>468</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>468</y>
+        </point>
+    </obstacle>
+    
+</level>
