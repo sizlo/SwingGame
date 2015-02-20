@@ -215,17 +215,42 @@ bool CSwing::IsThereAValidAnchor(CVector2f theAimPoint, CVector2f *anchor)
     CVector2f aimDirection = theAimPoint - bobPosition;
     aimDirection.Normalise();
     
-    // Now start at the minimum swing length and sample at each unit point
-    // along the possible rope points until we reach the max swing length
-    // At each point see if an anchor collides with any obstacles
-    // As soon as it collides this is the anchor point
-    float currentLength = smMinLength;
-    CVector2f currentSamplePoint = bobPosition + (aimDirection * currentLength);
+    // Make sure there is nothing in the way of the swing until we reach the
+    // minimum swing length
+    float currentLength = 0.0f;
+    CVector2f currentSamplePoint = bobPosition;
     CCircleShape anchorShape(smAnchorGap);
     std::list<CPhysicsBody *> obstacles = mParentLevel->GetObstacles();
     CVector2f cv;
     
-    while (!validPointFound && currentLength <= smMaxLength)
+    bool blockingObjectFound = false;
+    while (!blockingObjectFound && currentLength < smMinLength)
+    {
+        anchorShape.setPosition(currentSamplePoint);
+        FOR_EACH_IN_LIST(CPhysicsBody*, obstacles)
+        {
+            CConvexShape obstacleShape = *((*it)->GetShape());
+            if (CollisionHandler::AreColliding(anchorShape, obstacleShape, &cv))
+            {
+                blockingObjectFound = true;
+            }
+        }
+        
+        // Now move to the next sample point
+        currentLength += 1.0f;
+        currentSamplePoint += aimDirection;
+    }
+    
+    // Now start at the minimum swing length and sample at each unit point
+    // along the possible rope points until we reach the max swing length
+    // At each point see if an anchor collides with any obstacles
+    // As soon as it collides this is the anchor point
+    currentLength = smMinLength;
+    currentSamplePoint = bobPosition + (aimDirection * currentLength);
+    
+    while (!validPointFound
+           && !blockingObjectFound
+           && currentLength <= smMaxLength)
     {
         anchorShape.setPosition(currentSamplePoint);
         FOR_EACH_IN_LIST(CPhysicsBody*, obstacles)
