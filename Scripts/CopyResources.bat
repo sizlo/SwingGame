@@ -3,7 +3,7 @@ set solutionDir=%1
 set targetDir=%2
 
 :: Windows resources
-xcopy /Y "%solutionDir%WinResources" "%targetDir%"
+xcopy /Y /E "%solutionDir%WinResources" "%targetDir%"
 
 :: Game data
-xcopy /Y "%solutionDir%Data" "%targetDir%"
+xcopy /Y /E "%solutionDir%Data" "%targetDir%"
