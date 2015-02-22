@@ -116,6 +116,32 @@ void CLevel::ResumeLevel()
 }
 
 // =============================================================================
+// CLevel:ReactToFocusLost
+// -----------------------------------------------------------------------------
+void CLevel::ReactToFocusLost()
+{
+    mShouldResumeOnFocusGained = false;
+    
+    // Pause the game if it isn't already
+    if (!CSwingGame::HasAllGameStates(kGameStatePaused))
+    {
+        PauseLevel();
+        mShouldResumeOnFocusGained = true;
+    }
+}
+
+// =============================================================================
+// CLevel:ReactToFocusGained
+// -----------------------------------------------------------------------------
+void CLevel::ReactToFocusGained()
+{
+    if (mShouldResumeOnFocusGained)
+    {
+        ResumeLevel();
+    }
+}
+
+// =============================================================================
 // CLevel::SetName
 // -----------------------------------------------------------------------------
 void CLevel::SetName(std::string theName)

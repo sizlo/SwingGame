@@ -341,10 +341,7 @@ void CSwingGame::GoToLocation(EGameLocation theLocation,
 // Process all events recieved this cycle
 // -----------------------------------------------------------------------------
 void CSwingGame::ProcessEvents()
-{   
-    // Remember if we were paused when focus was lost
-    static bool wasPaused = false;
-
+{
     // Clear the last cycles keypress/mouse event list
     SystemUtilities::ClearInputEvents();
     
@@ -383,23 +380,14 @@ void CSwingGame::ProcessEvents()
                 break;
 
             case CEvent::GainedFocus:
-                // If we weren't paused when we lost focus then unpause now
-                if (!wasPaused)
-                {
-                    CSwingGame::UnsetGameState(kGameStatePaused);
-                }
+                smCurrentLocation->ReactToFocusGained();
+                
                 // Skip a frame when we gain focus
                 mShouldSkipUpdateFrame = true;
                 break;
 
             case CEvent::LostFocus:
-                // When we lose focus remember if we're paused
-                wasPaused = CSwingGame::HasAllGameStates(kGameStatePaused);
-                // If we weren't pause then pause now
-                if (!wasPaused)
-                {
-                    CSwingGame::SetGameState(kGameStatePaused);
-                }
+                smCurrentLocation->ReactToFocusLost();
                 break;
                 
             default:

@@ -48,6 +48,9 @@ public:
     void PauseLevel();
     void ResumeLevel();
     
+    void ReactToFocusLost();
+    void ReactToFocusGained();
+    
     // Setters
     void SetName            (std::string    theName);
     void SetStartPosition   (SStartPosition thePosition);
@@ -97,6 +100,8 @@ private:
     CText                       mTutorialText;
     
     CPauseableClock             mLevelClock;
+    
+    bool                        mShouldResumeOnFocusGained;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
