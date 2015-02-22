@@ -62,6 +62,9 @@ CSwingGame::~CSwingGame()
 // -----------------------------------------------------------------------------
 void CSwingGame::Init()
 {
+    // Initialise game options
+    GameOptions::Init();
+
     // Create the game window
     mWindow = new CWindow(GameOptions::windowWidth,
                           GameOptions::windowHeight,

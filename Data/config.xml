@@ -1,0 +1,5 @@
+<config>
+  <windowHeight>768</windowHeight>
+  <windowWidth>1024</windowWidth>
+  <useVsync>true</useVsync>
+</config>

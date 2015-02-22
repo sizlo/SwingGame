@@ -35,6 +35,9 @@
 // -----------------------------------------------------------------------------
 namespace XMLInterpreter
 {
+    // Set the game options from a config file
+    void ReadConfig(std::string filename);
+
     // Populate the given level using the given xml file
     void ProcessLevel(std::string filename, CLevel *theLevel);
     
@@ -42,6 +45,8 @@ namespace XMLInterpreter
     std::string GetLevelName(std::string filename);
     
     // Get a given data type from an xml node
+    int             GetInt          (pugi::xml_node theRoot);
+    bool            GetBool         (pugi::xml_node theRoot);
     CVector2f       GetVector2f     (pugi::xml_node theRoot);
     CPhysicsBody    GetLevelItem    (pugi::xml_node theRoot);
     SStartPosition  GetStartPosition(pugi::xml_node theRoot);

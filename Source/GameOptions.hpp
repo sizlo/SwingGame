@@ -23,6 +23,8 @@ namespace GameOptions
     extern float        viewWidth;
     extern bool         doVsync;
     extern unsigned int maxFPS;
+
+    extern void Init();
 };
 
 #endif /* defined(__SwingGame__GameOptions__) */

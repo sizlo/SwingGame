@@ -11,9 +11,57 @@
 // -----------------------------------------------------------------------------
 #include "XMLInterpreter.hpp"
 #include "SystemUtilities.hpp"
+#include "GameOptions.hpp"
 
 namespace XMLInterpreter
 {
+
+// =============================================================================
+// XMLInterpreter::ReadConfig
+// Set the game options from a config file
+// -----------------------------------------------------------------------------
+void ReadConfig(std::string filename)
+{
+    // Read the file
+    pugi::xml_document theDocument;
+    std::string fullName = SystemUtilities::GetResourcePath() + filename;
+    pugi::xml_parse_result theResult = theDocument.load_file(fullName.c_str());
+
+    if (theResult.status != pugi::status_ok)
+    {
+        DEBUG_LOG("Error parsisng config xml file: %s", filename.c_str());
+        DEBUG_LOG("Status code: %d", theResult.status);
+        
+        // Bail out
+        return;
+    }
+
+    // Begin processing
+    pugi::xml_node theRoot = theDocument.document_element();
+
+    // Go through all children of the root and process each in turn
+    for (pugi::xml_node theNode = theRoot.first_child();
+         theNode;
+         theNode = theNode.next_sibling())
+    {
+        if (strcmp(theNode.name(), "windowHeight") == 0)
+        {
+            GameOptions::windowHeight = GetInt(theNode);
+        }
+        else if (strcmp(theNode.name(), "windowWidth") == 0)
+        {
+            GameOptions::windowWidth = GetInt(theNode);
+        }
+        else if (strcmp(theNode.name(), "useVsync") == 0)
+        {
+            GameOptions::doVsync = GetBool(theNode);
+        }
+        else
+        {
+             DEBUG_LOG("Unknown xml node: %s", theNode.name());
+        }
+    }
+}
     
 // =============================================================================
 // XMLInterpreter::ProcessLevel
@@ -104,6 +152,26 @@ std::string GetLevelName(std::string filename)
     std::string theName = theRoot.attribute("name").as_string();
     
     return theName;
+}
+
+// =============================================================================
+// XMLInterpreter::GetInt
+// -----------------------------------------------------------------------------
+int GetInt(pugi::xml_node theRoot)
+{
+    int theResult = 0;
+    theResult = theRoot.text().as_int();
+    return theResult;
+}
+
+// =============================================================================
+// XMLInterpreter::GetBool
+// -----------------------------------------------------------------------------
+bool GetBool(pugi::xml_node theRoot)
+{
+    int theResult = 0;
+    theResult = theRoot.text().as_bool();
+    return theResult;
 }
 
 // =============================================================================

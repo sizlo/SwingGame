@@ -10,6 +10,7 @@
 // Include Files
 // -----------------------------------------------------------------------------
 #include "GameOptions.hpp"
+#include "XMLInterpreter.hpp"
 
 namespace GameOptions
 {
@@ -25,5 +26,14 @@ float           viewHeight      = 768.0f;
 float           viewWidth       = 1024.0f;
 bool            doVsync         = true;
 unsigned int    maxFPS          = 60;
+
+// =============================================================================
+// GameOptions::Init
+// Read the config from a file
+// -----------------------------------------------------------------------------
+void Init()
+{
+    XMLInterpreter::ReadConfig("config.xml");
+}
 
 } // namespace GameOptions
