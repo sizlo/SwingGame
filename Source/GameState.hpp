@@ -17,8 +17,7 @@ enum EGameState
     kGameStateFrontEnd  = 1 << 0,
     kGameStateInGame    = 1 << 1,
     kGameStatePaused    = 1 << 2,
-    kGameStateInactive  = 1 << 3,
-    kGameStateUpdating  = 1 << 4
+    kGameStateUpdating  = 1 << 3
 };
 
 #endif
