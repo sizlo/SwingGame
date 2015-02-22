@@ -295,10 +295,33 @@ void CLevel::WinLevel()
     // Pause the game
     PauseLevel();
     
+    std::map<std::string, CTime> bestTimes = XMLInterpreter::ReadBestTimes("times.xml");
+    
+    // Do we have a best time for this level
+    CTime thisTime = mLevelClock.GetElapsedTime();
+    CTime bestTime = thisTime;
+    std::string key = mName;
+    std::replace(key.begin(), key.end(), ' ', '_');
+    if (bestTimes.count(key) > 0)
+    {
+        bestTime = bestTimes[key];
+    }
+    
+    // Was this time better than our best
+    if (thisTime < bestTime)
+    {
+        bestTime = thisTime;
+    }
+    
+    // Save out best times
+    bestTimes[key] = bestTime;
+    XMLInterpreter::WriteBestTimes("times.xml", bestTimes);
+    
+    
     std::string timeString = "Your time: ";
-    timeString += mLevelClock.GetElapsedTime().AsString();
+    timeString += thisTime.AsString();
     timeString += "\nBest time: ";
-    timeString += mLevelClock.GetElapsedTime().AsString();
+    timeString += bestTime.AsString();
     mCompletedMenu->SetExtraText(timeString);
     
     mCompletedMenu->Enter();

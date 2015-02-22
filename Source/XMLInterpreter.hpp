@@ -37,6 +37,11 @@ namespace XMLInterpreter
 {
     // Set the game options from a config file
     void ReadConfig(std::string filename);
+    
+    // Read/write the players best times
+    std::map<std::string, CTime> ReadBestTimes(std::string filename);
+    void WriteBestTimes(std::string filename,
+                        std::map<std::string, CTime> theTimes);
 
     // Populate the given level using the given xml file
     void ProcessLevel(std::string filename, CLevel *theLevel);
@@ -48,6 +53,7 @@ namespace XMLInterpreter
     int             GetInt          (pugi::xml_node theRoot);
     bool            GetBool         (pugi::xml_node theRoot);
     CVector2f       GetVector2f     (pugi::xml_node theRoot);
+    CTime           GetTime         (pugi::xml_node theRoot);
     CPhysicsBody    GetLevelItem    (pugi::xml_node theRoot);
     SStartPosition  GetStartPosition(pugi::xml_node theRoot);
     CPhysicsBody    GetGoal         (pugi::xml_node theRoot);

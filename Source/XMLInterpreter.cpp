@@ -72,6 +72,67 @@ void ReadConfig(std::string filename)
 }
     
 // =============================================================================
+// XMLInterpreter::ReadBestTimes
+// -----------------------------------------------------------------------------
+std::map<std::string, CTime> ReadBestTimes(std::string filename)
+{
+    std::map<std::string, CTime> theTimes;
+    
+    // Read the file
+    pugi::xml_document theDocument;
+    std::string fullName = SystemUtilities::GetResourcePath() + filename;
+    pugi::xml_parse_result theResult = theDocument.load_file(fullName.c_str());
+    
+    if (theResult.status != pugi::status_ok)
+    {
+        DEBUG_LOG("Error parsisng times xml file: %s", filename.c_str());
+        DEBUG_LOG("Status code: %d", theResult.status);
+    }
+    
+    // Begin processing
+    pugi::xml_node theRoot = theDocument.document_element();
+    
+    // Go through all children of the root and process each in turn
+    for (pugi::xml_node theNode = theRoot.first_child();
+         theNode;
+         theNode = theNode.next_sibling())
+    {
+        theTimes[theNode.name()] = GetTime(theNode);
+    }
+    
+    return theTimes;
+}
+    
+// =============================================================================
+// XMLInterpreter::WriteBestTimes
+// -----------------------------------------------------------------------------
+void WriteBestTimes(std::string filename,
+                    std::map<std::string, CTime> theTimes)
+{
+    pugi::xml_document doc;
+    doc.load("<times></times>");
+    
+    pugi::xml_node theRoot = doc.document_element();
+
+    for (std::map<std::string, CTime>::iterator it = theTimes.begin();
+         it != theTimes.end();
+         ++it)
+    {
+        std::string key = it->first;
+        CTime value = it->second;
+        
+        pugi::xml_node theChild = theRoot.append_child(key.c_str());
+        char valueString[32];
+        sprintf(valueString, "%f", value.asSeconds());
+        bool res = theChild.text().set(valueString);
+        DEBUG_LOG(res ? "true" : "false");
+    }
+    
+    std::string fullName = SystemUtilities::GetResourcePath() + filename;
+    doc.save_file(fullName.c_str());
+}
+    
+// =============================================================================
 // XMLInterpreter::ProcessLevel
 // Populate the given level using the given xml file
 // -----------------------------------------------------------------------------
@@ -193,6 +254,17 @@ CVector2f GetVector2f(pugi::xml_node theRoot)
     CVector2f theResult;
     theResult.x = theRoot.child("x").text().as_float();
     theResult.y = theRoot.child("y").text().as_float();
+    
+    return theResult;
+}
+    
+// =============================================================================
+// XMLInterpreter::GetTime
+// -----------------------------------------------------------------------------
+CTime GetTime(pugi::xml_node theRoot)
+{
+    float seconds = theRoot.text().as_float();
+    CTime theResult = CTime::Seconds(seconds);
     
     return theResult;
 }
