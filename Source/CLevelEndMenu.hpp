@@ -40,6 +40,8 @@ public:
     
     void Enter();
     void Exit();
+
+    void Update(CTime elapsedTime);
     
     void ExecuteMenuItem(int choice);
     

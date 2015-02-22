@@ -12,6 +12,7 @@
 #include "CLevelEndMenu.hpp"
 #include "CSwingGame.hpp"
 #include "CLevel.hpp"
+#include "SystemUtilities.hpp"
 
 // =============================================================================
 // Static members
@@ -61,6 +62,21 @@ void CLevelEndMenu::Exit()
     
     // Update the parent again
     CSwingGame::RegisterUpdateable(mParentLevel);
+}
+
+// =============================================================================
+// CLevelEndMenu::Update
+// -----------------------------------------------------------------------------
+void CLevelEndMenu::Update(CTime elapsedTime)
+{
+    // Execute the parent
+    CTextMenu::Update(elapsedTime);
+    
+    // Restart on R
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::R))
+    {
+        ExecuteMenuItem(kLEMRestart);
+    }
 }
 
 // =============================================================================
