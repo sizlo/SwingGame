@@ -44,8 +44,10 @@ void CLevel::Enter()
     // Initialise anything we need to
     mPlayer = new CPlayer(this);
     mPlayer->Init();
-    mCompletedMenu = new CLevelEndMenu("Level completed", this);
-    mFailedMenu = new CLevelEndMenu("Level failed", this);
+    std::string completedTitle = mName + " completed";
+    mCompletedMenu = new CLevelEndMenu(completedTitle, this);
+    std::string failedTitle = mName + " failed";
+    mFailedMenu = new CLevelEndMenu(failedTitle, this);
     mPauseMenu = new CPauseMenu(this);
     
     // Start the level
@@ -78,7 +80,7 @@ void CLevel::Exit()
 }
 
 // =============================================================================
-// CLevel::Init
+// CLevel::StartLevel
 // Starts the level
 // -----------------------------------------------------------------------------
 void CLevel::StartLevel()
@@ -87,6 +89,30 @@ void CLevel::StartLevel()
     CSwingGame::UnsetGameState(kGameStatePaused);
     
     mPlayer->StartLevel(mStartPosition);
+    
+    mLevelClock.Restart();
+}
+
+// =============================================================================
+// CLevelPauseLevel
+// -----------------------------------------------------------------------------
+void CLevel::PauseLevel()
+{
+    CSwingGame::SetGameState(kGameStatePaused);
+    
+    // Pause the clock
+    mLevelClock.Pause();
+}
+
+// =============================================================================
+// CLevel::ResumeLevel
+// -----------------------------------------------------------------------------
+void CLevel::ResumeLevel()
+{
+    CSwingGame::UnsetGameState(kGameStatePaused);
+    
+    // Unpause the clock
+    mLevelClock.Resume();
 }
 
 // =============================================================================
@@ -160,9 +186,10 @@ CVector2f CLevel::GetGravityAcceleration()
 // -----------------------------------------------------------------------------
 void CLevel::Update(CTime elapsedTime)
 {
-    // Pause game on esc
+    // Open the pause menu on esc
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
     {
+        PauseLevel();
         mPauseMenu->Enter();
     }
     
@@ -175,17 +202,13 @@ void CLevel::Update(CTime elapsedTime)
     // Check for completion
     if (HasPlayerReachedGoal())
     {
-        // Pause the game
-        CSwingGame::SetGameState(kGameStatePaused);
-        mCompletedMenu->Enter();
+        WinLevel();
     }
     
     // Check for player leaving the level
     if (HasPlayerLeftLevel())
     {
-        // Kill them!
-        CSwingGame::SetGameState(kGameStatePaused);
-        mFailedMenu->Enter();
+        FailLevel();
     }
 }
 
@@ -209,6 +232,19 @@ void CLevel::Draw(CWindow *theWindow)
     
     // Draw the tutorial text
     theWindow->draw(mTutorialText);
+    
+    // Draw the clock time
+    std::list<CVector2f> points;
+    points.push_back(CVector2f(0.0f, 0.0f));
+    points.push_back(CVector2f(50.0f, 0.0f));
+    points.push_back(CVector2f(50.0f, 20.0f));
+    points.push_back(CVector2f(0.0f, 20.0f));
+    CConvexShape clockBG(points);
+    clockBG.setPosition(CVector2f(924.0f, 28.0f));
+    clockBG.setFillColor(CColour::Yellow);
+    theWindow->DrawShape(clockBG);
+    CTime elapsed = mLevelClock.GetElapsedTime();
+    theWindow->DrawTextAt(elapsed.AsString(), 929, 30, CColour::Black);
 }
 
 // =============================================================================
@@ -249,6 +285,33 @@ bool CLevel::HasPlayerLeftLevel()
     }
     
     return theResult;
+}
+
+// =============================================================================
+// CLevel::WinLevel
+// -----------------------------------------------------------------------------
+void CLevel::WinLevel()
+{
+    // Pause the game
+    PauseLevel();
+    
+    std::string timeString = "Your time: ";
+    timeString += mLevelClock.GetElapsedTime().AsString();
+    timeString += "\nBest time: ";
+    timeString += mLevelClock.GetElapsedTime().AsString();
+    mCompletedMenu->SetExtraText(timeString);
+    
+    mCompletedMenu->Enter();
+}
+
+// =============================================================================
+// CLevel::FailLevel
+// -----------------------------------------------------------------------------
+void CLevel::FailLevel()
+{
+    PauseLevel();
+    
+    mFailedMenu->Enter();
 }
 
 

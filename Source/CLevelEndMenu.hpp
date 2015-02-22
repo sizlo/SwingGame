@@ -42,11 +42,15 @@ public:
     void Exit();
 
     void Update(CTime elapsedTime);
+    void Draw(CWindow *theWindow);
     
     void ExecuteMenuItem(int choice);
     
+    void SetExtraText(std::string theText);
+    
 private:
     CLevel *mParentLevel;
+    std::string mExtraText;
     
     static float smHalfWidth;
     static float smHalfHeight;

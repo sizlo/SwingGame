@@ -45,6 +45,8 @@ public:
     void Exit();
     
     void StartLevel();
+    void PauseLevel();
+    void ResumeLevel();
     
     // Setters
     void SetName            (std::string    theName);
@@ -66,6 +68,9 @@ public:
 private:
     bool HasPlayerReachedGoal();
     bool HasPlayerLeftLevel();
+    
+    void WinLevel();
+    void FailLevel();
     
     std::string                 mName;
     
@@ -90,6 +95,8 @@ private:
     CPauseMenu                  *mPauseMenu;
     
     CText                       mTutorialText;
+    
+    CPauseableClock             mLevelClock;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */
