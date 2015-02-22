@@ -126,3 +126,19 @@ void CTextMenu::AddMenuItem(std::string theItem)
 {
     mMenuItems.push_back(theItem);
 }
+
+// =============================================================================
+// CTextMenu::GetCurrentSelectionIndex
+// -----------------------------------------------------------------------------
+int CTextMenu::GetCurrentSelectionIndex()
+{
+    return mCurrentSelection;
+}
+
+// =============================================================================
+// CTextMenu::SetCurrentSelectionIndex
+// -----------------------------------------------------------------------------
+void CTextMenu::SetCurrentSelectionIndex(int theIndex)
+{
+    mCurrentSelection = theIndex;
+}

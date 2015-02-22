@@ -31,6 +31,9 @@ public:
     virtual void ExecuteMenuItem(int choice) = 0;
     virtual void AddMenuItem(std::string theItem);
 
+    int GetCurrentSelectionIndex();
+    void SetCurrentSelectionIndex(int theIndex);
+
 private:
     std::string mTitle;
     std::list<std::string> mMenuItems;

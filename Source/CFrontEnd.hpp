@@ -33,6 +33,7 @@ public:
 private:
     static std::string smTitle;
     static CFloatRect smShape;
+    static int smStartingChoice;
     
     std::vector<std::string>    mFilenames;
 };

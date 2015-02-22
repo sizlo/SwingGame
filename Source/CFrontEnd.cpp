@@ -26,6 +26,7 @@ std::string CFrontEnd::smTitle = "SwingGame";
 CFloatRect CFrontEnd::smShape = CFloatRect(0.0f, 0.0f,
                                 GameOptions::viewWidth,
                                 GameOptions::viewHeight);
+int CFrontEnd::smStartingChoice = 0;
 
 // =============================================================================
 // CFrontEnd constructor/destructor
@@ -87,6 +88,9 @@ void CFrontEnd::Enter()
 {
     // Call the parent
     CTextMenu::Enter();
+
+    // Start the selection at where we last left it
+    SetCurrentSelectionIndex(smStartingChoice);
     
     // Set the game state
     CSwingGame::SetGameState(kGameStateFrontEnd);
@@ -96,6 +100,9 @@ void CFrontEnd::Exit()
 {
     // Call the parent
     CTextMenu::Exit();
+
+    // Remember which choice index we're at
+    smStartingChoice = GetCurrentSelectionIndex();
     
     // Unset the game state
     CSwingGame::UnsetGameState(kGameStateFrontEnd);
