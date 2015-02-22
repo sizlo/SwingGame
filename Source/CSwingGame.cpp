@@ -292,16 +292,10 @@ void CSwingGame::GoToLocation(EGameLocation theLocation,
 // Process all events recieved this cycle
 // -----------------------------------------------------------------------------
 void CSwingGame::ProcessEvents()
-{
-    // Eventually this will handle window focus events and keyboard/mouse events
-    // Only log once
-    static bool hasLogged = false;
-    if (!hasLogged)
-    {
-        DEBUG_LOG("Process Events - Not fully implemented");
-        hasLogged = true;
-    }
-    
+{   
+    // Remember if we were paused when focus was lost
+    static bool wasPaused = false;
+
     // Clear the last cycles keypress/mouse event list
     SystemUtilities::ClearInputEvents();
     
@@ -331,12 +325,31 @@ void CSwingGame::ProcessEvents()
             case CEvent::MouseButtonPressed:
                 // Keep a list of key and mouse press events this cycle
                 SystemUtilities::AddInputEvent(theEvent);
+                DEBUG_LOG("Input pressed");
                 break;
                 
                 
             case CEvent::Closed:
                 // Exit on close event
                 ExitGame();
+                break;
+
+            case CEvent::GainedFocus:
+                // If we weren't paused when we lost focus then unpause now
+                if (!wasPaused)
+                {
+                    CSwingGame::UnsetGameState(kGameStatePaused);
+                }
+                break;
+
+            case CEvent::LostFocus:
+                // When we lose focus remember if we're paused
+                wasPaused = CSwingGame::HasAllGameStates(kGameStatePaused);
+                // If we weren't pause then pause now
+                if (!wasPaused)
+                {
+                    CSwingGame::SetGameState(kGameStatePaused);
+                }
                 break;
                 
             default:
