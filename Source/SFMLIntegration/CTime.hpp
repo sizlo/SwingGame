@@ -24,6 +24,8 @@ public:
     CTime(sf::Time other);
     ~CTime();
     
+    std::string AsString();
+    
     // Create a CTime with the given seconds
     static CTime Seconds(float amount);
 };
