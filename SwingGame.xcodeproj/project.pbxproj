@@ -32,6 +32,7 @@
 		2267171D19F2960E00BF72D6 /* CTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2267171B19F2960E00BF72D6 /* CTexture.cpp */; };
 		2278E2ED1A963055006D95C1 /* CRigidSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2278E2EB1A963055006D95C1 /* CRigidSwing.cpp */; };
 		2278E2F01A9648EB006D95C1 /* CCircleShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2278E2EE1A9648EB006D95C1 /* CCircleShape.cpp */; };
+		2278E2F21A9A3ACF006D95C1 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 2278E2F11A9A3ACF006D95C1 /* config.xml */; };
 		229FAC0B19DDCBCD001CEFA6 /* CFrontEnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229FAC0919DDCBCD001CEFA6 /* CFrontEnd.cpp */; };
 		22BBDBEE1A2B46B500775A51 /* CFlexibleSwing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEC1A2B46B500775A51 /* CFlexibleSwing.cpp */; };
 		22BBDBF11A2BBC6600775A51 /* CDrawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BBDBEF1A2BBC6600775A51 /* CDrawable.cpp */; };
@@ -110,6 +111,7 @@
 		2278E2EC1A963055006D95C1 /* CRigidSwing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CRigidSwing.hpp; sourceTree = "<group>"; };
 		2278E2EE1A9648EB006D95C1 /* CCircleShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCircleShape.cpp; sourceTree = "<group>"; };
 		2278E2EF1A9648EB006D95C1 /* CCircleShape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CCircleShape.hpp; sourceTree = "<group>"; };
+		2278E2F11A9A3ACF006D95C1 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = config.xml; path = Data/config.xml; sourceTree = SOURCE_ROOT; };
 		229FAC0319DDC997001CEFA6 /* CRenderable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CRenderable.hpp; sourceTree = "<group>"; };
 		229FAC0419DDCA1B001CEFA6 /* CUpdateable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CUpdateable.hpp; sourceTree = "<group>"; };
 		229FAC0519DDCAB2001CEFA6 /* CMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CMenu.hpp; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		22C3F3F819D313880043264D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2278E2F11A9A3ACF006D95C1 /* config.xml */,
 				2251F4771A961E3C00B7628B /* Levels */,
 				22FC77FC19E195C0000A507F /* player.png */,
 				22FC77E719E16A17000A507F /* TestLevelBackground.png */,
@@ -401,6 +404,7 @@
 				22FC77F419E18145000A507F /* TestLevelGoal.png in Resources */,
 				22FC77F119E16A17000A507F /* TestLevelBorderY.png in Resources */,
 				2218B60319D31462002A2EB7 /* sansation.ttf in Resources */,
+				2278E2F21A9A3ACF006D95C1 /* config.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
