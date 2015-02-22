@@ -41,6 +41,8 @@
 // -----------------------------------------------------------------------------
 static void InitSFML(sf::Window *theWindow)
 {
+    DEBUG_LOG("Initialising SFML v%d.%d.%d", SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH);
+
     // When we're not in debug mode redirect SFML errors to nowhere
 #if !SG_DEBUG
     sf::err().rdbuf(NULL);
