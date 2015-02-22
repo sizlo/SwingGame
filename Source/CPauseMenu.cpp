@@ -65,6 +65,7 @@ void CPauseMenu::Exit()
     // Update the parent again and unpause the game
     CSwingGame::RegisterUpdateable(mParentLevel);
     CSwingGame::UnsetGameState(kGameStatePaused);
+    mParentLevel->ResumeLevel();
 }
 
 // =============================================================================

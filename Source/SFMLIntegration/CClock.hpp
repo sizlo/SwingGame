@@ -13,6 +13,7 @@
 // Include files
 // -----------------------------------------------------------------------------
 #include <SFML/Graphics.hpp>
+#include "CTime.hpp"
 
 // =============================================================================
 // Class definition
@@ -22,6 +23,26 @@ class CClock : public sf::Clock
 public:
     CClock();
     ~CClock();
+};
+
+// =============================================================================
+// Class definition
+// -----------------------------------------------------------------------------
+class CPauseableClock : public CClock
+{
+public:
+    CPauseableClock();
+    ~CPauseableClock();
+    
+    CTime Restart();
+    CTime Pause();
+    CTime Resume();
+    
+    CTime GetElapsedTime();
+    
+private:
+    CTime mAccumulatedTime;
+    bool mPaused;
 };
 
 #endif /* defined(__SwingGame__CClock__) */

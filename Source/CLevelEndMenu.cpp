@@ -80,6 +80,18 @@ void CLevelEndMenu::Update(CTime elapsedTime)
 }
 
 // =============================================================================
+// CLevelEndMenu::Draw
+// -----------------------------------------------------------------------------
+void CLevelEndMenu::Draw(CWindow *theWindow)
+{
+    // Call the parent method
+    CTextMenu::Draw(theWindow);
+    
+    // Draw the extra text
+    theWindow->DrawTextAt(mExtraText, 500, 360, CColour::White);
+}
+
+// =============================================================================
 // CLevelEndMenu::ExecuteMenuChoice
 // -----------------------------------------------------------------------------
 void CLevelEndMenu::ExecuteMenuItem(int choice)
@@ -101,4 +113,12 @@ void CLevelEndMenu::ExecuteMenuItem(int choice)
             CSwingGame::ExitGame();
             break;
     }
+}
+
+// =============================================================================
+// CLevelEndMenu::SetExtraText
+// -----------------------------------------------------------------------------
+void CLevelEndMenu::SetExtraText(std::string theText)
+{
+    mExtraText = theText;
 }
