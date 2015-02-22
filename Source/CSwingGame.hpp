@@ -87,6 +87,9 @@ private:
 #if !USE_SFML_VSYNC
     int mUPS;
 #endif
+
+    // When set we won't run one update cycle
+    bool mShouldSkipUpdateFrame;
     
     // The code returned on program exit
     int mExitCode;

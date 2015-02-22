@@ -42,6 +42,7 @@ CDebugHelper *theDebugHelper;
 CSwingGame::CSwingGame() :  mWindowTitle("SwingGame v" SG_VERSION_STRING),
                             mWindow(NULL),
                             mFPS(0),
+                            mShouldSkipUpdateFrame(false),
 #if !USE_SFML_VSYNC
                             mUPS(0),
 #endif
@@ -108,7 +109,11 @@ int CSwingGame::Run()
         ProcessEvents();
         
         CTime timeSinceLastUpdate = theUpdateClock.restart();
-        Update(timeSinceLastUpdate);
+        if (!mShouldSkipUpdateFrame)
+        {
+            Update(timeSinceLastUpdate);
+        }
+        mShouldSkipUpdateFrame = false;
        
 #if !USE_SFML_VSYNC
         // Only render if vsync is off or enough time has past
@@ -325,7 +330,6 @@ void CSwingGame::ProcessEvents()
             case CEvent::MouseButtonPressed:
                 // Keep a list of key and mouse press events this cycle
                 SystemUtilities::AddInputEvent(theEvent);
-                DEBUG_LOG("Input pressed");
                 break;
                 
                 
@@ -340,6 +344,8 @@ void CSwingGame::ProcessEvents()
                 {
                     CSwingGame::UnsetGameState(kGameStatePaused);
                 }
+                // Skip a frame when we gain focus
+                mShouldSkipUpdateFrame = true;
                 break;
 
             case CEvent::LostFocus:
