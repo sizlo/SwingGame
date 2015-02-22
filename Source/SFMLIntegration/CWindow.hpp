@@ -25,7 +25,10 @@
 class CWindow : public sf::RenderWindow
 {
 public:
-    CWindow(unsigned int width, unsigned int height, std::string title);
+    CWindow(unsigned int width, 
+            unsigned int height, 
+            std::string title,
+            bool fullscreen);
     ~CWindow();
     // Draw text at a specific location on screen
     void DrawTextAt(std::string theString,

@@ -53,10 +53,11 @@
 // -----------------------------------------------------------------------------
 CWindow::CWindow(unsigned int width,
                  unsigned int height,
-                 std::string title)
+                 std::string title,
+                 bool fullscreen)
 : sf::RenderWindow(sf::VideoMode(width, height),
                    title,
-                   sf::Style::Close,
+                   fullscreen ? sf::Style::Fullscreen : sf::Style::Close,
                    sf::ContextSettings(0, 0, 8)) // 8XAA
 {
     

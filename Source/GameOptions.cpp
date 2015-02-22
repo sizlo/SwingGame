@@ -18,14 +18,16 @@ namespace GameOptions
 // =============================================================================
 // Namespace gloabals
 // -----------------------------------------------------------------------------
-unsigned int    windowHeight    = 768;
-unsigned int    windowWidth     = 1024;
-float           viewLeft        = 0.0f;
-float           viewTop         = 0.0f;
-float           viewHeight      = 768.0f;
-float           viewWidth       = 1024.0f;
-bool            doVsync         = true;
-unsigned int    maxFPS          = 60;
+unsigned int    windowHeight        = 768;
+unsigned int    windowWidth         = 1024;
+float           viewLeft            = 0.0f;
+float           viewTop             = 0.0f;
+float           viewHeight          = 768.0f;
+float           viewWidth           = 1024.0f;
+bool            fullscreen          = false;
+bool            preserveAspect      = true;
+bool            doVsync             = true;
+unsigned int    maxFPS              = 60;
 
 // =============================================================================
 // GameOptions::Init

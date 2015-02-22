@@ -68,11 +68,52 @@ void CSwingGame::Init()
     // Create the game window
     mWindow = new CWindow(GameOptions::windowWidth,
                           GameOptions::windowHeight,
-                          mWindowTitle);
+                          mWindowTitle,
+                          GameOptions::fullscreen);
     
     // Use a view to make the game resolution independant
     CView theView(CFloatRect(GameOptions::viewLeft, GameOptions::viewTop,
                              GameOptions::viewWidth, GameOptions::viewHeight));
+
+    // If we want to preserve the games original aspect ratio then set a viewport
+    if (GameOptions::preserveAspect)
+    {
+        float vpLeft = 0.0f;
+        float vpTop = 0.0f;
+        float vpWidth = 1.0f;
+        float vpHeight = 1.0f;
+
+        float windowAspect = (float) GameOptions::windowWidth / (float) GameOptions::windowHeight;
+        float viewAspect = GameOptions::viewWidth / GameOptions::viewHeight;
+
+        if (windowAspect > viewAspect)
+        {
+            // The window aspect is wider than the view aspect
+            // The viewport will use the full window height
+            // Calculate what percentage of the view height that is
+            float percent = (float) GameOptions::windowHeight / GameOptions::viewHeight;
+            // Now use this to calculate the viewport width in pixels
+            float vpWidthPx = GameOptions::viewWidth * percent;
+            // Now work out what percent of the window width this is
+            vpWidth = vpWidthPx / (float) GameOptions::windowWidth;
+
+            // Now work out how far along the window we need to put this is order to center it
+            vpLeft = (1.0f - vpWidth) / 2.0f;
+        }
+        else if (windowAspect < viewAspect)
+        {
+            // The window aspect is taller than the view aspect
+            // Do similar calculations to above but in other dimension
+            float percent = (float) GameOptions::windowWidth / GameOptions::viewWidth;
+            float vpHeightPx = GameOptions::viewHeight * percent;
+            vpHeight = vpHeightPx / (float) GameOptions::windowHeight;
+            vpTop = (1.0f - vpHeight) / 2.0f;
+        }
+
+        theView.setViewport(CFloatRect(vpLeft, vpTop, vpWidth, vpHeight));
+    }
+
+
     mWindow->setView(theView);
     
     if ((GameOptions::windowWidth * 1.0f) / GameOptions::windowHeight

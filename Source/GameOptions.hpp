@@ -21,6 +21,8 @@ namespace GameOptions
     extern float        viewTop;
     extern float        viewHeight;
     extern float        viewWidth;
+    extern bool         fullscreen;
+    extern bool         preserveAspect;
     extern bool         doVsync;
     extern unsigned int maxFPS;
 

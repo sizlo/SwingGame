@@ -56,6 +56,14 @@ void ReadConfig(std::string filename)
         {
             GameOptions::doVsync = GetBool(theNode);
         }
+        else if (strcmp(theNode.name(), "fullscreen") == 0)
+        {
+            GameOptions::fullscreen = GetBool(theNode);
+        }
+        else if (strcmp(theNode.name(), "preserveAspect") == 0)
+        {
+            GameOptions::preserveAspect = GetBool(theNode);
+        }
         else
         {
              DEBUG_LOG("Unknown xml node: %s", theNode.name());
