@@ -130,10 +130,13 @@ bool WasButtonPressedThisCycle(CMouse::Button theButton,
         {
             theResult = true;
             
-            // Set the output position to the cursor position when the button
+			CVector2i windowPosition((*it).mouseButton.x, (*it).mouseButton.y);
+			CVector2f viewPosition = theGameWindow->mapPixelToCoords(windowPosition);
+            
+			// Set the output position to the cursor position when the button
             // was pressed
-            thePosition->x = (*it).mouseButton.x;
-            thePosition->y = (*it).mouseButton.y;
+            thePosition->x = viewPosition.x;
+            thePosition->y = viewPosition.y;
         }
     }
     
