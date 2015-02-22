@@ -109,6 +109,37 @@ void CFrontEnd::Exit()
 }
 
 // =============================================================================
+// CFrontEnd::Draw
+// -----------------------------------------------------------------------------
+void CFrontEnd::Draw(CWindow *theWindow)
+{
+    // Call the parent
+    CTextMenu::Draw(theWindow);
+    
+    // Draw the best times for each level
+    int xPos = 150;
+    int yPos = 90;
+    int yOffset = 20;
+    
+    std::map<std::string, CTime> bestTimes = XMLInterpreter::ReadBestTimes("times.xml");
+    
+    for (int i = 0; i < mFilenames.size(); i++)
+    {
+        std::string levelName = XMLInterpreter::GetLevelName(mFilenames.at(i));
+        std::string key = levelName;
+        std::replace(key.begin(), key.end(), ' ', '_');
+        
+        if (bestTimes.count(key) > 0)
+        {
+            CTime thisBestTime = bestTimes[key];
+            theWindow->DrawTextAt(thisBestTime.AsString(), xPos, yPos, CColour::White);
+        }
+        
+        yPos += yOffset;
+    }
+}
+
+// =============================================================================
 // CFrontEnd::ExecuteMenuItem
 // -----------------------------------------------------------------------------
 void CFrontEnd::ExecuteMenuItem(int choice)

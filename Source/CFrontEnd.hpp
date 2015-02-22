@@ -28,6 +28,8 @@ public:
     // Exit the menu
     void Exit();
     
+    void Draw(CWindow *theWindow);
+    
     void ExecuteMenuItem(int choice);
     
 private:
