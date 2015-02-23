@@ -110,6 +110,26 @@ void CPlayer::Draw(CWindow *theWindow)
     // Colour the player by the colour of the swing we will fire
     GetShape()->setFillColor(mSwings[mSwingToFire]->GetColour());
     theWindow->DrawShape(*GetShape());
+    
+    // Draw the cooldown timer for jumping
+    CTime jumpClockTime = mJumpClock.GetElapsedTime();
+    if (jumpClockTime < smJumpCooldown)
+    {
+        CTime timeLeft = smJumpCooldown - jumpClockTime;
+        float percentageLeft = timeLeft / smJumpCooldown;
+        float cooldownBarWidth = percentageLeft * (mSmallestRadius * 2.0f);
+        float cooldownBarLeft = GetPosition().x - mSmallestRadius;
+        float cooldownBarTop = GetPosition().y - 2.5f;
+        std::list<CVector2f> points;
+        points.push_back(CVector2f(0.0f, 0.0f));
+        points.push_back(CVector2f(cooldownBarWidth, 0.0f));
+        points.push_back(CVector2f(cooldownBarWidth, 5.0f));
+        points.push_back(CVector2f(0.0f, 5.0f));
+        CConvexShape cooldownBar(points);
+        cooldownBar.setPosition(cooldownBarLeft, cooldownBarTop);
+        cooldownBar.setFillColor(CColour::Red);
+        theWindow->DrawShape(cooldownBar);
+    }
 }
 
 // =============================================================================
