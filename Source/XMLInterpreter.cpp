@@ -124,8 +124,7 @@ void WriteBestTimes(std::string filename,
         pugi::xml_node theChild = theRoot.append_child(key.c_str());
         char valueString[32];
         sprintf(valueString, "%f", value.asSeconds());
-        bool res = theChild.text().set(valueString);
-        DEBUG_LOG(res ? "true" : "false");
+        theChild.text().set(valueString);
     }
     
     std::string fullName = SystemUtilities::GetResourcePath() + filename;
