@@ -21,9 +21,10 @@
 #include "CSpringSwing.hpp"
 
 // =============================================================================
-// Static variables
+// Static members
 // -----------------------------------------------------------------------------
-static CVector2f sJumpVelocity = CVector2f(0.0f, -250.0f);
+CVector2f CPlayer::smJumpVelocity = CVector2f(0.0f, -250.0f);
+CTime CPlayer::smJumpCooldown = CTime::Seconds(1.5f);
 
 // =============================================================================
 // SUVAT Helper Methods
@@ -156,6 +157,9 @@ void CPlayer::StartLevel(SStartPosition theStartPos)
     mCurrentSwing = mSwings[mSwingToFire];
     
     mCurrentSwing->AttemptToAttach(theStartPos.mSwingTarget);
+    
+    // Start the jump clock at the cooldown time so we can jump straight away
+    mJumpClock.Restart(smJumpCooldown);
 }
 
 // =============================================================================
@@ -197,10 +201,12 @@ void CPlayer::HandleInput()
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Space))
     {
         // Only jump if we're attached to a swing, and detach it when we do
-        if (mCurrentSwing->CanJumpFrom())
+        if (mCurrentSwing->CanJumpFrom()
+            && mJumpClock.GetElapsedTime() >= smJumpCooldown)
         {
             mCurrentSwing->Detach();
-            SetVelocity(GetVelocity() + sJumpVelocity);
+            SetVelocity(GetVelocity() + smJumpVelocity);
+            mJumpClock.Restart();
         }
     }
     
@@ -340,4 +346,19 @@ bool CPlayer::IsColliding()
 {
     // Let HandleCollisions do this check
     return HandleCollisions(false);
+}
+
+// =============================================================================
+// CPlayer::PauseClocks()
+// -----------------------------------------------------------------------------
+void CPlayer::PauseClocks(bool paused)
+{
+    if (paused)
+    {
+        mJumpClock.Pause();
+    }
+    else
+    {
+        mJumpClock.Resume();
+    }
 }

@@ -34,7 +34,7 @@ public:
     CPauseableClock();
     ~CPauseableClock();
     
-    CTime Restart();
+    CTime Restart(CTime theStartTime = CTime::Zero);
     CTime Pause();
     CTime Resume();
     

@@ -41,11 +41,11 @@ CPauseableClock::~CPauseableClock()
 // =============================================================================
 // CPauseableClock::Restart
 // -----------------------------------------------------------------------------
-CTime CPauseableClock::Restart()
+CTime CPauseableClock::Restart(CTime theStartTime /* = CTime::Zero */)
 {
     CTime elapsedTime = GetElapsedTime();
     mPaused = false;
-    mAccumulatedTime = CTime::Zero;
+    mAccumulatedTime = theStartTime;
     restart();
     return elapsedTime;
 }

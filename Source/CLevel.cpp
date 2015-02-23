@@ -100,8 +100,9 @@ void CLevel::PauseLevel()
 {
     CSwingGame::SetGameState(kGameStatePaused);
     
-    // Pause the clock
+    // Pause clocks
     mLevelClock.Pause();
+    mPlayer->PauseClocks(true);
 }
 
 // =============================================================================
@@ -111,8 +112,9 @@ void CLevel::ResumeLevel()
 {
     CSwingGame::UnsetGameState(kGameStatePaused);
     
-    // Unpause the clock
+    // Unpause clocks
     mLevelClock.Resume();
+    mPlayer->PauseClocks(false);
 }
 
 // =============================================================================

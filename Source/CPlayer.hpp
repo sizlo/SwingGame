@@ -44,6 +44,8 @@ public:
     
     bool IsColliding();
     
+    void PauseClocks(bool paused);
+    
 private:
     void        HandleInput();
     CVector2f   HandlePhysics();
@@ -66,6 +68,10 @@ private:
     
     // The swing we're currently attached to
     CSwing *mCurrentSwing;
+    
+    static CVector2f    smJumpVelocity;
+    static CTime        smJumpCooldown;
+    CPauseableClock     mJumpClock;
 };
 
 #endif /* defined(__SwingGame__CPlayer__) */
