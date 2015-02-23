@@ -1,0 +1,231 @@
+<level name="Test Level">
+  
+  <start>
+    <position>
+      <x>50</x>
+      <y>50</y>
+    </position>
+    <swingTarget>
+      <x>200</x>
+      <y>0</y>
+    </swingTarget>
+    <velocity>
+      <x>0</x>
+      <y>0</y>
+    </velocity>
+    <swingType>rigid</swingType>
+  </start>
+  
+  <tutorialText>
+      <text>this is text</text>
+      <x>500</x>
+      <y>500</y>
+  </tutorialText>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>800</x>
+      <y>500</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- Triangle obstacle -->
+  <obstacle>
+    <position>
+      <x>300</x>
+      <y>250</y>
+    </position>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </obstacle>
+
+  <!-- Long this line obstacle -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>700</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>350</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>350</x>
+      <y>1</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>1</y>
+    </point>
+  </obstacle>
+
+  <!-- Octagon obstacle -->
+  <obstacle>
+    <position>
+      <x>600</x>
+      <y>500</y>
+    </position>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>60</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>80</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>80</x>
+      <y>60</y>
+    </point>
+    <point>
+      <x>60</x>
+      <y>80</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>80</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>60</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- border top -->
+  <obstacle>
+    <position>
+      <x>0</x>
+      <y>0</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- border bottom -->
+  <obstacle>
+    <position>
+      <x>0</x>
+      <y>748</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>1024</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- border left -->
+  <obstacle>
+    <position>
+      <x>0</x>
+      <y>0</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>768</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>768</y>
+    </point>
+  </obstacle>
+
+  <!-- border right -->
+  <obstacle>
+    <position>
+      <x>1004</x>
+      <y>0</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>20</x>
+      <y>768</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>768</y>
+    </point>
+  </obstacle>
+
+</level>

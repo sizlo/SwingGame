@@ -1,0 +1,171 @@
+<level name="Tutorial 2">
+  
+  <start>
+    <position>
+      <x>50</x>
+      <y>250</y>
+    </position>
+    <swingTarget>
+      <x>100</x>
+      <y>220</y>
+    </swingTarget>
+    <velocity>
+      <x>0</x>
+      <y>0</y>
+    </velocity>
+    <swingType>rigid</swingType>
+  </start>
+  
+  <tutorialText>
+      <text>Left click to fire a new swing</text>
+      <x>50</x>
+      <y>180</y>
+  </tutorialText>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>800</x>
+      <y>300</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>200</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>250</x>
+      <y>200</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>450</x>
+      <y>200</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>650</x>
+      <y>200</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>850</x>
+      <y>200</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+</level>
