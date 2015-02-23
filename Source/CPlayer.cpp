@@ -116,7 +116,7 @@ void CPlayer::Draw(CWindow *theWindow)
     if (jumpClockTime < smJumpCooldown)
     {
         CTime timeLeft = smJumpCooldown - jumpClockTime;
-        float percentageLeft = timeLeft / smJumpCooldown;
+        float percentageLeft = timeLeft.asSeconds() / smJumpCooldown.asSeconds();
         float cooldownBarWidth = percentageLeft * (mSmallestRadius * 2.0f);
         float cooldownBarLeft = GetPosition().x - mSmallestRadius;
         float cooldownBarTop = GetPosition().y - 2.5f;
