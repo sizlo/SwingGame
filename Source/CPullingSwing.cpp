@@ -51,10 +51,13 @@ void CPullingSwing::Update(CTime elapsedTime)
         }
         else
         {
-            // Accelerate the player towards the origin
+            // Make sure the players velocity is towards the origin
             CVector2f v = mBob->GetVelocity();
             CVector2f bobToOrigin = mOrigin - mBob->GetPosition();
             bobToOrigin.Normalise();
+            v = v.GetComponentInDirection(bobToOrigin);
+            
+            // Accelerate the player towards the origin
             float timedInc = smPullSpeedIncrement * elapsedTime.asSeconds();
             CVector2f newV = v + (bobToOrigin * timedInc);
             
