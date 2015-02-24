@@ -19,6 +19,7 @@
 #include "CRigidSwing.hpp"
 #include "CFlexibleSwing.hpp"
 #include "CSpringSwing.hpp"
+#include "CPullingSwing.hpp"
 
 // =============================================================================
 // Static members
@@ -143,6 +144,7 @@ void CPlayer::Init()
     
     mSwings[kSwingTypeRigid] = new CRigidSwing(this, mParentLevel);
     mSwings[kSwingTypeFlexible] = new CFlexibleSwing(this, mParentLevel);
+    mSwings[kSwingTypePulling] = new CPullingSwing(this, mParentLevel);
     mSwings[kSwingTypeSpring] = new CSpringSwing(this, mParentLevel);
 }
 
@@ -153,6 +155,7 @@ void CPlayer::Cleanup()
 {
     SAFE_DELETE(mSwings[kSwingTypeRigid]);
     SAFE_DELETE(mSwings[kSwingTypeFlexible]);
+    SAFE_DELETE(mSwings[kSwingTypePulling]);
     SAFE_DELETE(mSwings[kSwingTypeSpring]);
     
     // Unregister update/renderables
@@ -240,6 +243,10 @@ void CPlayer::HandleInput()
         mSwingToFire = kSwingTypeFlexible;
     }
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num3))
+    {
+        mSwingToFire = kSwingTypePulling;
+    }
+    if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Num4))
     {
         mSwingToFire = kSwingTypeSpring;
     }

@@ -29,6 +29,7 @@ enum ESwingTypes
 {
     kSwingTypeRigid,
     kSwingTypeFlexible,
+    kSwingTypePulling,
     kSwingTypeSpring,
     kSwingTypeMax
 };
