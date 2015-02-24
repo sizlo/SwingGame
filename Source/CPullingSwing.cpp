@@ -15,7 +15,7 @@
 // =============================================================================
 // Static members
 // -----------------------------------------------------------------------------
-float CPullingSwing::smPullSpeedIncrement = 350.0f;
+float CPullingSwing::smPullSpeedIncrement = 450.0f;
 float CPullingSwing::smPullSpeedMax = 500.0f;
 float CPullingSwing::smDetachLength = CSwing::smMinLength;
 
