@@ -412,6 +412,10 @@ ESwingTypes GetSwingType(pugi::xml_node theRoot)
     {
         theResult = kSwingTypeFlexible;
     }
+    else if (strcmp(theRoot.text().as_string(), "pulling") == 0)
+    {
+        theResult = kSwingTypePulling;
+    }
     else if (strcmp(theRoot.text().as_string(), "spring") == 0)
     {
         theResult = kSwingTypeSpring;
