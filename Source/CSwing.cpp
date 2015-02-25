@@ -126,6 +126,8 @@ void CSwing::Draw(CWindow *theWindow)
 // -----------------------------------------------------------------------------
 void CSwing::Update(CTime elapsedTime)
 {
+    DetachIfAnchorIsNotValid();
+    
     if (mAttached)
     {
         HandleInput(elapsedTime);
@@ -363,6 +365,36 @@ void CSwing::HandleCollisions()
     if (validIntersectionFound)
     {
         RespondToCollisionAt(closestIntersection);
+    }
+}
+
+// =============================================================================
+// CSwing::DetachIfAnchorIsNotValid
+// -----------------------------------------------------------------------------
+void CSwing::DetachIfAnchorIsNotValid()
+{
+    if (mAttached)
+    {
+        CCircleShape anchorShape(smAnchorGap);
+        anchorShape.setPosition(mOrigin);
+        
+        std::list<CPhysicsBody*> theObstacles = mParentLevel->GetObstacles();
+        CVector2f cv;
+        bool collisionFound = false;
+        FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)
+        {
+            if (CollisionHandler::AreColliding(anchorShape,
+                                               *((*it)->GetShape()),
+                                               &cv))
+            {
+                collisionFound = true;
+            }
+        }
+        
+        if (!collisionFound)
+        {
+            Detach();
+        }
     }
 }
 

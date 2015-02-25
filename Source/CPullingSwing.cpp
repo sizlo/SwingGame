@@ -39,6 +39,8 @@ CPullingSwing::~CPullingSwing()
 // -----------------------------------------------------------------------------
 void CPullingSwing::Update(CTime elapsedTime)
 {
+    DetachIfAnchorIsNotValid();
+    
     if (mAttached)
     {
         // Update the length since the player will be closer now

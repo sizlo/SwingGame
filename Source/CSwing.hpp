@@ -65,6 +65,8 @@ protected:
     virtual void        HandleInput(CTime elapsedTime);
     virtual void        HandleCollisions();
     
+    virtual void        DetachIfAnchorIsNotValid();
+    
     virtual void        DrawAnchorPoint(CWindow *theWindow,
                                         CVector2f theAnchor);
     virtual void        DrawSwingSection(CWindow *theWindow,
