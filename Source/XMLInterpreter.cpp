@@ -187,6 +187,10 @@ void ProcessLevel(std::string filename, CLevel *theLevel)
         {
             theLevel->AddObstacle(GetObstacle(theNode));
         }
+        else if (strcmp(theNode.name(), "key") == 0)
+        {
+            theLevel->AddKeyAt(GetVector2f(theNode));
+        }
         else if (strcmp(theNode.name(), "tutorialText") == 0)
         {
             theLevel->SetTutorialText(GetLevelText(theNode));

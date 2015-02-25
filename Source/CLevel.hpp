@@ -32,6 +32,12 @@ struct SStartPosition
     ESwingTypes mSwingType;
 };
 
+struct SKey
+{
+    CPhysicsBody mBody;
+    bool         mCollected;
+};
+
 // =============================================================================
 // Class definition
 // -----------------------------------------------------------------------------
@@ -57,6 +63,7 @@ public:
     void SetGoal            (CPhysicsBody   theGoal);
     void SetBackground      (CSprite        theBackground);
     void AddObstacle        (CPhysicsBody   theObstacle);
+    void AddKeyAt           (CVector2f      theKeyPosition);
     void SetTutorialText    (CText          theText);
     
     // Getters
@@ -71,6 +78,10 @@ public:
 private:
     bool HasPlayerReachedGoal();
     bool HasPlayerLeftLevel();
+    
+    bool IsGoalOpen();
+    void LockGoal();
+    void UnlockGoal();
     
     void WinLevel();
     void FailLevel();
@@ -87,6 +98,9 @@ private:
     // Obstacles
     std::list<CPhysicsBody *>   mObstacles;
     
+    // Keys
+    std::list<SKey *>           mKeys;
+    
     // The player
     CPlayer                     *mPlayer;
     
@@ -102,6 +116,8 @@ private:
     CPauseableClock             mLevelClock;
     
     bool                        mShouldResumeOnFocusGained;
+    
+    static float smKeyRadius;
 };
 
 #endif /* defined(__SwingGame__CLevel__) */

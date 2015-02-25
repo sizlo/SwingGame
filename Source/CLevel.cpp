@@ -15,6 +15,11 @@
 #include "SystemUtilities.hpp"
 
 // =============================================================================
+// Static members
+// -----------------------------------------------------------------------------
+float CLevel::smKeyRadius = 10.0f;
+
+// =============================================================================
 // CLevel constructor/destructor
 // -----------------------------------------------------------------------------
 CLevel::CLevel(std::string filename)
@@ -77,6 +82,11 @@ void CLevel::Exit()
     {
         SAFE_DELETE((*it));
     }
+    
+    FOR_EACH_IN_LIST(SKey*, mKeys)
+    {
+        SAFE_DELETE((*it));
+    }
 }
 
 // =============================================================================
@@ -85,6 +95,13 @@ void CLevel::Exit()
 // -----------------------------------------------------------------------------
 void CLevel::StartLevel()
 {
+    // Make sure all keys are uncollected
+    FOR_EACH_IN_LIST(SKey*, mKeys)
+    {
+        (*it)->mCollected = false;
+    }
+    LockGoal();
+    
     // Unpause
     CSwingGame::UnsetGameState(kGameStatePaused);
     
@@ -184,6 +201,20 @@ void CLevel::AddObstacle(CPhysicsBody theObstacle)
 }
 
 // =============================================================================
+// CLevel::AddKetAy
+// -----------------------------------------------------------------------------
+void CLevel::AddKeyAt(CVector2f theKeyPosition)
+{
+    SKey *theKey = new SKey();
+    CConvexShape keyShape = CCircleShape(smKeyRadius);
+    keyShape.setFillColor(CColour::Yellow);
+    theKey->mBody.SetShape(keyShape);
+    theKey->mBody.SetPosition(theKeyPosition);
+    
+    mKeys.push_back(theKey);
+}
+
+// =============================================================================
 // CLevel::SetTutorialText
 // -----------------------------------------------------------------------------
 void CLevel::SetTutorialText(CText theText)
@@ -197,7 +228,14 @@ void CLevel::SetTutorialText(CText theText)
 // -----------------------------------------------------------------------------
 std::list<CPhysicsBody *> CLevel::GetObstacles()
 {
-    return mObstacles;
+    std::list<CPhysicsBody *> theObstacles = mObstacles;
+    
+    if (!IsGoalOpen())
+    {
+        theObstacles.push_back(&mGoal);
+    }
+    
+    return theObstacles;
 }
 
 // =============================================================================
@@ -225,6 +263,28 @@ void CLevel::Update(CTime elapsedTime)
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::R))
     {
         StartLevel();
+    }
+    
+    // Check for key collections
+    FOR_EACH_IN_LIST(SKey*, mKeys)
+    {
+        CVector2f cv;
+        SKey *thisKey = (*it);
+        if (!(thisKey->mCollected))
+        {
+            if (CollisionHandler::AreColliding(*(thisKey->mBody.GetShape()),
+                                               *(mPlayer->GetShape()),
+                                               &cv))
+            {
+                thisKey->mCollected = true;
+                DEBUG_LOG("Got key");
+            }
+        }
+    }
+    // If we have collected all the keys unlock the goal
+    if (IsGoalOpen())
+    {
+        UnlockGoal();
     }
     
     // Check for completion
@@ -256,6 +316,14 @@ void CLevel::Draw(CWindow *theWindow)
     FOR_EACH_IN_LIST(CPhysicsBody *, mObstacles)
     {
         theWindow->DrawShape(*((*it)->GetShape()));
+    }
+    
+    FOR_EACH_IN_LIST(SKey*, mKeys)
+    {
+        if (!(*it)->mCollected)
+        {
+            theWindow->DrawShape(*((*it)->mBody.GetShape()));
+        }
     }
     
     // Draw the tutorial text
@@ -313,6 +381,46 @@ bool CLevel::HasPlayerLeftLevel()
     }
     
     return theResult;
+}
+
+// =============================================================================
+// CLevel::IsGoalOpen
+// -----------------------------------------------------------------------------
+bool CLevel::IsGoalOpen()
+{
+    bool isOpen = true;
+    
+    // It's locked if there are any uncollected keys
+    FOR_EACH_IN_LIST(SKey*, mKeys)
+    {
+        if (!(*it)->mCollected)
+        {
+            isOpen = false;
+        }
+    }
+    
+    return isOpen;
+}
+
+// =============================================================================
+// CLevel::LockGoal
+// -----------------------------------------------------------------------------
+void CLevel::LockGoal()
+{
+    // Give the goal a border
+    CConvexShape *theShape = mGoal.GetShape();
+    theShape->setOutlineColor(CColour::Black);
+    theShape->setOutlineThickness(2.0f);
+}
+
+// =============================================================================
+// CLevel::UnlockGoal
+// -----------------------------------------------------------------------------
+void CLevel::UnlockGoal()
+{
+    // Remove the goals border
+    CConvexShape *theShape = mGoal.GetShape();
+    theShape->setOutlineThickness(0.0f);
 }
 
 // =============================================================================
