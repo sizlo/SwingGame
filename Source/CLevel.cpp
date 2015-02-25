@@ -277,7 +277,6 @@ void CLevel::Update(CTime elapsedTime)
                                                &cv))
             {
                 thisKey->mCollected = true;
-                DEBUG_LOG("Got key");
             }
         }
     }
