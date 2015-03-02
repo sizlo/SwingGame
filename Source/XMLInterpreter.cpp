@@ -278,11 +278,11 @@ CTime GetTime(pugi::xml_node theRoot)
 CPhysicsBody GetLevelItem(pugi::xml_node theRoot)
 {
     CHECK_CHILD(theRoot, "position");
-    CHECK_CHILD(theRoot, "texture");
     
     CPhysicsBody theResult;
     std::list<CVector2f> thePoints;
     CVector2f thePosition = CVector2f(0.0f, 0.0f);
+    float theRadius = 0.0f;
     
     // Process each child
     for (pugi::xml_node theNode = theRoot.first_child();
@@ -316,6 +316,10 @@ CPhysicsBody GetLevelItem(pugi::xml_node theRoot)
             CVector2f thePoint = GetVector2f(theNode);
             thePoints.push_back(thePoint);
         }
+        else if (strcmp(theNode.name(), "radius") == 0)
+        {
+            theRadius = theNode.text().as_float();
+        }
         else
         {
             DEBUG_LOG("Unknown xml node: %s", theNode.name());
@@ -323,7 +327,24 @@ CPhysicsBody GetLevelItem(pugi::xml_node theRoot)
     }
     
     // Create and initialise the shape
-    theResult.SetShape(CConvexShape(thePoints));
+    CConvexShape theShape;
+    
+    // Are we a circle or a normal shape
+    if (thePoints.size() > 0)
+    {
+        if (theRadius > 0.0f)
+        {
+            DEBUG_LOG("Shape has both circle and normal shape properties,"
+                      "treating as a normal shape");
+        }
+        theShape = CConvexShape(thePoints);
+    }
+    else if (thePoints.size() == 0 && theRadius > 0.0f)
+    {
+        theShape = CCircleShape(theRadius);
+    }
+    
+    theResult.SetShape(theShape);
     theResult.GetShape()->setPosition(thePosition);
     
     return theResult;
