@@ -1,0 +1,138 @@
+<level name="Level 9">
+    
+    <start>
+        <position>
+            <x>120</x>
+            <y>50</y>
+        </position>
+        <swingTarget>
+            <x>120</x>
+            <y>0</y>
+        </swingTarget>
+        <velocity>
+            <x>0</x>
+            <y>0</y>
+        </velocity>
+        <swingType>flexible</swingType>
+    </start>
+    
+    <!-- Square goal -->
+    <goal>
+        <position>
+            <x>2</x>
+            <y>666</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>100</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>100</x>
+            <y>100</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>100</y>
+        </point>
+    </goal>
+    
+    <background>TestLevelBackground.png</background>
+    
+    <!-- starting platform -->
+    <obstacle>
+        <position>
+            <x>100</x>
+            <y>0</y>
+        </position>
+        <point>
+            <x>0</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>40</x>
+            <y>0</y>
+        </point>
+        <point>
+            <x>40</x>
+            <y>10</y>
+        </point>
+        <point>
+            <x>0</x>
+            <y>10</y>
+        </point>
+    </obstacle>
+    
+   <!-- Centre circle -->
+   <obstacle>
+        <position>
+            <x>512</x>
+            <y>384</y>
+        </position>
+        <radius>20</radius>
+   </obstacle>
+   
+   <key>
+       <x>120</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>755</y>
+   </key>
+   
+   <key>
+       <x>855</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>75</y>
+   </key>
+   
+   <key>
+       <x>240</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>625</y>
+   </key>
+   
+   <key>
+       <x>723</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>210</y>
+   </key>
+   
+   <key>
+       <x>370</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>495</y>
+   </key>
+   
+   <key>
+       <x>585</x>
+       <y>384</y>
+   </key>
+   
+   <key>
+       <x>512</x>
+       <y>345</y>
+   </key>
+   
+</level>
