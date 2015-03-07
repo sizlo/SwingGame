@@ -28,6 +28,7 @@
     <ClCompile Include="Source\CPauseMenu.cpp" />
     <ClCompile Include="Source\CPhysicsBody.cpp" />
     <ClCompile Include="Source\CPlayer.cpp" />
+    <ClCompile Include="Source\CPullingSwing.cpp" />
     <ClCompile Include="Source\CRigidSwing.cpp" />
     <ClCompile Include="Source\CSpringSwing.cpp" />
     <ClCompile Include="Source\CSwing.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Source\CollisionHandler.hpp" />
     <ClInclude Include="Source\CPauseMenu.hpp" />
     <ClInclude Include="Source\CPhysicsBody.hpp" />
+    <ClInclude Include="Source\CPullingSwing.hpp" />
     <ClInclude Include="Source\CRigidSwing.hpp" />
     <ClInclude Include="Source\CSpringSwing.hpp" />
     <ClInclude Include="Source\CSwing.hpp" />
