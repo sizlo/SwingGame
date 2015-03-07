@@ -1,0 +1,76 @@
+<level name="Tutorial 1">
+  
+  <start>
+    <position>
+      <x>400</x>
+      <y>300</y>
+    </position>
+    <swingTarget>
+      <x>450</x>
+      <y>270</y>
+    </swingTarget>
+    <velocity>
+      <x>0</x>
+      <y>0</y>
+    </velocity>
+    <swingType>rigid</swingType>
+  </start>
+  
+  <tutorialText>
+      <text>Reach the green goal
+Right click to release the swing</text>
+      <x>400</x>
+      <y>450</y>
+  </tutorialText>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>580</x>
+      <y>300</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- swing platform -->
+  <obstacle>
+    <position>
+      <x>400</x>
+      <y>230</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+</level>

@@ -1,0 +1,189 @@
+<level name="Level 3">
+  
+  <start>
+    <position>
+      <x>50</x>
+      <y>150</y>
+    </position>
+    <swingTarget>
+      <x>100</x>
+      <y>120</y>
+    </swingTarget>
+    <velocity>
+      <x>0</x>
+      <y>0</y>
+    </velocity>
+    <swingType>rigid</swingType>
+  </start>
+
+  <!-- Square goal -->
+  <goal>
+    <position>
+      <x>800</x>
+      <y>300</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>50</x>
+      <y>50</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>50</y>
+    </point>
+  </goal>
+
+  <background>TestLevelBackground.png</background>
+
+  <!-- start platform -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>100</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>50</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>250</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>450</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>650</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+  <!-- floor platform -->
+  <obstacle>
+    <position>
+      <x>850</x>
+      <y>400</y>
+    </position>
+    <point>
+      <x>0</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>0</y>
+    </point>
+    <point>
+      <x>100</x>
+      <y>20</y>
+    </point>
+    <point>
+      <x>0</x>
+      <y>20</y>
+    </point>
+  </obstacle>
+
+</level>

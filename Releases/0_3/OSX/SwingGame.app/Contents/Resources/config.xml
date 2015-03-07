@@ -1,0 +1,14 @@
+<config>
+  <!-- The window dimensions, when in fullscreen set this to your screen resolution -->
+  <windowHeight>768</windowHeight>
+  <windowWidth>1024</windowWidth>
+
+  <!-- Display the game in a window or fullscreen -->
+  <fullscreen>false</fullscreen>
+  
+  <!-- Preserve the aspect ratio the game was designed for (highly recomended) -->
+  <preserveAspect>true</preserveAspect>
+
+  <!-- Limit framerate with vsync -->
+  <useVsync>true</useVsync>
+</config>
