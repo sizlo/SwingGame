@@ -29,8 +29,8 @@
 #endif
 
 // Release version
-#define SG_VERSION 0.2
-#define SG_VERSION_STRING "0.2"
+#define SG_VERSION 0.3
+#define SG_VERSION_STRING "0.3"
 
 // =============================================================================
 // Codepath switches
