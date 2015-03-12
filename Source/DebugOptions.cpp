@@ -18,13 +18,14 @@ namespace DebugOptions
 // =============================================================================
 // Namespace globals
 // -----------------------------------------------------------------------------
-bool showFramerate      = true;
-bool drawBounds         = false;
-bool drawOrigins        = false;
-bool drawShapePoints    = false;
-bool drawShapeNormals   = false;
-bool useSlowMotion      = false;
-bool showMouseCoords    = false;
+bool showFramerate          = true;
+bool drawBounds             = false;
+bool drawOrigins            = false;
+bool drawShapePoints        = false;
+bool drawShapeNormals       = false;
+bool useSlowMotion          = false;
+bool showMouseCoords        = false;
+bool showPlayerAcceleration = false;
 
 } // namespace DebugOptions
 
@@ -56,6 +57,7 @@ void CDebugHelper::Update(CTime elapsedTime)
         TOGGLE_DEBUG_OPTION(N, DebugOptions::drawShapeNormals);
         TOGGLE_DEBUG_OPTION(S, DebugOptions::useSlowMotion);
         TOGGLE_DEBUG_OPTION(M, DebugOptions::showMouseCoords);
+        TOGGLE_DEBUG_OPTION(A, DebugOptions::showPlayerAcceleration);
     }
 }
 

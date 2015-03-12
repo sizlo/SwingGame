@@ -69,6 +69,8 @@ private:
     // The swing we're currently attached to
     CSwing *mCurrentSwing;
     
+    CLine mDebugAccelerationLine;
+    
     static CVector2f    smJumpVelocity;
     static CTime        smJumpCooldown;
     CPauseableClock     mJumpClock;

@@ -36,6 +36,8 @@ namespace DebugOptions
     extern bool drawShapePoints;
     extern bool drawShapeNormals;
     extern bool useSlowMotion;
+    extern bool showMouseCoords;
+    extern bool showPlayerAcceleration;
 };
 
 // =============================================================================

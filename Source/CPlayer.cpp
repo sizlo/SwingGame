@@ -20,6 +20,7 @@
 #include "CFlexibleSwing.hpp"
 #include "CSpringSwing.hpp"
 #include "CPullingSwing.hpp"
+#include "DebugOptions.hpp"
 
 // =============================================================================
 // Static members
@@ -83,6 +84,10 @@ void CPlayer::Update(CTime elapsedTime)
         // Find the acceleration applied by any physics items
         CVector2f acceleration = HandlePhysics();
         
+        // Remember this acceleration so we can draw it for debug info
+        mDebugAccelerationLine =
+            CLine(GetPosition(), GetPosition() + acceleration/5.0f);
+        
         // Now try to move based on our velocity
         CTime timeSimulated = MoveUntilCollision(elapsedTime, acceleration);
         elapsedTime -= timeSimulated;
@@ -130,6 +135,12 @@ void CPlayer::Draw(CWindow *theWindow)
         cooldownBar.setPosition(cooldownBarLeft, cooldownBarTop);
         cooldownBar.setFillColor(CColour::Red);
         theWindow->DrawShape(cooldownBar);
+    }
+    
+    // Draw the debug acceleration
+    if (DebugOptions::showPlayerAcceleration)
+    {
+        theWindow->DrawLine(mDebugAccelerationLine, CColour::Red);
     }
 }
 

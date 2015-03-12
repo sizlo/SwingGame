@@ -14,6 +14,11 @@
 // =============================================================================
 // CLine constructor/destructor
 // -----------------------------------------------------------------------------
+CLine::CLine() : CLine(CVector2f(0.0f, 0.0f), CVector2f(1.0f, 0.0f))
+{
+    
+}
+
 CLine::CLine(CVector2f start, CVector2f end) :  mStart(start),
                                                 mEnd(end)
 {

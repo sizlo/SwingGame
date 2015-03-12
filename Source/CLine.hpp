@@ -21,6 +21,7 @@
 class CLine
 {
 public:
+    CLine();
     CLine(CVector2f start, CVector2f end);
     ~CLine();
     
