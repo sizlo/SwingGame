@@ -28,20 +28,29 @@
 \maketitle
 
 \begin{abstract}
-	This paper details the development of SwingGame, a 2D video game in which players use ropes and grappling hooks to get to a goal in various levels.  The SwingGame project had two main goals, to produce a reusable framework for building games and to produce a fun and engaging game using that framework. The goals were successfully achieved with the framework being used for multiple finished products and SwingGame receiving praise by those who have seen and played it.
+This paper details the development of SwingGame, a 2D video game in which players use ropes and grappling hooks to get to a goal in various levels.  The SwingGame project had two main goals, to produce a reusable framework for building games and to produce a fun and engaging game using that framework. The goals were successfully achieved with the framework being used for multiple finished products and SwingGame receiving praise by those who have seen and played it.
 \end{abstract}
 
 \tableofcontents{}
 
 
 \chapter{Context}
+This chapter provides an overview of what the project contains and its main goals. Similar existing technology is discussed along with why the decision to make a new system was made.
 	\section{Project Description}
+	The main system produced in this project is the game framework. This framework should handle all tasks generic to every video game including window management, drawing to the window and event handling. The framework should be easy to use, a developer should be able to define just the level and player behaviour and have a working game. It should also be extensible so that if any future projects require more complex features they can be easily added in.
+	
+	SwingGame was built using and alongside this framework. The game consists of a number of levels, each containing several obstacles and a goal. The aim of each level is to travel from the players starting point to the goal of the level using the physics of swinging around the various obstacles. Levels are scored based on the time it took for the player to reach the goal. The main objective of SwingGame is to show that the game framework is usable, but ideally it should also be an entertaining and engaging game.
 	\section{Existing Technologies}
-	Worms
-	Spider-man
-	Floating Point
-	Grappling Hook
-	Energy Hook
+	This section discusses existing technology similar to this project. The technologies include other game frameworks and existing games which incorporate similar swinging mechanics.
+		\subsection{Game Frameworks}
+		There already exists several game frameworks (sometimes called engines) which have a variety of different feature sets. The most popular and most similar of these frameworks are discussed here.
+		\subsubsection{Popular Frameworks}
+		The most popular frameworks in use today are Unity\cite{unity} and Unreal Engine\cite{unreal}.
+	%Worms
+	%Spider-man
+	%Floating Point
+	%Grappling Hook
+	%Energy Hook
 
 \chapter{Design}
 	\section{Requirements}
@@ -67,5 +76,9 @@
 	\section{Achievements}
 	\section{Lessons Learned}
 	\section{Future Improvements}
+	
+\bibliographystyle{plain}
+
+\bibliography{sources}
 
 \end{document}          
