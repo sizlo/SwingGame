@@ -511,6 +511,39 @@ void CSwingGame::Render()
     theDebugHelper->Draw(mWindow);
 #endif
     
+#if SG_DEBUG && 1
+    mWindow->clear(CColour::White);
+    
+    // Square
+    float length = 100.0f;
+    std::list<CVector2f> points;
+    points.push_back(CVector2f(-length, -length));
+    points.push_back(CVector2f(-length, length));
+    points.push_back(CVector2f(length, length));
+    points.push_back(CVector2f(length, -length));
+    CConvexShape square(points);
+    square.setFillColor(CColour::Blue);
+    square.setPosition(300.0f, 300.0f);
+    
+    // Triangle
+    points.clear();
+    points.push_back(CVector2f(0.0f, -length));
+    points.push_back(CVector2f(length, length));
+    points.push_back(CVector2f(-length, length));
+    CConvexShape triangle(points);
+    triangle.setFillColor(CColour::Black);
+    triangle.setPosition(500.0f, 600.0f);
+    
+    // Circle
+    CCircleShape circle(length);
+    circle.setFillColor(CColour::Yellow);
+    circle.setPosition(800.0f, 300.0f);
+    
+    mWindow->DrawShape(square);
+    mWindow->DrawShape(triangle);
+    mWindow->DrawShape(circle);
+#endif
+    
     // Display the new window contents
     mWindow->display();
 }
