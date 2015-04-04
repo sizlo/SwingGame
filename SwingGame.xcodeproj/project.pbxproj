@@ -590,6 +590,7 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = Source/SwingGame_Prefix.pch;
 				INFOPLIST_FILE = "MacResources/SwingGame-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -599,6 +600,7 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = Source/SwingGame_Prefix.pch;
 				INFOPLIST_FILE = "MacResources/SwingGame-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
