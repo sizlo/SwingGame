@@ -1,8 +1,17 @@
 \documentclass[]{report}
+
+% Package to allow utf8 characters (needed for umlauts)
 \usepackage[utf8]{inputenc}
+
+% Packacge for including images
 \usepackage{graphicx}
 \graphicspath{{graphics/}}
 
+% Show sub sub sections in the contents
+\setcounter{tocdepth}{3}
+
+\usepackage{mathtools}
+\usepackage{float}
 
 % Title Page
 \title{
@@ -86,24 +95,179 @@ This chapter outlines the development process of the project. It discusses some 
 	The way this abstraction was implemented was to create a class for each SFML class the framework used. The created class inherited from the SFML class and all uses of the class in the framework would use the new subclass. This meant than whenever functionality was added to an SFML subclass this functionality could be used by any existing instance of the class in the project without having to change its type.
 	
 	\section{Modules}
-	This section details the various modules present in both the game framework and in SwingGame. A high level view of how each module works is provided as well as why each module is a part of either the game or the framework.
+	This section details the various modules present in both the game framework and in SwingGame. A high level view of how each module works is provided as well as some of the more interesting details of the implementation.
 		\subsection{Game Framework}
 		The modules contained in the game framework are those which are not dependant on the type of game being made. Whatever the end product is these tasks will always be performed in the same way.
-			\subsubsection{Window Management}
 			\subsubsection{Graphics}
-			The requirements for graphics in this project were fairly straightforward, draw shapes and text to the screen. The most advanced graphics feature was being able to load an image into an object called a sprite which can move around the screen. This was mostly handled by SFML but some extra features were implemented. An image cache was created meaning that multiple sprites could share the same loaded image instead of duplicating it in memory. The ability to draw debug features of shape was also implemented. The graphics module could draw the origin of each shape along with all the points that make up that shape. A very useful piece of debug information which could be drawn was the bounding box of a shape, the smallest axis aligned rectangle which contains the entire shape. This bounding box is used in collisions and being able to see it proved very useful when working on collisions.
-			\begin{figure}[h]
+			The requirements for graphics in this project were fairly straightforward, draw shapes and text to the screen. The most advanced graphics feature was being able to load an image into an object called a sprite which can move around the screen. This was mostly handled by SFML but some extra features were implemented. An image cache was created meaning that multiple sprites could share the same loaded image instead of duplicating it in memory. The ability to draw debug features of shapes was also implemented. The graphics module could draw the origin of each shape along with all the points that make up that shape. A very useful piece of debug information which could be drawn was the bounding box of a shape, the smallest axis aligned rectangle which contains the entire shape. This bounding box is used in collisions and being able to see it proved very useful when working on collisions.
+			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.25]{debuggraphics}
 				\caption{A simple scene with debug graphics being drawn}
 				\label{debuggraphics}
 			\end{figure}
 			
-			\subsubsection{Gameloop}
-			\subsubsection{Event Management}
+			\subsubsection{Game Loop}
+			Almost every video game runs on top of what is called a game loop. Inside this loop is where the gameplay logic is executed including updating the players position and handling any user input. One of the most important aspects of a game loop is that it must be non blocking since games are interactive. This means that instead of waiting for the next input event the game is constantly processing cycles of the loop and reacts to any events when they happen to come in. The loop "processes user input, but doesn’t wait for it"\cite{gamepatterns}.
+			
+			The game loop in this projects game framework does three things on every cycle:
+			\begin{enumerate}
+				\item Process events
+				\item Update game objects
+				\item Draw the current game state
+			\end{enumerate}
+			
+			At different points of the games lifetime this loop needs to be processing different things. When the user is at a menu it should be updating the menu navigation and drawing the menu options with the current selection highlighted. When the user is in a level it should be updating the physics simulation and drawing the current level state. The way the framework handles this is by using Updateable and Renderable interfaces. At any point in the game a game object which implements either (or both) of these interfaces can be registered to or unregistered from the game loop. The loop keeps a list of all the currently registered objects and on each cycle will update all the current Updateables and draw all the current Renderables. Being able to register and unregister objects at any time made this game loop very powerful. When the game is paused it can simply unregister any dynamic objects in the level from the Updateable list. They will still be drawn in their current state but they will not be updated so their state will remain the same, as it should. This method also allows a game to keep menus alive in memory without being updated or drawn so that they do not have to be recreated whenever that menu is requested.
+			
+			Game loops can have fixed time steps or variable time steps\cite{gamepatterns}. A fixed time step means that on every cycle of the loop the same amount of time is simulated in the game. A variable time step means that on each cycle of the loop any amount of time can be simulated. This framework uses a variable time step game loop, where each cycle simulates the amount of time which has elapsed since the start of the last cycle. This means that no matter how powerful a machine the game is run on it will always run at the correct speed. On a more powerful machine each cycle will be processed quicker so a smaller time step will be simulated, leading to the game running at a higher frame rate. On a less powerful machine the inverse is true, meaning the game runs at a lower frame rate but is still simulated at the correct speed. If a fixed time step was used then less powerful machines would take longer to simulate the same time step making the game run at a different speed.
+			
+			\subsubsection{Window and Event Management}
+			The cross platform handling of different operating systems versions of windows and events was taken care of by SFML. A simple wrapper around this was implemented for the framework to add some extra features. One of these features was keeping a list of all user generated events (key presses, mouse clicks, etc) produced this cycle that the game can query. This allows the game to easily react to user input, simplifying the implementation of controlling the player. The framework also handles any custom window size, including full screen, without stretching or distorting the scene being drawn.
+			
 			\subsubsection{Menu System}
+			An important part of many games is their menus. A user needs to be able to navigate through the various game options and select what part of the game they want to play. A simple API was created in the game framework to allow games to define their own menus. It allows a game to specify what options should be present in a menu and what each option should do then handles the navigation and drawing of the menu in the framework. A game can override this default behaviour and look if they wish.
+			
+			A big part of the menu system is transition between different screens in the game. When a user selects a level they should transition to that level. This was achieved by having each different screen in the game implement a GameLocation interface. By implementing this interface a game location specifies what to do when transitioning to and from this location. For example, a level will initialise register all Updatebles and Renderables within that level and start the simulation when it is transitioned to. It will then stop the simulation and unregister its objects when transitioned from. The game framework only allows one game location to be active at a time, so whenever a location is entered all previous locations must have been exited.
+			
 			\subsubsection{Collision Detection}
+			Almost every game must deal with collisions and the method to detect them is always the same. If part of a shape is touching or inside another shape then those two shapes are colliding. A method to detect collisions between 2D shapes was implemented in the game framework.
+			
+			The collision detection consists of a broad phase and a narrow phase. The aim of the broad phase is to filter out any pairs of shapes that are definitely not colliding so as not to waste time on them in the narrow phase. The narrow phase then performs more in depth calculation on pairs of shapes that were not filtered out in the broad phase to see if the two shapes are actually colliding.
+			
+			The broad phase simply checks if the bounding boxes of the two shapes intersect each other. SFML provides this functionality but it is simple to deduce how this is done. Calculate the bounding box of each shape by finding its leftmost, rightmost, topmost and bottommost points. If the two boxes overlap both horizontally and vertically, which can be calculated using the expressions in figures \ref{horizontalbounding} and \ref{verticalbounding}, then the bounding boxes intersect each other. If the bounding boxes do not intersect then the shapes contained within them cannot possibly collide so they can be skipped in the narrow phase. This method can produce false positives where shapes bounding boxes intersect but they do not collide but it filters out so many other pairs that it is a net positive in efficiency. Examples of this method in various situations are provided in figures \ref{bbcollision}, \ref{bbnooverlap} and \ref{bbnocollision}.
+			
+			\begin{figure}[H]
+				\centering
+				
+				\begin{displaymath}
+					(A.left \leq B.right \land A.left \geq B.left) \lor (A.right \leq B.right \land A.right \geq B.left)
+				\end{displaymath}
+				
+				\caption{Boolean expression to check if two bounding boxes, A and B, overlap horizontally}
+				\label{horizontalbounding}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				
+				\begin{displaymath}
+				(A.bottom \leq B.top \land A.bottom \geq B.bottom) \lor (A.top \leq B.top \land A.top \geq B.bottom)
+				\end{displaymath}
+				
+				\caption{Boolean expression to check if two bounding boxes, A and B, overlap vertically}
+				\label{verticalbounding}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.25]{bbcollision}
+				\caption{The two bounding boxes intersect and the shapes within are colliding}
+				\label{bbcollision}
+			\end{figure}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.25]{bbnooverlap}
+				\caption{The two bounding boxes do not intersect so the shapes within cannot be colliding}
+				\label{bbnooverlap}
+			\end{figure}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.25]{bbnocollision}
+				\caption{The two bounding boxes intersect but the shapes within are not colliding}
+				\label{bbnocollision}
+			\end{figure}
+			
+			The first iteration of the narrow phase used the very simple concept of line intersections to check for collisions. If any line from shape A is intersecting any line from shape B then A and B are colliding. To check if two lines, A and B are intersecting they are first checked for an intersection assuming the lines are infinitely long. If the two infinite lines intersect then $u_{a}$ is given which is the proportion along line A that the intersection occurred. Similarly $u_{b}$ is the proportion along line B that the intersection occurred. If $u_{a}$ is 0.5 then the intersection occurred halfway along line A. Therefore if both $u_{a}$ and $u_{b}$ are between 0 and 1 then the intersection occurred on lines A and B so the two lines intersect. $u_{a}$ and $u_{b}$ can be found using the equations in figure \ref{lineintersectionequation}. If the denominator of that equations is 0 then the two lines are parallel so cannot intersect.
+			
+			\begin{figure}[H]
+				\centering
+				$x_{A_{1}}$ = The x coordinate of the start of line A
+				
+				$x_{A_{2}}$ = The x coordinate of the end of line A
+				
+				$x_{B_{1}}$ = The x coordinate of the start of line B
+				
+				$x_{B_{2}}$ = The x coordinate of the end of line B
+				
+				$y_{A_{1}}$ = The y coordinate of the start of line A
+				
+				$y_{A_{2}}$ = The y coordinate of the end of line A
+				
+				$y_{B_{1}}$ = The y coordinate of the start of line B
+				
+				$y_{B_{2}}$ = The y coordinate of the end of line B
+				
+				$u_{a}$ = The proportion along line A at which lines A and B intersect
+				
+				$u_{b}$ = The proportion along line B at which lines A and B intersect
+				\begin{displaymath}
+				u_{a} = \frac
+				{(x_{B_{2}}–x_{B_{1}})(y_{A_{1}}–y_{B_{1}})–(y_{B_{2}}–y_{B_{1}})(x_{A_{1}}–x_{B_{1}})}
+				{(y_{B_{2}}–y_{B_{1}})(x_{A_{2}}–x_{A_{1}})–(x_{B_{2}}–x_{B_{1}})(y_{A_{2}}–y_{A_{1}})}
+				\end{displaymath}
+				\begin{displaymath}
+				u_{b} = \frac
+				{(x_{A_{2}}–x_{A_{1}})(y_{A_{1}}–y_{B_{1}})–(y_{A_{2}}–y_{A_{1}})(x_{A_{1}}–x_{B_{1}})}
+				{(y_{B_{2}}–y_{B_{1}})(x_{A_{2}}–x_{A_{1}})–(x_{B_{2}}–x_{B_{1}})(y_{A_{2}}–y_{A_{1}})}
+				\end{displaymath}
+				\caption{Equations to find the intersection point of lines A and B\cite{linecollisionsite}}
+				\label{lineintersectionequation}
+			\end{figure}
+			
+			This worked very well for most cases but caused problems if one shape was completely inside another (figure \ref{lineintersectionproblem}). In this situation the framework would need to report that a collision was detected to the game as in most cases one object should not be inside another. This situation could arise if in one cycle of the game an object moved from completely outside an obstacle to completely inside an obstacle, and the game would need to know this has happened to react to it.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.25]{lineintersectionproblem}
+				\caption{The circle is completely inside the square meaning no collision is detected}
+				\label{lineintersectionproblem}
+			\end{figure}
+			
+			The solution to this problem was to use a different method for the narrow phase collision detection. It was decided to use Separating Axis Theorum (SAT)\cite{sattutorial} because SAT works for all convex shapes which is what the game framework uses and SAT is based on vector maths which is very efficient. 
+			
+			According to SAT if a line can be drawn between two shapes then they cannot be colliding. This is shown in figure \ref{satlines}. To check for this algorithmically an axis must be found where if the two shapes are projected onto that axis those projections do not overlap. If that axis can be found then the two shapes are not colliding, if it cannot be found then the shapes are colliding. This is shown in figure \ref{nsatprojections}. When attempting to find an axis in which the projections of two shapes do not overlap there is only a finite list of axis which need to be checked. These axis correspond to the normals of each line of the two shapes\cite{sattutorial}.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.65]{satlines}
+				\caption{On the top row the shapes are not colliding so a line can be drawn between them. On the bottom row the shapes are colliding so no lines can be drawn between them. \cite{sattutorial}}
+				\label{satlines}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.65]{nsatprojnocollide}
+				\includegraphics[scale=0.66]{nsatprojcollide}
+				\caption{In the left image there is an axis in which the projections do not overlap so the shapes cannot be colliding. In the right image there is no axis in which the projections do not overlap so the shapes must be colliding. \cite{nsattutorial}}
+				\label{nsatprojections}
+			\end{figure}
+			
+			To produce the projection of a shape onto the axis each point of the shape is projected onto a point on the axis. If both the point and the axis are represented as vectors then this projection can be calculated using the dot product of the two vectors\cite{sattutorial} which is explained in figure \ref{dotproduct}. The minimum and maximum of these projected points is kept for each shape. These values are then used to check if the projections overlap with the expression in figure \ref{projectionoverlapexpression}. This expression is checking if the maximum point of either projection is inside the other projection, if this is the case then the projections overlap.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{displaymath}
+					A \cdot B = A_x \times B_x + A_y \times B_y
+				\end{displaymath}
+				\caption{The dot product of two 2D vectors A and B}
+				\label{dotproduct}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\begin{displaymath}
+					(A_{max} \geq B_{min} \land A_{max} \leq B_{max}) \lor (B_{max} \geq A_{min} \land B_{max} \leq A_{max})
+				\end{displaymath}
+				\caption{Boolean expression to check if projections from two shapes, A and B are overlapping}
+				\label{projectionoverlapexpression}
+			\end{figure}
+			
+			To summarise, SAT checks for collisions by checking for overlaps in a list of axis which corresponds to the normals present on each shape. Overlaps are checked for by projecting each shape onto the current axis and checking if the projections overlap. If any axis has projections that do not overlap then the shapes are not colliding.
+			
 		\subsection{SwingGame}
+			\subsubsection{Levels}
+			\subsubsection{Game Play Mechanics}
+			\subsubsection{Physics}
 	
 
 \chapter{Evaluation}
