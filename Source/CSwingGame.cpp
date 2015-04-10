@@ -511,7 +511,7 @@ void CSwingGame::Render()
     theDebugHelper->Draw(mWindow);
 #endif
     
-#if SG_DEBUG && 1
+#if SG_DEBUG && 0
     mWindow->clear(CColour::White);
     
     // Square

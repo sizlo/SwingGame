@@ -142,6 +142,12 @@ void CPlayer::Draw(CWindow *theWindow)
     {
         theWindow->DrawLine(mDebugAccelerationLine, CColour::Red);
     }
+    if (DebugOptions::showPlayerVelocity)
+    {
+        CLine velocityLine = CLine(GetPosition(),
+                                   GetPosition() + GetVelocity()/5.0f);
+        theWindow->DrawLine(velocityLine, CColour::Blue);
+    }
 }
 
 // =============================================================================

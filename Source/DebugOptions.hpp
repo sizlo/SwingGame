@@ -38,6 +38,7 @@ namespace DebugOptions
     extern bool useSlowMotion;
     extern bool showMouseCoords;
     extern bool showPlayerAcceleration;
+    extern bool showPlayerVelocity;
 };
 
 // =============================================================================
