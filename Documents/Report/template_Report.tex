@@ -10,8 +10,15 @@
 % Show sub sub sections in the contents
 \setcounter{tocdepth}{3}
 
+% Package for displaying maths stuff
 \usepackage{mathtools}
+
+% Packages for positioning figures
 \usepackage{float}
+\usepackage{subcaption}
+
+% Package for quotes
+\usepackage{dirtytalk}
 
 % Title Page
 \title{
@@ -64,7 +71,7 @@ This chapter provides an overview of what the project contains and its main goal
 			
 			A much more similar framework to the one in this project is Löve\cite{love}. Löve allows developers to script the behaviour of 2D games in Lua and provides modules to handle common game tasks including drawing, event handling and physics.
 			\subsubsection{Decision To Make A New Framework}
-			Most of the frameworks discussed previously were too complex for the needs of SwingGame. This project did not need a whole suite of tools for creating worlds and animations so the most likely candidate to use was Löve. However the decision was made to create a new framework for the project, mostly as a learning exercise. The Dragonfly project shows that "game engines present the opportunity to strengthen programming skills and expose students to a range of fundamental computer science topics"\cite{dragonfly}. Also, the most interesting component of this project, implementation wise, was the physics of the game. If an existing physics system was used the SwingGame project would have been too simple.
+			Most of the frameworks discussed previously were too complex for the needs of SwingGame. This project did not need a whole suite of tools for creating worlds and animations so the most likely candidate to use was Löve. However the decision was made to create a new framework for the project, mostly as a learning exercise. The Dragonfly project shows that \say{game engines present the opportunity to strengthen programming skills and expose students to a range of fundamental computer science topics}\cite{dragonfly}. Also, the most interesting component of this project, implementation wise, was the physics of the game. If an existing physics system was used the SwingGame project would have been too simple.
 			
 		\subsection{Games}
 		Several games exist which have similar swinging mechanics to SwingGame. This section will discuss how some of those games use swinging and how they differ from SwingGame.
@@ -108,7 +115,7 @@ This chapter outlines the development process of the project. It discusses some 
 			\end{figure}
 			
 			\subsubsection{Game Loop}
-			Almost every video game runs on top of what is called a game loop. Inside this loop is where the gameplay logic is executed including updating the players position and handling any user input. One of the most important aspects of a game loop is that it must be non blocking since games are interactive. This means that instead of waiting for the next input event the game is constantly processing cycles of the loop and reacts to any events when they happen to come in. The loop "processes user input, but doesn’t wait for it"\cite{gamepatterns}.
+			Almost every video game runs on top of what is called a game loop. Inside this loop is where the gameplay logic is executed including updating the players position and handling any user input. One of the most important aspects of a game loop is that it must be non blocking since games are interactive. This means that instead of waiting for the next input event the game is constantly processing cycles of the loop and reacts to any events when they happen to come in. The loop \say{processes user input, but doesn’t wait for it}\cite{gamepatterns}.
 			
 			The game loop in this projects game framework does three things on every cycle:
 			\begin{enumerate}
@@ -265,10 +272,110 @@ This chapter outlines the development process of the project. It discusses some 
 			To summarise, SAT checks for collisions by checking for overlaps in a list of axis which corresponds to the normals present on each shape. Overlaps are checked for by projecting each shape onto the current axis and checking if the projections overlap. If any axis has projections that do not overlap then the shapes are not colliding.
 			
 		\subsection{SwingGame}
+		Modules made for SwingGame were bespoke tasks relevant only to that particular game. They were kept separate from the game framework in order to keep the framework generic and relevant to all games.
 			\subsubsection{Levels}
+			The levels for SwingGame were made to be completely data driven. The files that define the levels were written in XML and are read using the pugixml library. It was decided to have SwingGame load all valid level files which are present at runtime to not only facilitate the easy addition of new levels but to also allow users to create their own levels which can be loaded in.
+			
+			Levels were implemented by simply having one player per level and a list of obstacles which the player can collide with and swing on. Every update cycle the level is checked for completion by checking if the player is completely inside the goal and it is checked for failure by checking if the player is completely outside the window boundaries. A list of keys was added to levels which blocks the player from the goal while the list is not empty. When the player collides with a key it is removed from the list so a player must collect all keys to unlock the goal of the level. One level from SwingGame is shown in figure \ref{level8}.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.25]{level8}
+				\caption{Level 8 of SwingGame. The blue square is the player, black shapes are obstacles, the green square is the goal and the yellow circles are keys.}
+				\label{level8}
+			\end{figure}
 			\subsubsection{Game Play Mechanics}
+			The game play mechanics of SwingGame are the set of actions that a player can do. Most of these had fairly simple implementations, for example when the jump button is pressed while the player is on a swing that can be jumped from then detach them from the swing and give them an upwards velocity. The only mechanic with an interesting implementation is firing a swing.
+			
+			When a swing is fired the current position of the mouse is used as the aim point for that swing. SwingGame looks for the first obstacle on the line from the players current position to the aim point to anchor the swing to. When anchoring a swing a small gap is left between the end of the swing and the obstacle to ensure collisions are not constantly detected between the end of the swing and the obstacle. This is shown in figure \ref{anchorGap}.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics{anchorGap}
+				\caption{A swing anchored to an obstacle, the circle shows the anchor gap between the swing and the obstacle.}
+				\label{anchorGap}
+			\end{figure}
+			
+			The way this gap was initially implemented was by creating a line from the players position to the aim point and finding the first intersection along that line with any obstacles in the level. When the first intersection is found the anchor point is set to the position on that line a fixed distance before the intersection point, this distance is known as the anchor gap. This implementation had the problem that if a swing was close to parallel to an obstacle the anchor point would still be too close to the obstacle even after moving back along the line by the anchor gap. This is shown in figure \ref{anchorProblem}.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics{anchorProblem}
+				\caption{A swing anchored to an obstacle where the swing is closer than the anchor gap to the obstacle.}
+				\label{anchorProblem}
+			\end{figure}
+			
+			The solution implemented for this problem was to check each point along the line from the players position to the aim point until a valid anchor point is found. Starting at the players position at each pixel along this line a circle is created with a radius of the anchor gap. If this circle does not collide with any obstacle the next pixel along the line is checked. If the circle does collide with an obstacle then that pixel is set as the anchor point for the swing.
+			
 			\subsubsection{Physics}
-	
+			Initially the physics module for this project was intended to be part of the game framework as a very generic simulation of real world physics. This implementation was going to be based on applying forces to the physical bodies such as the normal force from obstacles the body collides with and the tension force from the swing. Eventually it was decided that the complexity of this implementation was not worth the benefit it would bring since there are very little games that require physics accurate to the real world. Instead the physics module was made within SwingGame and is very specific to the physics of that game.
+			
+			The physics of SwingGame is based on a small set of rules. One of these is that when the player is not attached to a swing they accelerate downwards due to gravity. Another is that when the player collides with an obstacle the velocity of the player should be reflected based on the orientation of the collision surface. For example a player colliding with a horizontal surface should have the y component of their velocity reflected. To calculate the reflection of velocity for an arbitrary oriented surface first calculate the components of velocity perpendicular and parallel to that surface ($v_{perp}$ and $v_{par}$ respectively ). This is done by projecting the velocity vector onto those direction vectors using the dot product. Scale these components by values for friction ($f$) and elasticity ($e$) and combine them into the response vector. Calculate the new velocity by subtracting this response from the old velocity. This is shown by the equation in figure \ref{collisionResponse}.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{displaymath}
+					0 \leq e \leq 1
+				\end{displaymath}
+				\begin{displaymath}
+					0 \leq f \leq 1
+				\end{displaymath}
+				\begin{displaymath}
+					vel_{new} = vel_{old} - ((v_{perp} \times (1+e)) + (v_{par} \times f))
+				\end{displaymath}
+				\caption{Equation to calculate the reflected velocity after colliding with a surface of arbitrary orientation.}
+				\label{collisionResponse}
+			\end{figure}
+			
+			The last rule for physics is that when the player is on a swing apply the component of gravity which is perpendicular to the direction of the swing. This is what provides the arc of the swing. It means that when the swing is completely horizontal the full acceleration of gravity is applied downwards. As the player swings towards their lowest point on the swing (equilibrium position\cite{pendulumWiki}) the magnitude of the acceleration decreases to zero while its direction remains perpendicular to the swing. This model produces a swing motion with all the important properties of a true pendulum. 
+			\begin{itemize}
+				\item{Acceleration is at a minimum and velocity is at a maximum at the equilibrium position}
+				\item{Velocity is at a minimum at the top of the swing}
+				\item{Acceleration is at a maximum when the swing is horizontal}
+			\end{itemize}
+			Figure \ref{swingingMotion} shows these values at various points during swinging.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{subfigure}[b]{1\textwidth}
+		        \includegraphics[scale=0.4]{swingingMotionLeftTop}
+		        \includegraphics[scale=0.4]{swingingMotionLeftLower}
+		        \includegraphics[scale=0.4]{swingingMotionBottom}
+		        \end{subfigure}
+		        
+		        \vspace{3 pt}
+		        
+				\begin{subfigure}[b]{1\textwidth}
+		        \includegraphics[scale=0.4]{swingingMotionRightLowerUp}
+		        \includegraphics[scale=0.4]{swingingMotionRightTop}
+		        \includegraphics[scale=0.4]{swingingMotionRightLowerDown}
+  		        \end{subfigure}
+				\caption{Acceleration (red) and velocity (blue) at various stages of a swing.}
+				\label{swingingMotion}
+			\end{figure}
+			
+			\subsubsection{Swing Types}
+			Three different types of swing were added to SwingGame. One is a rigid swing which bounces off obstacles if it collides with them. This was done by simply flipping the players velocity to point in the opposite direction.
+			
+			A flexible swing was added which wraps around the obstacles in the level (figure \ref{swingWrap}). This was achieved by having the flexible swing as a subclass of the rigid swing which behaves differently when it collides with an obstacle. The flexible swing keeps a list of previous anchor points and when it collides with an obstacle it adds the current anchor point to the previous list and sets the point at which the collision occurred as the current anchor point. This swing also needed to know when to unwrap itself, this was achieved by creating a triangle from the players current position, the current anchor point and the previous anchor point. If this triangle is colliding with any obstacles then the swing does not need to unwrap, if it is not colliding then it does need to unwrap. This is shown in figure \ref{swingUnwrap}.
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics{swingWrap}
+				\caption{The flexible swing wrapping around a circle obstacle}
+				\label{swingWrap}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.6]{swingUnwrapNo}
+				\includegraphics[scale=0.6]{swingUnwrapYes}
+				\caption{The flexible swing unwrapping. In the left image the red triangle is colliding with an obstacle so the swing should not unwrap. In the right image the red triangle is not colliding with anything so the swing should unwrap.}
+				\label{swingUnwrap}
+			\end{figure}
+			
+			The final swing type added was a pulling swing which reels the player in towards the swings anchor point. This was done by simply removing the players current velocity when they attach and then altering gravity to be an acceleration towards the anchor point.
+		
 
 \chapter{Evaluation}
 	\section{External Testing}
