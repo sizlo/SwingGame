@@ -40,6 +40,7 @@ namespace DebugOptions
     extern bool showPlayerAcceleration;
     extern bool showPlayerVelocity;
     extern bool drawUnwrapTriangle;
+    extern bool hidePauseMenu;
 };
 
 // =============================================================================

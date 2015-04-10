@@ -13,6 +13,7 @@
 #include "CSwingGame.hpp"
 #include "CLevel.hpp"
 #include "SystemUtilities.hpp"
+#include "DebugOptions.hpp"
 
 // =============================================================================
 // Static members
@@ -80,6 +81,17 @@ void CPauseMenu::Update(CTime elapsedTime)
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Escape))
     {
         ExecuteMenuItem(kPauseMenuResume);
+    }
+}
+
+// =============================================================================
+// CPauseMenu::Draw
+// -----------------------------------------------------------------------------
+void CPauseMenu::Draw(CWindow *theWindow)
+{
+    if (!DebugOptions::hidePauseMenu)
+    {
+        CTextMenu::Draw(theWindow);
     }
 }
 

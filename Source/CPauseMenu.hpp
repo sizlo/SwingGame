@@ -43,6 +43,7 @@ public:
     void Exit();
     
     void Update(CTime elapsedTime);
+    void Draw(CWindow *theWindow);
     
     void ExecuteMenuItem(int choice);
     
