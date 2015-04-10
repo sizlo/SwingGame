@@ -27,6 +27,7 @@ bool useSlowMotion          = false;
 bool showMouseCoords        = false;
 bool showPlayerAcceleration = false;
 bool showPlayerVelocity     = false;
+bool drawUnwrapTriangle     = false;
 
 } // namespace DebugOptions
 
@@ -60,6 +61,7 @@ void CDebugHelper::Update(CTime elapsedTime)
         TOGGLE_DEBUG_OPTION(M, DebugOptions::showMouseCoords);
         TOGGLE_DEBUG_OPTION(A, DebugOptions::showPlayerAcceleration);
         TOGGLE_DEBUG_OPTION(V, DebugOptions::showPlayerVelocity);
+        TOGGLE_DEBUG_OPTION(U, DebugOptions::drawUnwrapTriangle);
     }
 }
 

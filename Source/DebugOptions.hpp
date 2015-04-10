@@ -39,6 +39,7 @@ namespace DebugOptions
     extern bool showMouseCoords;
     extern bool showPlayerAcceleration;
     extern bool showPlayerVelocity;
+    extern bool drawUnwrapTriangle;
 };
 
 // =============================================================================

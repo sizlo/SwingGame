@@ -13,6 +13,7 @@
 #include "CPlayer.hpp"
 #include "CLevel.hpp"
 #include "CollisionHandler.hpp"
+#include "DebugOptions.hpp"
 
 // =============================================================================
 // CFlexibleSwing constructor/destructor
@@ -68,6 +69,14 @@ void CFlexibleSwing::Draw(CWindow *theWindow)
     
     // Draw the section from the last origin to the current one
     DrawSwingSection(theWindow, lastOrigin, mOrigin);
+    
+#if SG_DEBUG
+    if (DebugOptions::drawUnwrapTriangle && !mPreviousOrigins.empty())
+    {
+        mDebugUnwrapTriangle.setFillColor(CColour(255, 0, 0, 128));
+        theWindow->DrawShape(mDebugUnwrapTriangle);
+    }
+#endif
 }
 
 // =============================================================================
@@ -91,6 +100,9 @@ void CFlexibleSwing::Update(CTime elapsedTime)
         trianglePoints.push_back(mOrigin);
         trianglePoints.push_back(mBob->GetPosition());
         CConvexShape unwrapTriangle = CConvexShape(trianglePoints);
+#if SG_DEBUG
+        mDebugUnwrapTriangle = unwrapTriangle;
+#endif
         
         std::list<CPhysicsBody*> theObstacles = mParentLevel->GetObstacles();
         FOR_EACH_IN_LIST(CPhysicsBody*, theObstacles)

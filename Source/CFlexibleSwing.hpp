@@ -36,6 +36,10 @@ private:
     float                   GetInactiveLength();
     
     std::list<CVector2f>    mPreviousOrigins;
+    
+#if SG_DEBUG
+    CConvexShape    mDebugUnwrapTriangle;
+#endif
 };
 
 #endif /* defined(__SwingGame__CFlexibleSwing__) */
