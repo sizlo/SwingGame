@@ -149,7 +149,23 @@ This chapter details the design process of the project and the decisions made wi
 		One more library was used which was a port of the dirent.h UNIX header for Visual Studio\cite{dirent}. This was used to allow SwingGame to traverse files in a directory with a simple API.
 		
 	\section{Game Design}
-
+	This section details some of the decisions made when designing the systems within SwingGame.
+	\subsection{Objective}
+	An objective had to be introduced in order for SwingGame to be a game. This objective could have taken multiple forms such as collecting items to build up a score or follow a particular path. The decision was made to have the player attempt to reach a specific point of the level, known as the goal, since this would allow flexibility in play styles (i.e goals could be reached in multiple ways).
+	\subsection{Player Actions}
+	The set of actions the player was able to do was kept quite small in order to keep the scope of SwingGame fairly small and manageable. What follows is the list of actions decided to be included in the game.
+	\begin{itemize}
+		\item{Attach a swing to an anchor}
+		\item{Detach from a swing}
+		\item{Jump from certain swings}
+		\item{Climb and descend the rope of a swing}
+		\item{Switch swing type}
+	\end{itemize}
+	Notice that every action involves a swing. This was intentional as it meant if the player was not swinging they had no control over themselves, forcing them to use the swinging system to complete the levels.
+	\subsection{Other Thoughts}
+	SwingGame was intended to focus on smooth and elegant swinging through a level so it was decided that the player would be punished heavily when they do something wrong. Because of this the decision was made to have the player lose a lot of their speed when they collide with an obstacle.
+	
+	The priority for the physics of the game was always for them to feel good, not to be completely accurate to the real world. The player enjoying swinging through the level was more important than the simulation being entirely perfect. This idea led me to change my mind about how physics would be implemented which is discussed in the next chapter.
 
 \chapter{Development}
 This chapter outlines the development process of the project. It discusses some decisions which were made during implementation and the modules created. Some implementation detail is provided for the more interesting parts of the project.
