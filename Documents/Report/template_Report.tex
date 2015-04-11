@@ -85,11 +85,69 @@ This chapter provides an overview of what the project contains and its main goal
 			While the swinging movement in SwingGame is very similar to that of the Worms games and Floating Point it differs in objective to all of the discussed games. The other games all use swinging to move generally through the level and don't enforce a specific goal area. In SwingGame the entire aim of each level is to navigate around the various obstacles to reach one specific goal point in the level, making each level into a puzzle for the player to solve.
 
 \chapter{Design}
+This chapter details the design process of the project and the decisions made within it. The decisions for the requirements and technologies used for the framework are explained and a high level look at the game design is discussed.
 	\section{Requirements}
+	In this section the requirements made for the game framework are discussed including the essential features and some more high level conventions.
 		\subsection{Features}
+		The game framework should ideally include as many features as possible which are needed in most games. Doing this would ensure that redundant code would not have to be written in multiple games. The following is a list of features which are essential to the game framework ranked in order of importance, one being the most important.
+		\begin{enumerate}
+			\item{Game loop}
+			\item{Window management}
+			\item{Drawing graphics}
+			\item{Event management}
+		\end{enumerate}
+		All of these features are needed for a game to exist. A game needs to be built upon a game loop which controls its logic and it needs a window to display the game state in. It must be able to draw graphics in that window to show the current state and requires event management in order to respond to user input and make the game interactive. Each of these features is discussed in more depth in the next chapter.
+		
+		A list of features which are not essential to the framework but are still very useful is given below, ranked in order of most useful.
+		\begin{enumerate}
+			\item{Collision detection}
+			\item{Physics}
+			\item{Menu system}
+			\item{Sound and music}
+			\item{Animation}
+		\end{enumerate}
+		It was decided that the three most useful of these, collision detection, physics and a menu system would be added to the game framework while developing SwingGame. While audio and animation would have made SwingGame a better game they were far from the focus of the project. The intention was to add these features in if they were required for a future game.
+		
+		\subsection{Conventions}
+		During the design of the framework some conventions were decided upon to be followed during development. One of these was to not expose underlying libraries used in the framework to the game in case it was ever decided to change these libraries. The framework should act as a layer of abstraction between the game and the libraries.
+		
 	\section{Technologies Used}
+		This section covers the different technologies used in the project.
 		\subsection{Language}
+		One of the aims of the game framework was to be platform agnostic so that it could be used to make games for any and all platforms. Because of this a good choice of language to use would have been Java, however C++ was used instead. The decision to use C++ was made because it is the industry standard language for writing games and by using it to create a game and a game framework I would be able to teach myself how to program in it more effectively.
+		\subsection{Tools}
+		A number of tools were used to facilitate this project. Development mainly took place in Xcode for OSX as I was very familiar with it while Windows builds were made in Visual Studio. Source control was handled by git and the entire project was hosted open source on GitHub.
 		\subsection{Libraries}
+		It was never the point of this project to handle different operating systems versions of window handles and event queues so it was decided that libraries would be used to handle the cross platform interfacing of these types of systems. A number of different libraries were researched and the following table shows a comparison of their features.
+		
+		\begin{tabular}[H]{ l || c | c | c }
+			Feature & SFML 2.2\cite{sfml} & SDL 2.0\cite{sdl} & Allegro 5.1\cite{allegro} \\
+			\hline
+			\hline
+			Language & C++ & C & C \\
+			Windows & Y & Y  & Y \\
+			Events & Y & Y & Y \\
+			2D Graphics & Y & Y & Y \\
+			Audio & Y & Y & N \\
+			Timing & Y & Y & Y \\
+			Networking & Y & N & N \\
+			Threading & Y & Y & Y \\
+			\hline
+			Windows Support & Y & Y & Y \\
+			OSX Support & Y & Y & Y \\
+			Linux Support & Y & Y & Y \\
+			iOS Support & Y\footnotemark & Y & Y \\
+			Android Support &Y\footnotemark[1] & Y & Y \\
+		\end{tabular}
+		
+		\footnotetext{Experimental support in the current version}
+		
+		It was decided to use SFML 2.2\cite{sfml} because not only was it more feature rich than the alternatives, but it also had a C++ object oriented interface compared to the straight C interface of the others. The caveat to this decision was that the mobile support for SFML was not as robust as the alternatives, but SwingGame was never intended to be a mobile game so this was not a major issue.
+		
+		The project was going to involve the use of XML files for storing levels so an XML parsing library was required. The decision was made to use pugixml\cite{pugixml} as it was a lightweight C++ library that had received praise on a number of forums.
+		
+		One more library was used which was a port of the dirent.h UNIX header for Visual Studio\cite{dirent}. This was used to allow SwingGame to traverse files in a directory with a simple API.
+		
 	\section{Game Design}
 
 
@@ -97,7 +155,7 @@ This chapter provides an overview of what the project contains and its main goal
 This chapter outlines the development process of the project. It discusses some decisions which were made during implementation and the modules created. Some implementation detail is provided for the more interesting parts of the project.
 
 	\section{SFML Abstractions}
-	When implementation of the project began it was decided that there should be a layer of abstraction between the game framework and SFML. This decision was made initially because it was always possible that the classes provided by SFML would be missing some desired functionality. By putting a layer in between the framework and SFML any extra features could be implemented in this layer. This proved to be useful for adding a pause feature to the provided clock class among other enhancements.
+	As mentioned in the previous chapter it was decided that there should be a layer of abstraction between the game framework and SFML. One reason behind this was that it was always possible that the classes provided by SFML would be missing some desired functionality. By putting a layer in between the framework and SFML any extra features could be implemented in this layer. This proved to be useful for adding a pause feature to the provided clock class among other enhancements.
 	
 	The way this abstraction was implemented was to create a class for each SFML class the framework used. The created class inherited from the SFML class and all uses of the class in the framework would use the new subclass. This meant than whenever functionality was added to an SFML subclass this functionality could be used by any existing instance of the class in the project without having to change its type.
 	
