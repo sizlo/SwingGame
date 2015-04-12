@@ -20,6 +20,9 @@
 % Package for quotes
 \usepackage{dirtytalk}
 
+% Package for appenices
+\usepackage{appendix}
+
 % Title Page
 \title{
 	SwingGame\endgraf
@@ -53,6 +56,17 @@ This paper details the development of SwingGame, a 2D video game in which player
 
 \tableofcontents
 
+\chapter{Introduction}
+This idea behind this project was to produce a framework for creating games and a game which uses that framework. The framework was to be generic and be able to facilitate the making of many different types of games. Eventually the framework may be used to produce commercial games but initially it will be used for personal projects as an effort to become better at making games.
+
+SwingGame is the game which was produced alongside this framework to prove that the framework works. It is a 2D game in which a player must get from a starting point to a goal point in many levels. The only way to achieve this is by using several different types of swings which can be attached to obstacles within the level. Figure \ref{sgexample} shows a player swinging towards the goal in one of the levels of SwingGame.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{sgexample}
+	\caption{Level 4 of SwinGame. The brown square is the player, the black shapes are obstacles and the green square is the goal.}
+	\label{sgexample}
+\end{figure}
 
 \chapter{Context}
 This chapter provides an overview of what the project contains and its main goals. Similar existing technology is discussed along with why the decision to make a new system was made.
@@ -350,13 +364,13 @@ This chapter outlines the development process of the project. It discusses some 
 			\subsubsection{Levels}
 			The levels for SwingGame were made to be completely data driven. The files that define the levels were written in XML and are read using the pugixml library. It was decided to have SwingGame load all valid level files which are present at runtime to not only facilitate the easy addition of new levels but to also allow users to create their own levels which can be loaded in.
 			
-			Levels were implemented by simply having one player per level and a list of obstacles which the player can collide with and swing on. Every update cycle the level is checked for completion by checking if the player is completely inside the goal and it is checked for failure by checking if the player is completely outside the window boundaries. A list of keys was added to levels which blocks the player from the goal while the list is not empty. When the player collides with a key it is removed from the list so a player must collect all keys to unlock the goal of the level. One level from SwingGame is shown in figure \ref{level8}.
+			Levels were implemented by simply having one player per level and a list of obstacles which the player can collide with and swing on. Every update cycle the level is checked for completion by checking if the player is completely inside the goal and it is checked for failure by checking if the player is completely outside the window boundaries. A list of keys was added to levels which blocks the player from the goal while the list is not empty. When the player collides with a key it is removed from the list so a player must collect all keys to unlock the goal of the level. One level from SwingGame is shown in figure \ref{levelexample}.
 			
 			\begin{figure}[H]
 				\centering
 				\includegraphics[scale=0.25]{level8}
 				\caption{Level 8 of SwingGame. The blue square is the player, black shapes are obstacles, the green square is the goal and the yellow circles are keys.}
-				\label{level8}
+				\label{levelexample}
 			\end{figure}
 			\subsubsection{Game Play Mechanics}
 			The game play mechanics of SwingGame are the set of actions that a player can do. Most of these had fairly simple implementations, for example when the jump button is pressed while the player is on a swing that can be jumped from then detach them from the swing and give them an upwards velocity. The only mechanic with an interesting implementation is firing a swing.
@@ -527,14 +541,104 @@ This chapter discusses how the project was evaluated, including both SwingGame a
 	Since the game framework was intended to be used for multiple projects it should be evaluated based on how effective it has been to use in projects it was not tailor made for. The framework has been used in two other projects so far, each one is detailed in this section.
 		\subsection{Particle System}
 		An assignment for the Advanced Computer Graphics course for third years at the University of Manchester was to produce a particle system. The game framework from this project was successfully used to create a particle system for this assignment, using all modules from the framework apart from the graphics and collision modules. These modules were not used as they work only in 2D but the particle system was in 3D. Rendering in this project was done using OpenGL instead which the framework was able to handle. During this project functionality for a 3D camera which can be controlled to move around the scene and look in different direction was added to the game framework.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{particlesystem}
+			\caption{Particle system rendering a waterfall}
+			\label{particlesystem}
+		\end{figure}
+		
 		\subsection{Tick Tack Toe}
 		Tick Tack Toe is another game currently being developed on top of the game framework. It features a tick (the arachnid) which is being attacked by a hoard of toes trying to squash it. The tick can fight back against the toes by throwing thumb tacks at them. This game uses all modules of the game framework and the basic gameplay for it was completed in one day thanks to the functionality provided by the framework. So far in this project the event system of the game framework has been changed to use the Observer design pattern and functionality has been added to the graphics module to allow animated game objects.
+		
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{ticktacktoe}
+			\caption{Tick Tack Toe in its current state}
+			\label{ticktacktoe}
+		\end{figure}
 	
 
 \chapter{Reflection and Conclusion}
-	\section{Achievements}
+This chapter discusses what went right and what went wrong in this project. It explains whether the objectives were fulfilled and what would be done differently if the project were to be undertaken again.
+	\section{Objectives}
+	The objectives of the framework produced were to be reusable, extensible and easy to use. I think the framework succeeds in all these regards given its use in other projects. Each project was implemented without having to fight with the framework to get it to work, and each managed to add extra features which were not insubstantial. It could be said that this is the case because the person working on the project is the person who built the framework but it was only ever intended to be used on personal projects so I do not believe this is relevant.
+	
+	SwingGame was intended to show that the framework can produce a working and finished game and had the side objective of being fun and engaging. It definitely succeeded in showing the worth of the game framework and was somewhat successful at being a fun game. From the player feedback survey it is apparent that player find the game enjoyable but judging from percentage of people who attempted all levels the game did not retain most players attention for all nine short levels. I feel that this can partly be explained by the look of the game, the focus of the project was never on looking good. This resulted in text only menus and graphics which consisted of simple one colour shapes. This made the game look quite amateur even if the the motion and mechanics had the right feel I was going for.
+	
 	\section{Lessons Learned}
+	If I were to do this project again there are some things I would do differently, the main being not over engineering things. When creating the SFML abstraction layer I spent a lot of time creating a subclass for each SFML class used when a simple typedef would have achieved the same results. I could then have just changed the typedef into a true class when additional functionality was required.
+	
+	Another example of this is the time wasted when researching how to implement a physics model accurate to the real world. While I did eventually decide to use a much simpler model I should have known from the start that my original idea was way out of scope and looking into it was ultimately pointless.
+	
+	While creating SwingGame I made no effort to keep the source of the game separate from the framework itself. This lead to a messy situation when I began other projects as I had to isolate what was part of the framework and what was not. From this I learned that when making a generic library it should be kept as a separate project than anything being made alongside that library.
+	
+	Another lesson learned during this project is that of self motivation. There were large periods of time where I did no work on the project because I felt like the next thing planned would be boring and there were no looming deadlines to force me to work. Eventually I made myself get on with it so I could not only play the finished project but be able to show it off in its best possible state. If I had not done this I believe the game would have been a very rushed at the last minute and a much worse game because of that.
+	
 	\section{Future Improvements}
+	There are many improvements I could make to SwingGame in the future. The most obvious being adding in better art and even animations to make the game look a lot more professional. Another obvious addition would be audio, both ambient background music and sound effects for events that happen in the game. Beyond that extra functionality could also be added to SwingGame, more advanced level features like moving obstacles or teleporters which transport the player to another location could allow for much more diverse levels and puzzles. The game can also always be extended by adding more levels, though I feel my abilities as a level designer would not lead to much better levels than the current set.
+	
+	I have many more ideas for games I could make with the framework I produced. I imagine each of these will have the opportunity to discover extra features which could be added to the framework. I already have some in mind such as a system for mouse driven user interfaces which have a much more professional feel than the current text driven ones. Some more useful features would be an audio module and a system to rebind inputs to different buttons and keys.
+	
+	\begin{appendices}
+		\chapter{Appendix A: The Levels of SwingGame}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level1}
+			\caption{Level 1 of SwingGame}
+			\label{level1}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level2}
+			\caption{Level 2 of SwingGame}
+			\label{level2}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level3}
+			\caption{Level 3 of SwingGame}
+			\label{level3}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level4}
+			\caption{Level 4 of SwingGame}
+			\label{level4}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level5}
+			\caption{Level 5 of SwingGame}
+			\label{level5}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level6}
+			\caption{Level 6 of SwingGame}
+			\label{level6}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level7}
+			\caption{Level 7 of SwingGame}
+			\label{level7}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level8}
+			\caption{Level 8 of SwingGame}
+			\label{level8}
+		\end{figure}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.25]{level9}
+			\caption{Level 9 of SwingGame}
+			\label{level9}
+		\end{figure}
+		
+	\end{appendices}
 	
 \bibliographystyle{plain}
 
