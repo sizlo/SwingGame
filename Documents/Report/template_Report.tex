@@ -67,7 +67,7 @@ SwingGame is the game which was produced alongside this framework to prove that 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.25]{sgexample}
-	\caption{Level 4 of SwinGame. The brown square is the player, the black shapes are obstacles and the green square is the goal.}
+	\caption{Level 4 of SwingGame. The brown square is the player, the black shapes are obstacles and the green square is the goal.}
 	\label{sgexample}
 \end{figure}
 
@@ -367,7 +367,7 @@ This chapter outlines the development process of the project. It discusses some 
 			\subsubsection{Levels}
 			The levels for SwingGame were made to be completely data driven. The files that define the levels were written in XML and are read using the pugixml library. It was decided to have SwingGame load all valid level files which are present at runtime to not only facilitate the easy addition of new levels but to also allow users to create their own levels which can be loaded in.
 			
-			Levels were implemented by simply having one player per level and a list of obstacles which the player can collide with and swing on. Every update cycle the level is checked for completion by checking if the player is completely inside the goal and it is checked for failure by checking if the player is completely outside the window boundaries. A list of keys was added to levels which blocks the player from the goal while the list is not empty. When the player collides with a key it is removed from the list so a player must collect all keys to unlock the goal of the level. One level from SwingGame is shown in figure \ref{levelexample}.
+			Levels were implemented by simply having one player per level and a list of obstacles which the player can collide with and swing on. Every update cycle the level is checked for completion by checking if the player is completely inside the goal and it is checked for failure by checking if the player is completely outside the window boundaries. A list of keys was added to levels which blocks the player from the goal while the list is not empty. When the player collides with a key it is removed from the list so a player must collect all keys to unlock the goal of the level. One level from SwingGame is shown in figure \ref{levelexample}. Images of each level can be found in Appendix A.
 			
 			\begin{figure}[H]
 				\centering
@@ -493,7 +493,7 @@ This chapter discusses how the project was evaluated, including both SwingGame a
 				9 & 42.86 & 14.29 & 28.57 \\
 			\end{tabular}
 			
-			These results show that interest starts to drop as soon as level three and less than half of the respondents attempted all nine levels. The first five levels proved to be straightforward since all respondents who attempted them were able to complete them but the remaining levels forced some respondents to give up. Judging from the percentage of failed attempts level 6 was the most difficult.
+			These results show that interest starts to drop as soon as level three and less than half of the respondents attempted all nine levels. The first five levels proved to be straightforward since all respondents who attempted them were able to complete them but the remaining levels forced some respondents to give up. Judging from the percentage of failed attempts level six (figure \ref{level6}) was the most difficult.
 				
 			\subsubsection{Level Enjoyment}
 			In order to know which types of levels players enjoyed the most they were asked to state their most and least favourite levels. The following table shows for each level the percentage of respondents which claimed that level was their most or least favourite.
@@ -512,7 +512,7 @@ This chapter discusses how the project was evaluated, including both SwingGame a
 		        9 & 14.29 & 14.29 \\
 			\end{tabular}
 			
-			The only information which was gained from these results was that no level was universally loved nor hated, but levels four and five were liked slightly more than the rest.
+			The only information which was gained from these results was that no level was universally loved nor hated, but levels four and five (figures \ref{level4} and \ref{level5}) were liked slightly more than the rest.
 			
 			\subsubsection{Swing Type Preference}
 			The respondents were asked to rank each swing in order of enjoyment in an attempt to find out which was the most fun to use. The following table shows the rankings for each swing with one being the most enjoyable.
