@@ -93,7 +93,7 @@ This chapter provides an overview of what the project contains and its main goal
 		\subsection{Games}
 		Several games exist which have similar swinging mechanics to SwingGame. This section will discuss how some of those games use swinging and how they differ from SwingGame.
 			\subsubsection{Spider-Man}
-			Various Spider-Man games have used swinging on a line web to get around the environment, one of which is Spider-Man 2\cite{spiderman} by Treyarch. In this game the player uses the swinging mechanic to quickly navigate around a 3D virtual New York City.
+			Various Spider-Man games have used swinging on a web line to get around the environment, one of which is Spider-Man 2\cite{spiderman} by Treyarch. In this game the player uses the swinging mechanic to quickly navigate around a 3D virtual New York City.
 			\subsubsection{Worms}
 			The Worms\cite{worms} series by Team17 includes an item called the Ninja Rope. This item is used to attach to scenery in the level and swing the character to areas that would have otherwise been inaccessible. The swinging in these games was the biggest inspiration for SwingGame so it behaves very similarly to the swinging in SwingGame.
 			\subsubsection{Floating Point}
@@ -225,7 +225,7 @@ This chapter outlines the development process of the project. It discusses some 
 			\subsubsection{Menu System}
 			An important part of many games is their menus. A user needs to be able to navigate through the various game options and select what part of the game they want to play. A simple API was created in the game framework to allow games to define their own menus. It allows a game to specify what options should be present in a menu and what each option should do then handles the navigation and drawing of the menu in the framework. A game can override this default behaviour and look if they wish.
 			
-			A big part of the menu system is transition between different screens in the game. When a user selects a level they should transition to that level. This was achieved by having each different screen in the game implement a GameLocation interface. By implementing this interface a game location specifies what to do when transitioning to and from this location. For example, a level will initialise register all Updatebles and Renderables within that level and start the simulation when it is transitioned to. It will then stop the simulation and unregister its objects when transitioned from. The game framework only allows one game location to be active at a time, so whenever a location is entered all previous locations must have been exited.
+			A big part of the menu system is transitioning between different screens in the game. When a user selects a level they should transition to that level. This was achieved by having each different screen in the game implement a GameLocation interface. By implementing this interface a game location specifies what to do when transitioning to and from this location. For example, a level will register all Updatebles and Renderables within that level and start the simulation when it is transitioned to. It will then stop the simulation and unregister its objects when transitioned from. The game framework only allows one game location to be active at a time, so whenever a location is entered all previous locations must have been exited.
 			
 			\subsubsection{Collision Detection}
 			Almost every game must deal with collisions and the method to detect them is always the same. If part of a shape is touching or inside another shape then those two shapes are colliding. A method to detect collisions between 2D shapes was implemented in the game framework.
@@ -275,7 +275,7 @@ This chapter outlines the development process of the project. It discusses some 
 				\label{bbnocollision}
 			\end{figure}
 			
-			The first iteration of the narrow phase used the very simple concept of line intersections to check for collisions. If any line from shape A is intersecting any line from shape B then A and B are colliding. To check if two lines, A and B are intersecting they are first checked for an intersection assuming the lines are infinitely long. If the two infinite lines intersect then $u_{a}$ is given which is the proportion along line A that the intersection occurred. Similarly $u_{b}$ is the proportion along line B that the intersection occurred. If $u_{a}$ is 0.5 then the intersection occurred halfway along line A. Therefore if both $u_{a}$ and $u_{b}$ are between 0 and 1 then the intersection occurred on lines A and B so the two lines intersect. $u_{a}$ and $u_{b}$ can be found using the equations in figure \ref{lineintersectionequation}. If the denominator of that equations is 0 then the two lines are parallel so cannot intersect.
+			The first iteration of the narrow phase used the very simple concept of line intersections to check for collisions. If any line from shape A is intersecting any line from shape B then A and B are colliding. To check if two lines, A and B are intersecting they are first checked for an intersection assuming the lines are infinitely long. If the two infinite lines intersect then $u_{a}$ is given which is the proportion along line A that the intersection occurred. Similarly $u_{b}$ is the proportion along line B that the intersection occurred. If $u_{a}$ is 0.5 then the intersection occurred halfway along line A. Therefore if both $u_{a}$ and $u_{b}$ are between 0 and 1 then the intersection occurred on lines A and B so the two lines intersect. $u_{a}$ and $u_{b}$ can be found using the equations in figure \ref{lineintersectionequation}. If the denominator of those equations is 0 then the two lines are parallel so cannot intersect.
 			
 			\begin{figure}[H]
 				\centering
@@ -363,7 +363,7 @@ This chapter outlines the development process of the project. It discusses some 
 			To summarise, SAT checks for collisions by checking for overlaps in a list of axis which corresponds to the normals present on each shape. Overlaps are checked for by projecting each shape onto the current axis and checking if the projections overlap. If any axis has projections that do not overlap then the shapes are not colliding.
 			
 		\subsection{SwingGame}
-		Modules made for SwingGame were bespoke tasks relevant only to that particular game. They were kept separate from the game framework in order to keep the framework generic and relevant to all games.
+		Modules made for SwingGame were bespoke tasks relevant only to that particular game.
 			\subsubsection{Levels}
 			The levels for SwingGame were made to be completely data driven. The files that define the levels were written in XML and are read using the pugixml library. It was decided to have SwingGame load all valid level files which are present at runtime to not only facilitate the easy addition of new levels but to also allow users to create their own levels which can be loaded in.
 			
@@ -375,8 +375,8 @@ This chapter outlines the development process of the project. It discusses some 
 				\caption{Level 8 of SwingGame. The blue square is the player, black shapes are obstacles, the green square is the goal and the yellow circles are keys.}
 				\label{levelexample}
 			\end{figure}
-			\subsubsection{Game Play Mechanics}
-			The game play mechanics of SwingGame are the set of actions that a player can do. Most of these had fairly simple implementations, for example when the jump button is pressed while the player is on a swing that can be jumped from then detach them from the swing and give them an upwards velocity. The only mechanic with an interesting implementation is firing a swing.
+			\subsubsection{Gameplay Mechanics}
+			The gameplay mechanics of SwingGame are the set of actions that a player can do. Most of these had fairly simple implementations, for example when the jump button is pressed while the player is on a swing that can be jumped from then detach them from the swing and give them an upwards velocity. The only mechanic with an interesting implementation is firing a swing.
 			
 			When a swing is fired the current position of the mouse is used as the aim point for that swing. SwingGame looks for the first obstacle on the line from the players current position to the aim point to anchor the swing to. When anchoring a swing a small gap is left between the end of the swing and the obstacle to ensure collisions are not constantly detected between the end of the swing and the obstacle. This is shown in figure \ref{anchorGap}.
 			
@@ -543,11 +543,10 @@ This chapter discusses how the project was evaluated, including both SwingGame a
 	\section{Use In Other Projects}
 	Since the game framework was intended to be used for multiple projects it should be evaluated based on how effective it has been to use in projects it was not tailor made for. The framework has been used in two other projects so far, each one is detailed in this section.
 		\subsection{Particle System}
-		An assignment for the Advanced Computer Graphics course for third years at the University of Manchester was to produce a particle system. The game framework from this project was successfully used to create a particle system for this assignment, using all modules from the framework apart from the graphics and collision modules. These modules were not used as they work only in 2D but the particle system was in 3D. Rendering in this project was done using OpenGL instead which the framework was able to handle. During this project functionality for a 3D camera which can be controlled to move around the scene and look in different direction was added to the game framework.
+		An assignment for the Advanced Computer Graphics course for third years at the University of Manchester was to produce a particle system. The game framework from this project was successfully used to create a particle system for this assignment, using all modules from the framework apart from the graphics and collision modules. These modules were not used as they work only in 2D but the particle system was in 3D. Rendering in this project was done using OpenGL instead which the framework was able to handle. During this project functionality for a 3D camera which can be controlled to move around the scene and look in different directions was added to the game framework.
 		
 		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.25]{particlesystem}
+			\centerline{\includegraphics[width=1.5\textwidth]{particlesystem}}
 			\caption{Particle system rendering a waterfall}
 			\label{particlesystem}
 		\end{figure}
@@ -568,14 +567,14 @@ This chapter discusses what went right and what went wrong in this project. It e
 	\section{Objectives}
 	The objectives of the framework produced were to be reusable, extensible and easy to use. I think the framework succeeds in all these regards given its use in other projects. Each project was implemented without having to fight with the framework to get it to work, and each managed to add extra features which were not insubstantial. It could be said that this is the case because the person working on the project is the person who built the framework but it was only ever intended to be used on personal projects so I do not believe this is relevant.
 	
-	SwingGame was intended to show that the framework can produce a working and finished game and had the side objective of being fun and engaging. It definitely succeeded in showing the worth of the game framework and was somewhat successful at being a fun game. From the player feedback survey it is apparent that player find the game enjoyable but judging from percentage of people who attempted all levels the game did not retain most players attention for all nine short levels. I feel that this can partly be explained by the look of the game, the focus of the project was never on looking good. This resulted in text only menus and graphics which consisted of simple one colour shapes. This made the game look quite amateur even if the the motion and mechanics had the right feel I was going for.
+	SwingGame was intended to show that the framework can produce a working and finished game and had the side objective of being fun and engaging. It definitely succeeded in showing the worth of the game framework and was somewhat successful at being a fun game. From the player feedback survey it is apparent that players find the game enjoyable but judging from the percentage of people who attempted all levels the game did not retain most players attention for all nine short levels. I feel that this can partly be explained by the look of the game, the focus of the project was never on looking good. This resulted in text only menus and graphics which consisted of simple one colour shapes. This made the game look quite amateur even if the the motion and mechanics had the right feel I was going for.
 	
 	\section{Lessons Learned}
 	If I were to do this project again there are some things I would do differently, the main being not over engineering things. When creating the SFML abstraction layer I spent a lot of time creating a subclass for each SFML class used when a simple typedef would have achieved the same results. I could then have just changed the typedef into a true class when additional functionality was required.
 	
 	Another example of this is the time wasted when researching how to implement a physics model accurate to the real world. While I did eventually decide to use a much simpler model I should have known from the start that my original idea was way out of scope and looking into it was ultimately pointless.
 	
-	While creating SwingGame I made no effort to keep the source of the game separate from the framework itself. This lead to a messy situation when I began other projects as I had to isolate what was part of the framework and what was not. From this I learned that when making a generic library it should be kept as a separate project than anything being made alongside that library.
+	While creating SwingGame I made no effort to keep the source of the game separate from the framework itself. This lead to a messy situation when I began other projects as I had to isolate what was part of the framework and what was not. From this I learned that when making a generic library it should be kept as a separate project from anything being made alongside that library.
 	
 	Another lesson learned during this project is that of self motivation. There were large periods of time where I did no work on the project because I felt like the next thing planned would be boring and there were no looming deadlines to force me to work. Eventually I made myself get on with it so I could not only play the finished project but be able to show it off in its best possible state. If I had not done this I believe the game would have been a very rushed at the last minute and a much worse game because of that.
 	
