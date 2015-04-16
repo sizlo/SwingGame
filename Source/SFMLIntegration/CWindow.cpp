@@ -150,7 +150,7 @@ void CWindow::DrawShape(CConvexShape theShape)
         {
             CVector2f normal = (*it).GetNormal();
             CVector2f start = (*it).GetMidpoint();
-            CVector2f end = start + 5.0f * normal;
+            CVector2f end = start + 20.0f * normal;
             
             sf::Vertex line[] =
             {

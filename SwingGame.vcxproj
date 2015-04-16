@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CDemo.cpp" />
     <ClCompile Include="Source\CFlexibleSwing.cpp" />
     <ClCompile Include="Source\CFrontEnd.cpp" />
     <ClCompile Include="Source\CLevel.cpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="Source\SFMLIntegration\CText.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTexture.cpp" />
     <ClCompile Include="Source\SFMLIntegration\CTime.cpp" />
+    <ClInclude Include="Source\CDemo.hpp" />
     <ClInclude Include="Source\CFlexibleSwing.hpp" />
     <ClInclude Include="Source\CFrontEnd.hpp" />
     <ClInclude Include="Source\CLevelEndMenu.hpp" />

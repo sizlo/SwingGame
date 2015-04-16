@@ -13,6 +13,7 @@
 #include "CFrontEnd.hpp"
 #include "CTextureBank.hpp"
 #include "CLevel.hpp"
+#include "CDemo.hpp"
 #include "GameOptions.hpp"
 #include "DebugOptions.hpp"
 #include "SystemUtilities.hpp"
@@ -123,7 +124,7 @@ void CSwingGame::Init()
     }
     
     // Enter the front end menu
-    GoToLocation(kGameLocationFrontEnd);
+    GoToLocation(kGameLocationDemo);
     
     // Initialise other systems
     SystemUtilities::Init(mWindow);
@@ -326,6 +327,10 @@ void CSwingGame::GoToLocation(EGameLocation theLocation,
             DEBUG_LOG("%s requested", filename.c_str());
             smCurrentLocation = new CLevel(filename);
             break;
+
+        case kGameLocationDemo:
+            smCurrentLocation = new CDemo();
+            break;
             
         default:
             DEBUG_LOG("Unimplemented game location - going to front end");
@@ -485,7 +490,7 @@ void CSwingGame::Render()
     }
     
     // Clear the window
-    mWindow->clear();
+    mWindow->clear(CColour::White);
     
     // Iterate through all registered renderables, drawing them all
     FOR_EACH_IN_LIST(CRenderable *, smTheRenderables)

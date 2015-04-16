@@ -133,6 +133,9 @@
     <ClCompile Include="Source\CPullingSwing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\CDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CSwingGame.hpp">
@@ -289,6 +292,9 @@
       <Filter>Source Files\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="Source\CPullingSwing.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CDemo.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
