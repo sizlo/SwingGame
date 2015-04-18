@@ -1,0 +1,34 @@
+For my project I created a game framework and a game, SwingGame which uses that framework.
+The framework has modules for many generic tasks for game development including window management, events, graphics, menus and collision detection
+
+The collision detection uses a method called seperating axis theorum and works for any two convex shapes
+The way this works is it checks for overlaps between the two shapes in several different axis
+These axis correspond to the normals in the shapes
+So in this scene we have a vertical axis
+a horizontal axis
+an axis slanting upwards
+and an axis slanting downwards
+To check for an overlap in a particular axis we project each shape onto that axis
+This is done by projecting the individual points onto the axis
+Once all points of a shape have been projected we remember the region that the projection covered
+Once both shapes have been projected we check to see if these projections overlap
+If they do then we consider the shapes as overlapping in that axis and move on to another one
+We continue this process, checking for overlaps in each axis until we find an axis where there is not an overlap or we have checked all axis
+If we find an axis where the shapes do not overlap then there must be a gap between those two shapes in that axis
+We then know that the shapes are not colliding.
+However if we find that the shapes overlap in every axis then we know that the two shapes must be colliding.
+
+SwingGame is a 2D game in which the player must travel from a starting point to a goal using different type of swings.
+
+The swinging physics were developed by me.
+It works by constantly adjusting the acceleration of the player to be perpendicular to the direction of the rope.
+The magnitude of the acceleration is also changing, the closer the rope is to horizontal, the larger the acceleration.
+You can see this in the video with acceleration being shown as a red line and velocity as a blue line.
+
+The game framework made in this project has also been used to build some other applications.
+One of these is Tick Tack Toe, a game in whch a tick must defend itself from a hoard of toes by throwing a thumbtack at them.
+
+Another application which was built using this framework is a scriptable particle system.
+This program draws using open gl directly instead of using the frameworks graphics module as it is 3D
+
+For more about the game framework and SwingGame, including full source code visit timbrier.com/SwingGame
