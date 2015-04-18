@@ -12,7 +12,19 @@ CCircleShape * CreateCircleForPoint(CConvexShape &theShape, int thePoint)
     return circle;
 }
 
+CCircleShape * CreateNormalHighlight(float x, float y)
+{
+    CCircleShape *highlight = new CCircleShape(10.0f);
+    highlight->setFillColor(CColour(0, 0, 255, 64));
+    highlight->setPosition(x, y);
+    return highlight;
+}
+
 CDemo::CDemo()
+    :   mHorizontalAxisColour(0, 0, 0, 0),
+        mVerticalAxisColour(0, 0, 0, 0),
+        mRightUpAxisColour(0, 0, 0, 0),
+        mRightDownAxisColour(0, 0, 0, 0)
 {
     mSpeed = 500.0f;
 
@@ -26,7 +38,7 @@ CDemo::CDemo()
 
     mSquare = CConvexShape(points);
     mSquare.setPosition(800.0f, 500.0f);
-    mSquare.setFillColor(CColour::Blue);
+    mSquare.setFillColor(CColour(0, 0, 255, 128));
 
     points.clear();
     float triangleHalfWidth = 150.0f;
@@ -40,7 +52,7 @@ CDemo::CDemo()
 
     mTriangle = CConvexShape(points);
     mTriangle.setPosition(1000.0f, 650.0f);
-    mTriangle.setFillColor(CColour::Green);
+    mTriangle.setFillColor(CColour(0, 255, 0, 128));
 
     mLowerLeftToTopDir = top - lowerLeft;
     mLowerRightToTopDir = top - lowerRight;
@@ -196,6 +208,7 @@ CDemo::CDemo()
 CDemo::~CDemo()
 {
     ClearPointList();
+    ClearNormalHighlights();
 }
 
 void CDemo::Enter()
@@ -253,6 +266,18 @@ void CDemo::Update(CTime elapsedTime)
         }
     }
 
+    if (mState == kAnimateToCollision)
+    {
+        if (mAnimationTime < CTime::Seconds(1.0f))
+        {
+            CVector2f animationDirection = CVector2f(-1.0f, -1.0f);
+            animationDirection.Normalise();
+            CVector2f animationOffset = animationDirection * elapsedTime.asSeconds() * mSpeed * 0.25f;
+            MoveTriangle(animationOffset);
+            mAnimationTime += elapsedTime;
+        }
+    }
+
     if (SystemUtilities::WasKeyPressedThisCycle(CKeyboard::Space))
     {
         AdvanceState();
@@ -264,14 +289,19 @@ void CDemo::Draw(CWindow *theWindow)
     theWindow->DrawShape(mSquare);
     theWindow->DrawShape(mTriangle);
 
-    theWindow->DrawLine(mHorizontalAxis, CColour::Black);
-    theWindow->DrawLine(mVerticalAxis, CColour::Black);
-    theWindow->DrawLine(mRightDownAxis, CColour::Black);
-    theWindow->DrawLine(mRightUpAxis, CColour::Black);
+    theWindow->DrawLine(mHorizontalAxis, mHorizontalAxisColour);
+    theWindow->DrawLine(mVerticalAxis, mVerticalAxisColour);
+    theWindow->DrawLine(mRightDownAxis, mRightDownAxisColour);
+    theWindow->DrawLine(mRightUpAxis, mRightUpAxisColour);
 
     for (ProjectionPoint *point: mProjectionPoints)
     {
         theWindow->DrawShape(*(point->shape));
+    }
+
+    for (CCircleShape *highlight: mNormalHighlights)
+    {
+        theWindow->draw(*highlight);
     }
 
     theWindow->draw(mSquareVerticalProjection);
@@ -306,6 +336,45 @@ void CDemo::AdvanceState()
     switch (mState)
     {
     case kStart:
+        break;
+
+    case kShowNormals:
+        DebugOptions::drawShapeNormals = true;
+        break;
+
+    case kShowVerticalAxis:
+        mVerticalAxisColour = CColour(0, 0, 255, 255);
+        mNormalHighlights.push_back(CreateNormalHighlight(800.0f, 390.0f));
+        mNormalHighlights.push_back(CreateNormalHighlight(800.0f, 610.0f));
+        mNormalHighlights.push_back(CreateNormalHighlight(1000.0f, 735.0f));
+        break;
+
+    case kShowHorizontalAxis:
+        mVerticalAxisColour = CColour::Black;
+        mHorizontalAxisColour = CColour(0, 0, 255, 255);
+        ClearNormalHighlights();
+        mNormalHighlights.push_back(CreateNormalHighlight(690.0f, 500.0f));
+        mNormalHighlights.push_back(CreateNormalHighlight(910.0f, 500.0f));
+        break;
+
+    case kShowRightUpAxis:
+        mHorizontalAxisColour = CColour::Black;
+        mRightUpAxisColour = CColour(0, 0, 255, 255);
+        ClearNormalHighlights();
+        mNormalHighlights.push_back(CreateNormalHighlight(1082.0f, 643.0f));
+        break;
+
+    case kShowRightDownAxis:
+        mRightUpAxisColour = CColour::Black;
+        mRightDownAxisColour = CColour(0, 0, 255, 255);
+        ClearNormalHighlights();
+        mNormalHighlights.push_back(CreateNormalHighlight(918.0f, 643.0f));
+        break;
+
+    case kHideNormals:
+        DebugOptions::drawShapeNormals = false;
+        mRightDownAxisColour = CColour::Black;
+        ClearNormalHighlights();
         break;
 
     case kProjectingFirstPoint:
@@ -435,6 +504,10 @@ void CDemo::AdvanceState()
         mTriangleRightDownProjection.setFillColor(CColour(0, 255, 0, 128));
         break;
 
+    case kAnimateToCollision:
+        mAnimationTime = CTime::Zero;
+        break;
+
     default:
         break;
     }
@@ -449,4 +522,27 @@ void CDemo::ClearPointList()
         SAFE_DELETE(removed->shape);
         SAFE_DELETE(removed);
     }
+}
+
+void CDemo::ClearNormalHighlights()
+{
+    while (!mNormalHighlights.empty())
+    {
+        CCircleShape *removed = mNormalHighlights.front();
+        mNormalHighlights.pop_front();
+        SAFE_DELETE(removed);
+    }
+}
+
+void CDemo::MoveTriangle(CVector2f offset)
+{
+    mTriangle.move(offset);
+    CVector2f verticalOffset = offset.GetComponentInDirection(mUpDir);
+    mTriangleVerticalProjection.move(verticalOffset);
+    CVector2f horizontalOffset = offset.GetComponentInDirection(mLeftDir);
+    mTriangleHorizontalProjection.move(horizontalOffset);
+    CVector2f rightUpOffset = offset.GetComponentInDirection(mLowerLeftToTopDir);
+    mTriangleRightUpProjection.move(rightUpOffset);
+    CVector2f rightDownOffset = offset.GetComponentInDirection(mLowerRightToTopDir);
+    mTriangleRightDownProjection.move(rightDownOffset);
 }

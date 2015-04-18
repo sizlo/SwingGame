@@ -5,6 +5,12 @@
 enum EDemoState
 {
     kStart,
+    kShowNormals,
+    kShowVerticalAxis,
+    kShowHorizontalAxis,
+    kShowRightUpAxis,
+    kShowRightDownAxis,
+    kHideNormals,
     kProjectingFirstPoint,
     kProjectingSquareToVertical,
     kShowSquareVerticalProjection,
@@ -22,6 +28,7 @@ enum EDemoState
     kShowSquareRightDownProjection,
     kProjectingTriangleToRightDown,
     kShowTriangleRightDownProjection,
+    kAnimateToCollision,
     kMaxState
 };
 
@@ -45,6 +52,9 @@ public:
 
     void AdvanceState();
     void ClearPointList();
+    void ClearNormalHighlights();
+
+    void MoveTriangle(CVector2f offset);
 
 private:
     CConvexShape mSquare;
@@ -65,6 +75,11 @@ private:
     CConvexShape mRightDownAxisShape;
     CConvexShape mRightUpAxisShape;
 
+    CColour mHorizontalAxisColour;
+    CColour mVerticalAxisColour;
+    CColour mRightDownAxisColour;
+    CColour mRightUpAxisColour;
+
     CConvexShape mSquareVerticalProjection;
     CConvexShape mSquareHorizontalProjection;
     CConvexShape mSquareRightDownProjection;
@@ -78,6 +93,8 @@ private:
     int mState;
 
     float mSpeed;
+    CTime mAnimationTime;
 
     std::list<ProjectionPoint *> mProjectionPoints;
+    std::list<CCircleShape *> mNormalHighlights;
 };
