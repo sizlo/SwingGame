@@ -20,6 +20,9 @@ However if we find that the shapes overlap in every axis then we know that the t
 
 SwingGame is a 2D game in which the player must travel from a starting point to a goal using different type of swings.
 
+The game was inspired by swinging mechanics in several other games including the web swinging in the spider-man series, the ninja rope in the worms series and the grappling hook in floating point.
+SwingGame differs from these examples because instead of the swinging being a mechanic to move generally around the game it is used to to reach a specific goal, making each level a puzzle
+
 The swinging physics were developed by me.
 It works by constantly adjusting the acceleration of the player to be perpendicular to the direction of the rope.
 The magnitude of the acceleration is also changing, the closer the rope is to horizontal, the larger the acceleration.
