@@ -110,7 +110,7 @@ This chapter provides an overview of what the project contains and its main goal
 			The Worms \cite{worms} series by Team17 includes an item called the Ninja Rope. This item is used to attach to scenery in the level and swing the character to areas that would have otherwise been inaccessible. The swinging in these games was the biggest inspiration for SwingGame so it behaves very similarly to the swinging in SwingGame.
 			\begin{figure}[H]
 				\centerline{\includegraphics[width=0.75\textwidth]{worms}}
-				\caption{The ninja rope in Worms Armageddon  \cite{wormsimage}}
+				\caption{The Ninja Rope in Worms Armageddon  \cite{wormsimage}}
 				\label{wormsimage}
 			\end{figure}
 			\subsubsection{Floating Point}
@@ -188,12 +188,12 @@ This chapter details the design process of the project and the decisions made wi
 		
 		The project was going to involve the use of XML files for storing levels so an XML parsing library was required. The decision was made to use pugixml \cite{pugixml} as it was a lightweight C++ library that had received praise on a number of forums.
 		
-		One more library was used which was a port of the dirent.h UNIX header for Visual  \cite{dirent}. This was used to allow SwingGame to traverse files in a directory with a simple API.
+		One more library was used which was a port of the dirent.h UNIX header for Visual Studio \cite{dirent}. This was used to allow SwingGame to traverse files in a directory with a simple API.
 		
 	\section{Game Design}
 	This Section details some of the decisions made when designing the systems within SwingGame.
 	\subsection{Objective}
-	An objective had to be introduced in order for SwingGame to be a game. This objective could have taken multiple forms such as collecting items to build up a score or follow a particular path. The decision was made to have the player attempt to reach a specific point of the level, known as the goal, since this would allow flexibility in play styles (i.e goals could be reached in multiple ways).
+	An objective had to be introduced in order for SwingGame to be a game. This objective could have taken multiple forms such as collecting items to build up a score or following a particular path. The decision was made to have the player attempt to reach a specific point of the level, known as the goal, since this would allow flexibility in play styles (i.e goals could be reached in multiple ways).
 	\subsection{Player Actions}
 	The set of actions the player was able to do was kept quite small in order to keep the scope of SwingGame fairly small and manageable. What follows is the list of actions decided to be included in the game.
 	\begin{itemize}
@@ -233,7 +233,7 @@ This chapter outlines the development process of the project. It discusses some 
 			\subsubsection{Game Loop}
 			Almost every video game runs on top of what is called a game loop. Inside this loop is where the gameplay logic is executed including updating the players position and handling any user input. One of the most important aspects of a game loop is that it must be non blocking since games are interactive. This means that instead of waiting for the next input event the game is constantly processing cycles of the loop and reacts to any events when they happen to come in. The loop \say{processes user input, but doesn’t wait for it} \cite{gamepatterns}.
 			
-			The game loop in this projects game framework does three things on every cycle:
+			The game loop made for this framework does three things on every cycle:
 			\begin{enumerate}
 				\item Process events
 				\item Update game objects
@@ -348,7 +348,7 @@ This chapter outlines the development process of the project. It discusses some 
 			
 			The solution to this problem was to use a different method for the narrow phase collision detection. It was decided to use Separating Axis Theorum (SAT) \cite{sattutorial} because SAT works for all convex shapes which is what the game framework uses and SAT is based on vector maths which is very efficient. 
 			
-			According to SAT if a line can be drawn between two shapes then they cannot be colliding. This is shown in Figure \ref{satlines}. To check for this algorithmically an axis must be found where if the two shapes are projected onto that axis those projections do not overlap. If that axis can be found then the two shapes are not colliding, if it cannot be found then the shapes are colliding. This is shown in Figure \ref{nsatprojections}. When attempting to find an axis in which the projections of two shapes do not overlap there is only a finite list of axis which need to be checked. These axis correspond to the normals of each line of the two shapes \cite{sattutorial}.
+			According to SAT if a line can be drawn between two shapes then they cannot be colliding. This is shown in Figure \ref{satlines}. To check for this algorithmically an axis must be found where if the two shapes are projected onto that axis those projections do not overlap. If that axis can be found then the two shapes are not colliding, if it cannot be found then the shapes are colliding. This is shown in Figure \ref{nsatprojections}. When attempting to find an axis in which the projections of two shapes do not overlap there is only a finite list of axis which need to be checked. These axis correspond to the normals of the lines present in the two shapes \cite{sattutorial}.
 			
 			\begin{figure}[H]
 				\centering
@@ -502,7 +502,7 @@ This chapter discusses how the project was evaluated, including both SwingGame a
 		\subsection{Feedback}
 		This Section details the feedback received from the player survey.
 			\subsubsection{Clarity of the Game}
-			It was important that players understood what they were supposed to achieve and how to do achieve it. When asked how clear it was to play the game 71.43\% responses claimed it was clear while the rest answered with very clear.
+			It was important that players understood what they were supposed to achieve and how to achieve it. When asked how clear it was to play the game 71.43\% responses claimed it was clear while the rest answered with very clear.
 			\subsubsection{Level Completion}
 			Knowing how many players attempted and completed each level was useful to gauge how the game retained interest and how difficult each level was. The following table shows the percentage of respondents which attempted each level, and how many completed each level.
 			
